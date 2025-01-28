@@ -1,0 +1,77 @@
+{
+  "resources/js/app.jsx": {
+    "file": "assets/app-CGLdpLSv.js",
+    "name": "app",
+    "src": "resources/js/app.jsx",
+    "isEntry": true,
+    "dynamicImports": [
+      "resources/js/app/pages/index/page.jsx",
+      "resources/js/app/pages/index/sections/cottage-section.jsx",
+      "resources/js/app/pages/index/sections/hero-section.jsx",
+      "resources/js/app/pages/index/sections/rooms-section.jsx",
+      "resources/js/app/pages/user-login/components/carousel-component.jsx",
+      "resources/js/app/pages/user-login/page.jsx"
+    ],
+    "css": [
+      "assets/app-7SnBNzIq.css"
+    ]
+  },
+  "resources/js/app/pages/index/page.jsx": {
+    "file": "assets/page-Betj8Ly5.js",
+    "name": "page",
+    "src": "resources/js/app/pages/index/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/index/sections/hero-section.jsx",
+      "resources/js/app/pages/index/sections/rooms-section.jsx",
+      "resources/js/app/pages/index/sections/cottage-section.jsx"
+    ]
+  },
+  "resources/js/app/pages/index/sections/cottage-section.jsx": {
+    "file": "assets/cottage-section-CFIypsvd.js",
+    "name": "cottage-section",
+    "src": "resources/js/app/pages/index/sections/cottage-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app/pages/index/sections/hero-section.jsx": {
+    "file": "assets/hero-section-4ysKrYRl.js",
+    "name": "hero-section",
+    "src": "resources/js/app/pages/index/sections/hero-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app/pages/index/sections/rooms-section.jsx": {
+    "file": "assets/rooms-section-BImSEgQS.js",
+    "name": "rooms-section",
+    "src": "resources/js/app/pages/index/sections/rooms-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app/pages/user-login/components/carousel-component.jsx": {
+    "file": "assets/carousel-component-CAxv8FLB.js",
+    "name": "carousel-component",
+    "src": "resources/js/app/pages/user-login/components/carousel-component.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app/pages/user-login/page.jsx": {
+    "file": "assets/page-hD-NhWh9.js",
+    "name": "page",
+    "src": "resources/js/app/pages/user-login/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/user-login/components/carousel-component.jsx"
+    ]
+  }
+}
