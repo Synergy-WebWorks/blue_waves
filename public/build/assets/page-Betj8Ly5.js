@@ -1,1 +1,0 @@
-import{r as o,j as t}from"./app-CGLdpLSv.js";import e from"./hero-section-4ysKrYRl.js";import r from"./rooms-section-BImSEgQS.js";import s from"./cottage-section-CFIypsvd.js";function n(){return o.useState(!1),t.jsxs("div",{children:[t.jsx(e,{}),t.jsx(r,{}),t.jsx(s,{})]})}export{n as default};

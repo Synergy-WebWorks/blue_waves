@@ -1,23 +1,26 @@
 {
   "resources/js/app.jsx": {
-    "file": "assets/app-CGLdpLSv.js",
+    "file": "assets/app-Cx29a1bs.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "dynamicImports": [
       "resources/js/app/pages/index/page.jsx",
+      "resources/js/app/pages/index/sections/activity-section.jsx",
+      "resources/js/app/pages/index/sections/contact-section.jsx",
       "resources/js/app/pages/index/sections/cottage-section.jsx",
+      "resources/js/app/pages/index/sections/footer-section.jsx",
       "resources/js/app/pages/index/sections/hero-section.jsx",
       "resources/js/app/pages/index/sections/rooms-section.jsx",
       "resources/js/app/pages/user-login/components/carousel-component.jsx",
       "resources/js/app/pages/user-login/page.jsx"
     ],
     "css": [
-      "assets/app-7SnBNzIq.css"
+      "assets/app-B_-iZ2AC.css"
     ]
   },
   "resources/js/app/pages/index/page.jsx": {
-    "file": "assets/page-Betj8Ly5.js",
+    "file": "assets/page-YI5wSQen.js",
     "name": "page",
     "src": "resources/js/app/pages/index/page.jsx",
     "isDynamicEntry": true,
@@ -25,11 +28,32 @@
       "resources/js/app.jsx",
       "resources/js/app/pages/index/sections/hero-section.jsx",
       "resources/js/app/pages/index/sections/rooms-section.jsx",
-      "resources/js/app/pages/index/sections/cottage-section.jsx"
+      "resources/js/app/pages/index/sections/cottage-section.jsx",
+      "resources/js/app/pages/index/sections/activity-section.jsx",
+      "resources/js/app/pages/index/sections/contact-section.jsx",
+      "resources/js/app/pages/index/sections/footer-section.jsx"
+    ]
+  },
+  "resources/js/app/pages/index/sections/activity-section.jsx": {
+    "file": "assets/activity-section-DJB6pgIo.js",
+    "name": "activity-section",
+    "src": "resources/js/app/pages/index/sections/activity-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "resources/js/app/pages/index/sections/contact-section.jsx": {
+    "file": "assets/contact-section-cf38bHZ2.js",
+    "name": "contact-section",
+    "src": "resources/js/app/pages/index/sections/contact-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
     ]
   },
   "resources/js/app/pages/index/sections/cottage-section.jsx": {
-    "file": "assets/cottage-section-CFIypsvd.js",
+    "file": "assets/cottage-section-DPAL34zZ.js",
     "name": "cottage-section",
     "src": "resources/js/app/pages/index/sections/cottage-section.jsx",
     "isDynamicEntry": true,
@@ -37,8 +61,17 @@
       "resources/js/app.jsx"
     ]
   },
+  "resources/js/app/pages/index/sections/footer-section.jsx": {
+    "file": "assets/footer-section-BqFo6-dl.js",
+    "name": "footer-section",
+    "src": "resources/js/app/pages/index/sections/footer-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
   "resources/js/app/pages/index/sections/hero-section.jsx": {
-    "file": "assets/hero-section-4ysKrYRl.js",
+    "file": "assets/hero-section-CTgXkAFu.js",
     "name": "hero-section",
     "src": "resources/js/app/pages/index/sections/hero-section.jsx",
     "isDynamicEntry": true,
@@ -47,7 +80,7 @@
     ]
   },
   "resources/js/app/pages/index/sections/rooms-section.jsx": {
-    "file": "assets/rooms-section-BImSEgQS.js",
+    "file": "assets/rooms-section-2c7kbeyw.js",
     "name": "rooms-section",
     "src": "resources/js/app/pages/index/sections/rooms-section.jsx",
     "isDynamicEntry": true,
@@ -56,7 +89,7 @@
     ]
   },
   "resources/js/app/pages/user-login/components/carousel-component.jsx": {
-    "file": "assets/carousel-component-CAxv8FLB.js",
+    "file": "assets/carousel-component-BuDWmXVg.js",
     "name": "carousel-component",
     "src": "resources/js/app/pages/user-login/components/carousel-component.jsx",
     "isDynamicEntry": true,
@@ -65,7 +98,7 @@
     ]
   },
   "resources/js/app/pages/user-login/page.jsx": {
-    "file": "assets/page-hD-NhWh9.js",
+    "file": "assets/page-SmWj_4Km.js",
     "name": "page",
     "src": "resources/js/app/pages/user-login/page.jsx",
     "isDynamicEntry": true,
