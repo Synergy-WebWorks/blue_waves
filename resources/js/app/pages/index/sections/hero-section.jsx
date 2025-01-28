@@ -3,10 +3,10 @@ import { Dialog } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const navigation = [
-  { name: 'Rooms', href: '#' },
-  { name: 'Cottages', href: '#' },
-  { name: 'Activities', href: '#' },
-  { name: 'Contact Us', href: '#' },
+  { name: "Rooms", href: "#rooms" },
+  { name: "Cottages", href: "#cottages" },
+  { name: "Activities", href: "#activities" },
+  { name: "Contact Us", href: "#contact" },
 ]
 
 export default function IndexPage() {
@@ -88,6 +88,7 @@ export default function IndexPage() {
                     <a
                       key={item.name}
                       href={item.href}
+                      onClick={() => setMobileMenuOpen(false)}
                       className="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-blue-100"
                     >
                       {item.name}
@@ -172,7 +173,7 @@ export default function IndexPage() {
                     <div className="relative">
                       <img
                         alt=""
-                        src="images\Activities\Floating Cottage (1pc)/received_3935964250015825.jpeg"
+                        src="images\Activities\Floating Cottage (1pc)/1.jpeg"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />
@@ -209,7 +210,7 @@ export default function IndexPage() {
                     <div className="relative">
                       <img
                         alt=""
-                        src="/images\Umbrella Cottage (2pcs)/received_959612102525185.jpeg"
+                        src="/images\overlay.jpg"
                         className="aspect-[2/3] w-full rounded-xl bg-gray-900/5 object-cover shadow-lg"
                       />
                       <div className="pointer-events-none absolute inset-0 rounded-xl ring-1 ring-inset ring-gray-900/10" />

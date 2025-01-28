@@ -1,25 +1,102 @@
-import { useState } from "react";
-import { Dialog } from "@headlessui/react";
-import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useState, useEffect } from "react";
 import HeroSection from "./sections/hero-section";
 import RoomSection from "./sections/rooms-section";
 import CottageSection from "./sections/cottage-section";
+import ActivitySection from "./sections/activity-section";
+import ContactSection from "./sections/contact-section";
+import FooterSection from "./sections/footer-section";
 
 const navigation = [
-    { name: "Rooms", href: "#" },
-    { name: "Cottages", href: "#" },
-    { name: "Activities", href: "#" },
-    { name: "Contact Us", href: "#" },
+  { name: "Rooms", href: "#rooms" },
+  { name: "Cottages", href: "#cottages" },
+  { name: "Activities", href: "#activities" },
+  { name: "Contact Us", href: "#contact" },
 ];
 
 export default function IndexPage() {
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+    const [activeSection, setActiveSection] = useState("");
 
-    return (
-        <div>
-            <HeroSection />
-            <RoomSection />
-            <CottageSection/>
-        </div>
-    );
+    useEffect(() => {
+      const sections = document.querySelectorAll("section");
+  
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              setActiveSection(entry.target.id);
+            }
+          });
+        },
+        { threshold: 0.5 }
+      );
+  
+      sections.forEach((section) => {
+        observer.observe(section);
+      });
+  
+      return () => {
+        sections.forEach((section) => {
+          observer.unobserve(section);
+        });
+      };
+    }, []);
+  
+    const handleNavigationClick = (e, target) => {
+      e.preventDefault();
+  
+      const targetSection = document.querySelector(target);
+      if (targetSection) {
+        targetSection.scrollIntoView({
+          behavior: "smooth"
+        });
+      }
+    };
+
+  return (
+    <div>
+      <header className="absolute inset-x-0 top-0 z-50">
+        <nav aria-label="Global" className="mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8">
+          <div className="flex lg:flex-1">
+            <a href="#" className="-m-1.5 p-1.5">
+              <span className="sr-only">Blue Waves Resort</span>
+              <div className="flex flex-row gap-x-3">
+                <img alt="" src="/images/blue_waves.png" className="h-12 w-12" />
+                <div className="flex flex-col">
+                  <h3 className="text-lg text-white font-medium">Blue Waves Resort</h3>
+                  <p className="text-gray-100 text-xs font-medium italic">Brgy. Ermita, Sipaway Island, San Carlos City</p>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div className="hidden lg:flex lg:gap-x-12">
+            {navigation.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`text-md/8 font-semibold text-gray-200 hover:text-white ${
+                  activeSection === item.href.slice(1) ? "text-white" : ""
+                }`}
+              >
+                {item.name}
+              </a>
+            ))}
+          </div>
+          <div className="hidden lg:flex lg:flex-1 lg:justify-end">
+            <a href="/user-login" className="text-sm/6 font-semibold text-gray-100">
+              Log in <span aria-hidden="true">&rarr;</span>
+            </a>
+          </div>
+        </nav>
+      </header>
+      <main>
+        <section id="home"><HeroSection /></section>
+        <section id="rooms"><RoomSection /></section>
+        <section id="cottages"><CottageSection /></section>
+        <section id="activities"><ActivitySection /></section>
+        <section id="contact"><ContactSection /></section>
+        <FooterSection />
+      </main>
+    </div>
+  );
 }
