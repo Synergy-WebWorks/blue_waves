@@ -168,7 +168,7 @@ export default function ReservationCalendarSection() {
             <div className="ml-6 h-6 w-px bg-gray-300" />
             <button
               type="button"
-              className="ml-6 rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="ml-6 rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-cyan-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
             >
               Add event
             </button>
@@ -279,7 +279,7 @@ export default function ReservationCalendarSection() {
                   dateTime={day.date}
                   className={
                     day.isToday
-                      ? 'flex size-6 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white'
+                      ? 'flex size-6 items-center justify-center rounded-full bg-cyan-600 font-semibold text-white'
                       : undefined
                   }
                 >
@@ -290,12 +290,12 @@ export default function ReservationCalendarSection() {
                     {day.events.slice(0, 2).map((event) => (
                       <li key={event.id}>
                         <a href={event.href} className="group flex">
-                          <p className="flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600">
+                          <p className="flex-auto truncate font-medium text-gray-900 group-hover:text-cyan-600">
                             {event.name}
                           </p>
                           <time
                             dateTime={event.datetime}
-                            className="ml-3 hidden flex-none text-gray-500 group-hover:text-indigo-600 xl:block"
+                            className="ml-3 hidden flex-none text-gray-500 group-hover:text-cyan-600 xl:block"
                           >
                             {event.time}
                           </time>
@@ -317,7 +317,7 @@ export default function ReservationCalendarSection() {
                   day.isCurrentMonth ? 'bg-white' : 'bg-gray-50',
                   (day.isSelected || day.isToday) && 'font-semibold',
                   day.isSelected && 'text-white',
-                  !day.isSelected && day.isToday && 'text-indigo-600',
+                  !day.isSelected && day.isToday && 'text-cyan-600',
                   !day.isSelected && day.isCurrentMonth && !day.isToday && 'text-gray-900',
                   !day.isSelected && !day.isCurrentMonth && !day.isToday && 'text-gray-500',
                   'flex h-14 flex-col px-3 py-2 hover:bg-gray-100 focus:z-10',
@@ -327,7 +327,7 @@ export default function ReservationCalendarSection() {
                   dateTime={day.date}
                   className={classNames(
                     day.isSelected && 'flex size-6 items-center justify-center rounded-full',
-                    day.isSelected && day.isToday && 'bg-indigo-600',
+                    day.isSelected && day.isToday && 'bg-cyan-600',
                     day.isSelected && !day.isToday && 'bg-gray-900',
                     'ml-auto',
                   )}

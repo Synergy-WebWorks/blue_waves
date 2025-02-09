@@ -48,7 +48,7 @@ export default function ReservationTabsSection() {
                 onClick={() => setActiveTab(tab.key)}
                 className={classNames(
                   activeTab === tab.key
-                    ? 'border-indigo-500 text-indigo-600'
+                    ? 'border-cyan-600 text-cyan-600'
                     : 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700',
                   'group inline-flex items-center border-b-2 px-1 py-4 text-sm font-medium',
                 )}
@@ -56,7 +56,7 @@ export default function ReservationTabsSection() {
                 <tab.icon
                   aria-hidden="true"
                   className={classNames(
-                    activeTab === tab.key ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500',
+                    activeTab === tab.key ? 'text-cyan-600' : 'text-gray-400 group-hover:text-gray-500',
                     'mr-2 -ml-0.5 size-5',
                   )}
                 />

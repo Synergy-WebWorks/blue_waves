@@ -34,7 +34,7 @@ export default function AddActivitySection() {
                                 transition
                                 className="pointer-events-auto w-screen max-w-md transform transition duration-500 ease-in-out data-[closed]:translate-x-full sm:duration-700"
                             >
-                                <div className="flex h-full flex-col overflow-y-scroll bg-gradient-to-r from-indigo-500 to-10% via-sky-500 via-30% to-emerald-500 to-100% py-6 shadow-xl">
+                                <div className="flex h-full flex-col overflow-y-scroll bg-cyan-600 py-6 shadow-xl">
                                     <div className="px-4 sm:px-6">
                                         <div className="flex items-start justify-between">
                                             <Dialog.Title className="text-base font-semibold text-white">
@@ -163,7 +163,7 @@ export default function AddActivitySection() {
                                             </button>
                                             <button
                                                 type="submit"
-                                                className="ml-4 inline-flex justify-center rounded-md bg-sky-700 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
+                                                className="ml-4 inline-flex justify-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
                                             >
                                                 Save
                                             </button>

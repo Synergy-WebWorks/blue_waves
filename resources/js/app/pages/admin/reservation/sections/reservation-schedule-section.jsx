@@ -102,10 +102,10 @@ export default function ReservationScheduleSection() {
                 type="button"
                 className={classNames(
                   day.isSelected && 'text-white',
-                  !day.isSelected && day.isToday && 'text-indigo-600',
+                  !day.isSelected && day.isToday && 'text-cyan-600',
                   !day.isSelected && !day.isToday && day.isCurrentMonth && 'text-gray-900',
                   !day.isSelected && !day.isToday && !day.isCurrentMonth && 'text-gray-400',
-                  day.isSelected && day.isToday && 'bg-indigo-600',
+                  day.isSelected && day.isToday && 'bg-cyan-600',
                   day.isSelected && !day.isToday && 'bg-gray-900',
                   !day.isSelected && 'hover:bg-gray-200',
                   (day.isSelected || day.isToday) && 'font-semibold',

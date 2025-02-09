@@ -347,7 +347,7 @@ export default function AdminLayout({ children }) {
                 {/* Static sidebar for desktop */}
                 <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
                     {/* Sidebar component, swap this element with another sidebar if you like */}
-                    <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-gradient-to-r from-indigo-500 to-10% via-sky-500 via-30% to-emerald-500 to-100% px-6">
+                    <div className="flex grow flex-col gap-y-5 overflow-y-auto border-r border-gray-200 bg-cyan-700 px-6">
                         <div className="flex h-16 shrink-0 items-center">
                             <img
                                 alt="Blue Waves Resort"
@@ -377,8 +377,8 @@ export default function AdminLayout({ children }) {
                                                                 expanded[
                                                                     item.name
                                                                 ]
-                                                                    ? "text-gray-800 bg-white-800"
-                                                                    : "text-gray-600 hover:bg-green-600 hover:text-white"
+                                                                    ? "bg-cyan-800 text-white"
+                                                                    : "text-cyan-100 hover:bg-cyan-600 hover:text-white"
                                                             )}
                                                         >
                                                             <item.icon
@@ -409,7 +409,7 @@ export default function AdminLayout({ children }) {
                                                                                 href={
                                                                                     child.href
                                                                                 }
-                                                                                className="flex items-center text-gray-600 hover:text-white hover:bg-green-600 rounded-md px-2 py-1 text-sm font-semibold leading-6"
+                                                                                className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
                                                                             >
                                                                                 <child.icon
                                                                                     aria-hidden="true"
@@ -430,8 +430,8 @@ export default function AdminLayout({ children }) {
                                                         href={item.href}
                                                         className={classNames(
                                                             item.current
-                                                                ? "bg-white-800 text-gray-800"
-                                                                : "text-white hover:bg-sky-300 hover:text-gray-600",
+                                                                ? "bg-cyan-800 text-white"
+                                                                : "text-cyan-100 hover:bg-cyan-600 hover:text-white",
                                                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                                         )}
                                                     >
@@ -447,8 +447,8 @@ export default function AdminLayout({ children }) {
                                     </ul>
                                 </li>
                                 <li>
-                                    <div className="text-xs/6 font-semibold text-gray-400">
-                                        Your teams
+                                    <div className="text-xs/6 font-semibold text-gray-200">
+                                        System Controls
                                     </div>
                                     <ul
                                         role="list"
@@ -469,8 +469,8 @@ export default function AdminLayout({ children }) {
                                                                 expanded[
                                                                     teams.name
                                                                 ]
-                                                                    ? "text-white bg-white-800"
-                                                                    : "text-white hover:bg-sky-300 hover:text-gray-600"
+                                                                    ? "bg-cyan-800 text-white"
+                                                                    : "text-cyan-100 hover:bg-cyan-600 hover:text-white"
                                                             )}
                                                         >
                                                             <teams.icon
@@ -501,7 +501,7 @@ export default function AdminLayout({ children }) {
                                                                                 href={
                                                                                     child.href
                                                                                 }
-                                                                                className="flex items-center text-white hover:text-gray-600 hover:bg-sky-300 rounded-md px-2 py-1 text-sm font-semibold leading-6"
+                                                                                className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
                                                                             >
                                                                                 <child.icon
                                                                                     aria-hidden="true"
@@ -522,8 +522,8 @@ export default function AdminLayout({ children }) {
                                                         href={teams.href}
                                                         className={classNames(
                                                             teams.current
-                                                                ? "bg-white-800 text-gray-800"
-                                                                : "text-gray-600 hover:bg-green-600 hover:text-white",
+                                                                ? "bg-cyan-800 text-white"
+                                                                : "text-cyan-100 hover:bg-cyan-600 hover:text-white",
                                                             "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                                         )}
                                                     >
@@ -541,17 +541,17 @@ export default function AdminLayout({ children }) {
                                 <li className="-mx-6 mt-auto">
                                     <Link
                                         href="#"
-                                        className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-white hover:bg-sky-300 hover:text-gray-600"
+                                        className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-cyan-100 hover:bg-cyan-600 hover:text-white"
                                     >
                                         <img
                                             alt=""
-                                            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
                                             className="size-8 rounded-full bg-gray-50"
                                         />
                                         <span className="sr-only">
                                             Your profile
                                         </span>
-                                        <span aria-hidden="true">Tom Cook</span>
+                                        <span aria-hidden="true">Emilia Birch</span>
                                     </Link>
                                 </li>
                             </ul>
@@ -581,7 +581,7 @@ export default function AdminLayout({ children }) {
                     </Link>
                 </div>
 
-                <main className="py-10 lg:pl-72">
+                <main className="lg:pl-72">
                     <div className="px-4 sm:px-6 lg:px-8">{children}</div>
                 </main>
             </div>
