@@ -1,10 +1,118 @@
 {
+  "_BanknotesIcon-1kp-NalY.js": {
+    "file": "assets/BanknotesIcon-1kp-NalY.js",
+    "name": "BanknotesIcon",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_Bars3Icon-Ch2xZOjT.js": {
+    "file": "assets/Bars3Icon-Ch2xZOjT.js",
+    "name": "Bars3Icon",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_ChevronDownIcon-Bl39cRYn.js": {
+    "file": "assets/ChevronDownIcon-Bl39cRYn.js",
+    "name": "ChevronDownIcon",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_ChevronLeftIcon-CzG_50Z1.js": {
+    "file": "assets/ChevronLeftIcon-CzG_50Z1.js",
+    "name": "ChevronLeftIcon",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_ChevronRightIcon-Gj8cA4Jo.js": {
+    "file": "assets/ChevronRightIcon-Gj8cA4Jo.js",
+    "name": "ChevronRightIcon",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_XMarkIcon-C9KuS9gF.js": {
+    "file": "assets/XMarkIcon-C9KuS9gF.js",
+    "name": "XMarkIcon",
+    "imports": [
+      "resources/js/app.jsx",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "_index-BDJOudjm.js": {
+    "file": "assets/index-BDJOudjm.js",
+    "name": "index",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_keyboard-D7Qj7gNR.js": {
+    "file": "assets/keyboard-D7Qj7gNR.js",
+    "name": "keyboard",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_menu-0i_VTFkQ.js": {
+    "file": "assets/menu-0i_VTFkQ.js",
+    "name": "menu",
+    "imports": [
+      "resources/js/app.jsx",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "_react-apexcharts.min-Bo-tRzVk.js": {
+    "file": "assets/react-apexcharts.min-Bo-tRzVk.js",
+    "name": "react-apexcharts.min",
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
+  "_reservation-table-section-DGC2Q2KI.js": {
+    "file": "assets/reservation-table-section-DGC2Q2KI.js",
+    "name": "reservation-table-section",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx"
+    ]
+  },
   "resources/js/app.jsx": {
-    "file": "assets/app-Cx29a1bs.js",
+    "file": "assets/app-BUAhvThK.js",
     "name": "app",
     "src": "resources/js/app.jsx",
     "isEntry": true,
     "dynamicImports": [
+      "resources/js/app/pages/admin/accounts/page.jsx",
+      "resources/js/app/pages/admin/accounts/sections/add-user-section.jsx",
+      "resources/js/app/pages/admin/accounts/sections/user-table-section.jsx",
+      "resources/js/app/pages/admin/activities/page.jsx",
+      "resources/js/app/pages/admin/activities/sections/activity-table-section.jsx",
+      "resources/js/app/pages/admin/activities/sections/add-activity-section.jsx",
+      "resources/js/app/pages/admin/cottage/page.jsx",
+      "resources/js/app/pages/admin/cottage/sections/add-cottage-section.jsx",
+      "resources/js/app/pages/admin/cottage/sections/cottage-table-section.jsx",
+      "resources/js/app/pages/admin/dashboard/components/customer-component.jsx",
+      "resources/js/app/pages/admin/dashboard/components/sales-component.jsx",
+      "resources/js/app/pages/admin/dashboard/page.jsx",
+      "resources/js/app/pages/admin/dashboard/sections/graph-section.jsx",
+      "resources/js/app/pages/admin/dashboard/sections/stats-section.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/reports/components/reports-stat-component.jsx",
+      "resources/js/app/pages/admin/reports/page.jsx",
+      "resources/js/app/pages/admin/reports/sections/general-report-section.jsx",
+      "resources/js/app/pages/admin/reservation/page.jsx",
+      "resources/js/app/pages/admin/reservation/sections/reservation-calendar-section.jsx",
+      "resources/js/app/pages/admin/reservation/sections/reservation-schedule-section.jsx",
+      "_reservation-table-section-DGC2Q2KI.js",
+      "resources/js/app/pages/admin/reservation/sections/reservation-tabs-section.jsx",
+      "resources/js/app/pages/admin/rooms/page.jsx",
+      "resources/js/app/pages/admin/rooms/sections/add-room-section.jsx",
+      "resources/js/app/pages/admin/rooms/sections/room-table-section.jsx",
+      "resources/js/app/pages/admin/settings/page.jsx",
+      "resources/js/app/pages/admin/staff/page.jsx",
       "resources/js/app/pages/index/page.jsx",
       "resources/js/app/pages/index/sections/activity-section.jsx",
       "resources/js/app/pages/index/sections/contact-section.jsx",
@@ -16,11 +124,405 @@
       "resources/js/app/pages/user-login/page.jsx"
     ],
     "css": [
-      "assets/app-B_-iZ2AC.css"
+      "assets/app-Bazv3kDu.css"
+    ]
+  },
+  "resources/js/app/pages/admin/accounts/page.jsx": {
+    "file": "assets/page-EUQa6zqm.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/accounts/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/accounts/sections/user-table-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "resources/js/app/pages/admin/accounts/sections/add-user-section.jsx"
+    ]
+  },
+  "resources/js/app/pages/admin/accounts/sections/add-user-section.jsx": {
+    "file": "assets/add-user-section-BurHOysx.js",
+    "name": "add-user-section",
+    "src": "resources/js/app/pages/admin/accounts/sections/add-user-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/accounts/sections/user-table-section.jsx": {
+    "file": "assets/user-table-section-BD2oMD73.js",
+    "name": "user-table-section",
+    "src": "resources/js/app/pages/admin/accounts/sections/user-table-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/accounts/sections/add-user-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/activities/page.jsx": {
+    "file": "assets/page-BFXOWbRz.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/activities/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/activities/sections/activity-table-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "resources/js/app/pages/admin/activities/sections/add-activity-section.jsx"
+    ]
+  },
+  "resources/js/app/pages/admin/activities/sections/activity-table-section.jsx": {
+    "file": "assets/activity-table-section-DPQaT_TV.js",
+    "name": "activity-table-section",
+    "src": "resources/js/app/pages/admin/activities/sections/activity-table-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/activities/sections/add-activity-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/activities/sections/add-activity-section.jsx": {
+    "file": "assets/add-activity-section-COWpweIN.js",
+    "name": "add-activity-section",
+    "src": "resources/js/app/pages/admin/activities/sections/add-activity-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/cottage/page.jsx": {
+    "file": "assets/page-CHM0CJos.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/cottage/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/cottage/sections/cottage-table-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "resources/js/app/pages/admin/cottage/sections/add-cottage-section.jsx"
+    ]
+  },
+  "resources/js/app/pages/admin/cottage/sections/add-cottage-section.jsx": {
+    "file": "assets/add-cottage-section-CosOyizm.js",
+    "name": "add-cottage-section",
+    "src": "resources/js/app/pages/admin/cottage/sections/add-cottage-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/cottage/sections/cottage-table-section.jsx": {
+    "file": "assets/cottage-table-section-SSMT9CzM.js",
+    "name": "cottage-table-section",
+    "src": "resources/js/app/pages/admin/cottage/sections/cottage-table-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/cottage/sections/add-cottage-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/dashboard/components/customer-component.jsx": {
+    "file": "assets/customer-component-DfL6_Ie0.js",
+    "name": "customer-component",
+    "src": "resources/js/app/pages/admin/dashboard/components/customer-component.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_react-apexcharts.min-Bo-tRzVk.js"
+    ]
+  },
+  "resources/js/app/pages/admin/dashboard/components/sales-component.jsx": {
+    "file": "assets/sales-component-UAeVzOHc.js",
+    "name": "sales-component",
+    "src": "resources/js/app/pages/admin/dashboard/components/sales-component.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_react-apexcharts.min-Bo-tRzVk.js"
+    ]
+  },
+  "resources/js/app/pages/admin/dashboard/page.jsx": {
+    "file": "assets/page-CjLhaM0V.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/dashboard/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/dashboard/sections/stats-section.jsx",
+      "resources/js/app/pages/admin/dashboard/sections/graph-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "_menu-0i_VTFkQ.js",
+      "_ChevronDownIcon-Bl39cRYn.js",
+      "_BanknotesIcon-1kp-NalY.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js",
+      "resources/js/app/pages/admin/dashboard/components/customer-component.jsx",
+      "_react-apexcharts.min-Bo-tRzVk.js",
+      "resources/js/app/pages/admin/dashboard/components/sales-component.jsx"
+    ]
+  },
+  "resources/js/app/pages/admin/dashboard/sections/graph-section.jsx": {
+    "file": "assets/graph-section-BD0c40GQ.js",
+    "name": "graph-section",
+    "src": "resources/js/app/pages/admin/dashboard/sections/graph-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/dashboard/components/customer-component.jsx",
+      "resources/js/app/pages/admin/dashboard/components/sales-component.jsx",
+      "_index-BDJOudjm.js",
+      "_react-apexcharts.min-Bo-tRzVk.js"
+    ]
+  },
+  "resources/js/app/pages/admin/dashboard/sections/stats-section.jsx": {
+    "file": "assets/stats-section-CM-G312S.js",
+    "name": "stats-section",
+    "src": "resources/js/app/pages/admin/dashboard/sections/stats-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_menu-0i_VTFkQ.js",
+      "_ChevronDownIcon-Bl39cRYn.js",
+      "_BanknotesIcon-1kp-NalY.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/layout.jsx": {
+    "file": "assets/layout-CeJQNAUU.js",
+    "name": "layout",
+    "src": "resources/js/app/pages/admin/layout.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reports/components/reports-stat-component.jsx": {
+    "file": "assets/reports-stat-component-Db4h8OzP.js",
+    "name": "reports-stat-component",
+    "src": "resources/js/app/pages/admin/reports/components/reports-stat-component.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_BanknotesIcon-1kp-NalY.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reports/page.jsx": {
+    "file": "assets/page-E25Quytt.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/reports/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/reports/sections/general-report-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "resources/js/app/pages/admin/dashboard/components/customer-component.jsx",
+      "_react-apexcharts.min-Bo-tRzVk.js",
+      "resources/js/app/pages/admin/dashboard/components/sales-component.jsx",
+      "resources/js/app/pages/admin/reports/components/reports-stat-component.jsx",
+      "_BanknotesIcon-1kp-NalY.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reports/sections/general-report-section.jsx": {
+    "file": "assets/general-report-section-CRvtjoEu.js",
+    "name": "general-report-section",
+    "src": "resources/js/app/pages/admin/reports/sections/general-report-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/dashboard/components/customer-component.jsx",
+      "resources/js/app/pages/admin/dashboard/components/sales-component.jsx",
+      "resources/js/app/pages/admin/reports/components/reports-stat-component.jsx",
+      "_index-BDJOudjm.js",
+      "_react-apexcharts.min-Bo-tRzVk.js",
+      "_BanknotesIcon-1kp-NalY.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reservation/page.jsx": {
+    "file": "assets/page-Db-BmYiL.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/reservation/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/reservation/sections/reservation-tabs-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "resources/js/app/pages/admin/reservation/sections/reservation-schedule-section.jsx",
+      "_ChevronLeftIcon-CzG_50Z1.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js",
+      "_menu-0i_VTFkQ.js",
+      "resources/js/app/pages/admin/reservation/sections/reservation-calendar-section.jsx",
+      "_ChevronDownIcon-Bl39cRYn.js",
+      "_reservation-table-section-DGC2Q2KI.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reservation/sections/reservation-calendar-section.jsx": {
+    "file": "assets/reservation-calendar-section-DhJ8fV-C.js",
+    "name": "reservation-calendar-section",
+    "src": "resources/js/app/pages/admin/reservation/sections/reservation-calendar-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_ChevronLeftIcon-CzG_50Z1.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js",
+      "_ChevronDownIcon-Bl39cRYn.js",
+      "_menu-0i_VTFkQ.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reservation/sections/reservation-schedule-section.jsx": {
+    "file": "assets/reservation-schedule-section-DSSGjYea.js",
+    "name": "reservation-schedule-section",
+    "src": "resources/js/app/pages/admin/reservation/sections/reservation-schedule-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_ChevronLeftIcon-CzG_50Z1.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js",
+      "_menu-0i_VTFkQ.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/reservation/sections/reservation-tabs-section.jsx": {
+    "file": "assets/reservation-tabs-section-CqYtnY7_.js",
+    "name": "reservation-tabs-section",
+    "src": "resources/js/app/pages/admin/reservation/sections/reservation-tabs-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "resources/js/app/pages/admin/reservation/sections/reservation-schedule-section.jsx",
+      "resources/js/app/pages/admin/reservation/sections/reservation-calendar-section.jsx",
+      "_reservation-table-section-DGC2Q2KI.js",
+      "_ChevronLeftIcon-CzG_50Z1.js",
+      "_ChevronRightIcon-Gj8cA4Jo.js",
+      "_menu-0i_VTFkQ.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_ChevronDownIcon-Bl39cRYn.js"
+    ]
+  },
+  "resources/js/app/pages/admin/rooms/page.jsx": {
+    "file": "assets/page-5X--W3Y9.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/rooms/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "resources/js/app/pages/admin/rooms/sections/room-table-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "resources/js/app/pages/admin/rooms/sections/add-room-section.jsx"
+    ]
+  },
+  "resources/js/app/pages/admin/rooms/sections/add-room-section.jsx": {
+    "file": "assets/add-room-section-COluUwkn.js",
+    "name": "add-room-section",
+    "src": "resources/js/app/pages/admin/rooms/sections/add-room-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/rooms/sections/room-table-section.jsx": {
+    "file": "assets/room-table-section-CfhIcwsw.js",
+    "name": "room-table-section",
+    "src": "resources/js/app/pages/admin/rooms/sections/room-table-section.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/rooms/sections/add-room-section.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
+    ]
+  },
+  "resources/js/app/pages/admin/settings/page.jsx": {
+    "file": "assets/page-DE920NgH.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/settings/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js"
+    ]
+  },
+  "resources/js/app/pages/admin/staff/page.jsx": {
+    "file": "assets/page-D4wAFfmM.js",
+    "name": "page",
+    "src": "resources/js/app/pages/admin/staff/page.jsx",
+    "isDynamicEntry": true,
+    "imports": [
+      "resources/js/app.jsx",
+      "resources/js/app/pages/admin/layout.jsx",
+      "_index-BDJOudjm.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js",
+      "_Bars3Icon-Ch2xZOjT.js"
     ]
   },
   "resources/js/app/pages/index/page.jsx": {
-    "file": "assets/page-YI5wSQen.js",
+    "file": "assets/page-DBC4gwbA.js",
     "name": "page",
     "src": "resources/js/app/pages/index/page.jsx",
     "isDynamicEntry": true,
@@ -31,11 +533,14 @@
       "resources/js/app/pages/index/sections/cottage-section.jsx",
       "resources/js/app/pages/index/sections/activity-section.jsx",
       "resources/js/app/pages/index/sections/contact-section.jsx",
-      "resources/js/app/pages/index/sections/footer-section.jsx"
+      "resources/js/app/pages/index/sections/footer-section.jsx",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
     ]
   },
   "resources/js/app/pages/index/sections/activity-section.jsx": {
-    "file": "assets/activity-section-DJB6pgIo.js",
+    "file": "assets/activity-section-C67fgeXP.js",
     "name": "activity-section",
     "src": "resources/js/app/pages/index/sections/activity-section.jsx",
     "isDynamicEntry": true,
@@ -44,7 +549,7 @@
     ]
   },
   "resources/js/app/pages/index/sections/contact-section.jsx": {
-    "file": "assets/contact-section-cf38bHZ2.js",
+    "file": "assets/contact-section-3G-6aJM7.js",
     "name": "contact-section",
     "src": "resources/js/app/pages/index/sections/contact-section.jsx",
     "isDynamicEntry": true,
@@ -53,7 +558,7 @@
     ]
   },
   "resources/js/app/pages/index/sections/cottage-section.jsx": {
-    "file": "assets/cottage-section-DPAL34zZ.js",
+    "file": "assets/cottage-section-7dlj0q9l.js",
     "name": "cottage-section",
     "src": "resources/js/app/pages/index/sections/cottage-section.jsx",
     "isDynamicEntry": true,
@@ -62,7 +567,7 @@
     ]
   },
   "resources/js/app/pages/index/sections/footer-section.jsx": {
-    "file": "assets/footer-section-BqFo6-dl.js",
+    "file": "assets/footer-section-C-WalyMG.js",
     "name": "footer-section",
     "src": "resources/js/app/pages/index/sections/footer-section.jsx",
     "isDynamicEntry": true,
@@ -71,16 +576,19 @@
     ]
   },
   "resources/js/app/pages/index/sections/hero-section.jsx": {
-    "file": "assets/hero-section-CTgXkAFu.js",
+    "file": "assets/hero-section-Dk0PlktW.js",
     "name": "hero-section",
     "src": "resources/js/app/pages/index/sections/hero-section.jsx",
     "isDynamicEntry": true,
     "imports": [
-      "resources/js/app.jsx"
+      "resources/js/app.jsx",
+      "_Bars3Icon-Ch2xZOjT.js",
+      "_XMarkIcon-C9KuS9gF.js",
+      "_keyboard-D7Qj7gNR.js"
     ]
   },
   "resources/js/app/pages/index/sections/rooms-section.jsx": {
-    "file": "assets/rooms-section-2c7kbeyw.js",
+    "file": "assets/rooms-section-BsPr8_sr.js",
     "name": "rooms-section",
     "src": "resources/js/app/pages/index/sections/rooms-section.jsx",
     "isDynamicEntry": true,
@@ -89,7 +597,7 @@
     ]
   },
   "resources/js/app/pages/user-login/components/carousel-component.jsx": {
-    "file": "assets/carousel-component-BuDWmXVg.js",
+    "file": "assets/carousel-component-Cck6a6Vt.js",
     "name": "carousel-component",
     "src": "resources/js/app/pages/user-login/components/carousel-component.jsx",
     "isDynamicEntry": true,
@@ -98,7 +606,7 @@
     ]
   },
   "resources/js/app/pages/user-login/page.jsx": {
-    "file": "assets/page-SmWj_4Km.js",
+    "file": "assets/page-hAJElTMD.js",
     "name": "page",
     "src": "resources/js/app/pages/user-login/page.jsx",
     "isDynamicEntry": true,

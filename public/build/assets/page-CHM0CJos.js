@@ -1,0 +1,1 @@
+import{j as t}from"./app-BUAhvThK.js";import o from"./layout-CeJQNAUU.js";import r from"./cottage-table-section-SSMT9CzM.js";import"./index-BDJOudjm.js";import"./XMarkIcon-C9KuS9gF.js";import"./keyboard-D7Qj7gNR.js";import"./Bars3Icon-Ch2xZOjT.js";import"./add-cottage-section-CosOyizm.js";function u(){return t.jsx(o,{children:t.jsx(r,{})})}export{u as default};
