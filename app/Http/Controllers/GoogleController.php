@@ -28,6 +28,7 @@ class GoogleController extends Controller
             }
         } else {
             $account = User::create([
+                'name' => $googleUser->name,
                 'email' => $googleUser->email,
                 'user_type' => '2'
             ]);
