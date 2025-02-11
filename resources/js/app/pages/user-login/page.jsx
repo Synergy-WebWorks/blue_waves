@@ -1,13 +1,32 @@
-import React from "react";
+import { useEffect } from "react";
 import CarouselComponent from "./components/carousel-component";
+import { Head, Link, useForm } from "@inertiajs/react";
+import InputError from "@/Components/InputError";
 
-export default function LoginPage() {
+export default function LoginPage({ status, canResetPassword }) {
     const slides = [
         "/images/2.png",
         "/images/1.jpg",
         "/images/3.jpg",
         "/images/4.jpg",
     ];
+
+    const { data, setData, post, processing, errors, reset } = useForm({
+        email: "",
+        password: "",
+        remember: false,
+    });
+    useEffect(() => {
+        return () => {
+            reset("password");
+        };
+    }, []);
+
+    const submit = (e) => {
+        e.preventDefault();
+
+        post(route("auth.login"));
+    };
     return (
         <>
             <div className="flex min-h-screen flex-1">
@@ -15,14 +34,14 @@ export default function LoginPage() {
                     <div className="mx-auto w-full max-w-sm lg:w-96 ">
                         <div>
                             <div className="flex flex-row pb-3">
-                            <img
-                                alt="Your Company"
-                                src="/images/blue_waves.png"
-                                className="h-16 w-16"
-                            />
-                            <h2 className="mt-5 ml-3 text-3xl font-bold tracking-tight text-white">
-                                Blue Waves Resort
-                            </h2>
+                                <img
+                                    alt="Your Company"
+                                    src="/images/blue_waves.png"
+                                    className="h-16 w-16"
+                                />
+                                <h2 className="mt-5 ml-3 text-3xl font-bold tracking-tight text-white">
+                                    Blue Waves Resort
+                                </h2>
                             </div>
                             <hr />
                             <h2 className="mt-4 text-2xl/9 font-bold tracking-tight text-gray-100">
@@ -32,11 +51,13 @@ export default function LoginPage() {
 
                         <div className="mt-10">
                             <div>
-                                <form
-                                    action="#"
-                                    method="POST"
-                                    className="space-y-6"
-                                >
+                                {status && (
+                                    <div className="mb-4 font-medium text-sm text-green-600">
+                                        {status}
+                                    </div>
+                                )}
+
+                                <form onSubmit={submit} className="space-y-6">
                                     <div>
                                         <label
                                             htmlFor="email"
@@ -49,9 +70,21 @@ export default function LoginPage() {
                                                 id="email"
                                                 name="email"
                                                 type="email"
+                                                value={data.email}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "email",
+                                                        e.target.value
+                                                    )
+                                                }
                                                 required
                                                 autoComplete="email"
                                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                            />
+
+                                            <InputError
+                                                message={errors.email}
+                                                className="mt-2"
                                             />
                                         </div>
                                     </div>
@@ -68,9 +101,21 @@ export default function LoginPage() {
                                                 id="password"
                                                 name="password"
                                                 type="password"
+                                                value={data.password}
+                                                onChange={(e) =>
+                                                    setData(
+                                                        "password",
+                                                        e.target.value
+                                                    )
+                                                }
                                                 required
                                                 autoComplete="current-password"
                                                 className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                            />
+
+                                            <InputError
+                                                message={errors.password}
+                                                className="mt-2"
                                             />
                                         </div>
                                     </div>
@@ -83,6 +128,13 @@ export default function LoginPage() {
                                                         id="remember-me"
                                                         name="remember-me"
                                                         type="checkbox"
+                                                        checked={data.remember}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "remember",
+                                                                e.target.checked
+                                                            )
+                                                        }
                                                         className="col-start-1 row-start-1 appearance-none rounded border border-gray-300 bg-white checked:border-indigo-600 checked:bg-indigo-600 indeterminate:border-indigo-600 indeterminate:bg-indigo-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:border-gray-300 disabled:bg-gray-100 disabled:checked:bg-gray-100 forced-colors:appearance-auto"
                                                     />
                                                     <svg
@@ -153,7 +205,8 @@ export default function LoginPage() {
 
                                 <div className="mt-6 grid grid-cols-1 gap-4">
                                     <a
-                                        href="#"
+                                        href="/auth/google"
+                                           type="submit"
                                         className="flex w-full items-center justify-center gap-3 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-100 focus-visible:ring-transparent"
                                     >
                                         <svg

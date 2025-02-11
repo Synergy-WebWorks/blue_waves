@@ -27,6 +27,7 @@ import {
     FaMoneyBillTransfer,
     FaTentArrowDownToLine,
 } from "react-icons/fa6";
+import { Link } from "@inertiajs/react";
 
 const cards = [
     {
@@ -151,12 +152,14 @@ export default function StatsSection() {
                                             </a>
                                         </Menu.Item>
                                         <Menu.Item>
-                                            <a
-                                                href="#"
+                                            <Link
+                                                method="post"
+                                                href={route("logout")}
+                                                as="button"
                                                 className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                                             >
                                                 Logout
-                                            </a>
+                                            </Link>
                                         </Menu.Item>
                                     </Menu.Items>
                                 </Menu>

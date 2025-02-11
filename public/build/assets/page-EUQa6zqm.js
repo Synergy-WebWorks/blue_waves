@@ -1,1 +1,0 @@
-import{j as o}from"./app-BUAhvThK.js";import r from"./layout-CeJQNAUU.js";import t from"./user-table-section-BD2oMD73.js";import"./index-BDJOudjm.js";import"./XMarkIcon-C9KuS9gF.js";import"./keyboard-D7Qj7gNR.js";import"./Bars3Icon-Ch2xZOjT.js";import"./add-user-section-BurHOysx.js";function c(){return o.jsx(r,{children:o.jsx(t,{})})}export{c as default};
