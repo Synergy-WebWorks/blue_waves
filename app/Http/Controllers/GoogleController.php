@@ -27,7 +27,12 @@ class GoogleController extends Controller
                 return redirect(RouteServiceProvider::CUSTOMER);
             }
         } else {
-             return redirect(RouteServiceProvider::LOGININVALID);
+            $account = User::create([
+                'email' => $googleUser->email,
+                'user_type' => '2'
+            ]);
+            Auth::login($account);
+            return redirect(RouteServiceProvider::CUSTOMER);
         }
     }
 }
