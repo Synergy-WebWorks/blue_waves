@@ -19,6 +19,7 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/admin/dashboard';
     public const CUSTOMER = '/customer/dashboard';
+    public const LOGININVALID = '/?status=error';
 
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
