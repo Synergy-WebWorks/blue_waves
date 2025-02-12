@@ -30,6 +30,10 @@ Route::get('/', function () {
     return Inertia::render('index/page');
 });
 
+Route::get('/room-details', function () {
+    return Inertia::render('room-details/page');
+});
+
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

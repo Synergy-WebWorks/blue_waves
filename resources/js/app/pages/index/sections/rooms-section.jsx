@@ -4,7 +4,7 @@ const products = [
     {
         id: 1,
         name: "Room A",
-        href: "#",
+        href: "/room-details",
         price: "₱1500/night",
         description:
             "Perfect for small groups or families, each room is designed to comfortably accommodate up to 4 guests. Relax in a cozy space featuring double-deck beds and air conditioning for your comfort.",
@@ -16,7 +16,7 @@ const products = [
     {
         id: 2,
         name: "Room B",
-        href: "#",
+        href: "/room-details",
         price: "₱1500/night",
         description:
             "Perfect for small groups or families, each room is designed to comfortably accommodate up to 4 guests. Relax in a cozy space featuring double-deck beds and air conditioning for your comfort.",
@@ -27,7 +27,7 @@ const products = [
     {
         id: 3,
         name: "Family Room",
-        href: "#",
+        href: "/room-details",
         price: "₱6500/night",
         description:
             "Enjoy the ultimate group getaway in our spacious Family Room, perfect for up to 5 guests. This room is thoughtfully designed for comfort, featuring air conditioning and refrigerator to keep you cool and a vibrant ambiance to set the mood.",
@@ -38,7 +38,7 @@ const products = [
     {
         id: 3,
         name: "Family Room",
-        href: "#",
+        href: "/room-details",
         price: "₱6500/night",
         description:
             "Enjoy the ultimate group getaway in our spacious Family Room, perfect for up to 5 guests. This room is thoughtfully designed for comfort, featuring air conditioning and refrigerator to keep you cool and a vibrant ambiance to set the mood.",
