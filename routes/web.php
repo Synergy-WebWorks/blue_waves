@@ -30,11 +30,6 @@ Route::get('/', function () {
     return Inertia::render('index/page');
 });
 
-Route::get('/room-details', function () {
-    return Inertia::render('room-details/page');
-});
-
-
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
@@ -72,6 +67,18 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
 
     Route::get('/accounts', function () {
         return Inertia::render('admin/accounts/page');
+    });
+
+    Route::get('/inventory', function () {
+        return Inertia::render('admin/inventory/page');
+    });
+
+    Route::get('/terms', function () {
+        return Inertia::render('admin/terms/page');
+    });
+
+    Route::get('/landing-page', function () {
+        return Inertia::render('admin/landing-page/page');
     });
 });
 

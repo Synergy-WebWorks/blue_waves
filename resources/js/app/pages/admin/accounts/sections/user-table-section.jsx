@@ -24,10 +24,10 @@ export default function UserTableSection() {
         <div className="px-4 sm:px-6 lg:px-8 mt-4 pb-8 border rounded-lg shadow-lg">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
-                    <h1 className="text-base font-semibold text-gray-900 p-5">
+                    <h1 className="text-base font-semibold text-cyan-600 pt-5">
                         Account User Records
                     </h1>
-                    <p className="mt-2 text-sm text-gray-700">
+                    <p className="mt-2 text-sm text-gray-600">
                         A list of all the active users in the system.
                     </p>
                 </div>

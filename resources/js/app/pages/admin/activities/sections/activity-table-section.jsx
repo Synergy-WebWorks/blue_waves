@@ -56,10 +56,10 @@ export default function ActivityTableSection() {
         <div className="px-4 sm:px-6 lg:px-8 mt-4 pb-8 border rounded-lg shadow-lg">
             <div className="sm:flex sm:items-center">
                 <div className="sm:flex-auto">
-                    <h1 className="text-base font-semibold text-gray-900 pt-8">
+                    <h1 className="text-base font-semibold text-cyan-600 pt-8">
                         Activity Records
                     </h1>
-                    <p className="mt-2 text-sm text-gray-700">
+                    <p className="mt-2 text-sm text-gray-600">
                         A list of all the activities in the system.
                     </p>
                 </div>

@@ -24,6 +24,7 @@ import {
 } from "@heroicons/react/20/solid";
 import {
     FaCalendarCheck,
+    FaCalendarXmark,
     FaMoneyBillTransfer,
     FaTentArrowDownToLine,
 } from "react-icons/fa6";
@@ -50,7 +51,7 @@ const cards = [
     {
         name: "Cancelled Reservation",
         href: "#",
-        icon: ScaleIcon,
+        icon: FaCalendarXmark,
         amount: "3",
     },
 ];

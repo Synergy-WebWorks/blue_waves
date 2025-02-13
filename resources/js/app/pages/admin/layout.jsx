@@ -59,6 +59,16 @@ const teams = [
                 href: "./inventory",
                 icon: FaRegCircleDot,
             },
+            {
+                name: "Terms & Condition Section",
+                href: "./terms",
+                icon: FaRegCircleDot,
+            },
+            {
+                name: "Landing Page Section",
+                href: "./landing-page",
+                icon: FaRegCircleDot,
+            },
         ],
     },
     {
