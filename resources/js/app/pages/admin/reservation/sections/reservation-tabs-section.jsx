@@ -6,9 +6,9 @@ import ReservationCalendarSection from './reservation-calendar-section'
 import ReservationTableSection from './reservation-table-section'
 
 const tabs = [
+  { name: 'Reservation Table', key: 'reservation', icon: FaTable },
   { name: 'Calendar View', key: 'calendar', icon: CalendarIcon },
   { name: 'Scheduled', key: 'scheduled', icon: FaCalendarCheck },
-  { name: 'Reservation Table', key: 'reservation', icon: FaTable },
 ]
 
 function classNames(...classes) {
@@ -16,7 +16,7 @@ function classNames(...classes) {
 }
 
 export default function ReservationTabsSection() {
-  const [activeTab, setActiveTab] = useState('calendar') // Default active tab
+  const [activeTab, setActiveTab] = useState('reservation') // Default active tab
 
   return (
     <div>

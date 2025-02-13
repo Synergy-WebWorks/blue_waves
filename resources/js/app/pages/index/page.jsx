@@ -151,7 +151,6 @@ export default function IndexPage() {
                 <FooterSection />
             </main>
 
-            {/* Scroll to Top Button */}
             {showScrollToTop && (
                 <button
                     onClick={scrollToTop}

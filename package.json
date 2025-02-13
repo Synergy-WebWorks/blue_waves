@@ -27,6 +27,6 @@
         "heroicons": "^2.2.0",
         "react-apexcharts": "^1.7.0",
         "react-icons": "^5.4.0",
-        "react-tailwindcss-datepicker": "^2.0.0"
+        "react-tailwindcss-datepicker": "^1.7.3"
     }
 }
