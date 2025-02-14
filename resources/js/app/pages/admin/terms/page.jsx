@@ -1,99 +1,79 @@
-"use client";
-
-import { useState } from "react";
-
+import React from "react";
 import AdminLayout from "../layout";
 
-function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
-}
-
 export default function TermsAndConditionPage() {
-    const [sidebarOpen, setSidebarOpen] = useState(false);
-
     return (
-        <>
-            <AdminLayout>
-                <div className="w-full">
-                    <main>
-                        <h1 className="sr-only">Account Settings</h1>
+        <AdminLayout>
+            <div className="mt-4 p-4 border rounded-lg shadow-lg">
+                <div className="w-full mt-5 mb-5 grid grid-cols-1 md:grid-cols-2 gap-4 px-6 md:px-12 lg:px-20">
+                    {/* Left Column (Hero Content) */}
+                    <div className="flex flex-col justify-center items-center text-center md:text-left">
+                        <div>
+                            <h2 className="text-4xl font-bold text-cyan-600">
+                                Terms & Condition Section
+                            </h2>
+                            <p className="mt-4 text-lg text-gray-400">
+                                A resort's Terms and Conditions outline the
+                                rules and policies that guests must follow
+                                during their stay. These guidelines help ensure
+                                a smooth experience for both the guests and the
+                                resort management.
+                            </p>
+                            <p className="mt-2 text-sm/6 text-gray-400">
+                                Typical sections include:
+                            </p>
+                            <ul className="list-disc list-inside text-sm text-gray-400">
+                                <li>
+                                    <strong>
+                                        Booking & Cancellation Policies
+                                    </strong>{" "}
+                                    – Rules for reservations, payments, and
+                                    refunds.
+                                </li>
+                                <li>
+                                    <strong>Check-in & Check-out Times</strong>{" "}
+                                    – Specifies arrival and departure times.
+                                </li>
+                                <li>
+                                    <strong>Guest Responsibilities</strong> –
+                                    Expected behavior, noise policies, and
+                                    damage liability.
+                                </li>
+                                <li>
+                                    <strong>
+                                        Resort Facilities & Services
+                                    </strong>{" "}
+                                    – Guidelines for using amenities like pools,
+                                    spas, and restaurants.
+                                </li>
+                                <li>
+                                    <strong>Liability & Safety</strong> –
+                                    Disclaimers for accidents, lost items, or
+                                    emergency protocols.
+                                </li>
+                            </ul>
+                            <p className="mt-2 text-sm/6 text-gray-400">
+                                By agreeing to these terms, guests acknowledge
+                                their responsibilities and the resort’s
+                                policies, ensuring a hassle-free and enjoyable
+                                stay.
+                            </p>
+                        </div>
+                    </div>
 
-                        {/* Settings forms */}
-                        <div className="divide-y divide-white/5">
-                            <div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
-                                <div>
-                                    <h2 className="text-base/7 font-semibold text-gray-500">
-                                        Terms & Condition
-                                    </h2>
-                                    <p className="mt-1 text-sm/6 text-gray-400">
-                                        A resort's Terms and Conditions outline
-                                        the rules and policies that guests must
-                                        follow during their stay. These
-                                        guidelines help ensure a smooth
-                                        experience for both the guests and the
-                                        resort management.
-                                    </p>
-                                    <p className="mt-2 text-sm/6 text-gray-400">
-                                        Typical sections include:
-                                    </p>
-                                    <ul className="list-disc list-inside text-sm text-gray-400">
-                                        <li>
-                                            <strong>
-                                                Booking & Cancellation Policies
-                                            </strong>{" "}
-                                            – Rules for reservations, payments,
-                                            and refunds.
-                                        </li>
-                                        <li>
-                                            <strong>
-                                                Check-in & Check-out Times
-                                            </strong>{" "}
-                                            – Specifies arrival and departure
-                                            times.
-                                        </li>
-                                        <li>
-                                            <strong>
-                                                Guest Responsibilities
-                                            </strong>{" "}
-                                            – Expected behavior, noise policies,
-                                            and damage liability.
-                                        </li>
-                                        <li>
-                                            <strong>
-                                                Resort Facilities & Services
-                                            </strong>{" "}
-                                            – Guidelines for using amenities
-                                            like pools, spas, and restaurants.
-                                        </li>
-                                        <li>
-                                            <strong>Liability & Safety</strong>{" "}
-                                            – Disclaimers for accidents, lost
-                                            items, or emergency protocols.
-                                        </li>
-                                    </ul>
-                                    <p className="mt-2 text-sm/6 text-gray-400">
-                                        By agreeing to these terms, guests
-                                        acknowledge their responsibilities and
-                                        the resort’s policies, ensuring a
-                                        hassle-free and enjoyable stay.
-                                    </p>
-                                </div>
-
-                                <form className="md:col-span-2">
-                                    <div className="grid grid-cols-1 gap-x-6 gap-y-8 sm:max-w-full sm:grid-cols-6">
-                                        <div className="sm:col-span-full">
-                                            <label
-                                                htmlFor="first-name"
-                                                className="block text-sm/6 font-medium text-gray-500"
-                                            >
-                                                Terms & Condition Content
-                                            </label>
-                                            <div className="mt-2">
-                                                <textarea
-                                                    id="first-name"
-                                                    name="first-name"
-                                                    type="text"
-                                                    value="
+                    {/* Right Column (Textarea + Button) */}
+                    <div className="flex flex-col justify-center">
+                        <label
+                            htmlFor="contact_content"
+                            className="block text-sm font-medium text-cyan-600"
+                        >
+                            Terms & Condition Content
+                        </label>
+                        <textarea
+                            id="contact_content"
+                            name="contact_content"
+                            className="mt-2 w-full min-h-[300px] rounded-md bg-white/5 px-3 py-2 text-base text-gray-400 outline-none focus:ring-2 focus:ring-cyan-500 focus:text-gray-500 resize-none"
+                            value="
                                                     Blue Waves Resort Terms and Conditions
 
 Welcome to Blue Waves Resort! To ensure a pleasant and hassle-free stay, we kindly ask all guests to review and adhere to our Terms and Conditions.
@@ -133,27 +113,18 @@ Any disputes arising from the stay will be handled according to local laws.
 By confirming your booking and staying at Blue Waves Resort, you agree to abide by these Terms and Conditions.
 
                                                     "
-                                                    autoComplete="given-name"
-                                                    className="block w-full h-full min-h-[400px] rounded-md bg-white/5 px-3 py-1.5 text-base text-gray-500 outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6 resize-none"
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div className="mt-8 flex float-right">
-                                        <button
-                                            type="submit"
-                                            className="rounded-md bg-cyan-700 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-cyan-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-                                        >
-                                            Save Changes
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
+                        />
+                        <div className="mt-6 flex justify-end">
+                            <button
+                                type="submit"
+                                className="rounded-md bg-cyan-700 px-6 py-3 text-sm font-semibold text-white hover:bg-cyan-600 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+                            >
+                                Save Changes
+                            </button>
                         </div>
-                    </main>
+                    </div>
                 </div>
-            </AdminLayout>
-        </>
+            </div>
+        </AdminLayout>
     );
 }
