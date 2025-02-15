@@ -6,6 +6,7 @@ import {
   ClockIcon,
   EllipsisHorizontalIcon,
 } from '@heroicons/react/20/solid'
+import { CalendarIcon } from '@heroicons/react/24/outline'
 
 const days = [
   { date: '2021-12-27', events: [] },
@@ -166,12 +167,14 @@ export default function ReservationCalendarSection() {
               </Menu.Items>
             </Menu>
             <div className="ml-6 h-6 w-px bg-gray-300" />
-            <button
-              type="button"
-              className="ml-6 rounded-md bg-cyan-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-cyan-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
-            >
-              Add event
-            </button>
+            <a
+            type="button"
+            href="./booking"
+            className="block rounded-md bg-cyan-700 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-cyan-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
+          >
+            <CalendarIcon className="size-5 float-left mr-2"/>
+            Book a Reservation
+          </a>
           </div>
           <Menu as="div" className="relative ml-6 md:hidden">
             <Menu.Button className="-mx-2 flex items-center rounded-full border border-transparent p-2 text-gray-400 hover:text-gray-500">

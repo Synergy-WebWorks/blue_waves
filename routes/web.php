@@ -80,6 +80,14 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/landing-page', function () {
         return Inertia::render('admin/landing-page/page');
     });
+
+    Route::get('/booking', function () {
+        return Inertia::render('admin/booking/page');
+    });
+
+    Route::get('/contact', function () {
+        return Inertia::render('admin/contact/page');
+    });
 });
 
 Route::get('/staff/settings', function () {

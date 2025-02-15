@@ -37,13 +37,14 @@ export default function ReservationTableSection() {
           </p>
         </div>
         <div className="mt-4 sm:mt-0 sm:ml-16 sm:flex-none">
-          <button
+          <a
             type="button"
+            href="./booking"
             className="block rounded-md bg-cyan-700 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-cyan-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
           >
             <CalendarIcon className="size-5 float-left mr-2"/>
             Book a Reservation
-          </button>
+          </a>
         </div>
       </div>
       <div className="mt-8 flow-root">
