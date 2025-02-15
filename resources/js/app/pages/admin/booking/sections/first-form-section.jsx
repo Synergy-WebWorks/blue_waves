@@ -13,6 +13,18 @@ const orders = [
         price: "₱6500.00",
         capacity: "Good for 5 Persons",
         imageSrc: "/images/Family Room/C.jpeg",
+        daysTotal: "1",
+        unit: "Night(s)",
+    },
+    {
+        id: 2,
+        title: "Umbrella Cottage 1",
+        href: "#",
+        price: "₱600.00",
+        capacity: "Good for 4-5 Persons",
+        imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
+        daysTotal: "1",
+        unit: "Day(s)",
     },
     // More products...
 ];
@@ -382,6 +394,11 @@ export default function FirstFormSection() {
                                                     <p className="mt-1 text-sm text-gray-500">
                                                         {order.capacity}
                                                     </p>
+
+                                                    <p className="mt-1 text-sm text-gray-500">
+                                                        {order.daysTotal}{" "}
+                                                        {order.unit}
+                                                    </p>
                                                 </div>
 
                                                 <div className="ml-4 flow-root shrink-0">
@@ -400,23 +417,10 @@ export default function FirstFormSection() {
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-1 items-end justify-between pt-2">
+                                            <div className="flex flex-1 items-end justify-end pt-2">
                                                 <p className="mt-1 text-sm font-medium text-gray-900">
-                                                    {order.price}
+                                                    {order.price}/{order.unit}
                                                 </p>
-
-                                                <div className="ml-4">
-                                                    <div className="grid grid-cols-1">
-                                                        <input
-                                                            readOnly
-                                                            id="quantity"
-                                                            name="quantity"
-                                                            aria-label="Quantity"
-                                                            value="1 night(s)"
-                                                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                                                        />
-                                                    </div>
-                                                </div>
                                             </div>
                                         </div>
                                     </li>
@@ -426,7 +430,7 @@ export default function FirstFormSection() {
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">Subtotal</dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        ₱6,500.00
+                                        ₱7,100.00
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between p-2 border-b border-gray-300">
@@ -449,7 +453,7 @@ export default function FirstFormSection() {
                                         Total
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                        ₱6,620.00
+                                        ₱7,220.00
                                     </dd>
                                 </div>
                             </dl>

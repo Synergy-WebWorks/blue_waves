@@ -2,21 +2,29 @@ import React from "react";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
 
-const products = [
+const orders = [
     {
         id: 1,
-        title: "Basic Tee",
+        title: "Family Room",
         href: "#",
-        price: "$32.00",
-        color: "Black",
-        size: "Large",
-        imageSrc:
-            "https://tailwindui.com/plus-assets/img/ecommerce-images/checkout-page-02-product-01.jpg",
-        imageAlt: "Front of men's Basic Tee in black.",
+        price: "₱6500.00",
+        capacity: "Good for 5 Persons",
+        imageSrc: "/images/Family Room/C.jpeg",
+        daysTotal: "1",
+        unit: "Night(s)",
+    },
+    {
+        id: 2,
+        title: "Umbrella Cottage 1",
+        href: "#",
+        price: "₱600.00",
+        capacity: "Good for 4-5 Persons",
+        imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
+        daysTotal: "1",
+        unit: "Day(s)",
     },
     // More products...
 ];
-
 
 export default function SecondFormSection() {
     return (
@@ -176,7 +184,7 @@ export default function SecondFormSection() {
                     {/* Order summary */}
                     <div className="mt-10 lg:mt-0">
                         <h2 className="text-lg font-medium text-cyan-600">
-                            Order summary
+                            Booking Order summary
                         </h2>
 
                         <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
@@ -185,15 +193,15 @@ export default function SecondFormSection() {
                                 role="list"
                                 className="divide-y divide-gray-200"
                             >
-                                {products.map((product) => (
+                                {orders.map((order) => (
                                     <li
-                                        key={product.id}
+                                        key={order.id}
                                         className="flex px-4 py-6 sm:px-6"
                                     >
                                         <div className="shrink-0">
                                             <img
-                                                alt={product.imageAlt}
-                                                src={product.imageSrc}
+                                                alt={order.imageAlt}
+                                                src={order.imageSrc}
                                                 className="w-20 rounded-md"
                                             />
                                         </div>
@@ -203,17 +211,18 @@ export default function SecondFormSection() {
                                                 <div className="min-w-0 flex-1">
                                                     <h4 className="text-sm">
                                                         <a
-                                                            href={product.href}
+                                                            href={order.href}
                                                             className="font-medium text-gray-700 hover:text-gray-800"
                                                         >
-                                                            {product.title}
+                                                            {order.title}
                                                         </a>
                                                     </h4>
                                                     <p className="mt-1 text-sm text-gray-500">
-                                                        {product.color}
+                                                        {order.capacity}
                                                     </p>
                                                     <p className="mt-1 text-sm text-gray-500">
-                                                        {product.size}
+                                                        {order.daysTotal}{" "}
+                                                        {order.unit}
                                                     </p>
                                                 </div>
 
@@ -233,50 +242,12 @@ export default function SecondFormSection() {
                                                 </div>
                                             </div>
 
-                                            <div className="flex flex-1 items-end justify-between pt-2">
+                                            <div className="flex flex-1 items-end justify-end pt-2">
                                                 <p className="mt-1 text-sm font-medium text-gray-900">
-                                                    {product.price}
+                                                    {order.price}/{order.unit}
                                                 </p>
 
-                                                <div className="ml-4">
-                                                    <div className="grid grid-cols-1">
-                                                        <select
-                                                            id="quantity"
-                                                            name="quantity"
-                                                            aria-label="Quantity"
-                                                            className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-2 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                                                        >
-                                                            <option value={1}>
-                                                                1
-                                                            </option>
-                                                            <option value={2}>
-                                                                2
-                                                            </option>
-                                                            <option value={3}>
-                                                                3
-                                                            </option>
-                                                            <option value={4}>
-                                                                4
-                                                            </option>
-                                                            <option value={5}>
-                                                                5
-                                                            </option>
-                                                            <option value={6}>
-                                                                6
-                                                            </option>
-                                                            <option value={7}>
-                                                                7
-                                                            </option>
-                                                            <option value={8}>
-                                                                8
-                                                            </option>
-                                                        </select>
-                                                        <ChevronDownIcon
-                                                            aria-hidden="true"
-                                                            className="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
-                                                        />
-                                                    </div>
-                                                </div>
+                                               
                                             </div>
                                         </div>
                                     </li>
@@ -286,19 +257,22 @@ export default function SecondFormSection() {
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">Subtotal</dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        $64.00
+                                        ₱7,100.00
+                                    </dd>
+                                </div>
+                                <div className="flex items-center justify-between p-2 border-b border-gray-300">
+                                    <dt className="text-sm">Entrance Fee</dt>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <dt className="text-sm">Adult</dt>
+                                    <dd className="text-sm font-medium text-gray-900">
+                                        ₱80.00
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Shipping</dt>
+                                    <dt className="text-sm">Children</dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        $5.00
-                                    </dd>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Taxes</dt>
-                                    <dd className="text-sm font-medium text-gray-900">
-                                        $5.52
+                                        ₱40.00
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -306,7 +280,7 @@ export default function SecondFormSection() {
                                         Total
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                        $75.52
+                                        ₱7,220.00
                                     </dd>
                                 </div>
                             </dl>
