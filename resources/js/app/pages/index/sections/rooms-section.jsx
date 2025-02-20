@@ -15,7 +15,6 @@ export default function RoomSection() {
             setImageIndexes(new Array(products.length).fill(0));
         }
     }, [products.length]);
-    
 
     const handleNext = (index) => {
         setImageIndexes((prevIndexes) =>
@@ -37,7 +36,7 @@ export default function RoomSection() {
             )
         );
     };
-  
+
     return (
         <div className="bg-white">
             <div className="mx-8 max-w-full px-4 py-16 sm:px-6 sm:py-12 border-b border-gray-300">
@@ -75,8 +74,10 @@ export default function RoomSection() {
                                 <div className="relative">
                                     <img
                                         alt={product.name}
-                                        src={product.uploads[imageIndexes[index]]?.file ?? '/'}
-
+                                        src={
+                                            product.uploads[imageIndexes[index]]
+                                                ?.file ?? "/"
+                                        }
                                         className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
                                     />
                                     {/* Previous button */}
@@ -105,14 +106,56 @@ export default function RoomSection() {
                                     <p className="text-sm text-gray-500 text-justify">
                                         {product.description}
                                     </p>
-                                    <div className="flex flex-1 flex-col justify-end">
-                                        <p className="text-sm italic text-gray-500">
-                                            {product.options}
-                                        </p>
-                                        <p className="text-base font-medium text-gray-900">
-                                            {product.price}
-                                        </p>
+                                    <div className="flex">
+                                        <div className="flex flex-1 flex-col justify-end">
+                                            <p className="text-sm italic text-gray-500">
+                                                {product.options}
+                                            </p>
+                                            <p className="text-base font-medium text-gray-900">
+                                                {product.price}
+                                            </p>
+                                        </div>
+                                       
                                     </div>
+                                    <div className="flex flex-row items-start justify-between">
+                                            <div> ₱ {parseInt(product.rate).toFixed(2)}</div>
+                                            {!product.status && (
+                                                <span className="inline-flex items-center gap-x-1.5 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
+                                                    <svg
+                                                        viewBox="0 0 6 6"
+                                                        aria-hidden="true"
+                                                        className="size-1.5 fill-green-500"
+                                                    >
+                                                        <circle
+                                                            r={3}
+                                                            cx={3}
+                                                            cy={3}
+                                                        />
+                                                    </svg>
+                                                    Vacant
+                                                </span>
+                                            )}
+                                            {product.status && (
+                                                <span className="inline-flex items-center gap-x-1.5 rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
+                                                    <button
+                                                        type="button"
+                                                        className="group relative -mr-1 size-3.5 rounded-xs hover:bg-red-600/20"
+                                                    >
+                                                        <span className="sr-only">
+                                                            Remove
+                                                        </span>
+                                                        <svg
+                                                            viewBox="0 0 14 14"
+                                                            className="size-3.5 stroke-red-700/50 group-hover:stroke-red-700/75"
+                                                        >
+                                                            <path d="M4 4l6 6m0-6l-6 6" />
+                                                        </svg>
+                                                        <span className="absolute -inset-1" />
+                                                    </button>
+                                                    Reserved
+                                                </span>
+                                            )}
+                                        </div>
                                 </div>
                             </div>
                         );

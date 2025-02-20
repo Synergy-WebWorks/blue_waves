@@ -3,6 +3,10 @@ import { Bars3Icon } from "@heroicons/react/24/outline";
 import Datepicker from "react-tailwindcss-datepicker";
 import BookingDetailsComponent from "../components/booking-details-component";
 import { FaHouseCircleCheck } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "@/app/redux/app-slice";
+import moment from "moment";
+import { router } from "@inertiajs/react";
 
 const NEXT_MONTH = new Date();
 NEXT_MONTH.setMonth(NEXT_MONTH.getMonth() + 1);
@@ -16,13 +20,17 @@ const navigation = [
 
 export default function IndexPage() {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [dateRange, setDateRange] = useState({
-        startDate: new Date(),
-        endDate: null,
-    });
+    const { search } = useSelector((store) => store.app);
+    const dispatch = useDispatch();
     const today = new Date();
     today.setHours(0, 0, 0, 0);
+    console.log("search", search);
 
+    function search_rent_vacant() {
+        router.visit(
+            `?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
+        );
+    }
     return (
         <div className="bg-gradient-to-r from-indigo-500 to-10% via-sky-500 via-30% to-emerald-500 to-100%">
             <header className="absolute inset-x-0 top-0 z-50">
@@ -102,7 +110,7 @@ export default function IndexPage() {
                                     </p>
                                     <div className="mt-10 w-full max-w-6xl mx-auto bg-white shadow-lg rounded-2xl p-6 ring-1 ring-gray-900/5">
                                         <h3 className="text-lg font-semibold text-teal-600 mb-4">
-                                            <FaHouseCircleCheck className="size-6 float-left text-teal-600 mr-2"/>
+                                            <FaHouseCircleCheck className="size-6 float-left text-teal-600 mr-2" />
                                             Room/Cottages Availability
                                         </h3>
 
@@ -111,9 +119,22 @@ export default function IndexPage() {
                                             <div className="w-full flex-1">
                                                 <Datepicker
                                                     primaryColor={"teal"}
-                                                    value={dateRange}
+                                                    value={{
+                                                        startDate: search.start,
+                                                        endDate: search.end,
+                                                    }}
                                                     onChange={(newValue) =>
-                                                        setDateRange(newValue)
+                                                        dispatch(
+                                                            setSearch({
+                                                                ...search,
+                                                                start: moment(
+                                                                    newValue.startDate
+                                                                ).format("LL"),
+                                                                end: moment(
+                                                                    newValue.endDate
+                                                                ).format("LL"),
+                                                            })
+                                                        )
                                                     }
                                                     minDate={today}
                                                     separator="to"
@@ -131,7 +152,10 @@ export default function IndexPage() {
 
                                             {/* Search Button */}
                                             <div className="w-full sm:w-auto">
-                                                <button className="w-full sm:w-auto px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition">
+                                                <button
+                                                    onClick={search_rent_vacant}
+                                                    className="w-full sm:w-auto px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition"
+                                                >
                                                     Search
                                                 </button>
                                             </div>
