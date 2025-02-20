@@ -1,75 +1,27 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-
-const products = [
-    {
-        cottage_id: 1,
-        name: "Umbrella Cottage 1",
-        href: "#",
-        price: "₱600",
-        description:
-            "Perfect for small groups. our Umbrella Cottages offer a cozy, shaded space just steps from the beach. Relax, unwind, and enjoy the ocean breeze in the perfect spot for your seaside escape",
-        options: "Good for 4-5 Persons",
-        images: [
-            "images/Umbrella Cottage (2pcs)/1.jpeg",
-            "images/Umbrella Cottage (2pcs)/3.jpeg",
-            "images/Umbrella Cottage (2pcs)/4.jpeg",
-        ],
-    },
-    {
-        cottage_id: 2,
-        name: "Umbrella Cottage 2",
-        href: "#",
-        price: "₱600",
-        description:
-            "Perfect for small groups. our Umbrella Cottages offer a cozy, shaded space just steps from the beach. Relax, unwind, and enjoy the ocean breeze in the perfect spot for your seaside escape",
-        options: "Good for 4-5 Persons",
-        images: [
-            "/images/Umbrella Cottage (2pcs)/2.jpg",
-            "/images/Umbrella Cottage (2pcs)/6.jpg",
-            "/images/Umbrella Cottage (2pcs)/5.jpg",
-        ],
-    },
-    {
-        cottage_id: 3,
-        name: "Pavillion Cottage",
-        href: "#",
-        price: "₱2500",
-        description:
-            "Ideal for large groups, our Pavilion can accommodate 15 to 20 guests, offering a spacious and open area perfect for gatherings, celebrations, or simply enjoying time together. Make memories by the beach",
-        options: "Good for 15 - 20 Persons",
-        images: [
-            "images/Pavillion Cottage (1pc)/1.jpg",
-            "images/Pavillion Cottage (1pc)/2.jpg",
-            "images/Pavillion Cottage (1pc)/3.jpg",
-            "images/Pavillion Cottage (1pc)/4.jpg",
-        ],
-    },
-    {
-        cottage_id: 3,
-        name: "Floating  Cottage",
-        href: "#",
-        price: "₱3500",
-        description:
-            "Experience the ocean like never before with our Floating Cottage, perfect for 15–20 guests. Relax and enjoy the gentle sway of the waves while creating unforgettable memories right on the water.",
-        options: "Good for 15 - 20 Persons",
-        images: [
-            "images/Activities/Floating Cottage (1pc)/1.jpeg",
-            "images/Activities/Floating Cottage (1pc)/2.jpg",
-            "images/Activities/Floating Cottage (1pc)/3.jpeg",
-        ],
-    },
-];
+import { useSelector } from "react-redux";
 
 export default function CottageSection() {
-    const [imageIndexes, setImageIndexes] = useState(
-        products.map(() => 0) // Track image index per product
-    );
+    const { rents } = useSelector((store) => store.rent);
+
+    const products = rents?.filter((res) => res.type === "cottage") || [];
+
+    const [imageIndexes, setImageIndexes] = useState([]);
+
+    useEffect(() => {
+        if (products) {
+            setImageIndexes(new Array(products.length).fill(0));
+        }
+    }, [products.length]);
+    
 
     const handleNext = (index) => {
         setImageIndexes((prevIndexes) =>
             prevIndexes.map((imgIndex, i) =>
-                i === index ? (imgIndex + 1) % products[i].images.length : imgIndex
+                i === index
+                    ? (imgIndex + 1) % products[i].uploads.length
+                    : imgIndex
             )
         );
     };
@@ -78,12 +30,12 @@ export default function CottageSection() {
         setImageIndexes((prevIndexes) =>
             prevIndexes.map((imgIndex, i) =>
                 i === index
-                    ? (imgIndex - 1 + products[i].images.length) % products[i].images.length
+                    ? (imgIndex - 1 + products[i].uploads.length) %
+                      products[i].uploads.length
                     : imgIndex
             )
         );
     };
-
     return (
         <div className="bg-white">
             <div className="mx-8 max-w-full px-4 py-16 sm:px-6 sm:py-12 border-b border-gray-300">
@@ -117,7 +69,7 @@ export default function CottageSection() {
                             <div className="relative">
                                 <img
                                     alt={product.name}
-                                    src={product.images[imageIndexes[index]]}
+                                 src={product.uploads[imageIndexes[index]]?.file ?? '/'}
                                     className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
                                 />
                                 {/* Previous button */}

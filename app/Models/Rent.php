@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Rent extends Model
 {
@@ -16,4 +18,9 @@ class Rent extends Model
         'description',
         'type',
     ];
+
+    public function uploads(): HasMany
+    {
+        return $this->hasMany(Upload::class);
+    }
 }

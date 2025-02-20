@@ -6,6 +6,8 @@ import ActivitySection from "./sections/activity-section";
 import ContactSection from "./sections/contact-section";
 import FooterSection from "./sections/footer-section";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
+import store from "@/app/store/store";
+import { get_rent_thunk } from "@/app/redux/rent-thunk";
 
 const navigation = [
     { name: "Rooms", href: "#rooms" },
@@ -18,9 +20,13 @@ export default function IndexPage() {
     const [activeSection, setActiveSection] = useState("");
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
+
+    useEffect(()=>{
+        store.dispatch(get_rent_thunk())
+    },[]);
+
     useEffect(() => {
         const sections = document.querySelectorAll("section");
-
         const observer = new IntersectionObserver(
             (entries) => {
                 entries.forEach((entry) => {

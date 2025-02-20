@@ -9,6 +9,8 @@ import rentSlice from "../redux/rent-slice";
 import resortSlice from "../redux/resort-slice";
 import termSlice from "../redux/term-slice";
 import uploadSlice from "../redux/upload-slice";
+import { configureStore } from "@reduxjs/toolkit";
+
 const store = configureStore({
     reducer: {
         app: appSlice,
