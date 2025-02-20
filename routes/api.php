@@ -1,6 +1,17 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\BookingInfoController;
+use App\Http\Controllers\BookingOrderController;
+use App\Http\Controllers\InventoryAllocationController;
+use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\InventoryStockController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\RentController;
+use App\Http\Controllers\ResortController;
+use App\Http\Controllers\TermController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\XenditPaymentController;
 use GlennRaya\Xendivel\Xendivel;
 use Illuminate\Http\Request;
@@ -22,8 +33,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('/create-payment', [PaymentController::class, 'createPayment'])->name('payment.create');
-Route::get('/payment-status', [PaymentController::class, 'paymentStatus'])->name('payment.status');
+// Route::post('/create-payment', [PaymentController::class, 'createPayment'])->name('payment.create');
+// Route::get('/payment-status', [PaymentController::class, 'paymentStatus'])->name('payment.status');
+
+
+Route::resource('activity', ActivityController::class);
+Route::resource('booking_info', BookingInfoController::class);
+Route::resource('booking_order', BookingOrderController::class);
+Route::resource('inventory_allocation', InventoryAllocationController::class);
+Route::resource('inventory', InventoryController::class);
+Route::resource('inventory_stock', InventoryStockController::class);
+Route::resource('landing_page', LandingPageController::class);
+Route::resource('rent', RentController::class);
+Route::resource('resort', ResortController::class);
+Route::resource('term', TermController::class);
+Route::resource('upload', UploadController::class);
 
 
 Route::post('/pay-via-ewallet', function (Request $request) {
@@ -32,11 +56,11 @@ Route::post('/pay-via-ewallet', function (Request $request) {
     return $response;
 });
 
-Route::post('/pay-via-ewallet', function (Request $request) {
-    $response = Xendivel::payWithEwallet($request)
-        ->getResponse();
-    return $response;
-});
+// Route::post('/pay-via-ewallet', function (Request $request) {
+//     $response = Xendivel::payWithEwallet($request)
+//         ->getResponse();
+//     return $response;
+// });
 
 Route::post('/pay-with-card', function (Request $request) {
     $response = Xendivel::payWithCard($request)

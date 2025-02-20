@@ -235,12 +235,13 @@ const Checkout = () => {
                 amount: parseInt(amount),
                 currency: "PHP",
                 checkout_method: "ONE_TIME_PAYMENT",
-                channel_code: "PH_GCASH",
-                reference_id: "90c0c5f5-c6f0-4f2e-bf6c-f23763911f8a",
+                channel_code: "PH_PAYMAYA",
+                account_number:'09208868123',
                 channel_properties: {
                     success_redirect_url:
                         "https://package.test/ewallet/success",
                     failure_redirect_url: "https://package.test/ewallet/failed",
+                    cancel_redirect_url:"https://package.test/ewallet/cancel",
                 },
             })
             .then((response) => {

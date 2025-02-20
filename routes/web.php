@@ -30,12 +30,17 @@ Route::get('/', function () {
     return Inertia::render('index/page');
 });
 
+Route::get('/online-payment', function () {
+    return Inertia::render('xendivel/Checkout');
+});
+
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
 Route::get('/user-login', function () {
     return Inertia::render('user-login/page');
 })->name('login');
+
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('admin/dashboard/page');
