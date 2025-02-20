@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('max_capacity')->nullable();
             $table->string('description')->nullable();
             $table->string('type')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

@@ -17,6 +17,7 @@ class Rent extends Model
         'max_capacity',
         'description',
         'type',
+        'status'
     ];
 
     public function uploads(): HasMany
