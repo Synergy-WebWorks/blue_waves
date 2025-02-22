@@ -30,6 +30,10 @@ Route::get('/', function () {
     return Inertia::render('index/page');
 });
 
+Route::get('/book-reservation', function () {
+    return Inertia::render('book-reservation/page');
+});
+
 Route::get('/online-payment', function () {
     return Inertia::render('xendivel/Checkout');
 });
@@ -94,6 +98,7 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         return Inertia::render('admin/contact/page');
     });
 });
+
 
 Route::get('/staff/settings', function () {
     return Inertia::render('staff/settings/page');

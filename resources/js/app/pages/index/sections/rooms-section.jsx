@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/solid";
-import { useSelect } from "@material-tailwind/react";
 import { useSelector } from "react-redux";
 
 export default function RoomSection() {

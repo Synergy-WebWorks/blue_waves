@@ -1,0 +1,229 @@
+import React from "react";
+import { TrashIcon } from "@heroicons/react/20/solid";
+
+const orders = [
+    {
+        id: 1,
+        title: "Family Room",
+        href: "#",
+        price: "₱6500.00",
+        capacity: "Good for 5 Persons",
+        imageSrc: "/images/Family Room/C.jpeg",
+        daysTotal: "1",
+        unit: "Night(s)",
+    },
+    {
+        id: 2,
+        title: "Umbrella Cottage 1",
+        href: "#",
+        price: "₱600.00",
+        capacity: "Good for 4-5 Persons",
+        imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
+        daysTotal: "1",
+        unit: "Day(s)",
+    },
+    // More products...
+];
+
+export default function BookThirdFormSection() {
+    return (
+        <div className="bg-gray-50">
+            <div className="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
+                <h2 className="sr-only">Checkout</h2>
+
+                <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+                    {/* Order summary */}
+                    <div>
+                        <h2 className="text-lg font-medium text-cyan-600">
+                            Booking Order summary
+                        </h2>
+
+                        <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
+                            <h3 className="sr-only">Items in your cart</h3>
+                            <ul
+                                role="list"
+                                className="divide-y divide-gray-200"
+                            >
+                                {orders.map((order) => (
+                                    <li
+                                        key={order.id}
+                                        className="flex px-4 py-6 sm:px-6"
+                                    >
+                                        <div className="shrink-0">
+                                            <img
+                                                alt={order.imageAlt}
+                                                src={order.imageSrc}
+                                                className="w-20 rounded-md"
+                                            />
+                                        </div>
+
+                                        <div className="ml-6 flex flex-1 flex-col">
+                                            <div className="flex">
+                                                <div className="min-w-0 flex-1">
+                                                    <h4 className="text-sm">
+                                                        <a
+                                                            href={order.href}
+                                                            className="font-medium text-gray-700 hover:text-gray-800"
+                                                        >
+                                                            {order.title}
+                                                        </a>
+                                                    </h4>
+                                                    <p className="mt-1 text-sm text-gray-500">
+                                                        {order.capacity}
+                                                    </p>
+                                                    <p className="mt-1 text-sm text-gray-500">
+                                                        {order.daysTotal}{" "}
+                                                        {order.unit}
+                                                    </p>
+                                                </div>
+
+                                                <div className="ml-4 flow-root shrink-0">
+                                                    <button
+                                                        type="button"
+                                                        className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
+                                                    >
+                                                        <span className="sr-only">
+                                                            Remove
+                                                        </span>
+                                                        <TrashIcon
+                                                            aria-hidden="true"
+                                                            className="size-5"
+                                                        />
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex flex-1 items-end justify-end pt-2">
+                                                <p className="mt-1 text-sm font-medium text-gray-900">
+                                                    {order.price}/{order.unit}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </li>
+                                ))}
+                            </ul>
+                            <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
+                                <div className="flex items-center justify-between">
+                                    <dt className="text-sm">Subtotal</dt>
+                                    <dd className="text-sm font-medium text-gray-900">
+                                        ₱7,100.00
+                                    </dd>
+                                </div>
+                                <div className="flex items-center justify-between p-2 border-b border-gray-300">
+                                    <dt className="text-sm">Entrance Fee</dt>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <dt className="text-sm">Adult</dt>
+                                    <dd className="text-sm font-medium text-gray-900">
+                                        ₱80.00
+                                    </dd>
+                                </div>
+                                <div className="flex items-center justify-between">
+                                    <dt className="text-sm">Children</dt>
+                                    <dd className="text-sm font-medium text-gray-900">
+                                        ₱40.00
+                                    </dd>
+                                </div>
+                                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
+                                    <dt className="text-base font-medium">
+                                        Total
+                                    </dt>
+                                    <dd className="text-base font-medium text-gray-900">
+                                        ₱7,220.00
+                                    </dd>
+                                </div>
+                                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
+                                    <dt className="text-base font-medium">
+                                        Downpayment{" "}
+                                        <span className="text-red-500">*</span>
+                                        <p className="text-xs text-gray-500 italic">
+                                            50% of Total Billed Amount
+                                        </p>
+                                    </dt>
+                                    <dd className="text-base font-medium text-gray-900">
+                                        ₱3,610.00
+                                    </dd>
+                                </div>
+                            </dl>
+                        </div>
+                    </div>
+
+                    {/* Terms Content */}
+                    <div className="mt-10 lg:mt-0">
+                        <div className="flex flex-col justify-center">
+                            <label
+                                htmlFor="contact_content"
+                                className="block text-lg font-medium text-cyan-600"
+                            >
+                                Terms & Condition
+                            </label>
+                            <textarea
+                                readOnly
+                                id="contact_content"
+                                name="contact_content"
+                                className="mt-2 w-full min-h-[650px] border-none bg-white/5 px-3 py-2 text-base text-gray-600 resize-none"
+                                value="
+Welcome to Blue Waves Resort! To ensure a pleasant and hassle-free stay, we kindly ask all guests to review and adhere to our Terms and Conditions.
+
+1. Booking & Cancellation Policies
+A valid government-issued ID and full payment are required to confirm your booking.
+Cancellations made 7 days or more before check-in will receive a full refund.
+Cancellations made within 3-6 days before check-in will incur a 50% charge.
+Cancellations made within 48 hours of check-in or no-shows are non-refundable.
+Date changes are subject to availability and may incur additional charges.
+
+2. Check-in & Check-out Times
+Check-in time: 2:00 PM onwards. Early check-in is subject to availability.
+Check-out time: 12:00 PM. Late check-out beyond 1 hour may incur additional charges.
+Guests must return keycards at check-out to avoid a replacement fee.
+
+3. Guest Responsibilities
+Guests must comply with all resort rules and regulations.
+Noise levels should be kept at a minimum, especially after 10:00 PM.
+Guests are responsible for any damage to resort property and may be charged accordingly.
+Smoking is only permitted in designated areas. A cleaning fee applies for smoking inside rooms.
+
+4. Resort Facilities & Services
+Swimming pools, fitness centers, and other amenities are available during operating hours.
+Proper swimwear is required in pool areas.
+Outside food and beverages may not be allowed in certain areas of the resort.
+Guests must follow safety instructions when using resort facilities.
+
+5. Liability & Safety
+The resort is not liable for lost, stolen, or damaged personal belongings. Guests are advised to use in-room safes.
+The resort is not responsible for injuries due to misuse of facilities or failure to follow safety rules.
+In case of emergencies, please contact the front desk or resort security immediately.
+
+6. General Policies
+The resort reserves the right to refuse service to any guest who violates these terms.
+Any disputes arising from the stay will be handled according to local laws.
+By confirming your booking and staying at Blue Waves Resort, you agree to abide by these Terms and Conditions.
+
+                                                    "
+                            />
+                            <div className="mt-6 flex">
+                                <label className="flex items-center space-x-2">
+                                    <input
+                                        required
+                                        type="checkbox"
+                                        className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-500"
+                                    />
+                                    <span className="text-gray-700">
+                                        By proceeding, you agree to the{" "}
+                                        <a
+                                            href="#"
+                                            className="text-blue-600 hover:underline"
+                                        >
+                                            Terms and Conditions
+                                        </a>
+                                        {" "}of Blue Waves Resort.
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    );
+}
