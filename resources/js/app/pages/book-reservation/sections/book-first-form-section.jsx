@@ -1,34 +1,9 @@
 import React, { useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/16/solid";
-import { TrashIcon } from "@heroicons/react/20/solid";
 import Datepicker from "react-tailwindcss-datepicker";
 import BookingGuestComponent from "../components/booking-guest-component";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import BookingCartComponent from "../components/booking-cart-component";
 
-const orders = [
-    {
-        id: 1,
-        title: "Family Room",
-        href: "#",
-        price: "₱6500.00",
-        capacity: "Good for 5 Persons",
-        imageSrc: "/images/Family Room/C.jpeg",
-        daysTotal: "1",
-        unit: "Night(s)",
-    },
-    {
-        id: 2,
-        title: "Umbrella Cottage 1",
-        href: "#",
-        price: "₱600.00",
-        capacity: "Good for 4-5 Persons",
-        imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
-        daysTotal: "1",
-        unit: "Day(s)",
-    },
-    // More products...
-];
 
 const products = [
     {

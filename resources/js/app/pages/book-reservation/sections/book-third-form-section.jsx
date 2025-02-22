@@ -78,18 +78,6 @@ export default function BookThirdFormSection() {
                                                 </div>
 
                                                 <div className="ml-4 flow-root shrink-0">
-                                                    <button
-                                                        type="button"
-                                                        className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                                                    >
-                                                        <span className="sr-only">
-                                                            Remove
-                                                        </span>
-                                                        <TrashIcon
-                                                            aria-hidden="true"
-                                                            className="size-5"
-                                                        />
-                                                    </button>
                                                 </div>
                                             </div>
 

@@ -283,6 +283,16 @@ export default function SecondFormSection() {
                                         ₱7,220.00
                                     </dd>
                                 </div>
+                                
+                                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
+                                    <dt className="text-base font-medium">
+                                        Downpayment <span className="text-red-500">*</span>
+                                        <p className="text-xs text-gray-500 italic">50% of Total Billed Amount</p>
+                                    </dt>
+                                    <dd className="text-base font-medium text-gray-900">
+                                        ₱3,610.00
+                                    </dd>
+                                </div>
                             </dl>
                         </div>
                     </div>

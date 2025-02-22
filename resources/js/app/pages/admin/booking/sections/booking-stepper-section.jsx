@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { CheckIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import FirstFormSection from "./first-form-section";
 import SecondFormSection from "./second-form-section";
-import ThirdFormSection from "./third-form-section";
-import FourthFormSection from "./fourth-form-section";
-import FifthFormSection from "./fifth-form-section";
 
 export default function RegistrationStepperSection() {
     const [currentStep, setCurrentStep] = useState(1); // Set the first step as current (1-based index)
@@ -13,7 +10,7 @@ export default function RegistrationStepperSection() {
     const steps = [
         { id: "01", name: "Booking Order", description: "Completed" },
         { id: "02", name: "Confirm Booking", description: "Current" },
-        { id: "03", name: "Payment Section", description: "Upcoming" },
+        // { id: "03", name: "Payment Section", description: "Upcoming" },
         // { id: "04", name: "Booking Review", description: "Upcoming" },
         // { id: "05", name: "Payment Section", description: "Upcoming" },
     ];
@@ -59,8 +56,8 @@ export default function RegistrationStepperSection() {
                 return <FirstFormSection />;
             case 2:
                 return <SecondFormSection />;
-            case 3:
-                return <ThirdFormSection />;
+            // case 3:
+            //     return <ThirdFormSection />;
             // case 4:
             //     return <FourthFormSection />;
             // case 5:
@@ -242,9 +239,9 @@ export default function RegistrationStepperSection() {
                         {loading ? (
                             <>Loading...</>
                         ) : currentStep === steps.length ? (
-                            "Submit"
+                            "Place Booking Request"
                         ) : (
-                            "Next"
+                            "Proceed to Checkout"
                         )}
                     </button>
                 </div>

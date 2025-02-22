@@ -1,33 +1,9 @@
 import React, { useState } from "react";
-import { ChevronDownIcon } from "@heroicons/react/16/solid";
-import { TrashIcon } from "@heroicons/react/20/solid";
 import Datepicker from "react-tailwindcss-datepicker";
 import BookingGuestComponent from "../components/booking-guest-component";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import CartComponent from "../components/cart-component";
 
-const orders = [
-    {
-        id: 1,
-        title: "Family Room",
-        href: "#",
-        price: "₱6500.00",
-        capacity: "Good for 5 Persons",
-        imageSrc: "/images/Family Room/C.jpeg",
-        daysTotal: "1",
-        unit: "Night(s)",
-    },
-    {
-        id: 2,
-        title: "Umbrella Cottage 1",
-        href: "#",
-        price: "₱600.00",
-        capacity: "Good for 4-5 Persons",
-        imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
-        daysTotal: "1",
-        unit: "Day(s)",
-    },
-    // More products...
-];
 
 const products = [
     {
@@ -164,6 +140,10 @@ export default function FirstFormSection() {
         products.map(() => 0) // Track image index per product
     );
 
+    const [imageIndexes2, setImageIndexes2] = useState(
+        cottages.map(() => 0) // Track image index per product
+    );
+
     const handleNext = (index) => {
         setImageIndexes((prevIndexes) =>
             prevIndexes.map((imgIndex, i) =>
@@ -185,48 +165,75 @@ export default function FirstFormSection() {
         );
     };
 
+    const handleNext2 = (index2) => {
+        setImageIndexes2((prevIndexes2) =>
+            prevIndexes2.map((imgIndex2, i) =>
+                i === index2
+                    ? (imgIndex2 + 1) % cottages[i].images.length
+                    : imgIndex2
+            )
+        );
+    };
+
+    const handlePrev2 = (index2) => {
+        setImageIndexes2((prevIndexes2) =>
+            prevIndexes2.map((imgIndex2, i) =>
+                i === index2
+                    ? (imgIndex2 - 1 + cottages[i].images.length) %
+                      cottages[i].images.length
+                    : imgIndex2
+            )
+        );
+    };
+
     return (
         <div className="bg-gray-50">
             <div className="mx-auto px-4 pt-16 pb-24 sm:px-6 lg:px-8">
-                <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+                <div className="lg:grid lg:grid-cols-1 lg:gap-x-12 xl:gap-x-16">
                     <div>
-                        <div className="mt-2 pt-1 pb-10">
+                        <div className="mt-2 pt-1 pb-5">
+                        <div className="sticky top-0 z-10 bg-gray-50 pt-5 pb-5 px-5 py-5 border-b border-gray-300">
                             <h2 className="text-lg font-medium text-cyan-600">
                                 Booking Details
                             </h2>
 
-                            <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4 pb-3 border-b border-gray-300">
-                                {/* Datepicker - Full width on small screens */}
-                                <div className="w-full flex-1">
-                                    <Datepicker
-                                        primaryColor={"teal"}
-                                        value={dateRange}
-                                        onChange={(newValue) =>
-                                            setDateRange(newValue)
-                                        }
-                                        minDate={today}
-                                        separator="to"
-                                        displayFormat="MM/DD/YYYY"
-                                        popoverDirection="down"
-                                        showShortcuts={false}
-                                        className="w-full"
-                                    />
-                                </div>
+                            {/* Sticky Booking Section */}
+                            
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                                    {/* First Column - Datepicker & Booking Guest Component */}
+                                    <div className="flex flex-col gap-4">
+                                        <div className="flex flex-col sm:flex-row sm:gap-4">
+                                            <Datepicker
+                                                primaryColor={"teal"}
+                                                value={dateRange}
+                                                onChange={(newValue) =>
+                                                    setDateRange(newValue)
+                                                }
+                                                minDate={today}
+                                                separator="to"
+                                                displayFormat="MM/DD/YYYY"
+                                                popoverDirection="down"
+                                                showShortcuts={false}
+                                                useRange={false}
+                                                className="w-full sm:w-1/2 overflow-y-auto"
+                                            />
+                                            <BookingGuestComponent />
+                                        </div>
 
-                                {/* Booking Details Component - Full width on small screens */}
-                                <div className="w-full flex-1">
-                                    <BookingGuestComponent />
-                                </div>
+                                        {/* Search Button */}
+                                        <button className="w-full px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition">
+                                            Search
+                                        </button>
+                                    </div>
 
-                                {/* Search Button */}
-                                <div className="w-full">
-                                    <button className="w-full px-6 py-2 bg-teal-600 text-white font-semibold rounded-lg hover:bg-teal-700 transition">
-                                        Search
-                                    </button>
+                                    {/* Second Column - My Cart Button */}
+                                    <div className="flex justify-end items-end self-end">
+                                        <CartComponent />
+                                    </div>
                                 </div>
                             </div>
 
-                            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-2 lg:gap-x-8 mt-6 p-3 max-h-96 overflow-y-auto">
+                            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8 mt-6 p-3">
                                 {products.map((product, index) => (
                                     <div
                                         key={product.room_id}
@@ -289,7 +296,7 @@ export default function FirstFormSection() {
                                         </div>
                                     </div>
                                 ))}
-                                {cottages.map((cottage, index) => (
+                                {cottages.map((cottage, index2) => (
                                     <div
                                         key={cottage.cottage_id}
                                         className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg"
@@ -300,7 +307,7 @@ export default function FirstFormSection() {
                                                 alt={cottage.name}
                                                 src={
                                                     cottage.images[
-                                                        imageIndexes[index]
+                                                        imageIndexes2[index2]
                                                     ]
                                                 }
                                                 className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
@@ -309,7 +316,7 @@ export default function FirstFormSection() {
                                             <button
                                                 className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
                                                 onClick={() =>
-                                                    handlePrev(index)
+                                                    handlePrev2(index2)
                                                 }
                                             >
                                                 <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
@@ -318,7 +325,7 @@ export default function FirstFormSection() {
                                             <button
                                                 className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
                                                 onClick={() =>
-                                                    handleNext(index)
+                                                    handleNext2(index2)
                                                 }
                                             >
                                                 <ChevronRightIcon className="h-6 w-6 text-gray-600" />
@@ -352,111 +359,6 @@ export default function FirstFormSection() {
                                     </div>
                                 ))}
                             </div>
-                        </div>
-                    </div>
-
-                    {/* Order summary */}
-                    <div className="mt-10 lg:mt-0">
-                        <h2 className="text-lg font-medium text-cyan-600">
-                            Booking Order summary
-                        </h2>
-
-                        <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
-                            <h3 className="sr-only">Items in your cart</h3>
-                            <ul
-                                role="list"
-                                className="divide-y divide-gray-200"
-                            >
-                                {orders.map((order) => (
-                                    <li
-                                        key={order.id}
-                                        className="flex px-4 py-6 sm:px-6"
-                                    >
-                                        <div className="shrink-0">
-                                            <img
-                                                alt={order.imageAlt}
-                                                src={order.imageSrc}
-                                                className="w-20 rounded-md"
-                                            />
-                                        </div>
-
-                                        <div className="ml-6 flex flex-1 flex-col">
-                                            <div className="flex">
-                                                <div className="min-w-0 flex-1">
-                                                    <h4 className="text-sm">
-                                                        <a
-                                                            href={order.href}
-                                                            className="font-medium text-gray-700 hover:text-gray-800"
-                                                        >
-                                                            {order.title}
-                                                        </a>
-                                                    </h4>
-                                                    <p className="mt-1 text-sm text-gray-500">
-                                                        {order.capacity}
-                                                    </p>
-
-                                                    <p className="mt-1 text-sm text-gray-500">
-                                                        {order.daysTotal}{" "}
-                                                        {order.unit}
-                                                    </p>
-                                                </div>
-
-                                                <div className="ml-4 flow-root shrink-0">
-                                                    <button
-                                                        type="button"
-                                                        className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                                                    >
-                                                        <span className="sr-only">
-                                                            Remove
-                                                        </span>
-                                                        <TrashIcon
-                                                            aria-hidden="true"
-                                                            className="size-5"
-                                                        />
-                                                    </button>
-                                                </div>
-                                            </div>
-
-                                            <div className="flex flex-1 items-end justify-end pt-2">
-                                                <p className="mt-1 text-sm font-medium text-gray-900">
-                                                    {order.price}/{order.unit}
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                            <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
-                                <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Subtotal</dt>
-                                    <dd className="text-sm font-medium text-gray-900">
-                                        ₱7,100.00
-                                    </dd>
-                                </div>
-                                <div className="flex items-center justify-between p-2 border-b border-gray-300">
-                                    <dt className="text-sm">Entrance Fee</dt>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Adult</dt>
-                                    <dd className="text-sm font-medium text-gray-900">
-                                        ₱80.00
-                                    </dd>
-                                </div>
-                                <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Children</dt>
-                                    <dd className="text-sm font-medium text-gray-900">
-                                        ₱40.00
-                                    </dd>
-                                </div>
-                                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                                    <dt className="text-base font-medium">
-                                        Total
-                                    </dt>
-                                    <dd className="text-base font-medium text-gray-900">
-                                        ₱7,220.00
-                                    </dd>
-                                </div>
-                            </dl>
                         </div>
                     </div>
                 </div>
