@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\BookingInfo;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 class BookingInfoSeeder extends Seeder
 {
@@ -15,36 +15,26 @@ class BookingInfoSeeder extends Seeder
     public function run(): void
     {
         for ($i = 1; $i <= 20; $i++) {
-            $booking_info = DB::table('booking_infos')->insert([
-                'reference_id' => rand(1000, 9999),
-                'start' => now()->subDays(rand(1, 30))->toDateTimeString(),
-                'end' => now()->addDays(rand(1, 30))->toDateTimeString(),
-                'total' => rand(100, 1000),
-                'initial' => rand(50, 500),
-                'status' => ['pending', 'confirmed', 'canceled'][array_rand(['pending', 'confirmed', 'canceled'])],
+            DB::table('booking_infos')->insert([
+                'reference_id' => rand(1000000000, 9999999999), // 10-digit random reference ID
+                'start' => now()->subDays(rand(1, 30))->toDateString(),
+                'end' => now()->addDays(rand(1, 30))->toDateString(),
+                'email' => "user$i@example.com",
+                'mobile' => '09' . rand(100000000, 999999999), // Philippine mobile format
+                'fname' => Str::random(6),
+                'mname' => Str::random(4),
+                'lname' => Str::random(6),
+                'suffix' => rand(0, 1) ? 'Jr.' : '',
+                'address' => 'Street ' . rand(1, 100) . ', City ' . rand(1, 50),
+                'initial' => strtoupper(Str::random(3)),
+                'adults' => rand(1, 5),
+                'children' => rand(0, 3),
+                'total' => rand(1000, 10000), // Total cost
+                'status' => ['pending', 'paid', 'canceled', 'failed', 'partial'][array_rand(['pending', 'paid', 'canceled', 'partial'])],
                 'submitted_date' => now()->toDateTimeString(),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
-
-        //    $bo= DB::table('booking_orders')->insert([
-        //         'reference_id' => $booking_info['reference_id'],
-        //         'rent_id' => $i,
-        //         'activity_id' => rand(1, 10),
-        //         'started_at' => now()->subDays(rand(1, 30))->toDateTimeString(),
-        //         'end_at' => now()->addDays(rand(1, 30))->toDateTimeString(),
-        //         'duration' => rand(1, 10) . ' hours',
-        //         'sub_total' => rand(50, 1000),
-        //         'created_at' => now(),
-        //         'updated_at' => now(),
-        //     ]);
-
-        //    $bi= BookingInfo::where('reference_id',$booking_info['reference_id']);
-        //    if ($bi) {
-        //     $bi->update([
-        //         'total'=>$bo['sub_total']
-        //     ]);
-        //    }
         }
     }
 }
