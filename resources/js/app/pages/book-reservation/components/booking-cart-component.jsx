@@ -2,35 +2,22 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { CheckIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { FaCartFlatbedSuitcase } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelected } from "@/app/redux/app-slice";
 
 export default function BookingCartComponent() {
     const [open, setOpen] = useState(false);
-    const bookings = [
-        {
-            id: 1,
-            name: "Room A",
-            href: "#",
-            price: "₱ 900.00",
-            unit: "/night",
-            subtotal: "₱ 1800.00",
-            imageSrc:
-                "https://tailwindui.com/plus-assets/img/ecommerce-images/checkout-page-03-product-04.jpg",
-            imageAlt:
-                "Front side of mint cotton t-shirt with wavey lines pattern.",
-        },
-        {
-            id: 2,
-            name: "Family Room",
-            href: "#",
-            price: "₱ 3000.00",
-            unit: "/day",
-            subtotal: "₱ 6000.00",
-            imageSrc:
-                "https://tailwindui.com/plus-assets/img/ecommerce-images/shopping-cart-page-01-product-02.jpg",
-            imageAlt: "Front side of charcoal cotton t-shirt.",
-        },
-        // More products...
-    ];
+    const { selected } = useSelector((store) => store.app);
+    const dispatch = useDispatch();
+    function remove_cart(value) {
+        const idToRemove = value.id;
+        const updatedData = selected.filter((item) => item.id !== idToRemove);
+        dispatch(setSelected(updatedData));
+    }
+    const totalRate = selected.reduce(
+        (sum, item) => sum + Number(item.rate),
+        0
+    );
     return (
         <>
             <button
@@ -42,7 +29,7 @@ export default function BookingCartComponent() {
                     aria-hidden="true"
                     className="size-5 mr-2 float-start"
                 />
-                My Booking
+                My Booking ( {selected.length} )
             </button>
             <Dialog open={open} onClose={setOpen} className="relative z-10">
                 <Dialog.Backdrop
@@ -84,8 +71,8 @@ export default function BookingCartComponent() {
                                                         role="list"
                                                         className="divide-y divide-cyan-200 border-t border-b border-cyan-200"
                                                     >
-                                                        {bookings.map(
-                                                            (booking) => (
+                                                        {selected.map(
+                                                            (booking, i) => (
                                                                 <li
                                                                     key={
                                                                         booking.id
@@ -98,7 +85,9 @@ export default function BookingCartComponent() {
                                                                                 booking.imageAlt
                                                                             }
                                                                             src={
-                                                                                booking.imageSrc
+                                                                                booking
+                                                                                    ?.uploads[0]
+                                                                                    ?.file
                                                                             }
                                                                             className="size-24 rounded-md object-cover sm:size-32"
                                                                         />
@@ -107,7 +96,7 @@ export default function BookingCartComponent() {
                                                                     <div className="ml-4 flex flex-1 flex-col">
                                                                         <div>
                                                                             <div className="flex justify-between">
-                                                                                <h4 className="text-sm">
+                                                                                <h4 className="flex flex-col text-sm">
                                                                                     <a
                                                                                         href={
                                                                                             booking.href
@@ -118,6 +107,27 @@ export default function BookingCartComponent() {
                                                                                             booking.name
                                                                                         }
                                                                                     </a>
+                                                                                    <div className="flex flex-col ">
+                                                                                        <div>
+                                                                                            Min
+                                                                                            Capacity:
+                                                                                            {
+                                                                                                booking.min_capacity
+                                                                                            }
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            Max
+                                                                                            Capacity:
+                                                                                            {
+                                                                                                booking.max_capacity
+                                                                                            }
+                                                                                        </div>
+                                                                                        <div>
+                                                                                            {
+                                                                                                booking.description
+                                                                                            }
+                                                                                        </div>
+                                                                                    </div>
                                                                                 </h4>
                                                                                 <p className="ml-4 text-sm font-medium text-gray-900">
                                                                                     {
@@ -145,6 +155,11 @@ export default function BookingCartComponent() {
                                                                         <div className="mt-4 flex flex-1 items-end justify-end">
                                                                             <div className="ml-4">
                                                                                 <button
+                                                                                    onClick={() =>
+                                                                                        remove_cart(
+                                                                                            booking
+                                                                                        )
+                                                                                    }
                                                                                     type="button"
                                                                                     className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                                                                                 >
@@ -180,18 +195,18 @@ export default function BookingCartComponent() {
                                                                     Subtotal
                                                                 </dt>
                                                                 <dd className="ml-4 text-base font-medium text-gray-900">
-                                                                 ₱ 7800.00
+                                                                    ₱{" "}
+                                                                    {totalRate}
                                                                 </dd>
                                                             </div>
                                                         </dl>
                                                         <p className="flex mt-3 text-sm text-gray-500">
-                                                            Entrance Fee and Downpayment
-                                                            will be calculated
-                                                            at checkout.
+                                                            Entrance Fee and
+                                                            Downpayment will be
+                                                            calculated at
+                                                            checkout.
                                                         </p>
                                                     </div>
-
-                                                   
                                                 </section>
                                             </form>
                                         </div>

@@ -35,7 +35,19 @@ Route::get('/book-reservation', function () {
 });
 
 Route::get('/online-payment', function () {
-    return Inertia::render('xendivel/Checkout');
+    return Inertia::render('online_payment/page');
+});
+
+Route::get('/{type_payment}/success', function () {
+    return Inertia::render('online_payment/sections/success');
+});
+
+Route::get('/{type_payment}/failed', function () {
+    return Inertia::render('online_payment/sections/failure');
+});
+
+Route::get('/{type_payment}/cancel', function () {
+    return Inertia::render('online_payment/sections/cancel');
 });
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);

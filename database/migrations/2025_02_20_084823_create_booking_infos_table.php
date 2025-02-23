@@ -16,7 +16,16 @@ return new class extends Migration
             $table->bigInteger('reference_id')->nullable();
             $table->string('start')->nullable();
             $table->string('end')->nullable();
+            $table->string('email')->nullable();
+            $table->string('mobile')->nullable();
+            $table->string('fname')->nullable();
+            $table->string('mname')->nullable();
+            $table->string('lname')->nullable();
+            $table->string('suffix')->nullable();
+            $table->string('address')->nullable();
             $table->string('initial')->nullable();
+            $table->string('adults')->nullable();
+            $table->string('children')->nullable();
             $table->string('total')->nullable();
             $table->string('status')->nullable();
             $table->string('submitted_date')->nullable();

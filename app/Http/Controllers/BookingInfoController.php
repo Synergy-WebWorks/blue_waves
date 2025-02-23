@@ -16,25 +16,34 @@ class BookingInfoController extends Controller
     // Store a newly created booking record
     public function store(Request $request)
     {
-        $request->validate([
-            'reference_id' => 'required|string|max:255',
-            'start' => 'required|date',
-            'end' => 'required|date|after_or_equal:start',
-            'initial' => 'required|numeric',
-            'total' => 'required|numeric',
-            'status' => 'required|string|max:50',
-            'submitted_date' => 'required|date',
+
+        $booking = BookingInfo::create([
+            'reference_id' =>$request->reference_id,
+            'start' =>$request->start,
+            'end' =>$request->end,
+            'email' =>$request->email,
+            'mobile' =>$request->mobile,
+            'fname' =>$request->fname,
+            'mname' =>$request->mname,
+            'lname' =>$request->lname,
+            'suffix' =>$request->suffix,
+            'address' =>$request->address,
+            'initial' =>$request->initial,
+            'total' =>$request->total,
+            'children' =>$request->children,
+            'adults' =>$request->adults,
+            'status' =>$request->status,
+            'submitted_date' =>$request->submitted_date,
         ]);
 
-        $booking = BookingInfo::create($request->all());
-
-        return response()->json($booking, 201);
+        return response()->json($booking, 200);
     }
 
     // Display the specified booking record
-    public function show(BookingInfo $bookingInfo)
+    public function show($id)
     {
-        return response()->json($bookingInfo);
+        $bookingInfo =BookingInfo::where('reference_id',$id)->first();
+        return response()->json($bookingInfo, 200);
     }
 
     // Update the specified booking record

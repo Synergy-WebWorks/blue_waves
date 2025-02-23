@@ -28,7 +28,7 @@ export default function IndexPage() {
 
     function search_rent_vacant() {
         router.visit(
-            `?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
+            `/book-reservation?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
         );
     }
     return (

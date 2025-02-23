@@ -11,7 +11,7 @@ export function create_rent_service(data) {
 
 export function get_rent_service() {
     try {
-        const result = axios.get('/api/rent')
+        const result = axios.get(`/api/rent${window.location.search}`)
         return result
     } catch (error) {
 

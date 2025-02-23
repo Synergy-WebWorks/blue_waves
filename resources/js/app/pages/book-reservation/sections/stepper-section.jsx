@@ -7,11 +7,20 @@ import {
 import BookFirstFormSection from "./book-first-form-section";
 import BookSecondFormSection from "./book-second-form-section";
 import BookThirdFormSection from "./book-third-form-section";
+import { useSelector } from "react-redux";
+import store from "@/app/store/store";
+import { create_booking_info_thunk } from "@/app/redux/booking-info-thunk";
+import moment from "moment";
+import { router } from "@inertiajs/react";
 
 export default function StepperSection() {
     const [currentStep, setCurrentStep] = useState(1); // Set the first step as current (1-based index)
 
+    const { selected, customer } = useSelector((store) => store.app);
     const [loading, setLoading] = useState(false);
+    const params = new URLSearchParams(window.location.search);
+    const start = params.get("start");
+    const end = params.get("end");
     const steps = [
         { id: "01", name: "Booking Order", description: "Completed" },
         { id: "02", name: "Confirm Booking", description: "Current" },
@@ -49,13 +58,42 @@ export default function StepperSection() {
             setCurrentStep((prev) => prev - 1);
         }
     };
-    const submitHandler = () => {
-        // Your existing form submission logic
-        console.log("Form submitted!");
 
-        // Redirect to online payment
-        window.location.href = "/online-payment";
-    };
+    const totalRate = selected.reduce(
+        (sum, item) => sum + Number(item.rate),
+        0
+    );
+    const adults_rate = customer.adults;
+    const children_rate = customer.children;
+    const overall = parseInt(totalRate) + customer.children + customer.adults;
+    const down_payment =
+        (parseInt(totalRate) + customer.children + customer.adults) / 2;
+
+    async function submitHandler(params) {
+        setLoading(true);
+        try {
+            const reference_id =moment().format("MDDYYYYHHmmss");
+          await store.dispatch(
+                create_booking_info_thunk({
+                    ...customer,
+                    ...selected,
+                    reference_id: reference_id,
+                    submitted_date: moment().format("LLL"),
+                    start: start,
+                    end: end,
+                    adults: adults_rate,
+                    children: children_rate,
+                    total: overall,
+                    initial: down_payment,
+                    status: "pending",
+                })
+            );
+            setLoading(false);
+            router.visit(`/online-payment?reference_id=${reference_id}`)
+        } catch (error) {
+            setLoading(false);
+        }
+    }
     const handleStepClick = (stepIndex) => {
         setCurrentStep(stepIndex + 1);
     };
@@ -229,7 +267,7 @@ export default function StepperSection() {
                 </nav>
 
                 <div className="mb-8 mt-4 p-4">{renderCurrentForm()}</div>
-                <div className="mt-4 flex items-center justify-between mb-3 ml-5 mr-5">
+                <div className="fixed fl bottom-0 mt-4 flex items-center justify-between w-full p-3">
                     <button
                         onClick={handlePrevious}
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
@@ -243,8 +281,12 @@ export default function StepperSection() {
                                 ? () => submitHandler()
                                 : handleNext
                         }
-                        disabled={loading}
-                        className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-700"
+                        disabled={selected.length == 0 || loading}
+                        className={`px-4 py-2 text-white ${
+                            selected.length == 0 || loading
+                                ? "bg-gray-600 hover:bg-gray-700 text-white"
+                                : "bg-cyan-600 hover:bg-cyan-700 text-white"
+                        }}  rounded-md `}
                     >
                         {loading ? (
                             <>Loading...</>

@@ -1,10 +1,23 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Popover } from '@headlessui/react';
 
-export default function BookingGuestComponent() {
+export default function BookingGuestComponent({setPerson,person}) {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
 
+
+  useEffect(()=>{
+    setAdults(parseInt(person.adults))
+    setChildren(parseInt(person.children))
+  },[person.children])
+  
+  useEffect(()=>{
+    setPerson({
+      adults:adults,
+      children:children
+    })
+  },[adults,children])
+  
   const handleIncrement = (type) => {
     if (type === "adults") setAdults((prev) => prev + 1);
     if (type === "children") setChildren((prev) => prev + 1);

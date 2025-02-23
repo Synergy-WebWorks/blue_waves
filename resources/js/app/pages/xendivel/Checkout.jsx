@@ -3,7 +3,8 @@ import axios from "axios";
 
 const Checkout = () => {
     const [isXenditLoaded, setXenditLoaded] = useState(false);
-
+    const params = new URLSearchParams(window.location.search);
+    const adults = params.get("reference_id");
     // Payment method states (card, ewallet).
     const [paymentMethod, setPaymentMethod] = useState("card");
 
