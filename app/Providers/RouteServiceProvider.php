@@ -17,6 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
+    public const INDEX = '/';
     public const HOME = '/admin/dashboard';
     public const CUSTOMER = '/customer/dashboard';
     public const LOGININVALID = '/?status=error';

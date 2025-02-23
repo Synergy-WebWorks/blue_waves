@@ -36,19 +36,19 @@ Route::get('/book-reservation', function () {
 
 Route::get('/online-payment', function () {
     return Inertia::render('online_payment/page');
-});
+})->middleware('check.payment');
 
 Route::get('/{type_payment}/success', function () {
     return Inertia::render('online_payment/sections/success');
-});
+})->middleware('change.payment');
 
 Route::get('/{type_payment}/failed', function () {
     return Inertia::render('online_payment/sections/failure');
-});
+})->middleware('change.payment');
 
 Route::get('/{type_payment}/cancel', function () {
     return Inertia::render('online_payment/sections/cancel');
-});
+})->middleware('change.payment');
 
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);

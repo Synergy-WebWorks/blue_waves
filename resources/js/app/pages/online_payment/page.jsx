@@ -189,16 +189,16 @@ const OnlinePaymentPage = () => {
 
                         if (response.data.status === "CAPTURED") {
                             console.log("Success: ", response.data);
-                            router.visit(`/card-payment/success?reference_id=${reference_id}`);
-                            setApiResponse(
-                                JSON.stringify(response.data, null, 2)
-                            );
+                            router.visit(`/card-payment/success?reference_id=${btoa(reference_id)}`);
+                            // setApiResponse(
+                            //     JSON.stringify(response.data, null, 2)
+                            // );
                         }
                         if (response.data.status === "FAILED") {
                             console.log("Failed: ", response.data);
-                            setApiResponse(
-                                JSON.stringify(response.data, null, 2)
-                            );
+                            // setApiResponse(
+                            //     JSON.stringify(response.data, null, 2)
+                            // );
                         }
 
                         // Close the OTP dialog.
@@ -235,7 +235,7 @@ const OnlinePaymentPage = () => {
                 break;
         }
     };
-
+   
     // Pay with e-Wallet
     const payWithEwallet = async (event) => {
         event.preventDefault();
@@ -245,20 +245,21 @@ const OnlinePaymentPage = () => {
                 amount: parseInt(amount),
                 currency: "PHP",
                 checkout_method: "ONE_TIME_PAYMENT",
+                // channel_code: "PH_GCASH",
                 channel_code: "PH_PAYMAYA",
                 account_number: booking_info.mobile,
                 channel_properties: {
                     success_redirect_url:
-                        `https://blue-waves.site/ewallet/success?reference_id=${reference_id}`,
+                        `https://blue-waves.site/ewallet/success?reference_id=${btoa(reference_id)}`,
                     failure_redirect_url:
-                        `https://blue-waves.site/ewallet/failed?reference_id=${reference_id}`,
+                        `https://blue-waves.site/ewallet/failed?reference_id=${btoa(reference_id)}`,
                     cancel_redirect_url:
-                        `https://blue-waves.site/ewallet/cancel?reference_id=${reference_id}`,
+                        `https://blue-waves.site/ewallet/cancel?reference_id=${btoa(reference_id)}`,
                 },
             })
             .then((response) => {
                 // Upon successful request, you will be redirected to the eWallet's checkout url.
-                console.log("Success response: ", response.data);
+                console.log("Success response:aaaaaaaaaaa ", response.data);
                 window.location.href =
                     response.data.actions.desktop_web_checkout_url;
             })
