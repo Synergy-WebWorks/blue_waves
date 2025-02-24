@@ -2,19 +2,24 @@ import React, { useState } from "react";
 import { CheckIcon, ChevronLeftIcon } from "@heroicons/react/24/outline";
 import FirstFormSection from "./first-form-section";
 import SecondFormSection from "./second-form-section";
+import store from "@/app/store/store";
+import { create_booking_info_thunk } from "@/app/redux/booking-info-thunk";
+import moment from "moment";
+import { router } from "@inertiajs/react";
+import { useSelector } from "react-redux";
 
 export default function RegistrationStepperSection() {
     const [currentStep, setCurrentStep] = useState(1); // Set the first step as current (1-based index)
-   
+
+    const { selected, customer } = useSelector((store) => store.app);
     const [loading, setLoading] = useState(false);
     const steps = [
         { id: "01", name: "Booking Order", description: "Completed" },
         { id: "02", name: "Confirm Booking", description: "Current" },
-        // { id: "03", name: "Payment Section", description: "Upcoming" },
-        // { id: "04", name: "Booking Review", description: "Upcoming" },
-        // { id: "05", name: "Payment Section", description: "Upcoming" },
     ];
-
+    const params = new URLSearchParams(window.location.search);
+    const start = params.get("start");
+    const end = params.get("end");
     function classNames(...classes) {
         return classes.filter(Boolean).join(" ");
     }
@@ -67,6 +72,42 @@ export default function RegistrationStepperSection() {
         }
     };
 
+    const totalRate = selected.reduce(
+        (sum, item) => sum + Number(item.rate),
+        0
+    );
+    const adults_rate = customer.adults;
+    const children_rate = customer.children;
+    const overall = parseInt(totalRate) + customer.children + customer.adults;
+    const down_payment =
+        (parseInt(totalRate) + customer.children + customer.adults) / 2;
+
+    async function submitHandler(params) {
+        setLoading(true);
+        try {
+            const reference_id = moment().format("MDDYYYYHHmmss");
+            await store.dispatch(
+                create_booking_info_thunk({
+                    ...customer,
+                    ...selected,
+                    reference_id: reference_id,
+                    submitted_date: moment().format("LLL"),
+                    start: start,
+                    end: end,
+                    adults: adults_rate,
+                    children: children_rate,
+                    total: overall,
+                    initial: down_payment,
+                    status: "pending",
+                    processed_by:'admin'
+                })
+            );
+            setLoading(false);
+              router.visit(`/admin/booking`)
+        } catch (error) {
+            setLoading(false);
+        }
+    }
     return (
         <div>
             <div className="lg:border-b lg:border-t lg:border-gray-200 mt-5 mb-5">
@@ -216,9 +257,11 @@ export default function RegistrationStepperSection() {
                         ))}
                     </ol>
                 </nav>
-               
-                <div className="mb-8 mt-4 p-4 rounded-lg shadow-md">{renderCurrentForm()}</div>
-                <div className="mt-4 flex items-center justify-between mb-3">
+
+                <div className="mb-8 mt-4 p-4 rounded-lg shadow-md">
+                    {renderCurrentForm()}
+                </div>
+                <div className="fixed bottom-0 mt-4 flex items-center justify-between w-[75vw] p-3">
                     <button
                         onClick={handlePrevious}
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"

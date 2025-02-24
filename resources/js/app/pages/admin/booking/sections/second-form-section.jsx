@@ -1,32 +1,21 @@
 import React from "react";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
-
-const orders = [
-    {
-        id: 1,
-        title: "Family Room",
-        href: "#",
-        price: "₱6500.00",
-        capacity: "Good for 5 Persons",
-        imageSrc: "/images/Family Room/C.jpeg",
-        daysTotal: "1",
-        unit: "Night(s)",
-    },
-    {
-        id: 2,
-        title: "Umbrella Cottage 1",
-        href: "#",
-        price: "₱600.00",
-        capacity: "Good for 4-5 Persons",
-        imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
-        daysTotal: "1",
-        unit: "Day(s)",
-    },
-    // More products...
-];
+import { useDispatch, useSelector } from "react-redux";
+import { setCustomer, setSelected } from "@/app/redux/app-slice";
 
 export default function SecondFormSection() {
+    const { selected, customer } = useSelector((store) => store.app);
+    const dispatch = useDispatch();
+    const totalRate = selected.reduce(
+        (sum, item) => sum + Number(item.rate),
+        0
+    );
+    function remove_cart(value) {
+        const idToRemove = value.id;
+        const updatedData = selected.filter((item) => item.id !== idToRemove);
+        dispatch(setSelected(updatedData));
+    }
     return (
         <div className="bg-gray-50">
             <div className="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
@@ -48,8 +37,18 @@ export default function SecondFormSection() {
                                 </label>
                                 <div className="mt-2">
                                     <input
+                                        name="email"
+                                        value={customer.email ?? ""}
+                                        onChange={(e) =>
+                                            dispatch(
+                                                setCustomer({
+                                                    ...customer,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                })
+                                            )
+                                        }
                                         id="email-address"
-                                        name="email-address"
                                         type="email"
                                         autoComplete="email"
                                         className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -65,8 +64,18 @@ export default function SecondFormSection() {
                                 </label>
                                 <div className="mt-2">
                                     <input
-                                        id="phone"
-                                        name="phone"
+                                        id="mobile"
+                                        name="mobile"
+                                        value={customer.mobile ?? ""}
+                                        onChange={(e) =>
+                                            dispatch(
+                                                setCustomer({
+                                                    ...customer,
+                                                    [e.target.name]:
+                                                        e.target.value,
+                                                })
+                                            )
+                                        }
                                         type="text"
                                         autoComplete="tel"
                                         className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -91,7 +100,17 @@ export default function SecondFormSection() {
                                     <div className="mt-2">
                                         <input
                                             id="first-name"
-                                            name="first-name"
+                                            name="fname"
+                                            value={customer.fname ?? ""}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setCustomer({
+                                                        ...customer,
+                                                        [e.target.name]:
+                                                            e.target.value,
+                                                    })
+                                                )
+                                            }
                                             type="text"
                                             autoComplete="given-name"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -109,7 +128,17 @@ export default function SecondFormSection() {
                                     <div className="mt-2">
                                         <input
                                             id="first-name"
-                                            name="first-name"
+                                            name="mname"
+                                            value={customer.mname ?? ""}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setCustomer({
+                                                        ...customer,
+                                                        [e.target.name]:
+                                                            e.target.value,
+                                                    })
+                                                )
+                                            }
                                             type="text"
                                             autoComplete="given-name"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -127,7 +156,17 @@ export default function SecondFormSection() {
                                     <div className="mt-2">
                                         <input
                                             id="last-name"
-                                            name="last-name"
+                                            name="lname"
+                                            value={customer.lname ?? ""}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setCustomer({
+                                                        ...customer,
+                                                        [e.target.name]:
+                                                            e.target.value,
+                                                    })
+                                                )
+                                            }
                                             type="text"
                                             autoComplete="family-name"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -145,7 +184,17 @@ export default function SecondFormSection() {
                                     <div className="mt-2">
                                         <select
                                             id="last-name"
-                                            name="last-name"
+                                            name="suffix"
+                                            value={customer.suffix ?? ""}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setCustomer({
+                                                        ...customer,
+                                                        [e.target.name]:
+                                                            e.target.value,
+                                                    })
+                                                )
+                                            }
                                             type="text"
                                             autoComplete="family-name"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -171,6 +220,16 @@ export default function SecondFormSection() {
                                         <input
                                             id="address"
                                             name="address"
+                                            value={customer.address ?? ""}
+                                            onChange={(e) =>
+                                                dispatch(
+                                                    setCustomer({
+                                                        ...customer,
+                                                        [e.target.name]:
+                                                            e.target.value,
+                                                    })
+                                                )
+                                            }
                                             type="text"
                                             autoComplete="street-address"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
@@ -193,71 +252,96 @@ export default function SecondFormSection() {
                                 role="list"
                                 className="divide-y divide-gray-200"
                             >
-                                {orders.map((order) => (
-                                    <li
-                                        key={order.id}
-                                        className="flex px-4 py-6 sm:px-6"
-                                    >
-                                        <div className="shrink-0">
-                                            <img
-                                                alt={order.imageAlt}
-                                                src={order.imageSrc}
-                                                className="w-20 rounded-md"
-                                            />
-                                        </div>
+                                {selected.map((order, i) => {
+                                    console.log("orderorder", order);
+                                    return (
+                                        <li
+                                            key={order.id}
+                                            className="flex px-4 py-6 sm:px-6"
+                                        >
+                                            <div className="shrink-0">
+                                                <img
+                                                    alt={order.imageAlt}
+                                                    src={
+                                                        order?.uploads[0]?.file
+                                                    }
+                                                    className="w-20 rounded-md"
+                                                />
+                                            </div>
 
-                                        <div className="ml-6 flex flex-1 flex-col">
-                                            <div className="flex">
-                                                <div className="min-w-0 flex-1">
-                                                    <h4 className="text-sm">
-                                                        <a
-                                                            href={order.href}
-                                                            className="font-medium text-gray-700 hover:text-gray-800"
+                                            <div className="ml-6 flex flex-1 flex-col">
+                                                <div className="flex">
+                                                    <div className="min-w-0 flex-1">
+                                                        <h4 className="text-sm">
+                                                            <a
+                                                                href={
+                                                                    order.href
+                                                                }
+                                                                className="font-medium text-gray-700 hover:text-gray-800"
+                                                            >
+                                                                {order.name}
+                                                            </a>
+                                                        </h4>
+                                                        <div>
+                                                            <div className="flex gap-3 flex-col">
+                                                                Min Capacity:
+                                                                {
+                                                                    order.min_capacity
+                                                                }
+                                                            </div>
+                                                            <div>
+                                                                Max Capacity:
+                                                                {
+                                                                    order.max_capacity
+                                                                }
+                                                            </div>
+                                                            <div>
+                                                                {
+                                                                    order.description
+                                                                }
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div className="ml-4 flow-root shrink-0">
+                                                        <button
+                                                            onClick={() =>
+                                                                remove_cart(
+                                                                    order
+                                                                )
+                                                            }
+                                                            type="button"
+                                                            className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
                                                         >
-                                                            {order.title}
-                                                        </a>
-                                                    </h4>
-                                                    <p className="mt-1 text-sm text-gray-500">
-                                                        {order.capacity}
-                                                    </p>
-                                                    <p className="mt-1 text-sm text-gray-500">
-                                                        {order.daysTotal}{" "}
-                                                        {order.unit}
-                                                    </p>
+                                                            <span className="sr-only">
+                                                                Remove
+                                                            </span>
+                                                            <TrashIcon
+                                                                aria-hidden="true"
+                                                                className="size-5"
+                                                            />
+                                                        </button>
+                                                    </div>
                                                 </div>
 
-                                                <div className="ml-4 flow-root shrink-0">
-                                                    <button
-                                                        type="button"
-                                                        className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                                                    >
-                                                        <span className="sr-only">
-                                                            Remove
-                                                        </span>
-                                                        <TrashIcon
-                                                            aria-hidden="true"
-                                                            className="size-5"
-                                                        />
-                                                    </button>
+                                                <div className="flex flex-1 items-end justify-end pt-2">
+                                                    <p className="mt-1 text-sm font-medium text-gray-900">
+                                                        ₱
+                                                        {parseInt(
+                                                            order.rate
+                                                        ).toFixed(2)}
+                                                    </p>
                                                 </div>
                                             </div>
-
-                                            <div className="flex flex-1 items-end justify-end pt-2">
-                                                <p className="mt-1 text-sm font-medium text-gray-900">
-                                                    {order.price}/{order.unit}
-                                                </p>
-
-                                               
-                                            </div>
-                                        </div>
-                                    </li>
-                                ))}
+                                        </li>
+                                    );
+                                })}
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">Subtotal</dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        ₱7,100.00
+                                        ₱{totalRate.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between p-2 border-b border-gray-300">
@@ -266,13 +350,13 @@ export default function SecondFormSection() {
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">Adult</dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        ₱80.00
+                                        ₱{customer.adults.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">Children</dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        ₱40.00
+                                        ₱{customer.children.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -280,17 +364,30 @@ export default function SecondFormSection() {
                                         Total
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                        ₱7,220.00
+                                        ₱{" "}
+                                        {(
+                                            parseInt(totalRate) +
+                                            customer.children +
+                                            customer.adults
+                                        ).toFixed(2)}
                                     </dd>
                                 </div>
-                                
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                                     <dt className="text-base font-medium">
-                                        Downpayment <span className="text-red-500">*</span>
-                                        <p className="text-xs text-gray-500 italic">50% of Total Billed Amount</p>
+                                        Downpayment{" "}
+                                        <span className="text-red-500">*</span>
+                                        <p className="text-xs text-gray-500 italic">
+                                            50% of Total Billed Amount
+                                        </p>
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                        ₱3,610.00
+                                        ₱
+                                        {(
+                                            (parseInt(totalRate) +
+                                                customer.children +
+                                                customer.adults) /
+                                            2
+                                        ).toFixed(2)}
                                     </dd>
                                 </div>
                             </dl>

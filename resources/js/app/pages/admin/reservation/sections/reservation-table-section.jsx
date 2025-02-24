@@ -1,32 +1,14 @@
 import { CalendarIcon } from "@heroicons/react/16/solid"
 import { ExclamationCircleIcon } from "@heroicons/react/24/outline"
+import moment from "moment"
 import React from "react"
+import { useSelector } from "react-redux"
+import ReservationPaginationSection from "./reservation-pagination-section"
 
-const people = [
-  {
-    name: 'Lindsay Walton',
-    email: 'lindsay.walton@example.com',
-    contact: '091234567890',
-    booking: 'Feb 14, 2025 to Feb 15, 2025',
-    reference: 'BWS-000123456',
-    submitted: 'Feb 10, 2025',
-    image:
-      'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
-  },
-  {
-    name: 'Emilia Birch',
-    email: 'emilia.birchtree@example.com',
-    contact: '091234567890',
-    booking: 'Feb 18, 2025 to March 1, 2025',
-    reference: 'BWS-000789126',
-    submitted: 'Feb 12, 2025',
-    image:
-      'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80',
-  },
-  // More people...
-]
+
 
 export default function ReservationTableSection() {
+  const {booking_infos}=useSelector((store)=>store.booking_info)
   return (
     <div className="px-4 sm:px-6 lg:px-8">
       <div className="sm:flex sm:items-center">
@@ -77,44 +59,42 @@ export default function ReservationTableSection() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-gray-200 bg-white">
-                {people.map((person) => (
-                  <tr key={person.email}>
+                {booking_infos?.data?.map((res) => (
+                  <tr key={res.email}>
                     <td className="py-5 pr-3 pl-4 text-sm whitespace-nowrap sm:pl-0">
                       <div className="flex items-center">
-                        <div className="size-11 shrink-0">
-                          <img alt="" src={person.image} className="size-11 rounded-full" />
-                        </div>
-                        <div className="ml-4">
-                          <div className="font-medium text-gray-900">{person.name}</div>
-                          <div className="mt-1 text-gray-500">{person.email}</div>
-                        </div>
+                    
+                      <div className="font-medium text-gray-900">{res.fname??""} {res.mname??""} {res.lname??""}</div>
                       </div>
                     </td>
                     <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">
-                      <div className="text-gray-900">{person.contact}</div>
+                      <div className="text-gray-900">{res.mobile}</div>
                     </td>
                     <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">
-                      <div className="text-gray-900">{person.reference}</div>
+                      <div className="text-gray-900">{res.reference_id}</div>
                     </td>
                     <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">
-                      <div className="text-gray-900">{person.booking}</div>
+                      <div className="text-gray-900">{moment(res.start).format('LL')} - {moment(res.end).format('LL')}</div>
                     </td>
                     <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">
                       <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20 ring-inset">
                         <ExclamationCircleIcon className="float-left size-4"/>
-                        Pending Initial Payment
+                        {res.status}
                       </span>
                     </td>
-                    <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">{person.submitted}</td>
+                    <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">{moment(res.created_at).format('LL')}</td>
                     <td className="relative py-5 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
                       <a href="#" className="text-cyan-600 hover:text-cyan-900">
-                        Booking Details<span className="sr-only">, {person.name}</span>
+                        Booking Details<span className="sr-only">, {res.name}</span>
                       </a>
                     </td>
                   </tr>
                 ))}
               </tbody>
             </table>
+           <div className="my-3 flex items-end justify-end">
+           <ReservationPaginationSection />
+           </div>
           </div>
         </div>
       </div>

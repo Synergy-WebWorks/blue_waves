@@ -267,7 +267,7 @@ export default function StepperSection() {
                 </nav>
 
                 <div className="mb-8 mt-4 p-4">{renderCurrentForm()}</div>
-                <div className="fixed fl bottom-0 mt-4 flex items-center justify-between w-full p-3">
+                <div className="fixed  bottom-0 mt-4 flex items-center justify-between w-full p-3">
                     <button
                         onClick={handlePrevious}
                         className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"

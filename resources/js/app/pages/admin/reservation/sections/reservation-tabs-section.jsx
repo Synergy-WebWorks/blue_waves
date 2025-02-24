@@ -4,6 +4,7 @@ import { FaCalendarCheck, FaTable } from 'react-icons/fa6'
 import ReservationScheduleSection from './reservation-schedule-section'
 import ReservationCalendarSection from './reservation-calendar-section'
 import ReservationTableSection from './reservation-table-section'
+import { useSelector } from 'react-redux'
 
 const tabs = [
   { name: 'Reservation Table', key: 'reservation', icon: FaTable },
