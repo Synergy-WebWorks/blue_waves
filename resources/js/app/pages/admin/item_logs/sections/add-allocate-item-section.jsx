@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Dialog } from "@headlessui/react";
-import { CheckCircleIcon, PhotoIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { ArchiveBoxArrowDownIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaPlus } from "react-icons/fa6";
 import store from "@/app/store/store";
 import { create_inventory_thunk, get_inventory_thunk } from "@/app/redux/inventory-thunk";
-import { Alert } from "@material-tailwind/react";
 import { message } from "antd";
 
-export default function AddItemsSection() {
+export default function AddAllocateSection() {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({});
@@ -23,7 +22,7 @@ export default function AddItemsSection() {
                 })
             );
             store.dispatch(get_inventory_thunk())
-            message.success('Items Added Successfully');
+            message.success('Items Allocated Successfully');
             setOpen(false);
         } catch (error) {
             message.error("Failed to add items. Please try again."); // Show error message
@@ -41,8 +40,8 @@ export default function AddItemsSection() {
                     onClick={() => setOpen(true)}
                     className="block rounded-md bg-cyan-700 px-3 py-2 text-center text-sm font-semibold text-white shadow-xs hover:bg-cyan-600 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan-600"
                 >
-                    <PlusIcon className="size-5 float-left mr-2" />
-                    Add Item(s)
+                    <ArchiveBoxArrowDownIcon className="size-5 float-left mr-1" />
+                    Allocate Item(s)
                 </button>
             </div>
 
@@ -63,8 +62,8 @@ export default function AddItemsSection() {
                                     <div className="px-4 sm:px-6">
                                         <div className="flex items-start justify-between">
                                             <Dialog.Title className="text-base font-semibold text-white">
-                                                <FaPlus className="size-5 float-left mr-2" />
-                                                New Item(s)
+                                                <ArchiveBoxArrowDownIcon className="size-5 float-left mr-1" />
+                                                Allocate Item(s)
                                             </Dialog.Title>
                                             <div className="ml-3 flex h-7 items-center">
                                                 <button
@@ -104,26 +103,10 @@ export default function AddItemsSection() {
                                                             value={form.name}
                                                             name="name"
                                                             type="text"
-                                                            placeholder="Item Name"
+                                                            placeholder="Name of the Item"
                                                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                         />
                                                     </div>
-                                                    <div className="sm:col-span-12">
-                                                        <input
-                                                            onChange={(e) =>
-                                                                setForm({
-                                                                    ...form,
-                                                                    brand: e.target.value,
-                                                                })
-                                                            }
-                                                            value={form.brand}
-                                                            name="brand"
-                                                            type="text"
-                                                            placeholder="Brand Name"
-                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
-                                                        />
-                                                    </div>
-
                                                     <div className="sm:col-span-12">
                                                         <input
                                                             onChange={(e) =>
@@ -138,6 +121,9 @@ export default function AddItemsSection() {
                                                             placeholder="Quantity"
                                                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                         />
+                                                    </div>
+                                                    <div className="w-full sm:col-span-12">
+                                                        <label htmlFor="isConsumable" className="text-white">&nbsp;Select where to Allocate:</label>
                                                     </div>
                                                     <div className="flex sm:col-span-12">
                                                         <input
@@ -154,7 +140,7 @@ export default function AddItemsSection() {
                                                             name="consumable"
                                                             className="w-4 mt-1 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                                         />
-                                                        <label htmlFor="isConsumable" className="text-white">&nbsp;Consumable</label>
+                                                        <label htmlFor="isConsumable" className="text-white">&nbsp;Room</label>
                                                     </div>
 
                                                     <div className="flex sm:col-span-12">
@@ -172,10 +158,40 @@ export default function AddItemsSection() {
                                                             name="non-consumable"
                                                             className="w-4 mt-1 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                                         />
-                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Non-Consumable</label>
+                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Cottage</label>
                                                     </div>
-
-
+                                                    <div className="sm:col-span-12">
+                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Select Room</label>
+                                                        <select
+                                                            onChange={(e) =>
+                                                                setForm({
+                                                                    ...form,
+                                                                    brand: e.target.value,
+                                                                })
+                                                            }
+                                                            value={form.brand}
+                                                            name="brand"
+                                                            type="text"
+                                                            placeholder="Brand Name"
+                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                        />
+                                                    </div>
+                                                    <div className="sm:col-span-12">
+                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Select Cottage</label>
+                                                        <select
+                                                            onChange={(e) =>
+                                                                setForm({
+                                                                    ...form,
+                                                                    brand: e.target.value,
+                                                                })
+                                                            }
+                                                            value={form.brand}
+                                                            name="brand"
+                                                            type="text"
+                                                            placeholder="Brand Name"
+                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                        />
+                                                    </div>
                                                     <div className="sm:col-span-12">
                                                         <hr />
                                                     </div>
