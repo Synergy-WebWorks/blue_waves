@@ -1,1 +1,0 @@
-import{k as i,n as a}from"./app-C81-hSQI.js";function r(n){try{return i.post("/api/booking_info",n)}catch{}}async function s(n){return(await i.get("/api/booking_info/"+n)).data}function _(n){return async function(t,e){await r(n)}}function u(n){return async function(t,e){const o=await s(n);return t(a.actions.setBookingInfo(o)),o.status}}export{_ as c,u as g};

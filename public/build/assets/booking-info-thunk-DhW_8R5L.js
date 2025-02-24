@@ -1,0 +1,1 @@
+import{e as i,p as a}from"./app-CULENq38.js";function r(t){try{return i.post("/api/booking_info",t)}catch{}}async function s(t){return(await i.get("/api/booking_info/"+t)).data}function _(t){return async function(n,e){await r(t)}}function u(t){return async function(n,e){const o=await s(t);return n(a.actions.setBookingInfo(o)),o.status}}export{_ as c,u as g};

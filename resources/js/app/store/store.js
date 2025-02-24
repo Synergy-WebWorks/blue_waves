@@ -10,6 +10,7 @@ import resortSlice from "../redux/resort-slice";
 import termSlice from "../redux/term-slice";
 import uploadSlice from "../redux/upload-slice";
 import { configureStore } from "@reduxjs/toolkit";
+import inventorySlice from "../redux/inventory-slice";
 
 const store = configureStore({
     reducer: {
@@ -18,7 +19,7 @@ const store = configureStore({
         booking_info: bookingInfoSlice,
         booking_order: bookingOrderSlice,
         inventory_allocation: inventoryAllocationSlice,
-        inventory: activitySlice,
+        inventories: inventorySlice,
         inventory_stock: inventoryStockSlice,
         landing_page: landingPageSlice,
         rent: rentSlice,

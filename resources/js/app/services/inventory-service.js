@@ -37,6 +37,5 @@ export function update_inventory_service(data) {
         const result = axios.put(`/api/inventory/${data.id}`, data)
         return result
     } catch (error) {
-
     }
 }

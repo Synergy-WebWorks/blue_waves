@@ -1,12 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { CalendarIcon, ChevronDownIcon } from '@heroicons/react/16/solid'
 import { FaCalendarCheck, FaFileCircleMinus, FaFileLines, FaTable } from 'react-icons/fa6'
 import InventoryConsumableSection from './inventory-consumable-section'
 import InventoryNonConsumableSection from './inventory-non-consumable-section'
+import AddItemsSection from './add-items-section'
+import store from '@/app/store/store'
+import { get_inventory_thunk } from '@/app/redux/inventory-thunk'
 
 const tabs = [
-  { name: 'Cosumable Inventory Records', key: 'consumable', icon: FaFileLines },
-  { name: 'Non-Cosumable Inventory Records', key: 'non-consumable', icon: FaFileCircleMinus },
+  { name: 'Consumable Inventory Records', key: 'consumable', icon: FaFileLines },
+  { name: 'Non-Consumable Inventory Records', key: 'non-consumable', icon: FaFileCircleMinus },
 ]
 
 function classNames(...classes) {
@@ -16,6 +19,9 @@ function classNames(...classes) {
 export default function InventoryTabsSection() {
   const [activeTab, setActiveTab] = useState('consumable') // Default active tab
 
+  useEffect(() => {
+    store.dispatch(get_inventory_thunk())
+  }, []);
   return (
     <div>
       {/* Mobile Dropdown */}
@@ -63,12 +69,15 @@ export default function InventoryTabsSection() {
             ))}
           </nav>
         </div>
+        <div className='w-full flex items-center justify-end'>
+          <AddItemsSection />
+        </div>
       </div>
 
       {/* Tab Content */}
       <div className="mt-4 p-4 border rounded-lg shadow-lg">
-        {activeTab === 'consumable' && <InventoryConsumableSection/>}
-        {activeTab === 'non-consumable' && <InventoryNonConsumableSection/>}
+        {activeTab === 'consumable' && <InventoryConsumableSection />}
+        {activeTab === 'non-consumable' && <InventoryNonConsumableSection />}
       </div>
     </div>
   )
