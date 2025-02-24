@@ -103,7 +103,7 @@ export default function RegistrationStepperSection() {
                 })
             );
             setLoading(false);
-              router.visit(`/admin/booking`)
+              router.visit(`/admin/reservation`)
         } catch (error) {
             setLoading(false);
         }

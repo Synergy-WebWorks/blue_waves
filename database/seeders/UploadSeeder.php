@@ -26,7 +26,7 @@ class UploadSeeder extends Seeder
             DB::table('uploads')->insert([
                 'rent_id' => $i,
                 'activity_id' => rand(1, 10),
-                'file' => 'images/Umbrella Cottage (2pcs)/1.jpeg',
+                'file' => '/images/Umbrella Cottage (2pcs)/1.jpeg',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
