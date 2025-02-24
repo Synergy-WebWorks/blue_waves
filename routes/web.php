@@ -94,6 +94,15 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         return Inertia::render('admin/inventory/page');
     });
 
+    Route::prefix('inventory')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('admin/inventory/page');
+        });
+        Route::get('/{app_id}', function () {
+            return Inertia::render('admin/item_logs/page');
+        });
+    });
+
     Route::get('/terms', function () {
         return Inertia::render('admin/terms/page');
     });
