@@ -1,1 +1,0 @@
-import{j as t}from"./app-BwiauO4T.js";import r from"./layout-BKNN3Sv0.js";import"./index-DA3KyWg-.js";import"./dialog-Bt0kar76.js";import"./use-disposables-BdnoX1GC.js";import"./keyboard-CIUvEZGj.js";import"./use-root-containers-BtuJzqDt.js";import"./XMarkIcon-BUTjbU6z.js";import"./Bars3Icon-CbTHEexm.js";function f(){return t.jsx(r,{children:"SettingsPage"})}export{f as default};
