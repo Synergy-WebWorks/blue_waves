@@ -73,8 +73,10 @@ const ReservationCalendarSection = () => {
     };
 
     const handleDateClick = (value, res) => {
-        const selectedDate = moment(value.$d).format("LL"); 
-        router.visit(`/admin/reservation?start=${selectedDate}`);
+        if (res.source == "date") {
+            const selectedDate = moment(value.$d).format("LL");
+            router.visit(`/admin/reservation?start=${selectedDate}`);
+        }
     };
     return (
         <Calendar
