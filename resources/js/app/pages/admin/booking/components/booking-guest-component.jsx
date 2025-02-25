@@ -1,20 +1,27 @@
 import { useEffect, useState } from "react";
 import { Popover } from "@headlessui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { setSearch } from "@/app/redux/app-slice";
 
-export default function BookingGuestComponent({ setPerson, person }) {
+export default function BookingGuestComponent() {
     const [adults, setAdults] = useState(1);
     const [children, setChildren] = useState(0);
+    const dispatch = useDispatch();
+    const { selected, search } = useSelector((store) => store.app);
 
     useEffect(() => {
-        setAdults(isNaN(parseInt(person.adults))?0:parseInt(person.adults));
-        setChildren(isNaN(parseInt(person.children))?0:parseInt(person.children));
-    }, [person.children]);
-
+        setAdults(parseInt(search.adults));
+        setChildren(parseInt(search.children));
+    }, []);
+console.log('sdadsa',children)
     useEffect(() => {
-        setPerson({
-            adults: adults,
-            children: children,
-        });
+        dispatch(
+            setSearch({
+                ...search,
+                adults: adults,
+                children: children,
+            })
+        );
     }, [adults, children]);
 
     const handleIncrement = (type) => {

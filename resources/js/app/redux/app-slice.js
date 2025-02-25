@@ -3,17 +3,20 @@ import moment from "moment";
 const params = new URLSearchParams(window.location.search);
 const adults = params.get("adults");
 const children = params.get("children");
+const start = params.get("start");
+const end = params.get("end");
 const adults_price = parseInt(adults) * 50;
 const children_price = parseInt(children) * 20;
+
 export const appSlice = createSlice({
     name: "app",
     initialState: {
         user: {},
         search: {
-            start: moment().format("LL"),
-            end: null,
-            adults: 0,
-            children: 0,
+            start:start?? moment().format("LL"),
+            end:end?? moment().format("LL"),
+            adults: adults??0,
+            children: children??0,
         },
         selected: [],
         customer: {
@@ -26,6 +29,11 @@ export const appSlice = createSlice({
             state.user = action.payload;
         },
         setSearch: (state, action) => {
+            state.customer ={
+                ...state.customer,
+                adults:action.payload.adults * 50,
+                children:action.payload.children * 20
+            }
             state.search = action.payload;
         },
         setSelected: (state, action) => {

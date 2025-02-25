@@ -5,14 +5,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { router } from "@inertiajs/react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import { setSelected } from "@/app/redux/app-slice";
+import { setCustomer, setSearch, setSelected } from "@/app/redux/app-slice";
 import BookingCartComponent from "@/app/pages/book-reservation/components/booking-cart-component";
 
 export default function FirstFormSection() {
     const NEXT_MONTH = new Date();
     NEXT_MONTH.setMonth(NEXT_MONTH.getMonth() + 1);
     const { rents } = useSelector((store) => store.rent);
-    const { selected } = useSelector((store) => store.app);
+    const { selected, search, customer } = useSelector((store) => store.app);
 
     const params = new URLSearchParams(window.location.search);
     const adults = params.get("adults");
@@ -20,45 +20,41 @@ export default function FirstFormSection() {
 
     const start = params.get("start");
     const end = params.get("end");
-    
+
     const products = rents?.filter((res) => res.type === "cottage") || [];
     const rooms = rents?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
-    const [person, setPerson] = useState({
-        adults: 1,
-        children: 0,
-    });
 
-    useEffect(() => {
-        setPerson({
-            adults: adults,
-            children: children,
-        });
-    }, [adults]);
+    // const [person, setPerson] = useState({
+    //     adults: 1,
+    //     children: 0,
+    // });
 
-    const [dateRange, setDateRange] = useState({
-        startDate: moment().format("LL"),
-        endDate: moment().format("LL"),
-    });
+    // useEffect(() => {
+    //     dispatch(setCustomer({
+    //         adults: search.adults,
+    //         children: search.children,
+    //     }));
+    // }, [adults]);
 
-  
-    useEffect(() => {
-        setDateRange({
-            startDate: start == null ? moment().format("LL") : start,
-            endDate: end == null ? moment().format("LL") : end,
-        });
-    }, []);
+    // const [dateRange, setDateRange] = useState({
+    //     startDate: moment().format("LL"),
+    //     endDate: moment().format("LL"),
+    // });
+
+    // useEffect(() => {
+    //     setDateRange({
+    //         startDate: start == null ? moment().format("LL") : start,
+    //         endDate: end == null ? moment().format("LL") : end,
+    //     });
+    // }, []);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    const [imageIndexes, setImageIndexes] = useState(
-        products.map(() => 0) // Track image index per product
-    );
+    const [imageIndexes, setImageIndexes] = useState(products.map(() => 0));
 
-    const [imageIndexes2, setImageIndexes2] = useState(
-        rooms.map(() => 0) // Track image index per product
-    );
+    const [imageIndexes2, setImageIndexes2] = useState(rooms.map(() => 0));
 
     useEffect(() => {
         if (products) {
@@ -109,7 +105,7 @@ export default function FirstFormSection() {
     };
     function search_rent_vacant() {
         router.visit(
-            `/admin/booking?start=${dateRange.startDate}&end=${dateRange.endDate}&adults=${person.adults}&children=${person.children}`
+            `/admin/booking?start=${search.startDate}&end=${search.endDate}&adults=${search.adults}&children=${search.children}`
         );
     }
     console.log("selected", selected);
@@ -140,17 +136,22 @@ export default function FirstFormSection() {
                                         <div className="flex flex-col sm:flex-row sm:gap-4">
                                             <Datepicker
                                                 primaryColor={"teal"}
-                                                value={dateRange}
+                                                value={{
+                                                    startDate: search.start,
+                                                    endDate: search.end,
+                                                }}
                                                 onChange={(newValue) =>
-                                                    setDateRange({
-                                                        ...dateRange,
-                                                        start: moment(
-                                                            newValue.startDate
-                                                        ).format("LL"),
-                                                        endDate: moment(
-                                                            newValue.endDate
-                                                        ).format("LL"),
-                                                    })
+                                                    dispatch(
+                                                        setSearch({
+                                                            ...search,
+                                                            start: moment(
+                                                                newValue.startDate
+                                                            ).format("LL"),
+                                                            end: moment(
+                                                                newValue.endDate
+                                                            ).format("LL"),
+                                                        })
+                                                    )
                                                 }
                                                 minDate={today}
                                                 separator="to"
@@ -160,10 +161,7 @@ export default function FirstFormSection() {
                                                 useRange={false}
                                                 className="w-full sm:w-1/2 overflow-y-auto"
                                             />
-                                            <BookingGuestComponent
-                                                setPerson={setPerson}
-                                                person={person}
-                                            />
+                                            <BookingGuestComponent />
                                         </div>
 
                                         {/* Search Button */}

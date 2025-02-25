@@ -115,6 +115,10 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         return Inertia::render('admin/booking/page');
     });
 
+    Route::get('/booking/checkout', function () {
+        return Inertia::render('admin/booking/page');
+    });
+
     Route::get('/contact', function () {
         return Inertia::render('admin/contact/page');
     });

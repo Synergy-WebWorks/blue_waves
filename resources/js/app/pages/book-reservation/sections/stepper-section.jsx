@@ -16,7 +16,7 @@ import { router } from "@inertiajs/react";
 export default function StepperSection() {
     const [currentStep, setCurrentStep] = useState(1); // Set the first step as current (1-based index)
 
-    const { selected, customer } = useSelector((store) => store.app);
+    const { selected, customer, search } = useSelector((store) => store.app);
     const [loading, setLoading] = useState(false);
     const params = new URLSearchParams(window.location.search);
     const start = params.get("start");
@@ -58,11 +58,17 @@ export default function StepperSection() {
             setCurrentStep((prev) => prev - 1);
         }
     };
+    function getDayGap(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const difference = (end - start) / (1000 * 60 * 60 * 24);
+       return difference == 0?1:difference;
+    }
+    const gap = getDayGap(search.start, search.end);
 
-    const totalRate = selected.reduce(
-        (sum, item) => sum + Number(item.rate),
-        0
-    );
+    const totalRate =
+        selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
+
     const adults_rate = customer.adults;
     const children_rate = customer.children;
     const overall = parseInt(totalRate) + customer.children + customer.adults;
@@ -72,8 +78,8 @@ export default function StepperSection() {
     async function submitHandler(params) {
         setLoading(true);
         try {
-            const reference_id =moment().format("MDDYYYYHHmmss");
-          await store.dispatch(
+            const reference_id = moment().format("MDDYYYYHHmmss");
+            await store.dispatch(
                 create_booking_info_thunk({
                     ...customer,
                     ...selected,
@@ -89,7 +95,7 @@ export default function StepperSection() {
                 })
             );
             setLoading(false);
-            router.visit(`/online-payment?reference_id=${reference_id}`)
+            router.visit(`/online-payment?reference_id=${reference_id}`);
         } catch (error) {
             setLoading(false);
         }

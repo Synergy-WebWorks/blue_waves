@@ -2,15 +2,18 @@ import React from "react";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
 
-
-
 export default function BookThirdFormSection() {
-    const { selected,customer } = useSelector((store) => store.app);
+    const { selected, customer, search } = useSelector((store) => store.app);
 
-    const totalRate = selected.reduce(
-        (sum, item) => sum + Number(item.rate),
-        0
-    );
+    function getDayGap(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const difference = (end - start) / (1000 * 60 * 60 * 24);
+       return difference == 0?1:difference;
+    }
+    const gap = getDayGap(search.start, search.end);
+    const totalRate =
+        selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
 
     return (
         <div className="bg-gray-50">
@@ -72,7 +75,10 @@ export default function BookThirdFormSection() {
 
                                             <div className="flex flex-1 items-end justify-end pt-2">
                                                 <p className="mt-1 text-sm font-medium text-gray-900">
-                                                ₱ {parseInt(order.rate).toFixed(2)}
+                                                    ₱{" "}
+                                                    {parseInt(
+                                                        order.rate
+                                                    ).toFixed(2)}
                                                 </p>
                                             </div>
                                         </div>
@@ -81,24 +87,34 @@ export default function BookThirdFormSection() {
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Subtotal</dt>
+                                    <dt className="text-sm">
+                                        {" "}
+                                        Subtotal: {totalRate.toFixed(2) /
+                                            gap} x {gap}
+                                    </dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                       ₱{totalRate.toFixed(2)}
+                                        ₱{totalRate.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between p-2 border-b border-gray-300">
                                     <dt className="text-sm">Entrance Fee</dt>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Adult</dt>
+                                    <dt className="text-sm">
+                                        {" "}
+                                        Adults: 20 x {search.adults}
+                                    </dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                    ₱{customer.adults.toFixed(2)}
+                                        ₱{customer.adults.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Children</dt>
+                                    <dt className="text-sm">
+                                        {" "}
+                                        Children: 20 x {search.children}
+                                    </dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                    ₱{customer.children.toFixed(2)}
+                                        ₱{customer.children.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -106,7 +122,12 @@ export default function BookThirdFormSection() {
                                         Total
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                    ₱ {(parseInt(totalRate) +customer.children +customer.adults).toFixed(2)}
+                                        ₱{" "}
+                                        {(
+                                            parseInt(totalRate) +
+                                            customer.children +
+                                            customer.adults
+                                        ).toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -118,9 +139,14 @@ export default function BookThirdFormSection() {
                                         </p>
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                    ₱
-                                        {((parseInt(totalRate) +customer.children +customer.adults)/2).toFixed(2)}
-                                   </dd>
+                                        ₱
+                                        {(
+                                            (parseInt(totalRate) +
+                                                customer.children +
+                                                customer.adults) /
+                                            2
+                                        ).toFixed(2)}
+                                    </dd>
                                 </div>
                             </dl>
                         </div>

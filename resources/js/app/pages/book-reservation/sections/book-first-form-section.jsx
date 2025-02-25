@@ -48,6 +48,7 @@ export default function BookFirstFormSection() {
             endDate: end,
         });
     }, []);
+    
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -137,13 +138,14 @@ export default function BookFirstFormSection() {
                                     {/* First Column - Datepicker & Booking Guest Component */}
                                     <div className="flex flex-col gap-4">
                                         <div className="flex flex-col sm:flex-row sm:gap-4">
+                                          
                                             <Datepicker
                                                 primaryColor={"teal"}
                                                 value={dateRange}
                                                 onChange={(newValue) =>
                                                     setDateRange({
                                                         ...dateRange,
-                                                        start: moment(
+                                                        startDate: moment(
                                                             newValue.startDate
                                                         ).format("LL"),
                                                         endDate: moment(

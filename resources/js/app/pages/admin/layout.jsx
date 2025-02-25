@@ -13,16 +13,16 @@ import { FaDatabase, FaHeadset, FaRegCircleDot } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
 
 const navigation = [
-    { name: "Dashboard", href: "./dashboard", icon: HomeIcon, current: false },
+    { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: false },
     {
         name: "Reservation Section",
-        href: "./reservation",
+        href: "/admin/reservation",
         icon: CalendarDaysIcon,
         current: false,
     },
     {
         name: "Report Section",
-        href: "./reports",
+        href: "/admin/reports",
         icon: FolderIcon,
         current: false,
     },
@@ -34,7 +34,7 @@ const teams = [
         icon: UserGroupIcon,
         current: false,
         children: [
-            { name: "Accounts List", href: "./accounts", icon: FaRegCircleDot },
+            { name: "Accounts List", href: "/admin/accounts", icon: FaRegCircleDot },
         ],
     },
     {
@@ -43,30 +43,30 @@ const teams = [
         icon: FaDatabase,
         current: false,
         children: [
-            { name: "Room Section", href: "./rooms", icon: FaRegCircleDot },
+            { name: "Room Section", href: "/admin/rooms", icon: FaRegCircleDot },
             {
                 name: "Cottage Section",
-                href: "./cottage",
+                href: "/admin/cottage",
                 icon: FaRegCircleDot,
             },
             {
                 name: "Activity Section",
-                href: "./activities",
+                href: "/admin/activities",
                 icon: FaRegCircleDot,
             },
             {
                 name: "Inventory Section",
-                href: "./inventory",
+                href: "/admin/inventory",
                 icon: FaRegCircleDot,
             },
             {
                 name: "Terms & Condition Section",
-                href: "./terms",
+                href: "/admin/terms",
                 icon: FaRegCircleDot,
             },
             {
                 name: "Landing Page Section",
-                href: "./landing-page",
+                href: "/admin/landing-page",
                 icon: FaRegCircleDot,
             },
         ],
@@ -79,10 +79,10 @@ const teams = [
         children: [
             {
                 name: "Download User Manual",
-                href: "./manual",
+                href: "/admin/manual",
                 icon: FaRegCircleDot,
             },
-            { name: "Contact Us", href: "./contact", icon: FaRegCircleDot },
+            { name: "Contact Us", href: "/admin/contact", icon: FaRegCircleDot },
         ],
     },
 ];

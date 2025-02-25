@@ -9,9 +9,9 @@ import { router } from "@inertiajs/react";
 import { useSelector } from "react-redux";
 
 export default function RegistrationStepperSection() {
-    const [currentStep, setCurrentStep] = useState(1); // Set the first step as current (1-based index)
-
-    const { selected, customer } = useSelector((store) => store.app);
+    const path = window.location.pathname.split("/")[3];
+    const [currentStep, setCurrentStep] = useState(path ? 2 : 1);
+    const { selected, customer, search } = useSelector((store) => store.app);
     const [loading, setLoading] = useState(false);
     const steps = [
         { id: "01", name: "Booking Order", description: "Completed" },
@@ -37,17 +37,26 @@ export default function RegistrationStepperSection() {
         }));
 
     const stepsWithStatus = updateStepStatus();
-
+    console.log(
+        "dadwwawkdjlkjlawd",
+        `/admin/booking/checkout?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
+    );
     const handleNext = () => {
-        if (currentStep < steps.length) {
-            setCurrentStep((prev) => prev + 1);
-        }
+        // if (currentStep < steps.length) {
+        //     setCurrentStep((prev) => prev + 1);
+        // }
+        router.visit(
+            `/admin/booking/checkout?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
+        );
     };
 
     const handlePrevious = () => {
-        if (currentStep > 1) {
-            setCurrentStep((prev) => prev - 1);
-        }
+        // if (currentStep > 1) {
+        //     setCurrentStep((prev) => prev - 1);
+        // }
+        router.visit(
+            `/admin/booking?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
+        );
     };
 
     const handleStepClick = (stepIndex) => {
@@ -72,13 +81,21 @@ export default function RegistrationStepperSection() {
         }
     };
 
-    const totalRate = selected.reduce(
-        (sum, item) => sum + Number(item.rate),
-        0
-    );
+    function getDayGap(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const difference = (end - start) / (1000 * 60 * 60 * 24);
+       return difference == 0?1:difference;
+    }
+    const gap = getDayGap(search.start, search.end);
+
+    const totalRate =
+        selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
+
     const adults_rate = customer.adults;
     const children_rate = customer.children;
     const overall = parseInt(totalRate) + customer.children + customer.adults;
+
     const down_payment =
         (parseInt(totalRate) + customer.children + customer.adults) / 2;
 
@@ -99,11 +116,11 @@ export default function RegistrationStepperSection() {
                     total: overall,
                     initial: down_payment,
                     status: "pending",
-                    processed_by:'admin'
+                    processed_by: "admin",
                 })
             );
             setLoading(false);
-              router.visit(`/admin/reservation`)
+            router.visit(`/admin/reservation`);
         } catch (error) {
             setLoading(false);
         }

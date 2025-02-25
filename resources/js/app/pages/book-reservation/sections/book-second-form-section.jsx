@@ -5,13 +5,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { setCustomer, setSelected } from "@/app/redux/app-slice";
 
 export default function BookSecondFormSection() {
-    const { selected, customer } = useSelector((store) => store.app);
+    const { selected, customer, search } = useSelector((store) => store.app);
     const dispatch = useDispatch();
-    const totalRate = selected.reduce(
-        (sum, item) => sum + Number(item.rate),
-        0
-    );
 
+    function getDayGap(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const difference = (end - start) / (1000 * 60 * 60 * 24);
+        return difference;
+    }
+    const gap = getDayGap(search.start, search.end);
+    const totalRate =
+        selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
+        
     function remove_cart(value) {
         const idToRemove = value.id;
         const updatedData = selected.filter((item) => item.id !== idToRemove);
@@ -341,7 +347,7 @@ export default function BookSecondFormSection() {
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Subtotal</dt>
+                                    <dt className="text-sm"> Subtotal: {totalRate.toFixed(2)/gap} x {gap}</dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{totalRate.toFixed(2)}
                                     </dd>
@@ -350,13 +356,13 @@ export default function BookSecondFormSection() {
                                     <dt className="text-sm">Entrance Fee</dt>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Adult</dt>
+                                    <dt className="text-sm">  Adult: 50 x {search.adults}</dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{customer.adults.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">Children</dt>
+                                    <dt className="text-sm">  Children: 20 x {search.children}</dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{customer.children.toFixed(2)}
                                     </dd>
@@ -366,7 +372,12 @@ export default function BookSecondFormSection() {
                                         Total
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
-                                    ₱ {(parseInt(totalRate) +customer.children +customer.adults).toFixed(2)}
+                                        ₱{" "}
+                                        {(
+                                            parseInt(totalRate) +
+                                            customer.children +
+                                            customer.adults
+                                        ).toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -379,7 +390,12 @@ export default function BookSecondFormSection() {
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
                                         ₱
-                                        {((parseInt(totalRate) +customer.children +customer.adults)/2).toFixed(2)}
+                                        {(
+                                            (parseInt(totalRate) +
+                                                customer.children +
+                                                customer.adults) /
+                                            2
+                                        ).toFixed(2)}
                                     </dd>
                                 </div>
                             </dl>
