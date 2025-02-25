@@ -39,6 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::resource('activity', ActivityController::class);
 Route::resource('booking_info', BookingInfoController::class);
+Route::get('/get_calendar', [BookingInfoController::class, 'get_calendar']);
 Route::resource('booking_order', BookingOrderController::class);
 Route::resource('inventory_allocation', InventoryAllocationController::class);
 Route::resource('inventory', InventoryController::class);

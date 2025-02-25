@@ -5,13 +5,21 @@ export function create_booking_info_service(data) {
         const result = axios.post('/api/booking_info', data)
         return result
     } catch (error) {
+    }
+}
 
+
+export function get_calendar_service(query) {
+    try {
+        const result = axios.get('/api/get_calendar'+query)
+        return result
+    } catch (error) {
     }
 }
 
 export function get_booking_info_service() {
     try {
-        const result = axios.get('/api/booking_info')
+        const result = axios.get('/api/booking_info'+window.location.search)
         return result
     } catch (error) {
 

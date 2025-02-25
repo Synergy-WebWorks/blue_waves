@@ -14,11 +14,15 @@ class BookingInfoSeeder extends Seeder
      */
     public function run(): void
     {
+
         for ($i = 1; $i <= 20; $i++) {
+            $startDate = Carbon::now()->subDays(rand(1, 30))->format('F d, Y'); // Format: February 26, 2025
+            $endDate = Carbon::now()->addDays(rand(1, 30))->format('F d, Y');
+
             DB::table('booking_infos')->insert([
                 'reference_id' => rand(1000000000, 9999999999), // 10-digit random reference ID
-                'start' => now()->subDays(rand(1, 30))->toDateString(),
-                'end' => now()->addDays(rand(1, 30))->toDateString(),
+                'start' => $startDate, // Formatted start date
+                'end' => $endDate, // Formatted end date
                 'email' => "user$i@example.com",
                 'mobile' => '09' . rand(100000000, 999999999), // Philippine mobile format
                 'fname' => Str::random(6),
@@ -30,7 +34,7 @@ class BookingInfoSeeder extends Seeder
                 'adults' => rand(1, 5),
                 'children' => rand(0, 3),
                 'total' => rand(1000, 10000), // Total cost
-                'status' => ['pending', 'paid', 'canceled', 'failed', 'partial'][array_rand(['pending', 'paid', 'canceled', 'partial'])],
+                'status' => ['pending', 'paid', 'canceled', 'failed', 'partial'][array_rand(['pending', 'paid', 'canceled', 'failed', 'partial'])], // Fixed status array
                 'submitted_date' => now()->toDateTimeString(),
                 'created_at' => now(),
                 'updated_at' => now(),

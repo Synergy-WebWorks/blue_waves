@@ -5,15 +5,46 @@ namespace App\Http\Controllers;
 use App\Models\BookingInfo;
 use App\Notifications\BookingNotification;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class BookingInfoController extends Controller
 {
-    // Display a listing of the booking records
-    public function index()
+
+    public function get_calendar(Request $request)
     {
-        $bookings = BookingInfo::orderBy('id', 'desc')->paginate(10);
+        $year = $request->input('year', Carbon::now()->year);
+
+        // Get first and last day of the given year
+        $startDate = Carbon::create($year, 1, 1)->startOfYear()->toDateString();  // "2025-01-01"
+        $endDate = Carbon::create($year, 12, 31)->endOfYear()->toDateString();  // "2025-12-31"
+
+
+        // Fetch only bookings where the 'start' date is within the specified year
+        $bookings = BookingInfo::whereBetween(DB::raw("STR_TO_DATE(start, '%M %d, %Y')"), [$startDate, $endDate])
+            ->orderBy(DB::raw("STR_TO_DATE(start, '%M %d, %Y')"), 'asc')
+            ->get();
+
         return response()->json($bookings);
     }
+
+
+
+    public function index(Request $request)
+    {
+        $startDate = $request->input('start'); // Example: "February 26, 2025"
+
+        $query = BookingInfo::query();
+
+        if ($startDate) {
+            $query->where('start', $startDate);
+        }
+
+        $bookings = $query->orderBy('id', 'desc')->paginate(10);
+
+        return response()->json($bookings);
+    }
+
 
 
     // Store a newly created booking record
@@ -42,7 +73,7 @@ class BookingInfoController extends Controller
         if ($request->processed_by === 'admin') {
             $booking->notify(new BookingNotification($booking));
         }
-    
+
         return response()->json($booking, 200);
     }
 

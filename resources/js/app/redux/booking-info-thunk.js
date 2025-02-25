@@ -1,4 +1,4 @@
-import { create_booking_info_service, delete_booking_info_service, get_booking_info_by_id_service, get_booking_info_service, update_booking_info_service } from "../services/booking-info-service";
+import { create_booking_info_service, delete_booking_info_service, get_booking_info_by_id_service, get_booking_info_service, get_calendar_service, update_booking_info_service } from "../services/booking-info-service";
 import {bookingInfoSlice} from "./booking-info-slice";
 
 export function get_booking_info_thunk() {
@@ -7,6 +7,13 @@ export function get_booking_info_thunk() {
           dispatch(bookingInfoSlice.actions.setBookingInfos(res.data));
   };
 }
+
+export function get_calendar_thunk(query) {
+    return async function (dispatch, getState) {
+     const res = await get_calendar_service(query)
+            dispatch(bookingInfoSlice.actions.setCalendars(res.data));
+    };
+  }
 
 export function create_booking_info_thunk(data) {
     return async function (dispatch, getState) {

@@ -5,6 +5,7 @@ export const bookingInfoSlice = createSlice({
     initialState: {
         booking_infos: [],
         booking_info: {},
+        calendars:[]
     },
     reducers: {
         setBookingInfos: (state, action) => {
@@ -13,8 +14,11 @@ export const bookingInfoSlice = createSlice({
         setBookingInfo: (state, action) => {
             state.booking_info = action.payload;
         },
+        setCalendars: (state, action) => {
+            state.calendars = action.payload;
+        },
     },
 });
-export const { setBookingInfos, setBookingInfo } = bookingInfoSlice.actions;
+export const { setBookingInfos, setBookingInfo,setCalendars } = bookingInfoSlice.actions;
 
 export default bookingInfoSlice.reducer;

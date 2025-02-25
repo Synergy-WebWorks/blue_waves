@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux'
 const tabs = [
   { name: 'Reservation Table', key: 'reservation', icon: FaTable },
   { name: 'Calendar View', key: 'calendar', icon: CalendarIcon },
-  { name: 'Scheduled', key: 'scheduled', icon: FaCalendarCheck },
+  // { name: 'Scheduled', key: 'scheduled', icon: FaCalendarCheck },
 ]
 
 function classNames(...classes) {
