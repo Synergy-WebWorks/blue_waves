@@ -25,6 +25,7 @@ export function create_booking_info_thunk(data) {
 export function get_booking_info_by_id_thunk(id) {
     return async function (dispatch, getState) {
         const res = await get_booking_info_by_id_service(id)
+        console.log('resres',res)
         dispatch(bookingInfoSlice.actions.setBookingInfo(res));
         return res.status
     };

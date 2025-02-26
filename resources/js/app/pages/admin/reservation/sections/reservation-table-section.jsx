@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import ReservationPaginationSection from "./reservation-pagination-section";
 import store from "@/app/store/store";
 import { get_booking_info_thunk } from "@/app/redux/booking-info-thunk";
+import { Link } from "@inertiajs/react";
 
 export default function ReservationTableSection() {
     const { booking_infos } = useSelector((store) => store.booking_info);
@@ -127,15 +128,15 @@ export default function ReservationTableSection() {
                                             )}
                                         </td>
                                         <td className="relative py-5 pr-4 pl-3 text-right text-sm font-medium whitespace-nowrap sm:pr-0">
-                                            <a
-                                                href="#"
+                                            <Link
+                                                href={`/admin/reservation/${res.reference_id}`}
                                                 className="text-cyan-600 hover:text-cyan-900"
                                             >
                                                 Booking Details
                                                 <span className="sr-only">
                                                     , {res.name}
                                                 </span>
-                                            </a>
+                                            </Link>
                                         </td>
                                     </tr>
                                 ))}

@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
+            RentSeeder::class,
             ActivitySeeder::class,
             BookingInfoSeeder::class,
             BookingOrderSeeder::class,
@@ -23,7 +24,6 @@ class DatabaseSeeder extends Seeder
             InventorySeeder::class,
             InventoryStockSeeder::class,
             LandingPageSeeder::class,
-            RentSeeder::class,
             ResortSeeder::class,
             TermSeeder::class,
             UploadSeeder::class,
