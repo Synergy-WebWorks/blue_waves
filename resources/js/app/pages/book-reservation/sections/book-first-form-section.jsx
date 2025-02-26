@@ -312,7 +312,7 @@ export default function BookFirstFormSection() {
                                                     </p>
                                                     <button
                                                         onClick={() =>
-                                                            add_to_cart(product)
+                                                            add_to_cart(cottage)
                                                         }
                                                         className="ml-4 bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 rounded-md"
                                                     >

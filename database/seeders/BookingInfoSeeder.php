@@ -34,7 +34,7 @@ class BookingInfoSeeder extends Seeder
                 'adults' => rand(1, 5),
                 'children' => rand(0, 3),
                 'total' => rand(1000, 10000), // Total cost
-                'status' => ['pending', 'paid', 'canceled', 'failed', 'partial'][array_rand(['pending', 'paid', 'canceled', 'failed', 'partial'])], // Fixed status array
+                'status' => ['pending', 'paid', 'canceled', 'partial'][array_rand(['pending', 'paid', 'canceled', 'partial'])], // Fixed status array
                 'submitted_date' => now()->toDateTimeString(),
                 'created_at' => now(),
                 'updated_at' => now(),

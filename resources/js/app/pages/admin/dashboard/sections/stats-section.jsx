@@ -29,33 +29,10 @@ import {
     FaTentArrowDownToLine,
 } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
+import { useSelector } from "react-redux";
+import GraphSection from "./graph-section";
+import moment from "moment";
 
-const cards = [
-    {
-        name: "Pending Payment Reservation",
-        href: "#",
-        icon: FaMoneyBillTransfer,
-        amount: "3",
-    },
-    {
-        name: "Confirmed Reservation",
-        href: "#",
-        icon: FaCalendarCheck,
-        amount: "26",
-    },
-    {
-        name: "Active Reservation",
-        href: "#",
-        icon: FaTentArrowDownToLine,
-        amount: "10",
-    },
-    {
-        name: "Cancelled Reservation",
-        href: "#",
-        icon: FaCalendarXmark,
-        amount: "3",
-    },
-];
 const transactions = [
     {
         id: 1,
@@ -80,6 +57,9 @@ function classNames(...classes) {
 }
 
 export default function StatsSection() {
+    const { dashboards } = useSelector((store) => store.dashboard);
+    const { booking_orders } = useSelector((store) => store.booking_order);
+
     const options = {
         weekday: "long",
         year: "numeric",
@@ -87,12 +67,36 @@ export default function StatsSection() {
         day: "numeric",
     };
     const formattedDate = new Date().toLocaleDateString("en-US", options);
-
+    const cards = [
+        {
+            name: "Pending Reservation",
+            href: "#",
+            icon: FaMoneyBillTransfer,
+            amount: dashboards?.status_count?.pending ?? 0,
+        },
+        {
+            name: "Cancelled Reservation",
+            href: "#",
+            icon: FaCalendarCheck,
+            amount: dashboards?.status_count?.cancele ?? 0,
+        },
+        {
+            name: "Partial Payment",
+            href: "#",
+            icon: FaTentArrowDownToLine,
+            amount: dashboards?.status_count?.partial ?? 0,
+        },
+        {
+            name: "Paid Payment",
+            href: "#",
+            icon: FaCalendarXmark,
+            amount: dashboards?.status_count?.paid ?? 0,
+        },
+    ];
     return (
         <>
             <div className="min-h-full">
                 <div className="flex flex-1 flex-col">
-                    
                     <main className="pb-8">
                         {/* Page header */}
                         <div className="bg-white shadow-sm">
@@ -207,6 +211,7 @@ export default function StatsSection() {
                                 Recent activity
                             </h2>
 
+                            <GraphSection />
                             {/* Activity list (smallest breakpoint only) */}
                             <div className="shadow-sm sm:hidden">
                                 <ul
@@ -318,12 +323,10 @@ export default function StatsSection() {
                                                     </tr>
                                                 </thead>
                                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                                    {transactions.map(
-                                                        (transaction) => (
+                                                    {booking_orders?.data?.map(
+                                                        (transaction, i) => (
                                                             <tr
-                                                                key={
-                                                                    transaction.id
-                                                                }
+                                                                key={i}
                                                                 className="bg-white"
                                                             >
                                                                 <td className="w-full max-w-0 px-6 py-4 text-sm whitespace-nowrap text-gray-900">
@@ -340,7 +343,7 @@ export default function StatsSection() {
                                                                             />
                                                                             <p className="truncate text-gray-500 group-hover:text-gray-900">
                                                                                 {
-                                                                                    transaction.name
+                                                                                    transaction.reference_id
                                                                                 }
                                                                             </p>
                                                                         </a>
@@ -348,13 +351,11 @@ export default function StatsSection() {
                                                                 </td>
                                                                 <td className="px-6 py-4 text-right text-sm whitespace-nowrap text-gray-500">
                                                                     <span className="font-medium text-gray-900">
+                                                                        ₱{" "}
                                                                         {
-                                                                            transaction.amount
+                                                                            transaction.total
                                                                         }
                                                                     </span>
-                                                                    {
-                                                                        transaction.currency
-                                                                    }
                                                                 </td>
                                                                 <td className="hidden px-6 py-4 text-sm whitespace-nowrap text-gray-500 md:block">
                                                                     <span
@@ -372,15 +373,11 @@ export default function StatsSection() {
                                                                     </span>
                                                                 </td>
                                                                 <td className="px-6 py-4 text-right text-sm whitespace-nowrap text-gray-500">
-                                                                    <time
-                                                                        dateTime={
-                                                                            transaction.datetime
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            transaction.date
-                                                                        }
-                                                                    </time>
+                                                                    {moment(
+                                                                        transaction.created_at
+                                                                    ).format(
+                                                                        "LLL"
+                                                                    )}
                                                                 </td>
                                                             </tr>
                                                         )

@@ -1,8 +1,12 @@
 import React from "react";
 import { FaChartLine, FaRegCalendarCheck } from "react-icons/fa6";
 import ApexCharts from "react-apexcharts";
+import { useSelector } from "react-redux";
 
 export default function SalesComponent() {
+    const { dashboards } = useSelector((store) => store.dashboard);
+    const years = Object.entries(dashboards?.years??{});
+    console.log('years',years)
     const options = {
         chart: {
             id: "line-chart",
@@ -11,7 +15,7 @@ export default function SalesComponent() {
             },
         },
         xaxis: {
-            categories: ["2022", "2023", "2024", "2025"], // x-axis categories
+            categories: years.map(res=>res[0]), // x-axis categories
         },
         title: {
             text: "Annual Sales Graph",
@@ -35,7 +39,7 @@ export default function SalesComponent() {
     const series = [
         {
             name: "Sales Count",
-            data: [35, 57, 82, 20], // Data corresponding to each category
+            data: years.map(res=>res[1]), // Data corresponding to each category
         },
     ];
 

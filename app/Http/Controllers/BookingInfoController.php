@@ -32,15 +32,9 @@ class BookingInfoController extends Controller
 
     public function index(Request $request)
     {
-        $startDate = $request->input('start'); // Example: "February 26, 2025"
-
         $query = BookingInfo::query();
 
-        if ($startDate) {
-            $query->where('start', $startDate);
-        }
-
-        $bookings = $query->orderBy('id', 'desc')->paginate(10);
+        $bookings = $query->orderBy('id', 'desc')->paginate(10)->toArray();
 
         return response()->json($bookings);
     }

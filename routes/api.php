@@ -3,6 +3,7 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BookingInfoController;
 use App\Http\Controllers\BookingOrderController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\InventoryAllocationController;
 use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\InventoryStockController;
@@ -38,6 +39,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 Route::resource('activity', ActivityController::class);
+Route::resource('dashboard', DashboardController::class);
 Route::resource('booking_info', BookingInfoController::class);
 Route::get('/get_calendar', [BookingInfoController::class, 'get_calendar']);
 Route::resource('booking_order', BookingOrderController::class);

@@ -28,33 +28,9 @@ import {
     FaMoneyBillTransfer,
     FaTentArrowDownToLine,
 } from "react-icons/fa6";
+import { useSelector } from "react-redux";
+import moment from "moment";
 
-const cards = [
-    {
-        name: "Pending Payment Reservation",
-        href: "#",
-        icon: FaMoneyBillTransfer,
-        amount: "3",
-    },
-    {
-        name: "Confirmed Reservation",
-        href: "#",
-        icon: FaCalendarCheck,
-        amount: "26",
-    },
-    {
-        name: "Active Reservation",
-        href: "#",
-        icon: FaTentArrowDownToLine,
-        amount: "10",
-    },
-    {
-        name: "Cancelled Reservation",
-        href: "#",
-        icon: FaCalendarXmark,
-        amount: "3",
-    },
-];
 const transactions = [
     {
         id: 1,
@@ -149,14 +125,35 @@ function classNames(...classes) {
 }
 
 export default function ReportsStatsSection() {
-    const options = {
-        weekday: "long",
-        year: "numeric",
-        month: "long",
-        day: "numeric",
-    };
-    const formattedDate = new Date().toLocaleDateString("en-US", options);
+    const { booking_orders } = useSelector((store) => store.booking_order);
+    const { dashboards } = useSelector((store) => store.dashboard);
 
+    const cards = [
+        {
+            name: "Pending Reservation",
+            href: "#",
+            icon: FaMoneyBillTransfer,
+            amount: dashboards?.status_count?.pending ?? 0,
+        },
+        {
+            name: "Cancelled Reservation",
+            href: "#",
+            icon: FaCalendarCheck,
+            amount: dashboards?.status_count?.cancele ?? 0,
+        },
+        {
+            name: "Partial Payment",
+            href: "#",
+            icon: FaTentArrowDownToLine,
+            amount: dashboards?.status_count?.partial ?? 0,
+        },
+        {
+            name: "Paid Payment",
+            href: "#",
+            icon: FaCalendarXmark,
+            amount: dashboards?.status_count?.paid ?? 0,
+        },
+    ];
     return (
         <>
             <div className="min-h-full">
@@ -298,12 +295,10 @@ export default function ReportsStatsSection() {
                                                     </tr>
                                                 </thead>
                                                 <tbody className="divide-y divide-gray-200 bg-white">
-                                                    {transactions.map(
-                                                        (transaction) => (
+                                                    {booking_orders?.data?.map(
+                                                        (transaction, i) => (
                                                             <tr
-                                                                key={
-                                                                    transaction.id
-                                                                }
+                                                                key={i}
                                                                 className="bg-white"
                                                             >
                                                                 <td className="w-full max-w-0 px-6 py-4 text-sm whitespace-nowrap text-gray-900">
@@ -320,7 +315,7 @@ export default function ReportsStatsSection() {
                                                                             />
                                                                             <p className="truncate text-gray-500 group-hover:text-gray-900">
                                                                                 {
-                                                                                    transaction.name
+                                                                                    transaction.reference_id
                                                                                 }
                                                                             </p>
                                                                         </a>
@@ -328,13 +323,11 @@ export default function ReportsStatsSection() {
                                                                 </td>
                                                                 <td className="px-6 py-4 text-right text-sm whitespace-nowrap text-gray-500">
                                                                     <span className="font-medium text-gray-900">
+                                                                        ₱{" "}
                                                                         {
-                                                                            transaction.amount
+                                                                            transaction.total
                                                                         }
                                                                     </span>
-                                                                    {
-                                                                        transaction.currency
-                                                                    }
                                                                 </td>
                                                                 <td className="hidden px-6 py-4 text-sm whitespace-nowrap text-gray-500 md:block">
                                                                     <span
@@ -352,15 +345,11 @@ export default function ReportsStatsSection() {
                                                                     </span>
                                                                 </td>
                                                                 <td className="px-6 py-4 text-right text-sm whitespace-nowrap text-gray-500">
-                                                                    <time
-                                                                        dateTime={
-                                                                            transaction.datetime
-                                                                        }
-                                                                    >
-                                                                        {
-                                                                            transaction.date
-                                                                        }
-                                                                    </time>
+                                                                    {moment(
+                                                                        transaction.created_at
+                                                                    ).format(
+                                                                        "LLL"
+                                                                    )}
                                                                 </td>
                                                             </tr>
                                                         )

@@ -1,8 +1,11 @@
 import React from "react";
 import { FaPersonDigging, FaRegCalendarCheck } from "react-icons/fa6";
 import ApexCharts from "react-apexcharts";
+import { useSelector } from "react-redux";
 
 export default function CustomerComponent() {
+    const { dashboards } = useSelector((store) => store.dashboard);
+    
     const options = {
         chart: {
             id: "bar-chart",
@@ -47,11 +50,24 @@ export default function CustomerComponent() {
         },
         colors: ["#00ACC1"], // Customize the bar color if desired
     };
-
+console.log('dashboards',dashboards?.monthlyBookings?.April)
     const series = [
         {
             name: "Reservation Count",
-            data: [182, 46], // Data corresponding to each category
+            data: [
+                dashboards?.monthlyBookings?.January??0,
+                dashboards?.monthlyBookings?.February??0,
+                dashboards?.monthlyBookings?.March??0,
+                dashboards?.monthlyBookings?.April??0,
+                dashboards?.monthlyBookings?.May??0,
+                dashboards?.monthlyBookings?.June??0,
+                dashboards?.monthlyBookings?.July??0,
+                dashboards?.monthlyBookings?.August??0,
+                dashboards?.monthlyBookings?.September??0,
+                dashboards?.monthlyBookings?.October??0,
+                dashboards?.monthlyBookings?.November??0,
+                dashboards?.monthlyBookings?.December??0,
+            ], // Data corresponding to each category
         },
     ];
     return (
