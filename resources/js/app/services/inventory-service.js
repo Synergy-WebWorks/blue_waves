@@ -39,3 +39,15 @@ export function update_inventory_service(data) {
     } catch (error) {
     }
 }
+
+export function return_item_inventory_service(data) {
+    try {
+        // Make sure the id is part of the URL and data
+        const result = axios.put(`/api/return_item/${data.id}`, data);
+        return result;
+    } catch (error) {
+        console.error('Error returning item:', error);
+        throw error; // It's important to throw the error so we can handle it properly in the UI
+    }
+}
+

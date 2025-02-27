@@ -17,11 +17,12 @@ export function create_inventory_allocation_thunk(data) {
 
 export function get_inventory_allocation_by_id_thunk(id) {
     return async function (dispatch, getState) {
-        const res = await get_inventory_allocation_by_id_service(id)
-        dispatch(inventoryAllocationSlice.actions.setInventoryAllocation(res.status));
-        return res.status
+        const res = await get_inventory_allocation_by_id_service(id);
+        dispatch(inventoryAllocationSlice.actions.setInventoryAllocations(res.data.status));
+        return res;
     };
 }
+
 
 
 export function delete_inventory_allocation_thunk(id) {

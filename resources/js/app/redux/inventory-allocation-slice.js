@@ -3,7 +3,9 @@ import { createSlice } from "@reduxjs/toolkit";
 export const inventoryAllocationSlice = createSlice({
     name: "inventoryallocation",
     initialState: {
-        inventory_allocations: [],
+        inventory_allocations: {
+            data: []
+        },
         inventory_allocation: {},
     },
     reducers: {

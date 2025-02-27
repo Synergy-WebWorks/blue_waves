@@ -1,9 +1,11 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import React from "react";
-import { FaClockRotateLeft, FaHouseChimneyMedical, FaPlus } from "react-icons/fa6";
+import { FaClipboardCheck, FaClockRotateLeft, FaHouseChimneyMedical, FaPlus } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import AddStocksSection from "./add-stocks-section";
 import { router } from "@inertiajs/react";
+import { Tooltip } from "antd";
+import ReturnNonConsumableSection from "./return-non-consumable-section";
 
 export default function InventoryNonConsumableSection() {
     const { inventories } = useSelector((state) => state.inventories);
@@ -18,6 +20,9 @@ export default function InventoryNonConsumableSection() {
                         A list of all the non-consumable items including their
                         name, quantity and allocation history.
                     </p>
+                </div>
+                <div>
+                    <ReturnNonConsumableSection />
                 </div>
             </div>
             <div className="mt-8 flow-root">
@@ -45,12 +50,12 @@ export default function InventoryNonConsumableSection() {
                                     >
                                         Unallocated
                                     </th>
-                                    <th
+                                    {/* <th
                                         scope="col"
                                         className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
                                     >
                                         Damaged
-                                    </th>
+                                    </th> */}
                                     <th
                                         scope="col"
                                         className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
@@ -69,22 +74,33 @@ export default function InventoryNonConsumableSection() {
                                             {inventory.quantity}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm  text-green-700 font-bold">
-                                            {inventory.unallocated}
+                                            {inventory.quantity}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm  text-red-700 font-bold">
-                                            {inventory.damaged}
-                                        </td>
+                                        {/* <td className="whitespace-nowrap px-3 py-4 text-sm  text-red-700 font-bold">
+                                            {inventory.quantity}
+                                        </td> */}
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-cyan-600 font-bold">
                                             <span className="isolate flex gap-1 rounded-md shadow-xs">
                                                 <AddStocksSection data={inventory} />
-                                                <button
-                                                    type="button"
-                                                    onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/${inventory.id}`)}
-                                                    title="Allocation History"
-                                                    className="relative -ml-px inline-flex items-center rounded-r-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-indigo-500 focus:z-10"
-                                                >
-                                                    <FaClockRotateLeft />
-                                                </button>
+                                                <Tooltip title="Allocation History">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/${inventory.id}`)}
+                                                        title="Allocation History"
+                                                        className="relative -ml-px inline-flex items-center rounded-r-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-indigo-500 focus:z-10"
+                                                    >
+                                                        <FaClockRotateLeft />
+                                                    </button>
+                                                </Tooltip>
+                                                <Tooltip title="Inventory Received Records">
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/inventory_received/${inventory.id}`)}
+                                                        className="relative -ml-px inline-flex items-center rounded-r-md bg-orange-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-orange-500 focus:z-10"
+                                                    >
+                                                        <FaClipboardCheck />
+                                                    </button>
+                                                </Tooltip>
                                             </span>
                                         </td>
                                     </tr>

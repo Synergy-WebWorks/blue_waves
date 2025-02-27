@@ -70,13 +70,15 @@ class InventoryAllocationController extends Controller
     /**
      * Display the specified resource.
      */
+
     public function show($id)
     {
-        $inventory = InventoryAllocation::where('id', $id)->with(['inventory'])->first();
+        $inventory_allocation = InventoryAllocation::where('item_id', $id)->with(['inventory'])->paginate();
         return response()->json([
-            'status' => $inventory,
+            'status' => $inventory_allocation,
         ], 200);
     }
+
 
     /**
      * Show the form for editing the specified resource.

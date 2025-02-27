@@ -90,8 +90,32 @@ class InventoryController extends Controller
         return response()->json($inventory, 200);
     }
 
+    public function return_item(Request $request, $id)
+    {
+        $inventory = Inventory::find($id);
 
+        if (!$inventory) {
+            return response()->json(['error' => 'Inventory item not found'], 404);
+        }
 
+        // Validate incoming request data
+        $request->validate([
+            'quantity' => 'sometimes|nullable|integer|min:1',  // Ensure quantity is provided
+            'received' => 'sometimes|nullable|date',  // Ensure received date is provided
+        ]);
+
+        $quantityToReturn = $request->input('quantity', 0); // Get quantity to return from the request
+
+        if ($quantityToReturn > 0) {
+            $inventory->quantity += $quantityToReturn;  // Increase inventory by the returned quantity
+        }
+
+        // Update the inventory with other fields, excluding quantity
+        $inventory->update($request->except('quantity'));  // Avoid overwriting the quantity in the request
+
+        // Return the updated inventory item in the response
+        return response()->json($inventory, 200);
+    }
 
 
 

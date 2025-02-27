@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class InventoryStock extends Model
 {
@@ -14,4 +15,9 @@ class InventoryStock extends Model
         'added',
         'received_date',
     ];
+
+    public function inventory(): HasOne
+    {
+        return $this->hasOne(Inventory::class, 'id', 'inventory_id');
+    }
 }

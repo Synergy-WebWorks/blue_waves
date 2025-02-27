@@ -1,4 +1,4 @@
-import { create_inventory_service, delete_inventory_service, get_inventory_by_id_service, get_inventory_service, update_inventory_service } from "../services/inventory-service";
+import { create_inventory_service, delete_inventory_service, get_inventory_by_id_service, get_inventory_service, return_item_inventory_service, update_inventory_service } from "../services/inventory-service";
 import { inventorySlice } from "./inventory-slice";
 
 export function get_inventory_thunk() {
@@ -34,5 +34,11 @@ export function delete_inventory_thunk(id) {
 export function update_inventory_thunk(data) {
     return async function (dispatch, getState) {
         const res = await update_inventory_service(data)
+    };
+}
+
+export function return_item_inventory_thunk(data) {
+    return async function (dispatch, getState) {
+        const res = await return_item_inventory_service(data)
     };
 }

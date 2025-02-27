@@ -36,9 +36,12 @@ class InventoryStockController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(InventoryStock $inventoryStock)
+    public function show($id)
     {
-        return response()->json($inventoryStock);
+        $inventory_stock = InventoryStock::where('inventory_id', $id)->with(['inventory'])->paginate();
+        return response()->json([
+            'status' => $inventory_stock,
+        ], 200);
     }
 
     /**
