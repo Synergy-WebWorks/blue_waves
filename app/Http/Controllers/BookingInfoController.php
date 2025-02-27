@@ -72,7 +72,7 @@ class BookingInfoController extends Controller
             'started_at' =>$request->start,
             'end_at' =>$request->end,
             'duration' =>$request->gap,
-            'sub_total' => $request->total,
+            'sub_total' => $value['rate'],
            ]);
         }
         if ($request->processed_by === 'admin') {

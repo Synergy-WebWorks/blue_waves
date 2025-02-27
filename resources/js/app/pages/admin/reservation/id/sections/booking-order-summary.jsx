@@ -105,7 +105,7 @@ export default function BookingOrderSummary() {
                                                             </div>
                                                         </div>
 
-                                                        <div className="ml-4 flow-root shrink-0">
+                                                        {/* <div className="ml-4 flow-root shrink-0">
                                                             <button
                                                                 onClick={() =>
                                                                     remove_cart(
@@ -123,7 +123,7 @@ export default function BookingOrderSummary() {
                                                                     className="size-5"
                                                                 />
                                                             </button>
-                                                        </div>
+                                                        </div> */}
                                                     </div>
 
                                                     <div className="flex flex-1 items-end justify-end pt-2">
@@ -141,34 +141,33 @@ export default function BookingOrderSummary() {
                                 )}
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
-                                <div className="flex items-center justify-between">
-                                    <dt className="text-sm"> Subtotal:</dt>
-                                    <dd className="text-sm font-medium text-gray-900">
-                                        ₱{totalRate?.toFixed(2)}
-                                    </dd>
-                                </div>
+                               
                                 <div className="flex items-center justify-between p-2 border-b border-gray-300">
                                     <dt className="text-sm">Entrance Fee</dt>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
-                                        Adult: 50 x {booking_info.adults}
+                                        Adult: 50 x {booking_info.adults / 50}
                                     </dt>
                                     <dd className="text-sm font-medium text-gray-900">
-                                        ₱{(booking_info.adults * 50).toFixed(2)}
+                                        ₱
+                                        {parseInt(booking_info.adults).toFixed(
+                                            2
+                                        )}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
-                                        Children: 20 x {booking_info.children}
+                                        Children: 20 x{" "}
+                                        {booking_info.children / 20}
                                     </dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱
-                                        {(booking_info.children * 20).toFixed(
-                                            2
-                                        )}
+                                        {parseInt(
+                                            booking_info.children
+                                        ).toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
@@ -177,12 +176,9 @@ export default function BookingOrderSummary() {
                                     </dt>
                                     <dd className="text-base font-medium text-gray-900">
                                         ₱{" "}
-                                        {(
-                                            parseInt(totalRate) +
-                                            parseInt(booking_info.children) *
-                                                20 +
-                                            parseInt(booking_info.adults) * 50
-                                        ).toFixed(2)}
+                                        {parseInt(booking_info.total).toFixed(
+                                            2
+                                        )}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
