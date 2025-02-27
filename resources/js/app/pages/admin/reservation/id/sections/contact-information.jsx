@@ -1,238 +1,178 @@
-import { setCustomer } from '@/app/redux/app-slice'
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { setCustomer, setSelected } from "@/app/redux/app-slice";
+import { TrashIcon } from "@heroicons/react/24/outline";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function ContactInformation() {
     const { selected, customer, search } = useSelector((store) => store.app);
     const { booking_info } = useSelector((store) => store.booking_info);
-    const dispatch =useDispatch()
-    useEffect(()=>{
-        dispatch(setCustomer(booking_info))
-    },[booking_info?.id??''])
-  return (
-    <div>
-    <div>
-        <h2 className="text-lg font-medium text-cyan-600">
-            Contact information
-        </h2>
+    const dispatch = useDispatch();
 
-        <div className="mt-4">
-            <label
-                htmlFor="email-address"
-                className="block text-sm/6 font-medium text-gray-700"
-            >
-                Email address
-            </label>
-            <div className="mt-2">
-                <input
-                    name="email"
-                    value={customer.email ?? ""}
-                    onChange={(e) =>
-                        dispatch(
-                            setCustomer({
-                                ...customer,
-                                [e.target.name]:
-                                    e.target.value,
-                            })
-                        )
-                    }
-                    readOnly
-                    id="email-address"
-                    type="email"
-                    autoComplete="email"
-                    className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                />
-            </div>
-        </div>
-        <div className="sm:col-span-2 mt-3">
-            <label
-                htmlFor="phone"
-                className="block text-sm/6 font-medium text-gray-700"
-            >
-                Phone
-            </label>
-            <div className="mt-2">
-                <input
-                    id="mobile"
-                    name="mobile"
-                    readOnly
-                    value={customer.mobile ?? ""}
-                    onChange={(e) =>
-                        dispatch(
-                            setCustomer({
-                                ...customer,
-                                [e.target.name]:
-                                    e.target.value,
-                            })
-                        )
-                    }
-                    type="text"
-                    autoComplete="tel"
-                    className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                />
-            </div>
-        </div>
-    </div>
+    function getDayGap(startDate, endDate) {
+        const start = new Date(startDate);
+        const end = new Date(endDate);
+        const difference = (end - start) / (1000 * 60 * 60 * 24);
+        return difference == 0 ? 1 : difference;
+    }
+    const gap = getDayGap(search.start, search.end);
+    useEffect(() => {
+        dispatch(
+            setCustomer({
+                ...booking_info,
+                children: 0,
+                adults: 0,
+            })
+        );
+    }, [booking_info?.id ?? ""]);
 
-    <div className="mt-10 border-t border-gray-200 pt-10">
-        <h2 className="text-lg font-medium text-cyan-600">
-            Personal information
-        </h2>
-
-        <div className="mt-4 grid grid-cols-1 gap-y-6 sm:grid-cols-2 sm:gap-x-4">
+    function remove_cart(value) {
+        const idToRemove = value.id;
+        const updatedData = selected.filter((item) => item.id !== idToRemove);
+        dispatch(setSelected(updatedData));
+    }
+    const rent_total =
+        selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
+    return (
+        <div>
             <div>
-                <label
-                    htmlFor="first-name"
-                    className="block text-sm/6 font-medium text-gray-700"
-                >
-                    First name
-                </label>
-                <div className="mt-2">
-                    <input
-                        id="first-name"
-                        name="fname"
-                        readOnly
-                        value={customer.fname ?? ""}
-                        onChange={(e) =>
-                            dispatch(
-                                setCustomer({
-                                    ...customer,
-                                    [e.target.name]:
-                                        e.target.value,
-                                })
-                            )
-                        }
-                        type="text"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                    />
-                </div>
-            </div>
+                <h2 className="text-lg font-medium text-cyan-600  p-5">
+                    Additional Booking
+                </h2>
 
-            <div>
-                <label
-                    htmlFor="first-name"
-                    className="block text-sm/6 font-medium text-gray-700"
-                >
-                    Middle name
-                </label>
-                <div className="mt-2">
-                    <input
-                        id="first-name"
-                        name="mname"
-                        readOnly
-                        value={customer.mname ?? ""}
-                        onChange={(e) =>
-                            dispatch(
-                                setCustomer({
-                                    ...customer,
-                                    [e.target.name]:
-                                        e.target.value,
-                                })
-                            )
-                        }
-                        type="text"
-                        autoComplete="given-name"
-                        className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                    />
+                <div className="relative overflow-x-auto">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Rent Cottages/Rooms
+                                </th>
+                                <th scope="col" className="px-6 py-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {selected.map((res, i) => {
+                                return (
+                                    <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                        <th
+                                            scope="row"
+                                            className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                        >
+                                            {res.name}
+                                        </th>
+                                        <td className="px-6 py-4">
+                                            ₱ {parseInt(res.rate)} x {gap}days
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            ₱ {(res.rate * gap).toFixed(2)}
+                                        </td>
+                                        <td className="px-6 py-4">
+                                            <button
+                                                onClick={() => remove_cart(res)}
+                                            >
+                                                <TrashIcon className="h-6 text-red-600" />
+                                            </button>
+                                        </td>
+                                    </tr>
+                                );
+                            })}
+                               <tr className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <td scope="col" className="px-6 py-3">
+                                    Adults
+                                </td>
+                                <td scope="col" className="px-6 py-3">
+                                    ₱{parseInt(customer.adults).toFixed(2)}
+                                </td>
+                            </tr>
+                            <tr className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <td scope="col" className="px-6 py-3">
+                                    Children
+                                </td>
+                                <td scope="col" className="px-6 py-3">
+                                    ₱{parseInt(customer.children).toFixed(2)}
+                                </td>
+                            </tr>
+                         
+                            <tr className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <td scope="col" className="px-6 py-3">
+                                    Overall Total
+                                </td>
+                                <td scope="col" className="px-6 py-3">
+                                    ₱{" "}
+                                    {(
+                                        parseInt(customer.children) +
+                                        parseInt(customer.adults) +
+                                        rent_total
+                                    ).toFixed(2)}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
+                <h2 className="text-lg font-medium text-cyan-600  p-5">
+                    Contact information
+                </h2>
 
-            <div>
-                <label
-                    htmlFor="last-name"
-                    className="block text-sm/6 font-medium text-gray-700"
-                >
-                    Last name
-                </label>
-                <div className="mt-2">
-                    <input
-                        id="last-name"
-                        name="lname"
-                        readOnly
-                        value={customer.lname ?? ""}
-                        onChange={(e) =>
-                            dispatch(
-                                setCustomer({
-                                    ...customer,
-                                    [e.target.name]:
-                                        e.target.value,
-                                })
-                            )
-                        }
-                        type="text"
-                        autoComplete="family-name"
-                        className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                    />
-                </div>
-            </div>
-
-            <div>
-                <label
-                    htmlFor="last-name"
-                    className="block text-sm/6 font-medium text-gray-700"
-                >
-                    Suffix
-                </label>
-                <div className="mt-2">
-                    <select
-                        id="last-name"
-                        name="suffix"
-                        value={customer.suffix ?? ""}
-                        onChange={(e) =>
-                            dispatch(
-                                setCustomer({
-                                    ...customer,
-                                    [e.target.name]:
-                                        e.target.value,
-                                })
-                            )
-                        }
-                        type="text"
-                        readOnly
-                        autoComplete="family-name"
-                        className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                    >
-                        <option></option>
-                        <option>Sr</option>
-                        <option>Jr</option>
-                        <option>I</option>
-                        <option>II</option>
-                        <option>III</option>
-                    </select>
-                </div>
-            </div>
-
-            <div className="sm:col-span-2">
-                <label
-                    htmlFor="address"
-                    className="block text-sm/6 font-medium text-gray-700"
-                >
-                    Address
-                </label>
-                <div className="mt-2">
-                    <input
-                        id="address"
-                        readOnly
-                        name="address"
-                        value={customer.address ?? ""}
-                        onChange={(e) =>
-                            dispatch(
-                                setCustomer({
-                                    ...customer,
-                                    [e.target.name]:
-                                        e.target.value,
-                                })
-                            )
-                        }
-                        type="text"
-                        autoComplete="street-address"
-                        className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
-                    />
+                <div className="relative overflow-x-auto">
+                    <table className="w-full text-sm text-left rtl:text-right text-gray-500">
+                        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th scope="col" className="px-6 py-3">
+                                    Personal Information
+                                </th>
+                                <th scope="col" className="px-6 py-3"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                >
+                                    Fullname
+                                </th>
+                                <td className="px-6 py-4">
+                                    {customer.fname ?? ""}{" "}
+                                    {customer.mname ?? ""}{" "}
+                                    {customer.lname ?? ""}
+                                </td>
+                            </tr>
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                >
+                                    Email
+                                </th>
+                                <td className="px-6 py-4">
+                                    {customer.email ?? ""}
+                                </td>
+                            </tr>
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                >
+                                    Phone
+                                </th>
+                                <td className="px-6 py-4">
+                                    {customer.mobile ?? ""}
+                                </td>
+                            </tr>
+                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200">
+                                <th
+                                    scope="row"
+                                    className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                >
+                                    Address
+                                </th>
+                                <td className="px-6 py-4">
+                                    {customer.address ?? ""}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-  )
+    );
 }

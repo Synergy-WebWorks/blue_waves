@@ -6,7 +6,8 @@ import store from "@/app/store/store";
 import { create_booking_info_thunk } from "@/app/redux/booking-info-thunk";
 import moment from "moment";
 import { router } from "@inertiajs/react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setSelected } from "@/app/redux/app-slice";
 
 export default function RegistrationStepperSection() {
     const path = window.location.pathname.split("/")[3];
@@ -20,6 +21,7 @@ export default function RegistrationStepperSection() {
     const params = new URLSearchParams(window.location.search);
     const start = params.get("start");
     const end = params.get("end");
+    const dispatch =useDispatch()
     function classNames(...classes) {
         return classes.filter(Boolean).join(" ");
     }
@@ -120,6 +122,7 @@ console.log('down_payment',selected)
                 })
             );
             setLoading(false);
+            dispatch(setSelected([]))
             router.visit(`/admin/reservation`);
         } catch (error) {
             setLoading(false);

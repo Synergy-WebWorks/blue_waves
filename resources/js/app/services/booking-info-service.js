@@ -1,5 +1,12 @@
 import axios from "axios"
 
+export function add_order_service(data) {
+    try {
+        const result = axios.post('/api/add_order', data)
+        return result
+    } catch (error) {
+    }
+}
 export function create_booking_info_service(data) {
     try {
         const result = axios.post('/api/booking_info', data)
@@ -7,6 +14,7 @@ export function create_booking_info_service(data) {
     } catch (error) {
     }
 }
+
 
 
 export function get_calendar_service(query) {

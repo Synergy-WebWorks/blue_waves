@@ -90,6 +90,7 @@ export default function FirstFormSection() {
     }
 
     return (
+
         <div className="bg-gray-50">
             <div className="mx-auto px-4 pt-16 pb-24 sm:px-6 lg:px-8">
                 <div className="lg:grid lg:grid-cols-1 lg:gap-x-12 xl:gap-x-16">
@@ -197,8 +198,8 @@ export default function FirstFormSection() {
                                                         {product.name}
                                                     </a>
                                                 </h3>
-                                                <p className="text-sm italic font-bold text-gray-500">
-                                                    {product.options}
+                                                 <p className="text-sm italic font-bold text-gray-500">
+                                                  Price:  {parseInt(product.rate).toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-500 text-justify">
                                                     {product.description}

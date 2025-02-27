@@ -12,6 +12,31 @@ use Illuminate\Support\Facades\DB;
 class BookingInfoController extends Controller
 {
 
+    public function add_order(Request $request)
+    {
+
+
+        $bookingInfo = BookingInfo::where('reference_id', $request->customer['reference_id'])->first();
+
+        if ($bookingInfo) {
+            $bookingInfo->update([
+                'adults' => $request->customer['adults'] + $bookingInfo->adults,
+                'children' => $request->customer['children'] + $bookingInfo->children,
+                'total' => $request->total_rent + $bookingInfo->total,
+            ]);
+            foreach ($request->selected as $key => $value) {
+                BookingOrder::create([
+                    'reference_id' => $request->customer['reference_id'],
+                    'rent_id' => $value['id'],
+                    'started_at' => $request->start,
+                    'end_at' => $request->end,
+                    'duration' => $request->gap,
+                    'sub_total' => $value['rate'],
+                ]);
+            }
+            return response()->json('success');
+        }
+    }
     public function get_calendar(Request $request)
     {
         $year = $request->input('year', Carbon::now()->year);
@@ -66,14 +91,14 @@ class BookingInfoController extends Controller
             'submitted_date' => $request->submitted_date,
         ]);
         foreach ($request->selected as $key => $value) {
-           BookingOrder::create([
-            'reference_id' => $request->reference_id,
-            'rent_id' => $value['id'],
-            'started_at' =>$request->start,
-            'end_at' =>$request->end,
-            'duration' =>$request->gap,
-            'sub_total' => $value['rate'],
-           ]);
+            BookingOrder::create([
+                'reference_id' => $request->reference_id,
+                'rent_id' => $value['id'],
+                'started_at' => $request->start,
+                'end_at' => $request->end,
+                'duration' => $request->gap,
+                'sub_total' => $value['rate'],
+            ]);
         }
         if ($request->processed_by === 'admin') {
             $booking->notify(new BookingNotification($booking));

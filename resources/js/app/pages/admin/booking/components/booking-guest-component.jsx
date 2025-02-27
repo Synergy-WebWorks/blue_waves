@@ -13,7 +13,7 @@ export default function BookingGuestComponent() {
         setAdults(parseInt(search.adults));
         setChildren(parseInt(search.children));
     }, []);
-console.log('sdadsa',children)
+    console.log("sdadsa", children);
     useEffect(() => {
         dispatch(
             setSearch({
@@ -83,6 +83,7 @@ console.log('sdadsa',children)
                     <label className="text-gray-700">Children:</label>
                     <div className="flex items-center gap-2">
                         <button
+                            type="button"
                             onClick={() => handleDecrement("children")}
                             className="px-3 py-1 bg-gray-200 text-gray-700 rounded"
                         >
@@ -95,6 +96,7 @@ console.log('sdadsa',children)
                             className="w-10 text-center border border-gray-300 rounded"
                         />
                         <button
+                            type="button"
                             onClick={() => handleIncrement("children")}
                             className="px-3 py-1 bg-teal-600 text-white rounded"
                         >

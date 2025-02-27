@@ -3,31 +3,36 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContactInformation from "./contact-information";
+import AddReservationSection from "./add-reservation-section";
 
 export default function BookingOrderSummary() {
     const { selected, customer, search } = useSelector((store) => store.app);
     const { booking_info } = useSelector((store) => store.booking_info);
     const dispatch = useDispatch();
-    const totalRate = booking_info?.booking_orders?.reduce(
-        (sum, item) => sum + Number(item.sub_total),
-        0
-    );
+    
+   
+
+    // const totalRate = booking_info?.booking_orders?.reduce(
+    //     (sum, item) => sum + Number(item.sub_total),
+    //     0
+    // );
     console.log("booking_info?.booking_orders", booking_info);
     return (
         <div className="bg-gray-50">
-            <div className="mx-auto max-w-2xl px-4 pt-16 pb-24 sm:px-6 lg:max-w-7xl lg:px-8">
+            <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
                 <h2 className="sr-only">Checkout</h2>
+                <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
+                    {/* <ContactInformation /> */}
 
-                <form className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-16">
-                    <ContactInformation />
-
+                    <AddReservationSection />
                     {/* Order summary */}
                     <div className="mt-10 lg:mt-0">
-                        <h2 className="text-lg font-medium text-cyan-600">
+                 
+                        <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
+                        <ContactInformation />
+                        <h2 className="text-lg font-medium text-cyan-600 p-5">
                             Booking Order summary
                         </h2>
-
-                        <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
                             <h3 className="sr-only">Items in your cart</h3>
                             <ul
                                 role="list"
@@ -35,7 +40,6 @@ export default function BookingOrderSummary() {
                             >
                                 {booking_info?.booking_orders?.map(
                                     (order, i) => {
-                                        console.log("orderorder", order);
                                         return (
                                             <li
                                                 key={order.id}
@@ -105,25 +109,6 @@ export default function BookingOrderSummary() {
                                                             </div>
                                                         </div>
 
-                                                        {/* <div className="ml-4 flow-root shrink-0">
-                                                            <button
-                                                                onClick={() =>
-                                                                    remove_cart(
-                                                                        order
-                                                                    )
-                                                                }
-                                                                type="button"
-                                                                className="-m-2.5 flex items-center justify-center bg-white p-2.5 text-gray-400 hover:text-gray-500"
-                                                            >
-                                                                <span className="sr-only">
-                                                                    Remove
-                                                                </span>
-                                                                <TrashIcon
-                                                                    aria-hidden="true"
-                                                                    className="size-5"
-                                                                />
-                                                            </button>
-                                                        </div> */}
                                                     </div>
 
                                                     <div className="flex flex-1 items-end justify-end pt-2">
@@ -142,9 +127,6 @@ export default function BookingOrderSummary() {
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                                
-                                <div className="flex items-center justify-between p-2 border-b border-gray-300">
-                                    <dt className="text-sm">Entrance Fee</dt>
-                                </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
@@ -159,7 +141,7 @@ export default function BookingOrderSummary() {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
-                                        {" "}
+                                      
                                         Children: 20 x{" "}
                                         {booking_info.children / 20}
                                     </dt>
@@ -199,7 +181,7 @@ export default function BookingOrderSummary() {
                             </dl>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     );
