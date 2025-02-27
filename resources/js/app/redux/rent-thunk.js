@@ -2,10 +2,10 @@ import { create_rent_service, delete_rent_service, get_rent_by_id_service, get_r
 import { rentSlice } from "./rent-slice";
 
 export function get_rent_thunk() {
-  return async function (dispatch, getState) {
-   const res = await get_rent_service()
-          dispatch(rentSlice.actions.setRents(res.data));
-  };
+    return async function (dispatch, getState) {
+        const res = await get_rent_service()
+        dispatch(rentSlice.actions.setRents(res.data));
+    };
 }
 
 export function create_rent_thunk(data) {

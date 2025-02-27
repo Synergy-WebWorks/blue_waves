@@ -61,6 +61,7 @@ return array(
     'App\\Models\\Term' => $baseDir . '/app/Models/Term.php',
     'App\\Models\\Upload' => $baseDir . '/app/Models/Upload.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
+    'App\\Notifications\\BookingNotification' => $baseDir . '/app/Notifications/BookingNotification.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
     'App\\Providers\\BroadcastServiceProvider' => $baseDir . '/app/Providers/BroadcastServiceProvider.php',

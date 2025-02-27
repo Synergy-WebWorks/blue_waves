@@ -1,11 +1,11 @@
 import { create_inventory_allocation_service, delete_inventory_allocation_service, get_inventory_allocation_by_id_service, get_inventory_allocation_service, update_inventory_allocation_service } from "../services/inventory-allocation-service";
-import {inventoryAllocationSlice} from "./inventory-allocation-slice";
+import { inventoryAllocationSlice } from "./inventory-allocation-slice";
 
 export function get_inventory_allocation_thunk() {
-  return async function (dispatch, getState) {
-   const res = await get_inventory_allocation_service()
-          dispatch(inventoryAllocationSlice.actions.setInventoryAllocations(res.data));
-  };
+    return async function (dispatch, getState) {
+        const res = await get_inventory_allocation_service()
+        dispatch(inventoryAllocationSlice.actions.setInventoryAllocations(res.data));
+    };
 }
 
 export function create_inventory_allocation_thunk(data) {

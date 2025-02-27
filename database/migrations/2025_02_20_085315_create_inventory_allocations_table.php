@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('inventory_allocations', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('inventory_id')->nullable();
-            $table->bigInteger('rent_id')->nullable();
+            $table->bigInteger('item_id')->nullable();
+            $table->string('allocation')->nullable();
             $table->string('quantity')->nullable();
             $table->string('consumed')->nullable();
             $table->string('status')->nullable();
-            $table->string('allocated')->nullable();
             $table->timestamps();
         });
     }

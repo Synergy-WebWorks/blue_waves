@@ -1,37 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { ArchiveBoxArrowDownIcon, PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaPlus } from "react-icons/fa6";
 import store from "@/app/store/store";
-import { create_inventory_thunk, get_inventory_thunk } from "@/app/redux/inventory-thunk";
 import { message } from "antd";
+import { create_inventory_allocation_thunk, get_inventory_allocation_by_id_thunk } from "@/app/redux/inventory-allocation-thunk";
+import { useSelector } from "react-redux";
+import { get_rent_thunk } from "@/app/redux/rent-thunk";
+import { get_inventory_by_id_thunk } from "@/app/redux/inventory-thunk";
 
-export default function AddAllocateSection() {
+export default function AddAllocateSection({ data, datas }) {
+    const { rents } = useSelector((store) => store.rent);
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState({});
-
+    const [error, setError] = useState("");
+    const id = window.location.pathname.split('/')[3]
 
     const submitItem = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
+        if (parseInt(form.quantity) > data.quantity) {
+            setError("Quantity cannot exceed the available stock.");
+            return;
+        }
+
         setLoading(true);
         try {
             await store.dispatch(
-                create_inventory_thunk({
+                create_inventory_allocation_thunk({
                     ...form,
+                    item_id: data?.id,
                 })
             );
-            store.dispatch(get_inventory_thunk())
-            message.success('Items Allocated Successfully');
+            store.dispatch(get_inventory_allocation_by_id_thunk(id));
+            store.dispatch(get_inventory_by_id_thunk(id));
+            message.success("Items Allocated Successfully");
             setOpen(false);
         } catch (error) {
-            message.error("Failed to add items. Please try again."); // Show error message
+            message.error("Failed to add items. Please try again.");
         } finally {
             setLoading(false);
         }
     };
 
+    const roomRents = rents.filter((rent) => rent.type === "room");
+    const cottageRents = rents.filter((rent) => rent.type === "cottage");
 
+    console.log('fafaf', data)
+    console.log('zxzxz', rents)
     return (
         <>
             <div className="mt-5 text-right">
@@ -100,11 +116,12 @@ export default function AddAllocateSection() {
                                                                     name: e.target.value,
                                                                 })
                                                             }
-                                                            value={form.name}
+                                                            value={data?.name}
                                                             name="name"
                                                             type="text"
                                                             placeholder="Name of the Item"
                                                             className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                            readOnly
                                                         />
                                                     </div>
                                                     <div className="sm:col-span-12">
@@ -112,35 +129,60 @@ export default function AddAllocateSection() {
                                                             onChange={(e) =>
                                                                 setForm({
                                                                     ...form,
-                                                                    quantity: e.target.value,
+                                                                    brand: e.target.value,
                                                                 })
                                                             }
-                                                            value={form.quantity}
+                                                            value={data?.brand}
+                                                            name="brand"
+                                                            type="text"
+                                                            placeholder="Name of the Brand"
+                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                            readOnly
+                                                        />
+                                                    </div>
+                                                    <div className="sm:col-span-12">
+                                                        <input
+                                                            onChange={(e) => {
+                                                                const quantity = e.target.value;
+                                                                setForm({
+                                                                    ...form,
+                                                                    quantity: quantity,
+                                                                });
+
+                                                                // Validate if quantity exceeds available stock
+                                                                if (parseInt(quantity) > data?.quantity) {
+                                                                    setError("Quantity cannot exceed the available stock.");
+                                                                } else {
+                                                                    setError("");
+                                                                }
+                                                            }}
+                                                            value={form.quantity || ""}
                                                             name="quantity"
                                                             type="number"
                                                             placeholder="Quantity"
-                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                            className={`block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6 ${error ? 'border-red-500' : ''}`}
                                                         />
+                                                        {error && <p className=" bg-white rounded-md text-red-500 text-sm">{error}</p>}
                                                     </div>
                                                     <div className="w-full sm:col-span-12">
-                                                        <label htmlFor="isConsumable" className="text-white">&nbsp;Select where to Allocate:</label>
+                                                        <label className="text-white">&nbsp;Select where to Allocate:</label>
                                                     </div>
                                                     <div className="flex sm:col-span-12">
                                                         <input
                                                             onChange={(e) => {
                                                                 setForm({
                                                                     ...form,
-                                                                    type: e.target.checked ? "Consumable" : "Non-Consumable",
-                                                                    ["non-consumable"]: false,
-                                                                    ["consumable"]: e.target.checked,
+                                                                    type: e.target.checked ? "Room" : "Cottage",
+                                                                    ["cottage"]: false,
+                                                                    ["room"]: e.target.checked,
                                                                 });
                                                             }}
-                                                            checked={form.type === "Consumable"}
+                                                            checked={form.type === "Room"}
                                                             type="checkbox"
-                                                            name="consumable"
+                                                            name="room"
                                                             className="w-4 mt-1 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                                         />
-                                                        <label htmlFor="isConsumable" className="text-white">&nbsp;Room</label>
+                                                        <label className="text-white">&nbsp;Room</label>
                                                     </div>
 
                                                     <div className="flex sm:col-span-12">
@@ -148,50 +190,66 @@ export default function AddAllocateSection() {
                                                             onChange={(e) => {
                                                                 setForm({
                                                                     ...form,
-                                                                    type: e.target.checked ? "Non-Consumable" : "Consumable",
-                                                                    ["consumable"]: false,
-                                                                    ["non-consumable"]: e.target.checked,
+                                                                    type: e.target.checked ? "Cottage" : "Room",
+                                                                    ["room"]: false,
+                                                                    ["cottage"]: e.target.checked,
                                                                 });
                                                             }}
-                                                            checked={form.type === "Non-Consumable"}
+                                                            checked={form.type === "Cottage"}
                                                             type="checkbox"
-                                                            name="non-consumable"
+                                                            name="cottage"
                                                             className="w-4 mt-1 h-4 text-black bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                                                         />
-                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Cottage</label>
+                                                        <label className="text-white">&nbsp;Cottage</label>
                                                     </div>
-                                                    <div className="sm:col-span-12">
-                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Select Room</label>
-                                                        <select
-                                                            onChange={(e) =>
-                                                                setForm({
-                                                                    ...form,
-                                                                    brand: e.target.value,
-                                                                })
-                                                            }
-                                                            value={form.brand}
-                                                            name="brand"
-                                                            type="text"
-                                                            placeholder="Brand Name"
-                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
-                                                        />
-                                                    </div>
-                                                    <div className="sm:col-span-12">
-                                                        <label htmlFor="isNonConsumable" className="text-white">&nbsp;Select Cottage</label>
-                                                        <select
-                                                            onChange={(e) =>
-                                                                setForm({
-                                                                    ...form,
-                                                                    brand: e.target.value,
-                                                                })
-                                                            }
-                                                            value={form.brand}
-                                                            name="brand"
-                                                            type="text"
-                                                            placeholder="Brand Name"
-                                                            className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
-                                                        />
-                                                    </div>
+
+                                                    {form.type === "Room" && (
+                                                        <div className="sm:col-span-12">
+                                                            <label className="text-white">&nbsp;Select Room</label>
+                                                            <select
+                                                                onChange={(e) =>
+                                                                    setForm({
+                                                                        ...form,
+                                                                        allocation: e.target.value,
+                                                                    })
+                                                                }
+                                                                value={form.allocation}
+                                                                name="room"
+                                                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                            >
+                                                                <option value="">Select a Room</option>
+                                                                {roomRents.map((rent) => (
+                                                                    <option key={rent.id} value={rent.name}>
+                                                                        {rent.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    )}
+
+                                                    {form.type === "Cottage" && (
+                                                        <div className="sm:col-span-12">
+                                                            <label className="text-white">&nbsp;Select Cottage</label>
+                                                            <select
+                                                                onChange={(e) =>
+                                                                    setForm({
+                                                                        ...form,
+                                                                        allocation: e.target.value,
+                                                                    })
+                                                                }
+                                                                value={form.allocation}
+                                                                name="cottage"
+                                                                className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                            >
+                                                                <option value="">Select a Cottage</option>
+                                                                {cottageRents.map((rent) => (
+                                                                    <option key={rent.id} value={rent.name}>
+                                                                        {rent.name}
+                                                                    </option>
+                                                                ))}
+                                                            </select>
+                                                        </div>
+                                                    )}
                                                     <div className="sm:col-span-12">
                                                         <hr />
                                                     </div>

@@ -10,7 +10,7 @@ class RentController extends Controller
     // Display a listing of the rent items
     public function index()
     {
-        $rents=Rent::with(['uploads'])->get();
+        $rents = Rent::with(['uploads'])->get();
         return response()->json($rents);
     }
 
@@ -28,7 +28,9 @@ class RentController extends Controller
 
         $rent = Rent::create($request->all());
 
-        return response()->json($rent, 201);
+        return response()->json([
+            'result' => $rent
+        ], 200);
     }
 
     // Display the specified rent item

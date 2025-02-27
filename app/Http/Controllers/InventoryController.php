@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Inventory;
+use App\Models\InventoryStock;
 use Illuminate\Http\Request;
 
 class InventoryController extends Controller
@@ -49,20 +50,25 @@ class InventoryController extends Controller
     }
 
     // Display the specified inventory item
-    public function show(Inventory $inventory)
+    public function show($id)
     {
-        return response()->json($inventory);
+        $inventory = Inventory::where('id', $id)->first();
+        return response()->json([
+            'status' => $inventory,
+        ], 200);
     }
 
     // Update the specified inventory item
     public function update(Request $request, Inventory $inventory)
     {
+        // Validate incoming request data
         $request->validate([
             'type' => 'sometimes|required|string|max:255',
             'name' => 'sometimes|required|string|max:255',
             'brand' => 'sometimes|nullable|string|max:255',
             'quantity' => 'sometimes|nullable|integer|min:0',
             'status' => 'sometimes|nullable|string|max:50',
+            'received' => 'sometimes|nullable|date',
         ]);
 
         if ($request->has('quantity')) {
@@ -71,8 +77,21 @@ class InventoryController extends Controller
 
         $inventory->update($request->except('quantity'));
 
-        return response()->json($inventory);
+        $remainingStock = max(0, $inventory->quantity - $request->input('quantity', 0));
+
+        $inventoryStock = InventoryStock::create([
+            'inventory_id' => $inventory->id,
+            'remaining' => $remainingStock,
+            'added' => $request->input('quantity', 0),
+            'received_date' => $request->input('received'),
+        ]);
+
+        // Return the updated inventory as a response
+        return response()->json($inventory, 200);
     }
+
+
+
 
 
 
