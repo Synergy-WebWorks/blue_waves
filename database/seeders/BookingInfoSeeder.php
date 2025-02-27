@@ -9,6 +9,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Carbon\Carbon;
+use Faker\Factory as Faker;
 
 class BookingInfoSeeder extends Seeder
 {
@@ -24,23 +25,25 @@ class BookingInfoSeeder extends Seeder
             $startDate = Carbon::now()->subDays(rand(1, 30));
             $endDate = Carbon::now()->addDays(rand(1, 30));
             $total = rand(1000, 10000);
-            $duration =$startDate->diffInDays($endDate);
+            $duration = $startDate->diffInDays($endDate);
             $rent = Rent::where('id', $i)->first();
-            
+            $faker = Faker::create();
+
+
             $bi = BookingInfo::create([
-                'reference_id' => rand(1000000000, 9999999999), // 10-digit random reference ID
+                'reference_id' => rand(100000000009, 999999999999), // 10-digit random reference ID
                 'start' => $startDate->format('F d, Y'), // Formatted start date
                 'end' => $endDate->format('F d, Y'), // Formatted end date
                 'email' => "user$i@example.com",
                 'mobile' => '09' . rand(100000000, 999999999), // Philippine mobile format
-                'fname' => Str::random(6),
-                'mname' => Str::random(4),
-                'lname' => Str::random(6),
+                'fname' => $faker->firstName,
+                'mname' => $faker->firstName,
+                'lname' => $faker->lastName,
                 'suffix' => rand(0, 1) ? 'Jr.' : '',
                 'address' => 'Street ' . rand(1, 100) . ', City ' . rand(1, 50),
-                'initial' =>($duration * $rent->rate) / 2,
-                'adults' => rand(1, 5),
-                'children' => rand(0, 3),
+                'initial' => ($duration * $rent->rate) / 2,
+                'adults' => 50,
+                'children' => 20,
                 'total' => $total, // Total cost
                 'status' => ['pending', 'paid', 'canceled', 'partial'][array_rand(['pending', 'paid', 'canceled', 'partial'])], // Fixed status array
                 'submitted_date' => now()->toDateTimeString(),
@@ -54,7 +57,7 @@ class BookingInfoSeeder extends Seeder
                     'started_at' => $bi->start,
                     'end_at' => $bi->end,
                     'duration' => $duration,
-                    'sub_total' =>$duration * $rent->rate,
+                    'sub_total' => $duration * $rent->rate,
                 ]);
             }
         }

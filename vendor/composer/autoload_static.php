@@ -353,8 +353,8 @@ class ComposerStaticInit916feb54f6cf7e4c898dec0ae35d62d1
         ),
         'Spatie\\LaravelIgnition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/laravel-ignition',
+            1 => __DIR__ . '/..' . '/spatie/laravel-ignition/src',
         ),
         'Spatie\\Image\\' => 
         array (
@@ -366,8 +366,8 @@ class ComposerStaticInit916feb54f6cf7e4c898dec0ae35d62d1
         ),
         'Spatie\\Ignition\\' => 
         array (
-            0 => __DIR__ . '/..' . '/spatie/ignition/src',
-            1 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            0 => __DIR__ . '/..' . '/spatie/error-solutions/legacy/ignition',
+            1 => __DIR__ . '/..' . '/spatie/ignition/src',
         ),
         'Spatie\\FlareClient\\' => 
         array (
@@ -634,11 +634,13 @@ class ComposerStaticInit916feb54f6cf7e4c898dec0ae35d62d1
         'App\\Http\\Controllers\\BookingInfoController' => __DIR__ . '/../..' . '/app/Http/Controllers/BookingInfoController.php',
         'App\\Http\\Controllers\\BookingOrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/BookingOrderController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
         'App\\Http\\Controllers\\GoogleController' => __DIR__ . '/../..' . '/app/Http/Controllers/GoogleController.php',
         'App\\Http\\Controllers\\InventoryAllocationController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventoryAllocationController.php',
         'App\\Http\\Controllers\\InventoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventoryController.php',
         'App\\Http\\Controllers\\InventoryStockController' => __DIR__ . '/../..' . '/app/Http/Controllers/InventoryStockController.php',
         'App\\Http\\Controllers\\LandingPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LandingPageController.php',
+        'App\\Http\\Controllers\\NonConsumableController' => __DIR__ . '/../..' . '/app/Http/Controllers/NonConsumableController.php',
         'App\\Http\\Controllers\\PaymentController' => __DIR__ . '/../..' . '/app/Http/Controllers/PaymentController.php',
         'App\\Http\\Controllers\\ProfileController' => __DIR__ . '/../..' . '/app/Http/Controllers/ProfileController.php',
         'App\\Http\\Controllers\\RentController' => __DIR__ . '/../..' . '/app/Http/Controllers/RentController.php',
@@ -668,6 +670,7 @@ class ComposerStaticInit916feb54f6cf7e4c898dec0ae35d62d1
         'App\\Models\\InventoryAllocation' => __DIR__ . '/../..' . '/app/Models/InventoryAllocation.php',
         'App\\Models\\InventoryStock' => __DIR__ . '/../..' . '/app/Models/InventoryStock.php',
         'App\\Models\\LandingPage' => __DIR__ . '/../..' . '/app/Models/LandingPage.php',
+        'App\\Models\\NonConsumableAllocation' => __DIR__ . '/../..' . '/app/Models/NonConsumableAllocation.php',
         'App\\Models\\Rent' => __DIR__ . '/../..' . '/app/Models/Rent.php',
         'App\\Models\\Resort' => __DIR__ . '/../..' . '/app/Models/Resort.php',
         'App\\Models\\Term' => __DIR__ . '/../..' . '/app/Models/Term.php',
