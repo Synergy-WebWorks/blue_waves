@@ -74,6 +74,9 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         return Inertia::render('admin/reservation/page');
     });
 
+    Route::get('/reservation/{id}', function () {
+        return Inertia::render('admin/reservation/id/page');
+    });
     Route::get('/rooms', function () {
         return Inertia::render('admin/rooms/page');
     });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\BookingInfo;
+use App\Models\BookingOrder;
 use App\Notifications\BookingNotification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -32,15 +33,9 @@ class BookingInfoController extends Controller
 
     public function index(Request $request)
     {
-        $startDate = $request->input('start'); // Example: "February 26, 2025"
-
         $query = BookingInfo::query();
 
-        if ($startDate) {
-            $query->where('start', $startDate);
-        }
-
-        $bookings = $query->orderBy('id', 'desc')->paginate(10);
+        $bookings = $query->orderBy('id', 'desc')->paginate(10)->toArray();
 
         return response()->json($bookings);
     }
@@ -70,6 +65,16 @@ class BookingInfoController extends Controller
             'status' => $request->status,
             'submitted_date' => $request->submitted_date,
         ]);
+        foreach ($request->selected as $key => $value) {
+           BookingOrder::create([
+            'reference_id' => $request->reference_id,
+            'rent_id' => $value['id'],
+            'started_at' =>$request->start,
+            'end_at' =>$request->end,
+            'duration' =>$request->gap,
+            'sub_total' => $value['rate'],
+           ]);
+        }
         if ($request->processed_by === 'admin') {
             $booking->notify(new BookingNotification($booking));
         }
@@ -80,7 +85,7 @@ class BookingInfoController extends Controller
     // Display the specified booking record
     public function show($id)
     {
-        $bookingInfo = BookingInfo::where('reference_id', $id)->first();
+        $bookingInfo = BookingInfo::where('reference_id', $id)->with(['booking_orders'])->first();
         return response()->json($bookingInfo, 200);
     }
 

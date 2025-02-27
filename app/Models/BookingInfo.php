@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Notifications\Notifiable;
 
 class BookingInfo extends Model
@@ -28,4 +29,8 @@ class BookingInfo extends Model
         'status',
         'submitted_date',
     ];
+    public function booking_orders():HasMany
+    {
+        return $this->hasMany(BookingOrder::class,'reference_id','reference_id')->with(['rent']);
+    }
 }

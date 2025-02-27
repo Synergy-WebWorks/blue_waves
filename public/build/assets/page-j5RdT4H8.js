@@ -1,1 +1,0 @@
-import{j as t}from"./app-CWPsuLI4.js";import r from"./layout-Bj54cBsR.js";import"./index-DODd8WYZ.js";import"./dialog-MWSE0gaa.js";import"./use-disposables-DbVD6tUG.js";import"./keyboard-CqKiugSg.js";import"./use-root-containers-DceuvgwW.js";import"./XMarkIcon-D7DWRzKS.js";import"./Bars3Icon-BLxTBUdR.js";function u(){return t.jsx(r,{children:"StaffPage"})}export{u as default};

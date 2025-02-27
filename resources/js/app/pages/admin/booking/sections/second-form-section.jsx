@@ -355,6 +355,11 @@ export default function SecondFormSection() {
                                         ₱{totalRate.toFixed(2)}
                                     </dd>
                                 </div>
+                                
+                                <dt className="text-sm">
+                                        {" "}
+                                        Duration:  {gap}days
+                                    </dt>
                                 <div className="flex items-center justify-between p-2 border-b border-gray-300">
                                     <dt className="text-sm">Entrance Fee</dt>
                                 </div>

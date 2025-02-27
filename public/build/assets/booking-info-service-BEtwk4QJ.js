@@ -1,0 +1,1 @@
+import{g as o}from"./app-BlcgsAHv.js";function n(r){try{return o.post("/api/booking_info",r)}catch{}}function i(r){try{return o.get("/api/get_calendar"+r)}catch{}}function a(){try{return o.get("/api/booking_info"+window.location.search)}catch{}}async function c(r){return(await o.get("/api/booking_info/"+r)).data}export{c as a,i as b,n as c,a as g};

@@ -82,7 +82,7 @@ export default function StepperSection() {
             await store.dispatch(
                 create_booking_info_thunk({
                     ...customer,
-                    ...selected,
+                    selected,
                     reference_id: reference_id,
                     submitted_date: moment().format("LLL"),
                     start: start,
@@ -92,6 +92,7 @@ export default function StepperSection() {
                     total: overall,
                     initial: down_payment,
                     status: "pending",
+                    gap:gap
                 })
             );
             setLoading(false);

@@ -11,10 +11,12 @@ import termSlice from "../redux/term-slice";
 import uploadSlice from "../redux/upload-slice";
 import { configureStore } from "@reduxjs/toolkit";
 import inventorySlice from "../redux/inventory-slice";
+import dashboardSlice  from "../redux/dashboard-slice";
 
 const store = configureStore({
     reducer: {
         app: appSlice,
+        dashboard: dashboardSlice,
         activity: activitySlice,
         booking_info: bookingInfoSlice,
         booking_order: bookingOrderSlice,

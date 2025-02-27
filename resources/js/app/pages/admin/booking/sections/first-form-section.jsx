@@ -15,39 +15,11 @@ export default function FirstFormSection() {
     const { selected, search, customer } = useSelector((store) => store.app);
 
     const params = new URLSearchParams(window.location.search);
-    const adults = params.get("adults");
-    const children = params.get("children");
 
-    const start = params.get("start");
-    const end = params.get("end");
 
     const products = rents?.filter((res) => res.type === "cottage") || [];
     const rooms = rents?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
-
-    // const [person, setPerson] = useState({
-    //     adults: 1,
-    //     children: 0,
-    // });
-
-    // useEffect(() => {
-    //     dispatch(setCustomer({
-    //         adults: search.adults,
-    //         children: search.children,
-    //     }));
-    // }, [adults]);
-
-    // const [dateRange, setDateRange] = useState({
-    //     startDate: moment().format("LL"),
-    //     endDate: moment().format("LL"),
-    // });
-
-    // useEffect(() => {
-    //     setDateRange({
-    //         startDate: start == null ? moment().format("LL") : start,
-    //         endDate: end == null ? moment().format("LL") : end,
-    //     });
-    // }, []);
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -309,7 +281,7 @@ export default function FirstFormSection() {
                                                     </p>
                                                     <button
                                                         onClick={() =>
-                                                            add_to_cart(product)
+                                                            add_to_cart(cottage)
                                                         }
                                                         className="ml-4 bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 rounded-md"
                                                     >

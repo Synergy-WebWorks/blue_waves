@@ -37,10 +37,8 @@ export default function RegistrationStepperSection() {
         }));
 
     const stepsWithStatus = updateStepStatus();
-    console.log(
-        "dadwwawkdjlkjlawd",
-        `/admin/booking/checkout?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
-    );
+   
+
     const handleNext = () => {
         // if (currentStep < steps.length) {
         //     setCurrentStep((prev) => prev + 1);
@@ -90,7 +88,7 @@ export default function RegistrationStepperSection() {
     const gap = getDayGap(search.start, search.end);
 
     const totalRate =
-        selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
+        selected.reduce((sum, item) => sum + (Number(item.rate) * gap), 0);
 
     const adults_rate = customer.adults;
     const children_rate = customer.children;
@@ -98,6 +96,7 @@ export default function RegistrationStepperSection() {
 
     const down_payment =
         (parseInt(totalRate) + customer.children + customer.adults) / 2;
+console.log('down_payment',selected)
 
     async function submitHandler(params) {
         setLoading(true);
@@ -106,7 +105,7 @@ export default function RegistrationStepperSection() {
             await store.dispatch(
                 create_booking_info_thunk({
                     ...customer,
-                    ...selected,
+                    selected,
                     reference_id: reference_id,
                     submitted_date: moment().format("LLL"),
                     start: start,
@@ -117,6 +116,7 @@ export default function RegistrationStepperSection() {
                     initial: down_payment,
                     status: "pending",
                     processed_by: "admin",
+                    gap:gap
                 })
             );
             setLoading(false);

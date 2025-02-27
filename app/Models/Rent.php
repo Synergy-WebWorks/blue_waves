@@ -24,4 +24,8 @@ class Rent extends Model
     {
         return $this->hasMany(Upload::class);
     }
+     public function upload():HasOne
+    {
+        return $this->hasOne(Upload::class,'rent_id','id');
+    }
 }
