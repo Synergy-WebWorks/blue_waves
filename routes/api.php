@@ -45,9 +45,10 @@ Route::get('/get_calendar', [BookingInfoController::class, 'get_calendar']);
 Route::post('/add_order', [BookingInfoController::class, 'add_order']);
 
 Route::resource('booking_order', BookingOrderController::class);
-Route::resource('inventory_allocation', InventoryAllocationController::class);
+Route::resource('inventory_allocations', InventoryAllocationController::class);
 Route::resource('inventory', InventoryController::class);
-Route::resource('inventory_stock', InventoryStockController::class);
+Route::put('/return_item/{id}', [InventoryController::class, 'return_item']);
+Route::resource('inventory_stocks', InventoryStockController::class);
 Route::resource('landing_page', LandingPageController::class);
 Route::resource('rent', RentController::class);
 Route::resource('resort', ResortController::class);

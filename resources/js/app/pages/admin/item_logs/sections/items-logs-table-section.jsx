@@ -1,53 +1,25 @@
 import React, { useEffect } from "react";
 import AddAllocateSection from "./add-allocate-item-section";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import store from "@/app/store/store";
 import { get_rent_thunk } from "@/app/redux/rent-thunk";
 import { get_inventory_allocation_by_id_thunk } from "@/app/redux/inventory-allocation-thunk";
+import moment from "moment";
 
 export default function ItemsLogTableSection() {
-    const { inventory_allocation } = useSelector((state) => state.inventory_allocation);
+    const dispatch = useDispatch();
+    const { inventory_allocations } = useSelector((state) => state.inventory_allocations);
     const { inventory } = useSelector((state) => state.inventories);
-    const id = window.location.pathname.split('/')[3]
+
+    const item_id = window.location.pathname.split('/')[3]
 
     useEffect(() => {
-        store.dispatch(get_rent_thunk())
-        store.dispatch(get_inventory_allocation_by_id_thunk(id))
-    }, []);
+        if (item_id) {
+            dispatch(get_inventory_allocation_by_id_thunk(item_id));
+        }
+    }, [dispatch, item_id]);
 
-    console.log('eeeee', inventory)
-
-    const room = [
-        {
-            id: 1,
-            name: "Room A",
-            href: "#",
-            rate: "₱1500/night",
-            capacity: "Good for 4 Persons",
-            imageSrc: "/images/ROOMS (2pcs)/ROOM B/B.jpeg",
-            status: "Active",
-        },
-        {
-            id: 2,
-            name: "Room B",
-            href: "#",
-            rate: "₱1500/night",
-            capacity: "Good for 4 Persons",
-            imageSrc: "/images/ROOMS (2pcs)/ROOM B/B.jpeg",
-            status: "Active",
-        },
-        {
-            id: 3,
-            name: "Family Room",
-            href: "#",
-            rate: "₱6500/night",
-            capacity: "Good for 5 Persons",
-            imageSrc: "/images/Family Room/C.jpeg",
-            status: "Active",
-        },
-    ];
-
-    console.log('aaaaa', inventory_allocation)
+    console.log('eeeedde', inventory_allocations)
     return (
         <div className="px-4 sm:px-6 lg:px-8 mt-4 pb-8 border rounded-lg shadow-lg">
             <div className="sm:flex sm:items-center">
@@ -56,7 +28,7 @@ export default function ItemsLogTableSection() {
                         Item Logs Records
                     </h1>
                 </div>
-                <AddAllocateSection datas={inventory_allocation} data={inventory} />
+                <AddAllocateSection datas={inventory_allocations} data={inventory} />
             </div>
             <div className="mt-2">
                 <h1 className="text-sm">
@@ -102,16 +74,16 @@ export default function ItemsLogTableSection() {
                                 </tr>
                             </thead>
                             <tbody className="divide-y divide-gray-200 bg-white">
-                                {room.map((room) => (
-                                    <tr key={room.name}>
+                                {inventory_allocations?.data.map((allocation) => (
+                                    <tr key={allocation?.name}>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                                            {room.name}
+                                            {allocation?.allocation}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                                            {room.rate}
+                                            {allocation?.quantity}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                                            {room.capacity}
+                                            {moment(allocation.created_at).format('LLL')}
                                         </td>
                                         {/* <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
                                             <a

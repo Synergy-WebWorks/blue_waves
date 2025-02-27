@@ -20,6 +20,6 @@ class InventoryAllocation extends Model
 
     public function inventory(): HasOne
     {
-        return $this->hasOne(Inventory::class);
+        return $this->hasOne(Inventory::class, 'id', 'item_id');
     }
 }

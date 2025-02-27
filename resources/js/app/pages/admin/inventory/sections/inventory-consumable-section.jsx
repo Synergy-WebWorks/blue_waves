@@ -1,7 +1,8 @@
-import { FaClockRotateLeft, FaPlus } from "react-icons/fa6";
+import { FaClipboardCheck, FaClockRotateLeft, FaPlus } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 import AddStocksSection from "./add-stocks-section";
 import { router } from "@inertiajs/react";
+import { Tooltip } from "antd";
 
 export default function InventoryConsumableSection() {
 
@@ -92,14 +93,24 @@ export default function InventoryConsumableSection() {
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-cyan-600 font-bold">
                                                 <span className="isolate flex gap-1 rounded-md shadow-xs">
                                                     <AddStocksSection data={inventory} />
-                                                    <button
-                                                        type="button"
-                                                        onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/${inventory.id}`)}
-                                                        title="Issued/Dispensed History"
-                                                        className="relative -ml-px inline-flex items-center rounded-r-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-indigo-500 focus:z-10"
-                                                    >
-                                                        <FaClockRotateLeft />
-                                                    </button>
+                                                    <Tooltip title="Issued/Dispensed History">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/${inventory.id}`)}
+                                                            className="relative -ml-px inline-flex items-center rounded-r-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-indigo-500 focus:z-10"
+                                                        >
+                                                            <FaClockRotateLeft />
+                                                        </button>
+                                                    </Tooltip>
+                                                    <Tooltip title="Inventory Received Records">
+                                                        <button
+                                                            type="button"
+                                                            onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/inventory_received/${inventory.id}`)}
+                                                            className="relative -ml-px inline-flex items-center rounded-r-md bg-orange-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-orange-500 focus:z-10"
+                                                        >
+                                                            <FaClipboardCheck />
+                                                        </button>
+                                                    </Tooltip>
                                                 </span>
                                             </td>
                                         </tr>

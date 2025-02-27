@@ -1,0 +1,1 @@
+import{g as r,o as s}from"./app-DWKB3ECa.js";function o(){try{return r.get("/api/dashboard")}catch{}}function c(){return async function(t,e){const a=await o();t(s.actions.setDashboards(a.data))}}export{c as g};

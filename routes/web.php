@@ -101,8 +101,11 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
         Route::get('/', function () {
             return Inertia::render('admin/inventory/page');
         });
-        Route::get('/{app_id}', function () {
+        Route::get('/{item_id}', function () {
             return Inertia::render('admin/item_logs/page');
+        });
+        Route::get('/inventory_received/{item_id}', function () {
+            return Inertia::render('admin/received_inventory_stock/page');
         });
     });
 
