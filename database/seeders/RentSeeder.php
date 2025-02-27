@@ -18,7 +18,7 @@ class RentSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             DB::table('rents')->insert([
                 'name' => 'Room ' . $i,
-                'rate' => rand(100, 1000),
+                'rate' => 1500,
                 'min_capacity' => rand(1, 5),
                 'max_capacity' => rand(6, 15),
                 'description' => 'Description for room ' . $i,
@@ -30,7 +30,7 @@ class RentSeeder extends Seeder
         for ($i = 1; $i <= 20; $i++) {
             DB::table('rents')->insert([
                 'name' => 'Cottage ' . $i,
-                'rate' => rand(100, 1000),
+                'rate' => 700,
                 'min_capacity' => rand(1, 5),
                 'max_capacity' => rand(6, 15),
                 'description' => 'Description for cottage ' . $i,
