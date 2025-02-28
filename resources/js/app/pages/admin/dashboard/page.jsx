@@ -10,7 +10,6 @@ export default function AdminPage() {
   useEffect(()=>{
     
     store.dispatch(get_booking_info_thunk());
-    
     store.dispatch(get_dashboard_thunk());  
   },[])
   return (

@@ -1,1 +1,0 @@
-import{g as n,i as r}from"./app-DWKB3ECa.js";function a(){try{return n.get(`/api/rent${window.location.search}`)}catch{}}function c(){return async function(t,s){const e=await a();t(r.actions.setRents(e.data))}}export{c as g};

@@ -4,13 +4,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ContactInformation from "./contact-information";
 import AddReservationSection from "./add-reservation-section";
+import CheckoutSection from "./checkout-section";
 
 export default function BookingOrderSummary() {
     const { selected, customer, search } = useSelector((store) => store.app);
     const { booking_info } = useSelector((store) => store.booking_info);
     const dispatch = useDispatch();
-    
-   
 
     // const totalRate = booking_info?.booking_orders?.reduce(
     //     (sum, item) => sum + Number(item.sub_total),
@@ -27,12 +26,15 @@ export default function BookingOrderSummary() {
                     <AddReservationSection />
                     {/* Order summary */}
                     <div className="mt-10 lg:mt-0">
-                 
                         <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
-                        <ContactInformation />
-                        <h2 className="text-lg font-medium text-cyan-600 p-5">
-                            Booking Order summary
-                        </h2>
+                            <ContactInformation />
+                            {booking_info.status == "partial" || booking_info.status == "pending" && (
+                                <CheckoutSection />
+                            )}
+
+                            <h2 className="text-lg font-medium text-cyan-600 p-5">
+                                Booking Order summary
+                            </h2>
                             <h3 className="sr-only">Items in your cart</h3>
                             <ul
                                 role="list"
@@ -108,7 +110,6 @@ export default function BookingOrderSummary() {
                                                                 </div>
                                                             </div>
                                                         </div>
-
                                                     </div>
 
                                                     <div className="flex flex-1 items-end justify-end pt-2">
@@ -126,7 +127,6 @@ export default function BookingOrderSummary() {
                                 )}
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
-                               
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
@@ -141,7 +141,6 @@ export default function BookingOrderSummary() {
                                 </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
-                                      
                                         Children: 20 x{" "}
                                         {booking_info.children / 20}
                                     </dt>

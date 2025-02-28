@@ -7,6 +7,15 @@ export function add_order_service(data) {
     } catch (error) {
     }
 }
+
+export function checkout_data_service(data) {
+    try {
+        const result = axios.post('/api/checkout_data', data)
+        return result
+    } catch (error) {
+    }
+}
+
 export function create_booking_info_service(data) {
     try {
         const result = axios.post('/api/booking_info', data)

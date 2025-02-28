@@ -43,6 +43,7 @@ Route::resource('dashboard', DashboardController::class);
 Route::resource('booking_info', BookingInfoController::class);
 Route::get('/get_calendar', [BookingInfoController::class, 'get_calendar']);
 Route::post('/add_order', [BookingInfoController::class, 'add_order']);
+Route::post('/checkout_data', [BookingInfoController::class, 'checkout_data']);
 
 Route::resource('booking_order', BookingOrderController::class);
 Route::resource('inventory_allocations', InventoryAllocationController::class);

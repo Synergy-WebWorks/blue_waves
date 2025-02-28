@@ -11,6 +11,16 @@ use Illuminate\Support\Facades\DB;
 
 class BookingInfoController extends Controller
 {
+    public function checkout_data(Request $request)
+    {
+        $bookingInfo = BookingInfo::where('id', $request->id)->first();
+        if ($bookingInfo) {
+            $bookingInfo->update([
+                'status' => $request->status
+            ]);
+        }
+        return response()->json('success');
+    }
 
     public function add_order(Request $request)
     {
@@ -31,7 +41,7 @@ class BookingInfoController extends Controller
                     'started_at' => $request->start,
                     'end_at' => $request->end,
                     'duration' => $request->gap,
-                    'sub_total' => $value['rate'],
+                    'sub_total' => $value['rate'] *  $request->gap,
                 ]);
             }
             return response()->json('success');
