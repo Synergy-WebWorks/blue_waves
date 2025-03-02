@@ -35,6 +35,7 @@ return array(
     'App\\Http\\Controllers\\ResortController' => $baseDir . '/app/Http/Controllers/ResortController.php',
     'App\\Http\\Controllers\\TermController' => $baseDir . '/app/Http/Controllers/TermController.php',
     'App\\Http\\Controllers\\UploadController' => $baseDir . '/app/Http/Controllers/UploadController.php',
+    'App\\Http\\Controllers\\XenditController' => $baseDir . '/app/Http/Controllers/XenditController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\ChangePaymentStatus' => $baseDir . '/app/Http/Middleware/ChangePaymentStatus.php',

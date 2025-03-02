@@ -28,7 +28,7 @@ export default function BookingOrderSummary() {
                     <div className="mt-10 lg:mt-0">
                         <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
                             <ContactInformation />
-                            {booking_info.status == "partial" || booking_info.status == "pending" && (
+                            {(booking_info.status == "partial" || booking_info.status == "pending" )&& (
                                 <CheckoutSection />
                             )}
 
