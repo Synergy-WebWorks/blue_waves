@@ -28,6 +28,7 @@ return new class extends Migration
             $table->string('children')->nullable();
             $table->string('total')->nullable();
             $table->string('status')->nullable();
+            $table->string('payment_type')->nullable();
             $table->string('submitted_date')->nullable();
             $table->timestamps();
         });

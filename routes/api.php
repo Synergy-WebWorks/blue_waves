@@ -75,36 +75,37 @@ Route::post('pay-with-card', [XenditController::class, 'pay_via_card']);
 // });
 
 
-use GlennRaya\Xendivel\Invoice;
+// use GlennRaya\Xendivel\Invoice;
 
-Route::get('/xendivel/invoice/generate', function () {
-    $invoice_data = [
-        'invoice_number' => 1000023,
-        'card_type' => 'VISA',
-        'masked_card_number' => '400000XXXXXX0002',
-        'merchant' => [
-            'name' => 'Xendivel LLC',
-            'address' => '152 Maple Avenue Greenfield, New Liberty, Arcadia USA 54331',
-            'phone' => '+63 971-444-1234',
-            'email' => 'xendivel@example.com',
-        ],
-        'customer' => [
-            'name' => 'Victoria Marini',
-            'address' => 'Alex Johnson, 4457 Pine Circle, Rivertown, Westhaven, 98765, Silverland',
-            'email' => 'victoria@example.com',
-            'phone' => '+63 909-098-654',
-        ],
-        'items' => [
-            ['item' => 'iPhone 15 Pro Max', 'price' => 1099, 'quantity' => 5],
-            ['item' => 'MacBook Pro 16" M3 Max', 'price' => 2499, 'quantity' => 3],
-            ['item' => 'Apple Pro Display XDR', 'price' => 5999, 'quantity' => 2],
-            ['item' => 'Pro Stand', 'price' => 999, 'quantity' => 2],
-        ],
-        'tax_rate' => 0.12,  // Ensure tax rate is in decimal format
-        'tax_id' => '123-456-789',
-        'footer_note' => 'Thank you for your recent purchase with us! We are thrilled to have the opportunity to serve you and hope that your new purchase brings you great satisfaction.',
-    ];
+// Route::get('/xendivel/invoice/generate', function () {
+//     $invoice_data = [
+//         'invoice_number' => '831000',
+//         'card_type' => 'VISA',
+//         'masked_card_number' => '4000000000001091',
+//         'merchant' => [
+//             'name' => 'Xendivel LLC',
+//             'address' => '152 Maple Avenue Greenfield, New Liberty, Arcadia USA 54331',
+//             'phone' => '+63 971-444-1234',
+//             'email' => 'xendivel@example.com',
+//         ],
+//         'customer' => [
+//             'name' => 'Victoria Marini',
+//             'address' => 'Alex Johnson, 4457 Pine Circle, Rivertown, Westhaven, 98765, Silverland',
+//             'email' => 'victoria@example.com',
+//             'phone' => '+63 909-098-654',
+//         ],
+//         'items' => [
+//             ['item' => 'iPhone 15 Pro Max', 'price' => 1099, 'quantity' => 5],
+//             ['item' => 'MacBook Pro 16" M3 Max', 'price' => 2499, 'quantity' => 3],
+//             ['item' => 'Apple Pro Display XDR', 'price' => 5999, 'quantity' => 2],
+//             ['item' => 'Pro Stand', 'price' => 999, 'quantity' => 2],
+//         ],
+//         'tax_rate' => .12,
+//         'tax_id' => '123-456-789',
+//         'footer_note' => 'Thank you for your recent purchase with us! We are thrilled to have the opportunity to serve you and hope that your new purchase brings you great satisfaction.',
+//     ];
 
-    return Invoice::make($invoice_data)->save();
+//     return Invoice::make($invoice_data)
+//         ->save();
     
-});
+// });

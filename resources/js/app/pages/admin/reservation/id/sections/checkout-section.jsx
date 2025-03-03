@@ -98,16 +98,18 @@ export default function CheckoutSection() {
                             {/* Buttons */}
                             <div className="mt-5 sm:mt-6 sm:flex sm:justify-end space-x-3 w-full">
                                 <button
+                                disabled={loading}
                                     onClick={() => submit_checkout("paid")}
                                     className="px-4 w-full py-2 bg-indigo-600 text-white rounded-md text-sm font-semibold hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 >
-                                    CHECKOUT
+                                {loading?"Loading...":"CHECKOUT"}    
                                 </button>
                                 <button
+                                disabled={loading}
                                     onClick={() => submit_checkout("cancelled")}
                                     className="px-4 py-2 w-full bg-red-500 text-white rounded-md text-sm font-semibold hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-red-500"
                                 >
-                                    CANCEL RESERVATION
+                                 {loading?"Loading...":"CANCEL RESERVATION"}        
                                 </button>
                             </div>
                         </Transition.Child>

@@ -27,6 +27,7 @@ class BookingInfo extends Model
         'adults',
         'children',
         'status',
+        'payment_type',
         'submitted_date',
     ];
     public function booking_orders():HasMany

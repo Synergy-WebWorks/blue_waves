@@ -2,7 +2,10 @@
 
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\XenditController;
+use App\Models\BookingInfo;
 use Illuminate\Foundation\Application;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,14 +20,9 @@ use Inertia\Inertia;
 |
 */
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
+Route::get('/xendivel/invoice/generate', [XenditController::class, 'get_invoice']);
+
+
 
 Route::get('/', function () {
     return Inertia::render('index/page');

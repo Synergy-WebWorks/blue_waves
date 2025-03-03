@@ -11,10 +11,10 @@ export default function BookingOrderSummary() {
     const { booking_info } = useSelector((store) => store.booking_info);
     const dispatch = useDispatch();
 
-    // const totalRate = booking_info?.booking_orders?.reduce(
-    //     (sum, item) => sum + Number(item.sub_total),
-    //     0
-    // );
+    const rent_total = booking_info?.booking_orders?.reduce(
+        (sum, item) => sum + Number(item.sub_total),
+        0
+    );
     console.log("booking_info?.booking_orders", booking_info);
     return (
         <div className="bg-gray-50">
@@ -28,7 +28,8 @@ export default function BookingOrderSummary() {
                     <div className="mt-10 lg:mt-0">
                         <div className="mt-4 rounded-lg border border-gray-200 bg-white shadow-xs">
                             <ContactInformation />
-                            {(booking_info.status == "partial" || booking_info.status == "pending" )&& (
+                            {(booking_info.status == "partial" ||
+                                booking_info.status == "pending") && (
                                 <CheckoutSection />
                             )}
 
@@ -127,6 +128,14 @@ export default function BookingOrderSummary() {
                                 )}
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
+                                <div className="flex items-center justify-between ">
+                                    <dt className="text-base font-medium">
+                                        Cottages/Rooms
+                                    </dt>
+                                    <dd className="text-base font-medium text-gray-900">
+                                        ₱ {parseInt(rent_total).toFixed(2)}
+                                    </dd>
+                                </div>
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
@@ -151,17 +160,7 @@ export default function BookingOrderSummary() {
                                         ).toFixed(2)}
                                     </dd>
                                 </div>
-                                <div className="flex items-center justify-between border-t border-gray-200 pt-6">
-                                    <dt className="text-base font-medium">
-                                        Total
-                                    </dt>
-                                    <dd className="text-base font-medium text-gray-900">
-                                        ₱{" "}
-                                        {parseInt(booking_info.total).toFixed(
-                                            2
-                                        )}
-                                    </dd>
-                                </div>
+
                                 <div className="flex items-center justify-between border-t border-gray-200 pt-6">
                                     <dt className="text-base font-medium">
                                         Downpayment{" "}
@@ -174,6 +173,23 @@ export default function BookingOrderSummary() {
                                         ₱
                                         {parseInt(
                                             booking_info.initial
+                                        )?.toFixed(2)}
+                                    </dd>
+                                </div>
+
+                                <div className="flex items-center bg-gray-300 p-3 rounded-md justify-between border-t border-gray-200 ">
+                                    <dt className="text-base font-black">
+                                        Total Balance
+                                    </dt>
+                                    <dd className="text-base text-gray-900 font-black">
+                                        ₱
+                                        {(
+                                            parseInt(rent_total) +
+                                            parseInt(
+                                                booking_info.children ?? 0
+                                            ) +
+                                            parseInt(booking_info.adults ?? 0) -
+                                            parseInt(booking_info.initial)
                                         )?.toFixed(2)}
                                     </dd>
                                 </div>

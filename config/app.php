@@ -163,6 +163,7 @@ return [
         /*
          * Application Service Providers...
          */
+        Barryvdh\DomPDF\ServiceProvider::class,
         Laravel\Socialite\SocialiteServiceProvider::class,
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,

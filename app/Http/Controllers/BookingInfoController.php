@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BookingInfo;
 use App\Models\BookingOrder;
 use App\Notifications\BookingNotification;
+use App\Notifications\InvoiceNotification;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -18,6 +19,18 @@ class BookingInfoController extends Controller
             $bookingInfo->update([
                 'status' => $request->status
             ]);
+
+            if ($request->status == 'paid') {
+                $invoiceData = [
+                    'id' => $bookingInfo->reference_id,
+                    'customer_name' => trim("{$bookingInfo->fname} {$bookingInfo->mname} {$bookingInfo->lname}"),
+                    'amount' => $bookingInfo->initial,
+                    'date' => now()->format('Y-m-d'),
+                    'email' => $bookingInfo->email,
+                ];
+
+                $bookingInfo->notify(new InvoiceNotification($invoiceData));
+            }
         }
         return response()->json('success');
     }
