@@ -11,7 +11,7 @@ import termSlice from "../redux/term-slice";
 import uploadSlice from "../redux/upload-slice";
 import { configureStore } from "@reduxjs/toolkit";
 import inventorySlice from "../redux/inventory-slice";
-import dashboardSlice  from "../redux/dashboard-slice";
+import dashboardSlice from "../redux/dashboard-slice";
 
 const store = configureStore({
     reducer: {
@@ -25,6 +25,7 @@ const store = configureStore({
         inventory_stocks: inventoryStockSlice,
         landing_page: landingPageSlice,
         rent: rentSlice,
+        rents: rentSlice,
         resort: resortSlice,
         term: termSlice,
         upload: uploadSlice,

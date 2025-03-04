@@ -1,1 +1,0 @@
-import{i as r,v as s}from"./app-D2Qro0Cw.js";function e(){try{return r.get("/api/dashboard")}catch{}}function c(){return async function(t,o){const a=await e();t(s.actions.setDashboards(a.data))}}export{c as g};

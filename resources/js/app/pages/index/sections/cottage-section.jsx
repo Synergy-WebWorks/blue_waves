@@ -5,37 +5,6 @@ import { useSelector } from "react-redux";
 export default function CottageSection() {
     const { rents } = useSelector((store) => store.rent);
 
-    const products = rents?.filter((res) => res.type === "cottage") || [];
-
-    const [imageIndexes, setImageIndexes] = useState([]);
-
-    useEffect(() => {
-        if (products) {
-            setImageIndexes(new Array(products.length).fill(0));
-        }
-    }, [products.length]);
-    
-
-    const handleNext = (index) => {
-        setImageIndexes((prevIndexes) =>
-            prevIndexes.map((imgIndex, i) =>
-                i === index
-                    ? (imgIndex + 1) % products[i].uploads.length
-                    : imgIndex
-            )
-        );
-    };
-
-    const handlePrev = (index) => {
-        setImageIndexes((prevIndexes) =>
-            prevIndexes.map((imgIndex, i) =>
-                i === index
-                    ? (imgIndex - 1 + products[i].uploads.length) %
-                      products[i].uploads.length
-                    : imgIndex
-            )
-        );
-    };
     return (
         <div className="bg-white">
             <div className="mx-8 max-w-full px-4 py-16 sm:px-6 sm:py-12 border-b border-gray-300">
@@ -60,16 +29,16 @@ export default function CottageSection() {
                 </div>
 
                 <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8 border-t border-gray-300 pt-6">
-                    {products.map((product, index) => (
+                    {rents?.result?.map((rent, index) => (
                         <div
-                            key={product.cottage_id}
+                            key={rent.cottage_id}
                             className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg"
                         >
                             {/* Image container with navigation */}
                             <div className="relative">
                                 <img
-                                    alt={product.name}
-                                 src={product.uploads[imageIndexes[index]]?.file ?? '/'}
+                                    alt={rent.name}
+                                    //  src={rent.uploads[imageIndexes[index]]?.file ?? '/'}
                                     className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
                                 />
                                 {/* Previous button */}
@@ -91,17 +60,17 @@ export default function CottageSection() {
                             {/* Room Info */}
                             <div className="flex flex-1 flex-col space-y-2 p-4">
                                 <h3 className="text-sm font-medium text-gray-900">
-                                    <a href={product.href}>{product.name}</a>
+                                    <a href={rent.href}>{rent.name}</a>
                                 </h3>
                                 <p className="text-sm text-gray-500 text-justify">
-                                    {product.description}
+                                    {rent.description}
                                 </p>
                                 <div className="flex flex-1 flex-col justify-end">
                                     <p className="text-sm italic text-gray-500">
-                                        {product.options}
+                                        {rent.options}
                                     </p>
                                     <p className="text-base font-medium text-gray-900">
-                                        {product.price}
+                                        {rent.price}
                                     </p>
                                 </div>
                             </div>

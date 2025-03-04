@@ -48,8 +48,8 @@ export default function ViewActivityImageSection({ data }) {
                 <Image
                     alt="Selected Image"
                     src={images[currentImageIndex]?.file}
-                    width={550}
-                    height={300}
+                    width={200}
+                    height={100}
                     style={{ borderRadius: '16px', objectFit: 'cover' }}
                 />
 

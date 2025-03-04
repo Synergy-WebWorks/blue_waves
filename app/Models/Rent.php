@@ -22,10 +22,10 @@ class Rent extends Model
 
     public function uploads(): HasMany
     {
-        return $this->hasMany(Upload::class);
+        return $this->hasMany(Upload::class, 'rent_id', 'id');
     }
-     public function upload():HasOne
+    public function upload(): HasOne
     {
-        return $this->hasOne(Upload::class,'rent_id','id');
+        return $this->hasOne(Upload::class, 'rent_id', 'id');
     }
 }

@@ -8,56 +8,56 @@ export default function ActivityTableSection() {
     const { activities } = useSelector((state) => state.activities);
 
     console.log('activities', activities)
-    const room = [
-        {
-            id: "1",
-            name: "Small Kayak",
-            intro: "Paddle through Paradise",
-            rate: "₱150",
-            unit: "per hour",
-            qty: "5",
-            imageUrl:
-                "/images/kayak.jpeg",
-            description: "Embark on a thrilling kayaking adventure across the tranquil waters of our resort. Glide through crystal-clear waters, with the sea breeze in your hair and stunning views of the coastline surrounding you. Whether you’re a beginner or a seasoned paddler, kayaking is a perfect way to explore hidden coves, serene beaches, and peaceful mangroves at your own pace.",
-            status: "Active",
-        },
-        {
-            id: "2",
-            name: "Big Kayak",
-            intro: "Dive into the Depths",
-            rate: "₱400",
-            unit: "per hour",
-            qty: "5",
-            imageUrl:
-                "/images/kayak.jpeg",
-            description: "Discover the underwater world like never before with our world-class diving experiences. Dive into the vibrant marine life of our pristine reefs, where colorful fish, graceful sea turtles, and thriving coral gardens await. Our experienced diving instructors will guide you through each dive, ensuring you enjoy a safe and memorable underwater journey. Whether you're an experienced diver or a beginner eager to explore, there's a world beneath the waves waiting for you.",
-            status: "Active",
-        },
-        {
-            id: "3",
-            name: "Diving",
-            intro: "Dive into the Depths",
-            rate: "₱1000",
-            unit: "per session",
-            qty: "",
-            imageUrl:
-                "/images/diver.jpeg",
-            description: "Discover the underwater world like never before with our world-class diving experiences. Dive into the vibrant marine life of our pristine reefs, where colorful fish, graceful sea turtles, and thriving coral gardens await. Our experienced diving instructors will guide you through each dive, ensuring you enjoy a safe and memorable underwater journey. Whether you're an experienced diver or a beginner eager to explore, there's a world beneath the waves waiting for you.",
-            status: "Active",
-        },
-        {
-            id: "4",
-            name: "Coral Watching",
-            intro: "Explore the Coral Kingdom",
-            rate: "₱800",
-            unit: "per person",
-            qty: "",
-            imageUrl:
-                "/images/diving.jpg",
-            description: "Take a boat tour to witness the magical coral gardens that lie beneath the surface. With a guided coral watching experience, you'll explore the vibrant marine ecosystems teeming with life. Enjoy the view of delicate coral formations and colorful marine species without even getting your feet wet. Perfect for those who want to admire the ocean’s beauty from above the water, this experience will leave you in awe of the biodiversity beneath the waves.",
-            status: "Active",
-        },
-    ];
+    // const room = [
+    //     {
+    //         id: "1",
+    //         name: "Small Kayak",
+    //         intro: "Paddle through Paradise",
+    //         rate: "₱150",
+    //         unit: "per hour",
+    //         qty: "5",
+    //         imageUrl:
+    //             "/images/kayak.jpeg",
+    //         description: "Embark on a thrilling kayaking adventure across the tranquil waters of our resort. Glide through crystal-clear waters, with the sea breeze in your hair and stunning views of the coastline surrounding you. Whether you’re a beginner or a seasoned paddler, kayaking is a perfect way to explore hidden coves, serene beaches, and peaceful mangroves at your own pace.",
+    //         status: "Active",
+    //     },
+    //     {
+    //         id: "2",
+    //         name: "Big Kayak",
+    //         intro: "Dive into the Depths",
+    //         rate: "₱400",
+    //         unit: "per hour",
+    //         qty: "5",
+    //         imageUrl:
+    //             "/images/kayak.jpeg",
+    //         description: "Discover the underwater world like never before with our world-class diving experiences. Dive into the vibrant marine life of our pristine reefs, where colorful fish, graceful sea turtles, and thriving coral gardens await. Our experienced diving instructors will guide you through each dive, ensuring you enjoy a safe and memorable underwater journey. Whether you're an experienced diver or a beginner eager to explore, there's a world beneath the waves waiting for you.",
+    //         status: "Active",
+    //     },
+    //     {
+    //         id: "3",
+    //         name: "Diving",
+    //         intro: "Dive into the Depths",
+    //         rate: "₱1000",
+    //         unit: "per session",
+    //         qty: "",
+    //         imageUrl:
+    //             "/images/diver.jpeg",
+    //         description: "Discover the underwater world like never before with our world-class diving experiences. Dive into the vibrant marine life of our pristine reefs, where colorful fish, graceful sea turtles, and thriving coral gardens await. Our experienced diving instructors will guide you through each dive, ensuring you enjoy a safe and memorable underwater journey. Whether you're an experienced diver or a beginner eager to explore, there's a world beneath the waves waiting for you.",
+    //         status: "Active",
+    //     },
+    //     {
+    //         id: "4",
+    //         name: "Coral Watching",
+    //         intro: "Explore the Coral Kingdom",
+    //         rate: "₱800",
+    //         unit: "per person",
+    //         qty: "",
+    //         imageUrl:
+    //             "/images/diving.jpg",
+    //         description: "Take a boat tour to witness the magical coral gardens that lie beneath the surface. With a guided coral watching experience, you'll explore the vibrant marine ecosystems teeming with life. Enjoy the view of delicate coral formations and colorful marine species without even getting your feet wet. Perfect for those who want to admire the ocean’s beauty from above the water, this experience will leave you in awe of the biodiversity beneath the waves.",
+    //         status: "Active",
+    //     },
+    // ];
     return (
         <div className="px-4 sm:px-6 lg:px-8 mt-4 pb-8 border rounded-lg shadow-lg">
             <div className="sm:flex sm:items-center">

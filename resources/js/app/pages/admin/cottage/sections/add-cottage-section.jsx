@@ -2,9 +2,59 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaHouseFloodWater } from "react-icons/fa6";
+import { create_rent_thunk } from "@/app/redux/rent-thunk";
+import store from "@/app/store/store";
+import { message } from "antd";
+import { setRent } from "@/app/redux/rent-slice";
+import { useDispatch, useSelector } from "react-redux";
+import UploadCottageSection from "./upload-cottage-section";
 
 export default function AddCottageSection() {
     const [open, setOpen] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [uploadedFile1, setUploadedFile1] = useState(null);
+    const { rent } = useSelector((state) => state.rents);
+    const dispatch = useDispatch();
+
+    function data_handler(e) {
+        dispatch(setRent({
+            ...rent,
+            [e.target.name]: e.target.value,
+        }));
+    }
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setLoading(true);
+
+        const fd = new FormData();
+        fd.append('rent_id', rent.id ?? '');
+        fd.append('file_name', rent.file_name ?? '');
+        fd.append('name', rent.name ?? '');
+        fd.append('rate', rent.rate ?? '');
+        fd.append('min_capacity', rent.min_capacity ?? '');
+        fd.append('max_capacity', rent.max_capacity ?? '');
+        fd.append('description', rent.description ?? '');
+        fd.append('type', 'cottage');
+        fd.append('status', 'Vacant');
+
+        if (uploadedFile1 && uploadedFile1.length > 0) {
+            Array.from(uploadedFile1).forEach((file) => {
+                fd.append('uploads[]', file);
+            });
+        }
+
+        try {
+            await store.dispatch(create_rent_thunk(fd));
+            // await store.dispatch(get_activity_thunk());
+            message.success("Cottage successfully saved!");
+            setOpen(false);
+        } catch (error) {
+            message.error("Failed to add Cottage. Please try again.");
+        } finally {
+            setLoading(false);
+        }
+    }
 
     return (
         <>
@@ -61,7 +111,7 @@ export default function AddCottageSection() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
+                                    <form onSubmit={handleSubmit} className="relative mt-6 flex-1 px-4 sm:px-6">
                                         <div>
                                             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
                                                 <div className="sm:col-span-12">
@@ -72,8 +122,9 @@ export default function AddCottageSection() {
                                                 </div>
                                                 <div className="sm:col-span-12">
                                                     <input
-                                                        id="cottage_name"
-                                                        name="cottage_name"
+                                                        onChange={data_handler}
+                                                        value={rent?.name ?? ""}
+                                                        name="name"
                                                         type="text"
                                                         placeholder="Cottage Name"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
@@ -82,8 +133,9 @@ export default function AddCottageSection() {
 
                                                 <div className="sm:col-span-12">
                                                     <input
-                                                        id="cottage_rate"
-                                                        name="cottage_rate"
+                                                        onChange={data_handler}
+                                                        value={rent?.rate ?? ""}
+                                                        name="rate"
                                                         type="number"
                                                         placeholder="Cottage Rate"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
@@ -91,75 +143,58 @@ export default function AddCottageSection() {
                                                 </div>
                                                 <div className="sm:col-span-12">
                                                     <input
-                                                        id="cottage_capacity"
-                                                        name="cottage_capacity"
-                                                        type="text"
-                                                        placeholder="Cottage Capacity: Ex. 4-5 person"
+                                                        onChange={data_handler}
+                                                        value={rent?.min_capacity ?? ""}
+                                                        name="min_capacity"
+                                                        type="number"
+                                                        placeholder="Minimum Capacity"
+                                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                    />
+                                                </div>
+                                                <div className="sm:col-span-12">
+                                                    <input
+                                                        onChange={data_handler}
+                                                        value={rent?.max_capacity ?? ""}
+                                                        name="max_capacity"
+                                                        type="number"
+                                                        placeholder="Maximum Capacity"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
                                                 </div>
 
-                                               
+
 
                                                 <div className="sm:col-span-12">
                                                     <hr />
                                                     <h3 className="text-base font-medium text-white pt-3">
-                                                       Cottage Description
+                                                        Cottage Description
                                                     </h3>
                                                 </div>
 
                                                 <div className="sm:col-span-12">
                                                     <textarea
-                                                        name="cottage_description"
-                                                        type="cottage_description"
+                                                        name="description"
+                                                        onChange={data_handler}
+                                                        value={rent?.description ?? ""}
                                                         placeholder="Cottage Description"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
                                                 </div>
-                                              
+
 
                                                 <div className="sm:col-span-12">
                                                     <hr />
                                                     <h3 className="text-base font-medium text-white pt-3">
-                                                       Upload Cottage Images
+                                                        Upload Cottage Images
                                                     </h3>
-                                                        <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white bg-cyan-600 px-6 py-10">
-                                                            <div className="text-center">
-                                                                <PhotoIcon
-                                                                    aria-hidden="true"
-                                                                    className="mx-auto size-12 text-gray-300"
-                                                                />
-                                                                <div className="mt-4 flex text-sm/6 text-gray-600">
-                                                                    <label
-                                                                        htmlFor="file-upload"
-                                                                        className="relative cursor-pointer rounded-md font-semibold text-gray-300 hover:text-white"
-                                                                    >
-                                                                        <span>
-                                                                            Upload
-                                                                            a
-                                                                            file
-                                                                        </span>
-                                                                        <input
-                                                                            multiple
-                                                                            id="file-upload"
-                                                                            name="file-upload"
-                                                                            type="file"
-                                                                            accept="image/*"
-                                                                            className="sr-only"
-                                                                        />
-                                                                    </label>
-                                                                    <p className="pl-1">
-                                                                        or drag
-                                                                        and drop
-                                                                    </p>
-                                                                </div>
-                                                                <p className="text-xs/5 text-gray-600">
-                                                                    PNG, JPG,
-                                                                    GIF up to
-                                                                    10MB
-                                                                </p>
-                                                            </div>
+                                                    <div className="mt-2 flex justify-center rounded-lg border border-dashed border-white bg-cyan-600 px-6 py-10">
+                                                        <div className="text-center">
+                                                            <UploadCottageSection
+                                                                files={uploadedFile1}
+                                                                setFiles={setUploadedFile1}
+                                                            />
                                                         </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -173,12 +208,13 @@ export default function AddCottageSection() {
                                             </button>
                                             <button
                                                 type="submit"
+                                                disabled={loading}
                                                 className="ml-4 inline-flex justify-center rounded-md bg-sky-500 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-sky-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-500"
                                             >
-                                                Save
+                                                {loading ? "Saving..." : "Save"}
                                             </button>
                                         </div>
-                                    </div>
+                                    </form>
                                 </div>
                             </Dialog.Panel>
                         </div>
