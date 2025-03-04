@@ -2,6 +2,7 @@ import React from "react";
 import AddActivitySection from "./add-activity-section";
 
 export default function ActivityTableSection() {
+    
     const room = [
         {
             id: "1",

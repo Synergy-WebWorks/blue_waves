@@ -17,7 +17,7 @@ const store = configureStore({
     reducer: {
         app: appSlice,
         dashboard: dashboardSlice,
-        activity: activitySlice,
+        activities: activitySlice,
         booking_info: bookingInfoSlice,
         booking_order: bookingOrderSlice,
         inventory_allocations: inventoryAllocationSlice,
