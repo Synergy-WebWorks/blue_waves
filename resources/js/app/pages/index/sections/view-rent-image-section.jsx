@@ -1,0 +1,72 @@
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { Image } from 'antd';
+import React, { useState } from 'react';
+
+export default function ViewRentImageSection({ data }) {
+    console.log('data', data?.uploads);
+
+    // Find images related to this activity
+    const images = data?.uploads?.filter(image => image.rent_id === data?.id);
+
+    // If there are no images, return a message
+    if (!images || images.length === 0) {
+        return (
+            <td className="whitespace-nowrap px-3 py-4 text-sm">
+                <div className="col-span-3 text-center text-gray-500">
+                    No image available
+                </div>
+            </td>
+        );
+    }
+
+    // Set up state to control the currently displayed image index
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    // Handle Next button click
+    const handleNext = () => {
+        if (images.length > 1) {
+            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length); // Loop back to the first image after the last one
+        }
+    };
+
+    const handlePrevious = () => {
+        setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+    };
+
+    return (
+        <div>
+            <div className="relative mt-3 gap-4 flex">
+                <Image
+                    alt="Selected Image"
+                    src={images[currentImageIndex]?.file}
+                    width={550}  // Set width to 300px
+                    height={300} // Set height to 200px
+                    style={{ borderRadius: '0px', objectFit: 'cover' }}
+                    className="aspect-[3/2] w-full rounded-lg object-cover"
+                />
+                {images.length > 1 && (
+                    <button
+                        onClick={handlePrevious}
+                        className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-[rgba(45,55,72,0.6)] hover:bg-[rgba(45,55,72,0.8)] text-white rounded-full p-2"
+                    >
+                        <ChevronLeftIcon className='h-6' />
+                    </button>
+                )}
+                {/* Next Button, only show if there is more than one image */}
+                {images.length > 1 && (
+                    <button
+                        onClick={handleNext}
+                        className="flex absolute top-1/2 right-5 transform -translate-y-1/2 bg-[rgba(45,55,72,0.6)] hover:bg-[rgba(45,55,72,0.8)] text-white rounded-full p-2"
+                    >
+                        <ChevronRightIcon className='h-6' />
+                    </button>
+                )}
+            </div>
+
+            {/* Optional: Display the number of images and current image index */}
+            <div className="text-center mt-2 text-sm text-gray-500">
+                {currentImageIndex + 1} / {images.length}
+            </div>
+        </div>
+    );
+}

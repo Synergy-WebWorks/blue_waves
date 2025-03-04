@@ -1,1 +1,0 @@
-import{j as r}from"./app-CN-kroqi.js";function e(){return r.jsx("div",{className:"py-5 border-t border-gray-300",children:r.jsx("div",{className:"border p-4 rounded-lg shadow-md",children:"ThirdFormSection"})})}export{e as default};

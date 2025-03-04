@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { FaHouseFloodWater } from "react-icons/fa6";
-import { create_rent_thunk } from "@/app/redux/rent-thunk";
+import { create_rent_thunk, get_rent_thunk } from "@/app/redux/rent-thunk";
 import store from "@/app/store/store";
 import { message } from "antd";
 import { setRent } from "@/app/redux/rent-slice";
@@ -46,7 +46,7 @@ export default function AddCottageSection() {
 
         try {
             await store.dispatch(create_rent_thunk(fd));
-            // await store.dispatch(get_activity_thunk());
+            await store.dispatch(get_rent_thunk());
             message.success("Cottage successfully saved!");
             setOpen(false);
         } catch (error) {
