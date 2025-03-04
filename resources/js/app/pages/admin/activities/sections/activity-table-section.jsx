@@ -1,8 +1,13 @@
 import React from "react";
 import AddActivitySection from "./add-activity-section";
+import { useSelector } from "react-redux";
+import ViewActivityImageSection from "./view-activity-image-section";
+import UpdateActivitySection from "./update-activity-section";
 
 export default function ActivityTableSection() {
-    
+    const { activities } = useSelector((state) => state.activities);
+
+    console.log('activities', activities)
     const room = [
         {
             id: "1",
@@ -24,7 +29,7 @@ export default function ActivityTableSection() {
             unit: "per hour",
             qty: "5",
             imageUrl:
-            "/images/kayak.jpeg",
+                "/images/kayak.jpeg",
             description: "Discover the underwater world like never before with our world-class diving experiences. Dive into the vibrant marine life of our pristine reefs, where colorful fish, graceful sea turtles, and thriving coral gardens await. Our experienced diving instructors will guide you through each dive, ensuring you enjoy a safe and memorable underwater journey. Whether you're an experienced diver or a beginner eager to explore, there's a world beneath the waves waiting for you.",
             status: "Active",
         },
@@ -69,69 +74,66 @@ export default function ActivityTableSection() {
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table className="min-w-full divide-y divide-gray-300">
+                        <table className="divide-y min-w-full divide-gray-900 text-center">
                             <thead>
                                 <tr>
                                     <th
-                                        scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="text-center px-3 py-3 text-xs font-bold uppercase tracking-wide"
+                                    >
+                                        Activity Name
+                                    </th>
+                                    <th
+                                        className="text-center px-3 py-3 text-xs font-bold uppercase tracking-wide"
                                     >
                                         Image
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
-                                    >
-                                        Activity Name
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Activity Rate
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Quantity
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Status
                                     </th>
                                     <th
                                         scope="col"
-                                        className="relative py-3 pl-3 pr-4 sm:pr-0"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
-                                        <span className="sr-only">Edit</span>
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200 bg-white">
-                                {room.map((room) => (
-                                    <tr key={room.name}>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
-                                            <img
-                                                alt=""
-                                                src={room.imageUrl}
-                                                className="h-16 w-full rounded-2xl object-cover"
-                                            />
+                            <tbody className="divide-y divide-gray-300 bg-white">
+                                {activities?.result?.map((activity) => (
+                                    <tr key={activity.name}>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            <b className="text-lg">{activity.name}</b>
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
-                                            {room.name}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
-                                            {room.rate} {room.unit}
-                                        </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
-                                            {room.qty}
+                                        <ViewActivityImageSection data={activity} />
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            {activity.rate} {activity.unit}
                                         </td>
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
-                                            <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                                                {room.status}
+                                            {activity.quantity}
+                                        </td>
+                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                            <span
+                                                className={`inline-flex items-center rounded-md px-2 py-1 text-md font-medium ring-1 ring-inset ${activity.status === "Active"
+                                                    ? "bg-green-50 text-green-700 ring-green-600/20"
+                                                    : "bg-red-50 text-red-700 ring-red-600/20"
+                                                    }`}
+                                            >
+                                                {activity.status}
                                             </span>
                                         </td>
                                         <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
@@ -139,9 +141,9 @@ export default function ActivityTableSection() {
                                                 href="#"
                                                 className="text-indigo-500 hover:text-indigo-700"
                                             >
-                                                Update Activity
+                                                <UpdateActivitySection data={activity} />
                                                 <span className="sr-only">
-                                                    , {room.rsbsa}
+                                                    , {activity.rsbsa}
                                                 </span>
                                             </a>
                                         </td>

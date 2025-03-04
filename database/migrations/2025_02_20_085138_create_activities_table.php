@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('unit')->nullable();
             $table->string('quantity')->nullable();
             $table->string('intro')->nullable();
-            $table->string('description')->nullable();
+            $table->longText('description')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
         });
     }

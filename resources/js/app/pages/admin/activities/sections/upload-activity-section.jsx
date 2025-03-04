@@ -71,26 +71,40 @@ export default function UploadActivitySection({ files, setFiles }) {
                     </div>
                 </div>
             </div>
+            <div className="mt-4 mb-4 grid grid-cols-3 gap-4">
+                {uploadedFiles.map((fileData, index) => (
+                    <div key={index} className="flex items-center justify-between rounded-md p-2">
+
+                    </div>
+                ))}
+            </div>
             <div>
                 {uploadedFiles.length > 0 && (
                     <div id="display-area" className="mt-4 mb-4 flex gap-6">
                         {uploadedFiles.map((fileData, index) => (
-                            <div key={index} className="flex flex-1">
-                                {fileData.file.type === 'application/pdf' ? (
-                                    <iframe
-                                        src={fileData.fileUrl}
-                                        width="300px"
-                                        height="400px"
-                                        className="rounded-md"
-                                        title={`Uploaded PDF - ${fileData.file.name}`}
-                                    />
-                                ) : (
-                                    <img
-                                        src={fileData.fileUrl}
-                                        alt={`Uploaded image - ${fileData.file.name}`}
-                                        className="rounded-md max-w-full max-h-40"
-                                    />
-                                )}
+                            <div key={index} className="relative flex flex-col">
+                                <div>
+                                    <button className="text-white flex w-full items-center justify-end mb-1 pr-1" onClick={(e) => handleRemoveFile(e, fileData.file)}>
+                                        <XMarkIcon className="h-6" />
+                                    </button>
+                                </div>
+                                <div>
+                                    {fileData.file.type === 'application/pdf' ? (
+                                        <iframe
+                                            src={fileData.fileUrl}
+                                            width="300px"
+                                            height="400px"
+                                            className="rounded-md"
+                                            title={`Uploaded PDF - ${fileData.file.name}`}
+                                        />
+                                    ) : (
+                                        <img
+                                            src={fileData.fileUrl}
+                                            alt={`Uploaded image - ${fileData.file.name}`}
+                                            className="rounded-md max-w-full max-h-40"
+                                        />
+                                    )}
+                                </div>
                             </div>
                         ))}
                     </div>

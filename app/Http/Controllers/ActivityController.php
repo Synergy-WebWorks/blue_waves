@@ -12,7 +12,10 @@ class ActivityController extends Controller
     // Display a listing of the activities
     public function index()
     {
-        return response()->json(Activity::all());
+        $activities = Activity::with(['uploads'])->get();
+        return response()->json([
+            'result' => $activities
+        ], 200);
     }
 
     // Store a newly created activity
@@ -25,6 +28,7 @@ class ActivityController extends Controller
             'quantity' => 'required|integer',
             'intro' => 'nullable|string',
             'description' => 'nullable|string',
+            'status' => 'nullable|string',
         ]);
 
         $activity = Activity::create($request->only([
@@ -34,6 +38,7 @@ class ActivityController extends Controller
             'quantity',
             'intro',
             'description',
+            'status',
         ]));
 
         $this->handleFileUploads($request, 'uploads', $activity);

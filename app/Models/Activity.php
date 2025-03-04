@@ -16,6 +16,7 @@ class Activity extends Model
         'quantity',
         'intro',
         'description',
+        'status'
     ];
 
     public function uploads(): HasMany

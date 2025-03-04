@@ -5,7 +5,7 @@ import LandingPageTabsSection from './sections/landing-page-tabs-section'
 export default function LandingPage() {
   return (
     <AdminLayout>
-        <LandingPageTabsSection/>
+      <LandingPageTabsSection />
     </AdminLayout>
   )
 }

@@ -1,6 +1,9 @@
 import React from "react";
+import { useSelector } from "react-redux";
 
 export default function LandingPageActivitySection() {
+    const { activities } = useSelector((state) => state.activities)
+    console.log('activities', activities)
     return (
         <div className="w-full mt-5 mb-5 grid grid-cols-1 md:grid-cols-2 gap-4 px-6 md:px-12 lg:px-20">
             {/* Left Column (Hero Content) */}

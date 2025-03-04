@@ -8,6 +8,7 @@ import FooterSection from "./sections/footer-section";
 import { ArrowUpIcon } from "@heroicons/react/24/outline";
 import store from "@/app/store/store";
 import { get_rent_thunk } from "@/app/redux/rent-thunk";
+import { get_activity_thunk } from "@/app/redux/activity-thunk";
 
 const navigation = [
     { name: "Rooms", href: "#rooms" },
@@ -21,9 +22,10 @@ export default function IndexPage() {
     const [showScrollToTop, setShowScrollToTop] = useState(false);
 
 
-    useEffect(()=>{
+    useEffect(() => {
         store.dispatch(get_rent_thunk())
-    },[]);
+        store.dispatch(get_activity_thunk())
+    }, []);
 
     useEffect(() => {
         const sections = document.querySelectorAll("section");
@@ -118,11 +120,10 @@ export default function IndexPage() {
                                 onClick={(e) =>
                                     handleNavigationClick(e, item.href)
                                 }
-                                className={`text-md/8 font-semibold text-gray-200 hover:text-white ${
-                                    activeSection === item.href.slice(1)
+                                className={`text-md/8 font-semibold text-gray-200 hover:text-white ${activeSection === item.href.slice(1)
                                         ? "text-white"
                                         : ""
-                                }`}
+                                    }`}
                             >
                                 {item.name}
                             </a>

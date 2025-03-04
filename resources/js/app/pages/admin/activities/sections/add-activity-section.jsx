@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FaSailboat } from "react-icons/fa6";
-import { create_activity_thunk } from "@/app/redux/activity-thunk";
+import { create_activity_thunk, get_activity_thunk } from "@/app/redux/activity-thunk";
 import { message } from "antd";
 import UploadActivitySection from "./upload-activity-section";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,6 +36,7 @@ export default function AddActivitySection() {
         fd.append('quantity', activity.quantity ?? '');
         fd.append('intro', activity.intro ?? '');
         fd.append('description', activity.description ?? '');
+        fd.append('status', 'Active');
 
         if (uploadedFile1 && uploadedFile1.length > 0) {
             Array.from(uploadedFile1).forEach((file) => {
@@ -45,6 +46,7 @@ export default function AddActivitySection() {
 
         try {
             await store.dispatch(create_activity_thunk(fd));
+            await store.dispatch(get_activity_thunk());
             message.success("Activity successfully saved!");
             setOpen(false);
         } catch (error) {
