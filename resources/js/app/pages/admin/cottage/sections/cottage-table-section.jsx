@@ -2,6 +2,7 @@ import React from "react";
 import AddCottageSection from "./add-cottage-section";
 import { useSelector } from "react-redux";
 import ViewCottageImageSection from "./view-cottage-image-section";
+import UpdateCottageSection from "./update-cottage-section";
 
 export default function CottageTableSection() {
     const { rents } = useSelector((state) => state.rents)
@@ -61,48 +62,48 @@ export default function CottageTableSection() {
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table className="min-w-full divide-y divide-gray-300">
+                        <table className="min-w-full divide-y text-center divide-gray-900">
                             <thead>
                                 <tr>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Cottage Name
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Image
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Cottage Rate
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Cottage Capacity
                                     </th>
                                     <th
                                         scope="col"
-                                        className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
                                         Status
                                     </th>
                                     <th
                                         scope="col"
-                                        className="relative py-3 pl-3 pr-4 sm:pr-0"
+                                        className="px-3 py-3 text-center text-xs font-bold uppercase tracking-wide"
                                     >
-                                        <span className="sr-only">Edit</span>
+                                        Action
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-200 bg-white">
+                            <tbody className="divide-y divide-gray-300 bg-white">
                                 {rents?.result?.map((cottage) => {
                                     if (cottage.type === "cottage") {
                                         return (
@@ -127,7 +128,7 @@ export default function CottageTableSection() {
                                                         href="#"
                                                         className="text-indigo-500 hover:text-indigo-700"
                                                     >
-                                                        Update Cottage
+                                                        <UpdateCottageSection data={cottage} />
                                                         <span className="sr-only">
                                                             , {cottage.rsbsa}
                                                         </span>
