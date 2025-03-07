@@ -66,7 +66,7 @@ export default function RoomSection() {
                                         </div>
                                         <div className="flex flex-row items-start justify-between">
                                             <div> ₱ {parseInt(rent.rate).toFixed(2)}</div>
-                                            {!rent.status && (
+                                            {rent?.status === "Vacant" && (
                                                 <span className="inline-flex items-center gap-x-1.5 rounded-full bg-green-100 px-2 py-1 text-xs font-medium text-green-700">
                                                     <svg
                                                         viewBox="0 0 6 6"
@@ -82,7 +82,7 @@ export default function RoomSection() {
                                                     Vacant
                                                 </span>
                                             )}
-                                            {rent.status && (
+                                            {rent?.status === "Reserved" && (
                                                 <span className="inline-flex items-center gap-x-1.5 rounded-full bg-red-100 px-2 py-1 text-xs font-medium text-red-700">
                                                     <button
                                                         type="button"
