@@ -58,13 +58,13 @@ export default function RoomTableSection() {
                                         scope="col"
                                         className="px-3 py-3 text-center text-xs font-medium uppercase tracking-wide"
                                     >
-                                        Image
+                                        Room Name
                                     </th>
                                     <th
                                         scope="col"
                                         className="px-3 py-3 text-center text-xs font-medium uppercase tracking-wide"
                                     >
-                                        Room Name
+                                        Image
                                     </th>
                                     <th
                                         scope="col"
