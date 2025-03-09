@@ -33,7 +33,7 @@ import ViewActivityImageSection from "./view-activity-image-section";
 // ];
 export default function ActivitySection() {
     const { activities } = useSelector((state) => state.activities)
-    console.log('activities', activities)
+    console.log('activitisses', activities)
     return (
         <>
             {/* Sale and testimonials */}

@@ -1,1 +1,0 @@
-import{k as n,p as a}from"./app-DATZI7U8.js";function c(t){try{return n.post("/api/rent",t)}catch{}}function s(){try{return n.get(`/api/rent${window.location.search}`)}catch{}}function i(){return async function(t,e){const r=await s();t(a.actions.setRents(r.data))}}function u(t){return async function(e,r){await c(t)}}export{u as c,i as g};

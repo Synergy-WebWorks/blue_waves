@@ -11,7 +11,7 @@ export default function CottageSection() {
             <div className="mx-8 max-w-full px-4 py-16 sm:px-6 sm:py-12 border-b border-gray-300">
                 <div className="relative py-24 text-center border-b border-gray-300">
                     <div
-                        className="absolute inset-0 bg-[url('/images/overlay3.jpg')] bg-cover bg-center bg-fixed rounded-md opacity-80"
+                        className="absolute inset-0 bg-[url('/images/cottage.jpg')] bg-cover bg-center bg-fixed rounded-md opacity-80"
                         aria-hidden="true"
                     />
                     <div className="absolute inset-0 bg-black/50 rounded-md" aria-hidden="true" />
