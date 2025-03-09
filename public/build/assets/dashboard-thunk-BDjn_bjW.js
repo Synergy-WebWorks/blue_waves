@@ -1,0 +1,1 @@
+import{k as r,w as s}from"./app-DCI7Yaz1.js";function e(){try{return r.get("/api/dashboard")}catch{}}function c(){return async function(t,o){const a=await e();t(s.actions.setDashboards(a.data))}}export{c as g};
