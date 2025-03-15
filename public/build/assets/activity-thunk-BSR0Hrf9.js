@@ -1,1 +1,0 @@
-import{k as a,l as e}from"./app-DCI7Yaz1.js";function r(t){try{return a.post("/api/activity",t)}catch{}}function n(){try{return a.get("/api/activity")}catch{}}function o(){return async function(t,i){const c=await n();t(e.actions.setActivities(c.data))}}function u(t){return async function(i,c){await r(t)}}export{u as c,o as g};

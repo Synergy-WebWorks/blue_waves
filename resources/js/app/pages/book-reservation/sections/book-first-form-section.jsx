@@ -18,9 +18,9 @@ export default function BookFirstFormSection() {
     const params = new URLSearchParams(window.location.search);
     const adults = params.get("adults");
     const children = params.get("children");
-
-    const products = rents?.filter((res) => res.type === "cottage") || [];
-    const rooms = rents?.filter((res) => res.type === "room") || [];
+console.log('rentsrents',rents)
+    const products = rents.result?.filter((res) => res.type === "cottage") || [];
+    const rooms = rents.result?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
     const [person, setPerson] = useState({
         adults: 1,

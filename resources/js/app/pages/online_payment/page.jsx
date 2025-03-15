@@ -11,11 +11,12 @@ const OnlinePaymentPage = () => {
     const reference_id = params.get("reference_id");
     const { booking_info } = useSelector((store) => store.booking_info);
     // Payment method states (card, ewallet).
+    const [loading, setLoading] = useState(false);
     const [paymentMethod, setPaymentMethod] = useState("card");
     const [apiResponse, setApiResponse] = useState("");
     const [cardError, setCardError] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-
+    const [ewallet, setEwallet] = useState("PH_GCASH");
     const [errors, setErrors] = useState({
         error_code: "",
         message: "",
@@ -244,6 +245,7 @@ const OnlinePaymentPage = () => {
     // Pay with e-Wallet
     const payWithEwallet = async (event) => {
         event.preventDefault();
+        setLoading(true);
         await axios
             .post("/api/pay-via-ewallet", {
                 // You can test different failure scenarios by using the 'magic amount' from Xendit.
@@ -252,7 +254,7 @@ const OnlinePaymentPage = () => {
                 checkout_method: "ONE_TIME_PAYMENT",
                 // channel_code: "PH_GCASH",
                 reference_id: reference_id,
-                channel_code: "PH_PAYMAYA",
+                channel_code: ewallet,
                 account_number: booking_info.mobile,
                 channel_properties: {
                     success_redirect_url: `https://blue-waves.site/ewallet/success?reference_id=${btoa(
@@ -271,6 +273,7 @@ const OnlinePaymentPage = () => {
                 console.log("Success response:aaaaaaaaaaa ", response.data);
                 window.location.href =
                     response.data.actions.desktop_web_checkout_url;
+                setLoading(false);
             })
             .catch((error) => {
                 const err = JSON.parse(error.response.data.message);
@@ -279,6 +282,7 @@ const OnlinePaymentPage = () => {
 
                 setErrorMessage(err.message);
                 setErrors(err);
+                setLoading(false);
             });
     };
 
@@ -542,6 +546,37 @@ const OnlinePaymentPage = () => {
                             paymentMethod === "ewallet" ? "flex" : "hidden"
                         }`}
                     >
+                        <div className="p-4 w-96 flex flex-col">
+                            <h2 className="text-lg font-semibold mb-2">
+                                Select E-Wallet
+                            </h2>
+                            <div className="flex flex-col space-y-2">
+                                <label className="flex items-center space-x-2">
+                                    <input
+                                        type="radio"
+                                        name="ewallet"
+                                        value="PH_GCASH"
+                                        checked={ewallet === "PH_GCASH"}
+                                        onChange={() => setEwallet("PH_GCASH")}
+                                        className="form-radio text-blue-600"
+                                    />
+                                    <span>Gcash</span>
+                                </label>
+                                <label className="flex items-center space-x-2">
+                                    <input
+                                        type="radio"
+                                        name="ewallet"
+                                        value="PH_PAYMAYA"
+                                        checked={ewallet === "PH_PAYMAYA"}
+                                        onChange={() =>
+                                            setEwallet("PH_PAYMAYA")
+                                        }
+                                        className="form-radio text-green-600"
+                                    />
+                                    <span>PayMaya</span>
+                                </label>
+                            </div>
+                        </div>
                         <input
                             placeholder="Amount to pay"
                             type="text"
@@ -550,10 +585,11 @@ const OnlinePaymentPage = () => {
                             onChange={(e) => setAmount(e.target.value)}
                         ></input>
                         <button
+                            disabled={loading}
                             className={`col-span-6 rounded-md bg-black py-3 text-sm font-bold uppercase text-white hover:bg-gray-800 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-green-600`}
                             onClick={payWithEwallet}
                         >
-                            Charge with eWallet
+                            {loading ? "Loading..." : "Charge with eWallet"}
                         </button>
                     </div>
                 </div>

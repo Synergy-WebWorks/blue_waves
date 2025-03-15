@@ -32,8 +32,8 @@ export default function IndexPage() {
         );
     }
     return (
-        <div className="bg-gradient-to-r from-indigo-500 to-10% via-sky-500 via-30% to-emerald-500 to-100%">
-            <header className="absolute inset-x-0 top-0 z-50">
+        <div className="bg-gradient-to-r from-indigo-500 via-sky-500 via-30% to-emerald-500 to-100%">
+            {/* <header className="absolute inset-x-0 top-0 z-50">
                 <nav
                     aria-label="Global"
                     className="mx-auto flex max-w-8xl items-center justify-between p-6 lg:px-8"
@@ -89,7 +89,7 @@ export default function IndexPage() {
                         </a>
                     </div>
                 </nav>
-            </header>
+            </header> */}
             <main>
                 <div className="relative isolate">
                     <div className="overflow-hidden">
