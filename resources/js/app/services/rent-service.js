@@ -34,7 +34,7 @@ export function delete_rent_service(id) {
 
 export function update_rent_service(data) {
     try {
-        const result = axios.put(`/api/rent/${data.id}`, data)
+        const result = axios.post(`/api/update_rent`, data)
         return result
     } catch (error) {
 

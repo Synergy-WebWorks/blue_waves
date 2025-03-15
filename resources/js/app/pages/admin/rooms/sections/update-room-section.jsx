@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FaSailboat, FaPenToSquare, FaHouseFloodWater, FaBed } from "react-icons/fa6";
@@ -8,34 +8,40 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActivity } from "@/app/redux/activity-slice";
 import store from "@/app/store/store";
 import UpdateImageSection from "./update-image-section";
+import { get_rent_thunk, update_rent_thunk } from "@/app/redux/rent-thunk";
 
 export default function UpdateRoomSection({ data }) {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
     const [uploadedFile1, setUploadedFile1] = useState(null);
     const { activity } = useSelector((state) => state.activities);
+    const [form,setForm]=useState({})
     const dispatch = useDispatch();
 
     function data_handler(e) {
-        dispatch(setActivity({
-            ...activity,
-            [e.target.name]: e.target.value,
-        }));
-    }
+        setForm({
+             ...form,
+             [e.target.name]: e.target.value,
+         });
+     }
+
+      useEffect(()=>{
+            setForm(data)
+        },[open])
 
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
 
         const fd = new FormData();
-        fd.append('activity_id', activity.id ?? '');
-        fd.append('file_name', activity.file_name ?? '');
-        fd.append('name', activity.name ?? '');
-        fd.append('rate', activity.rate ?? '');
-        fd.append('unit', activity.unit ?? '');
-        fd.append('quantity', activity.quantity ?? '');
-        fd.append('intro', activity.intro ?? '');
-        fd.append('description', activity.description ?? '');
+        fd.append('id', form?.id ?? '');
+        fd.append('file_name', form?.file_name ?? '');
+        fd.append('name', form?.name ?? '');
+        fd.append('rate', form?.rate ?? '');
+        fd.append('unit', form?.unit ?? '');
+        fd.append('quantity', form?.quantity ?? '');
+        fd.append('intro', form?.intro ?? '');
+        fd.append('description', form?.description ?? '');
         fd.append('status', 'Active');
 
         if (uploadedFile1 && uploadedFile1.length > 0) {
@@ -45,8 +51,8 @@ export default function UpdateRoomSection({ data }) {
         }
 
         try {
-            await store.dispatch(create_activity_thunk(fd));
-            await store.dispatch(get_activity_thunk());
+            await store.dispatch(update_rent_thunk(fd));
+            store.dispatch(get_rent_thunk())
             message.success("Cottage successfully updated!");
             setOpen(false);
         } catch (error) {
@@ -118,7 +124,7 @@ export default function UpdateRoomSection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.name ?? ""}
+                                                        value={form?.name ?? ""}
                                                         name="name"
                                                         type="text"
                                                         placeholder="Activity Name"
@@ -129,7 +135,7 @@ export default function UpdateRoomSection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.rate ?? ""}
+                                                        value={form?.rate ?? ""}
                                                         name="rate"
                                                         type="text"
                                                         placeholder="Cottage Rate"
@@ -140,7 +146,7 @@ export default function UpdateRoomSection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.min_capacity ?? ""}
+                                                        value={form?.min_capacity ?? ""}
                                                         name="min_capacity"
                                                         type="text"
                                                         placeholder="Minimum Capacity"
@@ -150,7 +156,7 @@ export default function UpdateRoomSection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.max_capacity ?? ""}
+                                                        value={form?.max_capacity ?? ""}
                                                         name="max_capacity"
                                                         type="text"
                                                         placeholder="Maximum Capacity"
@@ -169,7 +175,7 @@ export default function UpdateRoomSection({ data }) {
                                                     <textarea
                                                         name="description"
                                                         onChange={data_handler}
-                                                        value={data?.description ?? ""}
+                                                        value={form?.description ?? ""}
                                                         placeholder="Activity Description"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
@@ -183,7 +189,7 @@ export default function UpdateRoomSection({ data }) {
                                                 {/* <div className="sm:col-span-12">
                                                     <select
                                                         onChange={data_handler}
-                                                        value={data?.status ?? ""}
+                                                        value={form?.status ?? ""}
                                                         name="unit"
                                                         className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     >
@@ -198,7 +204,7 @@ export default function UpdateRoomSection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.status ?? ""}
+                                                        value={form?.status ?? ""}
                                                         name="status"
                                                         type="text"
                                                         placeholder="Status"
@@ -211,7 +217,7 @@ export default function UpdateRoomSection({ data }) {
                                                     <hr />
                                                     <div className="mt-4 flex justify-center rounded-lg border border-dashed border-white bg-cyan-600 px-6 py-10">
                                                         <div className="text-center">
-                                                            <UpdateImageSection data={data} />
+                                                            <UpdateImageSection data={form} />
                                                         </div>
                                                     </div>
                                                 </div>

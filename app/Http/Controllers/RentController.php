@@ -74,7 +74,7 @@ class RentController extends Controller
     }
 
     // Update the specified rent item
-    public function update(Request $request, Rent $rent)
+    public function update_rent(Request $request)
     {
         $request->validate([
             'name' => 'sometimes|required|string|max:255',
@@ -84,9 +84,11 @@ class RentController extends Controller
             'description' => 'sometimes|nullable|string',
             'type' => 'sometimes|required|string|max:100',
         ]);
-
-        $rent->update($request->all());
-
+        $rent =Rent::where('id',$request->id)->first();
+        if ($rent) {
+            $rent->update($request->all());
+        }
+       
         return response()->json($rent);
     }
 

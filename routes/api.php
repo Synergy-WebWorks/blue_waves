@@ -53,6 +53,7 @@ Route::put('/return_item/{id}', [InventoryController::class, 'return_item']);
 Route::resource('inventory_stocks', InventoryStockController::class);
 Route::resource('landing_page', LandingPageController::class);
 Route::resource('rent', RentController::class);
+Route::post('/update_rent', [RentController::class, 'update_rent']);
 Route::resource('resort', ResortController::class);
 Route::resource('term', TermController::class);
 Route::resource('upload', UploadController::class);
