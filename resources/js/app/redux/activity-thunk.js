@@ -37,3 +37,4 @@ export function update_activity_thunk(data) {
         const res = await update_activity_service(data)
     };
 }
+

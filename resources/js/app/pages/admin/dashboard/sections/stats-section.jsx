@@ -58,6 +58,7 @@ function classNames(...classes) {
 
 export default function StatsSection() {
     const { dashboards } = useSelector((store) => store.dashboard);
+    const { user } = useSelector((state) => state.app)
     const { booking_orders } = useSelector((store) => store.booking_order);
 
     const options = {
@@ -107,8 +108,8 @@ export default function StatsSection() {
                                         <div className="flex items-center">
                                             <img
                                                 alt=""
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-                                                className="hidden size-16 rounded-full sm:block"
+                                                src="/images/user_icon.png"
+                                                className="hidden size-10 rounded-full sm:block"
                                             />
                                             <div>
                                                 <div className="flex items-center">
@@ -118,11 +119,21 @@ export default function StatsSection() {
                                                         className="size-16 rounded-full sm:hidden"
                                                     />
                                                     <h1 className="ml-3 text-2xl/7 font-bold text-gray-900 sm:truncate sm:text-2xl/9">
-                                                        Good morning, Emilia
-                                                        Birch
+                                                        {(() => {
+                                                            const hour = new Date().getHours();
+                                                            let greeting = "Good evening";
+
+                                                            if (hour < 12) {
+                                                                greeting = "Good morning";
+                                                            } else if (hour < 18) {
+                                                                greeting = "Good afternoon";
+                                                            }
+
+                                                            return `${greeting}, ${user?.fname} ${user?.lname}`;
+                                                        })()}
                                                     </h1>
                                                 </div>
-                                                <dl className="mt-6 flex flex-col sm:mt-1 sm:ml-3 sm:flex-row sm:flex-wrap">
+                                                {/* <dl className="mt-6 flex flex-col sm:mt-1 sm:ml-3 sm:flex-row sm:flex-wrap">
                                                     <dt className="sr-only">
                                                         Company
                                                     </dt>
@@ -143,7 +154,7 @@ export default function StatsSection() {
                                                         />
                                                         Verified account
                                                     </dd>
-                                                </dl>
+                                                </dl> */}
                                             </div>
                                         </div>
                                     </div>
@@ -361,8 +372,8 @@ export default function StatsSection() {
                                                                     <span
                                                                         className={classNames(
                                                                             statusStyles[
-                                                                                transaction
-                                                                                    .status
+                                                                            transaction
+                                                                                .status
                                                                             ],
                                                                             "inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize"
                                                                         )}

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import {
     Bars3Icon,
@@ -11,6 +11,9 @@ import {
 
 import { FaDatabase, FaHeadset, FaRegCircleDot } from "react-icons/fa6";
 import { Link } from "@inertiajs/react";
+import { useSelector } from "react-redux";
+import { get_user_thunk } from "@/app/redux/app-thunk";
+import store from "@/app/store/store";
 
 const navigation = [
     { name: "Dashboard", href: "/admin/dashboard", icon: HomeIcon, current: false },
@@ -64,11 +67,11 @@ const teams = [
                 href: "/admin/terms",
                 icon: FaRegCircleDot,
             },
-            {
-                name: "Landing Page Section",
-                href: "/admin/landing-page",
-                icon: FaRegCircleDot,
-            },
+            // {
+            //     name: "Landing Page Section",
+            //     href: "/admin/landing-page",
+            //     icon: FaRegCircleDot,
+            // },
         ],
     },
     {
@@ -77,11 +80,11 @@ const teams = [
         icon: FaHeadset,
         current: false,
         children: [
-            {
-                name: "Download User Manual",
-                href: "/admin/manual",
-                icon: FaRegCircleDot,
-            },
+            // {
+            //     name: "Download User Manual",
+            //     href: "/admin/manual",
+            //     icon: FaRegCircleDot,
+            // },
             { name: "Contact Us", href: "/admin/contact", icon: FaRegCircleDot },
         ],
     },
@@ -92,8 +95,13 @@ function classNames(...classes) {
 }
 
 export default function AdminLayout({ children }) {
+    const { user } = useSelector((state) => state.app)
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [expanded, setExpanded] = useState({});
+
+    useEffect(() => {
+        store.dispatch(get_user_thunk())
+    }, []);
 
     const toggleExpand = (name) => {
         setExpanded((prev) => ({
@@ -198,35 +206,35 @@ export default function AdminLayout({ children }) {
                                                                 {expanded[
                                                                     item.name
                                                                 ] && (
-                                                                    <ul className="ml-6 mt-1 space-y-1">
-                                                                        {item.children.map(
-                                                                            (
-                                                                                child
-                                                                            ) => (
-                                                                                <Link
-                                                                                    key={
-                                                                                        child.name
-                                                                                    }
-                                                                                >
+                                                                        <ul className="ml-6 mt-1 space-y-1">
+                                                                            {item.children.map(
+                                                                                (
+                                                                                    child
+                                                                                ) => (
                                                                                     <Link
-                                                                                        href={
-                                                                                            child.href
-                                                                                        }
-                                                                                        className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
-                                                                                    >
-                                                                                        <child.icon
-                                                                                            aria-hidden="true"
-                                                                                            className="h-3 w-3 shrink-0 mr-2"
-                                                                                        />
-                                                                                        {
+                                                                                        key={
                                                                                             child.name
                                                                                         }
+                                                                                    >
+                                                                                        <Link
+                                                                                            href={
+                                                                                                child.href
+                                                                                            }
+                                                                                            className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
+                                                                                        >
+                                                                                            <child.icon
+                                                                                                aria-hidden="true"
+                                                                                                className="h-3 w-3 shrink-0 mr-2"
+                                                                                            />
+                                                                                            {
+                                                                                                child.name
+                                                                                            }
+                                                                                        </Link>
                                                                                     </Link>
-                                                                                </Link>
-                                                                            )
-                                                                        )}
-                                                                    </ul>
-                                                                )}
+                                                                                )
+                                                                            )}
+                                                                        </ul>
+                                                                    )}
                                                             </>
                                                         ) : (
                                                             <Link
@@ -294,35 +302,35 @@ export default function AdminLayout({ children }) {
                                                                 {expanded[
                                                                     teams.name
                                                                 ] && (
-                                                                    <ul className="ml-6 mt-1 space-y-1">
-                                                                        {teams.children.map(
-                                                                            (
-                                                                                child
-                                                                            ) => (
-                                                                                <li
-                                                                                    key={
-                                                                                        child.name
-                                                                                    }
-                                                                                >
-                                                                                    <Link
-                                                                                        href={
-                                                                                            child.href
-                                                                                        }
-                                                                                        className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
-                                                                                    >
-                                                                                        <child.icon
-                                                                                            aria-hidden="true"
-                                                                                            className="h-3 w-3 shrink-0 mr-2"
-                                                                                        />
-                                                                                        {
+                                                                        <ul className="ml-6 mt-1 space-y-1">
+                                                                            {teams.children.map(
+                                                                                (
+                                                                                    child
+                                                                                ) => (
+                                                                                    <li
+                                                                                        key={
                                                                                             child.name
                                                                                         }
-                                                                                    </Link>
-                                                                                </li>
-                                                                            )
-                                                                        )}
-                                                                    </ul>
-                                                                )}
+                                                                                    >
+                                                                                        <Link
+                                                                                            href={
+                                                                                                child.href
+                                                                                            }
+                                                                                            className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
+                                                                                        >
+                                                                                            <child.icon
+                                                                                                aria-hidden="true"
+                                                                                                className="h-3 w-3 shrink-0 mr-2"
+                                                                                            />
+                                                                                            {
+                                                                                                child.name
+                                                                                            }
+                                                                                        </Link>
+                                                                                    </li>
+                                                                                )
+                                                                            )}
+                                                                        </ul>
+                                                                    )}
                                                             </>
                                                         ) : (
                                                             <link
@@ -332,7 +340,7 @@ export default function AdminLayout({ children }) {
                                                                 className={classNames(
                                                                     teams.current
                                                                         ? "bg-cyan-800 text-white"
-                                                                    : "text-cyan-100 hover:bg-cyan-600 hover:text-white",
+                                                                        : "text-cyan-100 hover:bg-cyan-600 hover:text-white",
                                                                     "group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6"
                                                                 )}
                                                             >
@@ -407,33 +415,33 @@ export default function AdminLayout({ children }) {
                                                         {expanded[
                                                             item.name
                                                         ] && (
-                                                            <ul className="ml-6 mt-1 space-y-1">
-                                                                {item.children.map(
-                                                                    (child) => (
-                                                                        <Link
-                                                                            key={
-                                                                                child.name
-                                                                            }
-                                                                        >
+                                                                <ul className="ml-6 mt-1 space-y-1">
+                                                                    {item.children.map(
+                                                                        (child) => (
                                                                             <Link
-                                                                                href={
-                                                                                    child.href
-                                                                                }
-                                                                                className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
-                                                                            >
-                                                                                <child.icon
-                                                                                    aria-hidden="true"
-                                                                                    className="h-3 w-3 shrink-0 mr-2"
-                                                                                />
-                                                                                {
+                                                                                key={
                                                                                     child.name
                                                                                 }
+                                                                            >
+                                                                                <Link
+                                                                                    href={
+                                                                                        child.href
+                                                                                    }
+                                                                                    className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
+                                                                                >
+                                                                                    <child.icon
+                                                                                        aria-hidden="true"
+                                                                                        className="h-3 w-3 shrink-0 mr-2"
+                                                                                    />
+                                                                                    {
+                                                                                        child.name
+                                                                                    }
+                                                                                </Link>
                                                                             </Link>
-                                                                        </Link>
-                                                                    )
-                                                                )}
-                                                            </ul>
-                                                        )}
+                                                                        )
+                                                                    )}
+                                                                </ul>
+                                                            )}
                                                     </>
                                                 ) : (
                                                     <Link
@@ -499,33 +507,33 @@ export default function AdminLayout({ children }) {
                                                         {expanded[
                                                             teams.name
                                                         ] && (
-                                                            <ul className="ml-6 mt-1 space-y-1">
-                                                                {teams.children.map(
-                                                                    (child) => (
-                                                                        <li
-                                                                            key={
-                                                                                child.name
-                                                                            }
-                                                                        >
-                                                                            <Link
-                                                                                href={
-                                                                                    child.href
-                                                                                }
-                                                                                className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
-                                                                            >
-                                                                                <child.icon
-                                                                                    aria-hidden="true"
-                                                                                    className="h-3 w-3 shrink-0 mr-2"
-                                                                                />
-                                                                                {
+                                                                <ul className="ml-6 mt-1 space-y-1">
+                                                                    {teams.children.map(
+                                                                        (child) => (
+                                                                            <li
+                                                                                key={
                                                                                     child.name
                                                                                 }
-                                                                            </Link>
-                                                                        </li>
-                                                                    )
-                                                                )}
-                                                            </ul>
-                                                        )}
+                                                                            >
+                                                                                <Link
+                                                                                    href={
+                                                                                        child.href
+                                                                                    }
+                                                                                    className="flex items-center text-cyan-100 hover:bg-cyan-600 hover:text-white rounded-md px-2 py-1 text-sm font-semibold leading-6"
+                                                                                >
+                                                                                    <child.icon
+                                                                                        aria-hidden="true"
+                                                                                        className="h-3 w-3 shrink-0 mr-2"
+                                                                                    />
+                                                                                    {
+                                                                                        child.name
+                                                                                    }
+                                                                                </Link>
+                                                                            </li>
+                                                                        )
+                                                                    )}
+                                                                </ul>
+                                                            )}
                                                     </>
                                                 ) : (
                                                     <link
@@ -555,14 +563,14 @@ export default function AdminLayout({ children }) {
                                     >
                                         <img
                                             alt=""
-                                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
+                                            src="/images/user_icon.png"
                                             className="size-8 rounded-full bg-gray-50"
                                         />
                                         <span className="sr-only">
                                             Your profile
                                         </span>
                                         <span aria-hidden="true">
-                                            Emilia Birch
+                                            {user?.fname} {user?.lname}
                                         </span>
                                     </Link>
                                 </li>
@@ -587,7 +595,7 @@ export default function AdminLayout({ children }) {
                         <span className="sr-only">Your profile</span>
                         <img
                             alt=""
-                            src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
+                            src="/images/user_icon.png"
                             className="size-8 rounded-full bg-gray-50"
                         />
                     </Link>

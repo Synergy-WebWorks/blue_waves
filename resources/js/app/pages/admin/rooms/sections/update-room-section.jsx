@@ -15,19 +15,19 @@ export default function UpdateRoomSection({ data }) {
     const [loading, setLoading] = useState(false);
     const [uploadedFile1, setUploadedFile1] = useState(null);
     const { activity } = useSelector((state) => state.activities);
-    const [form,setForm]=useState({})
+    const [form, setForm] = useState({})
     const dispatch = useDispatch();
 
     function data_handler(e) {
         setForm({
-             ...form,
-             [e.target.name]: e.target.value,
-         });
-     }
+            ...form,
+            [e.target.name]: e.target.value,
+        });
+    }
 
-      useEffect(()=>{
-            setForm(data)
-        },[open])
+    useEffect(() => {
+        setForm(data)
+    }, [open])
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -38,11 +38,10 @@ export default function UpdateRoomSection({ data }) {
         fd.append('file_name', form?.file_name ?? '');
         fd.append('name', form?.name ?? '');
         fd.append('rate', form?.rate ?? '');
-        fd.append('unit', form?.unit ?? '');
-        fd.append('quantity', form?.quantity ?? '');
-        fd.append('intro', form?.intro ?? '');
+        fd.append('min_capacity', form?.min_capacity ?? '');
+        fd.append('max_capacity', form?.max_capacity ?? '');
         fd.append('description', form?.description ?? '');
-        fd.append('status', 'Active');
+        fd.append('status', form.status ?? '');
 
         if (uploadedFile1 && uploadedFile1.length > 0) {
             Array.from(uploadedFile1).forEach((file) => {

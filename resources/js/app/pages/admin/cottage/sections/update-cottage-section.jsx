@@ -15,16 +15,16 @@ export default function UpdateCottageSection({ data }) {
     const [loading, setLoading] = useState(false);
     const [uploadedFile1, setUploadedFile1] = useState(null);
     const { activity } = useSelector((state) => state.activities);
-    const [form,setForm]=useState({})
+    const [form, setForm] = useState({})
     const dispatch = useDispatch();
 
-    useEffect(()=>{
+    useEffect(() => {
         setForm(data)
-    },[open])
-    console.log('form',form)
+    }, [open])
+    console.log('form', form)
 
     function data_handler(e) {
-       setForm({
+        setForm({
             ...form,
             [e.target.name]: e.target.value,
         });
@@ -39,11 +39,10 @@ export default function UpdateCottageSection({ data }) {
         fd.append('file_name', form?.file_name ?? '');
         fd.append('name', form?.name ?? '');
         fd.append('rate', form?.rate ?? '');
-        fd.append('unit', form?.unit ?? '');
-        fd.append('quantity', form?.quantity ?? '');
-        fd.append('intro', form?.intro ?? '');
+        fd.append('min_capacity', form?.min_capacity ?? '');
+        fd.append('max_capacity', form?.max_capacity ?? '');
         fd.append('description', form?.description ?? '');
-        fd.append('status', 'Active');
+        fd.append('status', form.status ?? '');
 
         if (uploadedFile1 && uploadedFile1.length > 0) {
             Array.from(uploadedFile1).forEach((file) => {

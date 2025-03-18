@@ -22,10 +22,10 @@ class ActivityController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'rate' => 'required|numeric',
-            'unit' => 'required|string|max:50',
-            'quantity' => 'required|integer',
+            'name' => 'nullable|string|max:255',
+            'rate' => 'nullable|numeric',
+            'unit' => 'nullable|string|max:50',
+            'quantity' => 'nullable|integer',
             'intro' => 'nullable|string',
             'description' => 'nullable|string',
             'status' => 'nullable|string',
@@ -73,19 +73,21 @@ class ActivityController extends Controller
         return response()->json($activity);
     }
 
-    // Update the specified activity
-    public function update(Request $request, Activity $activity)
+    public function update_activity(Request $request)
     {
         $request->validate([
-            'name' => 'sometimes|required|string|max:255',
-            'rate' => 'sometimes|required|numeric',
-            'unit' => 'sometimes|required|string|max:50',
-            'quantity' => 'sometimes|required|integer',
+            'name' => 'nullable|string|max:255',
+            'rate' => 'nullable|numeric',
+            'unit' => 'nullable|string|max:50',
+            'quantity' => 'nullable|integer',
             'intro' => 'nullable|string',
             'description' => 'nullable|string',
         ]);
 
-        $activity->update($request->all());
+        $activity = Activity::where('id', $request->id)->first();
+        if ($activity) {
+            $activity->update($request->all());
+        }
 
         return response()->json($activity);
     }

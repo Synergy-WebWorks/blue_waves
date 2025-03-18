@@ -34,7 +34,7 @@ export function delete_activity_service(id) {
 
 export function update_activity_service(data) {
     try {
-        const result = axios.put(`/api/activity/${data.id}`, data)
+        const result = axios.post(`/api/update_activity`, data)
         return result
     } catch (error) {
 

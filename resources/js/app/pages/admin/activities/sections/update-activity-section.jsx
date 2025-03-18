@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { FaSailboat, FaPenToSquare } from "react-icons/fa6";
-import { create_activity_thunk, get_activity_thunk } from "@/app/redux/activity-thunk";
+import { create_activity_thunk, get_activity_thunk, update_activity_thunk } from "@/app/redux/activity-thunk";
 import { message, Tooltip } from "antd";
 import UploadActivitySection from "./upload-activity-section";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,29 +15,34 @@ export default function UpdateActivitySection({ data }) {
     const [loading, setLoading] = useState(false);
     const [uploadedFile1, setUploadedFile1] = useState(null);
     const { activity } = useSelector((state) => state.activities);
+    const [form, setForm] = useState({})
     const dispatch = useDispatch();
 
     function data_handler(e) {
-        dispatch(setActivity({
-            ...activity,
+        setForm({
+            ...form,
             [e.target.name]: e.target.value,
-        }));
+        });
     }
+
+    useEffect(() => {
+        setForm(data)
+    }, [open])
 
     async function handleSubmit(e) {
         e.preventDefault();
         setLoading(true);
 
         const fd = new FormData();
-        fd.append('activity_id', activity.id ?? '');
-        fd.append('file_name', activity.file_name ?? '');
-        fd.append('name', activity.name ?? '');
-        fd.append('rate', activity.rate ?? '');
-        fd.append('unit', activity.unit ?? '');
-        fd.append('quantity', activity.quantity ?? '');
-        fd.append('intro', activity.intro ?? '');
-        fd.append('description', activity.description ?? '');
-        fd.append('status', 'Active');
+        fd.append('id', form.id ?? '');
+        fd.append('file_name', form.file_name ?? '');
+        fd.append('name', form.name ?? '');
+        fd.append('rate', form.rate ?? '');
+        fd.append('unit', form.unit ?? '');
+        fd.append('quantity', form.quantity ?? '');
+        fd.append('intro', form.intro ?? '');
+        fd.append('description', form.description ?? '');
+        fd.append('status', form.status ?? '');
 
         if (uploadedFile1 && uploadedFile1.length > 0) {
             Array.from(uploadedFile1).forEach((file) => {
@@ -46,12 +51,12 @@ export default function UpdateActivitySection({ data }) {
         }
 
         try {
-            await store.dispatch(create_activity_thunk(fd));
+            await store.dispatch(update_activity_thunk(fd));
             await store.dispatch(get_activity_thunk());
-            message.success("Activity successfully saved!");
+            message.success("Activity successfully updated!");
             setOpen(false);
         } catch (error) {
-            message.error("Failed to add Activity. Please try again.");
+            message.error("Failed to update Activity. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -118,7 +123,7 @@ export default function UpdateActivitySection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.name ?? ""}
+                                                        value={form?.name ?? ""}
                                                         name="name"
                                                         type="text"
                                                         placeholder="Activity Name"
@@ -129,7 +134,7 @@ export default function UpdateActivitySection({ data }) {
                                                 <div className="sm:col-span-12">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.intro ?? ""}
+                                                        value={form?.intro ?? ""}
                                                         name="intro"
                                                         type="text"
                                                         placeholder="Short Intro for Activity"
@@ -140,7 +145,7 @@ export default function UpdateActivitySection({ data }) {
                                                 <div className="sm:col-span-6">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.rate ?? ""}
+                                                        value={form?.rate ?? ""}
                                                         name="rate"
                                                         type="number"
                                                         placeholder="Activity Rate"
@@ -151,7 +156,7 @@ export default function UpdateActivitySection({ data }) {
                                                 <div className="sm:col-span-6">
                                                     <select
                                                         onChange={data_handler}
-                                                        value={data?.unit ?? ""}
+                                                        value={form?.unit ?? ""}
                                                         name="unit"
                                                         className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     >
@@ -168,7 +173,7 @@ export default function UpdateActivitySection({ data }) {
                                                 <div className="sm:col-span-6">
                                                     <input
                                                         onChange={data_handler}
-                                                        value={data?.quantity ?? ""}
+                                                        value={form?.quantity ?? ""}
                                                         name="quantity"
                                                         type="number"
                                                         placeholder="Quantity"
@@ -187,7 +192,7 @@ export default function UpdateActivitySection({ data }) {
                                                     <textarea
                                                         name="description"
                                                         onChange={data_handler}
-                                                        value={data?.description ?? ""}
+                                                        value={form?.description ?? ""}
                                                         placeholder="Activity Description"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
@@ -199,18 +204,12 @@ export default function UpdateActivitySection({ data }) {
                                                     </h3>
                                                 </div>
                                                 <div className="sm:col-span-12">
-                                                    <select
-                                                        onChange={data_handler}
-                                                        value={data?.status ?? ""}
-                                                        name="unit"
-                                                        className="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pl-3 pr-8 text-base text-gray-900 outline-none focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
-                                                    >
-                                                        <option value="" disabled>
-                                                            -- Update Status --
-                                                        </option>
+                                                    <select name="status" onChange={data_handler} value={form?.status ?? ""} className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none">
+                                                        <option value="" disabled>-- Update Status --</option>
                                                         <option value="Active">Active</option>
                                                         <option value="Inactive">Inactive</option>
                                                     </select>
+
                                                 </div>
 
                                                 <div className="sm:col-span-12">
