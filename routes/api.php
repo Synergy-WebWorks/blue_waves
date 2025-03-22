@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AccountController;
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BookingInfoController;
 use App\Http\Controllers\BookingOrderController;
@@ -42,6 +43,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::resource('activity', ActivityController::class);
 Route::post('/update_activity', [ActivityController::class, 'update_activity']);
 Route::resource('dashboard', DashboardController::class);
+Route::resource('account', AccountController::class);
 Route::resource('booking_info', BookingInfoController::class);
 Route::get('/get_calendar', [BookingInfoController::class, 'get_calendar']);
 Route::post('/add_order', [BookingInfoController::class, 'add_order']);

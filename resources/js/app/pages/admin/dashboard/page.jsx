@@ -7,14 +7,14 @@ import { get_booking_info_thunk } from '@/app/redux/booking-info-thunk'
 
 export default function AdminPage() {
 
-  useEffect(()=>{
-    
+  useEffect(() => {
+
     store.dispatch(get_booking_info_thunk());
-    store.dispatch(get_dashboard_thunk());  
-  },[])
+    store.dispatch(get_dashboard_thunk());
+  }, [])
   return (
     <AdminLayout>
-      <StatsSection/>
+      <StatsSection />
     </AdminLayout>
   )
 }

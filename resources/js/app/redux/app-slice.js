@@ -11,12 +11,13 @@ const children_price = parseInt(children) * 20;
 export const appSlice = createSlice({
     name: "app",
     initialState: {
+        users: [],
         user: {},
         search: {
-            start:start?? moment().format("LL"),
-            end:end?? moment().format("LL"),
-            adults: adults??0,
-            children: children??0,
+            start: start ?? moment().format("LL"),
+            end: end ?? moment().format("LL"),
+            adults: adults ?? 0,
+            children: children ?? 0,
         },
         selected: [],
         customer: {
@@ -28,11 +29,14 @@ export const appSlice = createSlice({
         setUser: (state, action) => {
             state.user = action.payload;
         },
+        setUsers: (state, action) => {
+            state.users = action.payload
+        },
         setSearch: (state, action) => {
-            state.customer ={
+            state.customer = {
                 ...state.customer,
-                adults:action.payload.adults * 50,
-                children:action.payload.children * 20
+                adults: action.payload.adults * 50,
+                children: action.payload.children * 20
             }
             state.search = action.payload;
         },
@@ -44,7 +48,7 @@ export const appSlice = createSlice({
         },
     },
 });
-export const { setUser, setSearch, setSelected, setCustomer } =
+export const { setUser, setUsers, setSearch, setSelected, setCustomer } =
     appSlice.actions;
 
 export default appSlice.reducer;
