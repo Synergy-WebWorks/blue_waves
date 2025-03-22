@@ -328,8 +328,7 @@ const OnlinePaymentPage = () => {
                 <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-75 backdrop-blur-md">
                     <div className="flex h-3/4 max-w-2xl flex-col items-center justify-center overflow-hidden rounded-xl bg-white p-8 shadow-2xl">
                         <span className="w-3/4 text-center text-xl font-bold">
-                            Please confirm your identity by entering the
-                            one-time password (OTP) provided to you.
+                        Please wait until the transactions are successful.
                         </span>
                         <iframe src={otpUrl} className="h-full w-full"></iframe>
                     </div>
