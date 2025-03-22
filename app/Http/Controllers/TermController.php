@@ -7,10 +7,13 @@ use Illuminate\Http\Request;
 
 class TermController extends Controller
 {
-    // Display a listing of terms
+
     public function index()
     {
-        return response()->json(Term::all());
+        $terms = Term::get();
+        return response()->json([
+            'result' => $terms
+        ], 200);
     }
 
     // Store a newly created term
@@ -25,22 +28,30 @@ class TermController extends Controller
         return response()->json($term, 201);
     }
 
-    // Display the specified term
-    public function show(Term $term)
+    public function show($id)
     {
-        return response()->json($term);
+        $term = Term::where('id', $id)->first();
+
+        if (!$term) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Term not found'
+            ], 404);
+        }
+
+        return response()->json([
+            'status' => $term,
+            'data' => $term,
+        ], 200);
     }
 
-    // Update the specified term
-    public function update(Request $request, Term $term)
+
+    public function update(Request $request,  $id)
     {
-        $request->validate([
-            'content' => 'sometimes|required|string',
-        ]);
-
-        $term->update($request->all());
-
-        return response()->json($term);
+        $term = Term::where('id', $id)->first();
+        if ($term) {
+            $term->update($request->all());
+        }
     }
 
     // Remove the specified term

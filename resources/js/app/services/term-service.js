@@ -15,7 +15,7 @@ export function get_term_service() {
         return result
     } catch (error) {
 
-    }
+    }   
 }
 
 export async function get_term_by_id_service(id) {

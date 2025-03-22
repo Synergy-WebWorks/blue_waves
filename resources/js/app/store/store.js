@@ -27,7 +27,7 @@ const store = configureStore({
         rent: rentSlice,
         rents: rentSlice,
         resort: resortSlice,
-        term: termSlice,
+        terms: termSlice,
         upload: uploadSlice,
     },
 });

@@ -2,10 +2,10 @@ import { create_term_service, delete_term_service, get_term_by_id_service, get_t
 import { termSlice } from "./term-slice";
 
 export function get_term_thunk() {
-  return async function (dispatch, getState) {
-   const res = await get_term_service()
-          dispatch(termSlice.actions.setTerms(res.data));
-  };
+    return async function (dispatch, getState) {
+        const res = await get_term_service()
+        dispatch(termSlice.actions.setTerms(res.data));
+    };
 }
 
 export function create_term_thunk(data) {
