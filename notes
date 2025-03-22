@@ -1,0 +1,10 @@
+transaction table partial payment ra ang moreflect sa amount (same sa report section sd) 
+logout no pop up ----------------------------------------------- Reservation Section:
+
+ - Book reservation button no display 
+view booking details no display 
+once initial payment is received. ang status updated na into confirmed booking. 
+once may pending na booking na sa room or sa cottage, dapat di na mkita ang room or cottage sa booking section and sa landing page.
+
+ - after processing sa payment dapat may payment confirmed na modal then route balik sa landing page. 
+No email na nareceive after successfull booking.

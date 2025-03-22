@@ -21,6 +21,7 @@ export default function StepperSection() {
     const params = new URLSearchParams(window.location.search);
     const start = params.get("start");
     const end = params.get("end");
+    const [accept, setAccept] = useState(false);
     const steps = [
         { id: "01", name: "Booking Order", description: "Completed" },
         { id: "02", name: "Confirm Booking", description: "Current" },
@@ -62,7 +63,7 @@ export default function StepperSection() {
         const start = new Date(startDate);
         const end = new Date(endDate);
         const difference = (end - start) / (1000 * 60 * 60 * 24);
-       return difference == 0?1:difference;
+        return difference == 0 ? 1 : difference;
     }
     const gap = getDayGap(search.start, search.end);
 
@@ -92,7 +93,7 @@ export default function StepperSection() {
                     total: overall,
                     initial: down_payment,
                     status: "pending",
-                    gap:gap
+                    gap: gap,
                 })
             );
             setLoading(false);
@@ -113,7 +114,7 @@ export default function StepperSection() {
             case 2:
                 return <BookSecondFormSection />;
             case 3:
-                return <BookThirdFormSection />;
+                return <BookThirdFormSection setAccept={setAccept} />;
             // case 4:
             //     return <FourthFormSection />;
             // case 5:
@@ -288,9 +289,9 @@ export default function StepperSection() {
                                 ? () => submitHandler()
                                 : handleNext
                         }
-                        disabled={selected.length == 0 || loading}
+                        disabled={selected.length == 0 || loading || !accept}
                         className={`px-4 py-2 text-white ${
-                            selected.length == 0 || loading
+                            selected.length == 0 || loading || !accept
                                 ? "bg-gray-600 hover:bg-gray-700 text-white"
                                 : "bg-cyan-600 hover:bg-cyan-700 text-white"
                         }}  rounded-md `}

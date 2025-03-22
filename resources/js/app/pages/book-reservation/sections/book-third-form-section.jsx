@@ -2,14 +2,14 @@ import React from "react";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
 
-export default function BookThirdFormSection() {
+export default function BookThirdFormSection({setAccept}) {
     const { selected, customer, search } = useSelector((store) => store.app);
 
     function getDayGap(startDate, endDate) {
         const start = new Date(startDate);
         const end = new Date(endDate);
         const difference = (end - start) / (1000 * 60 * 60 * 24);
-       return difference == 0?1:difference;
+        return difference == 0 ? 1 : difference;
     }
     const gap = getDayGap(search.start, search.end);
     const totalRate =
@@ -209,6 +209,7 @@ By confirming your booking and staying at Blue Waves Resort, you agree to abide 
                                 <label className="flex items-center space-x-2">
                                     <input
                                         required
+                                        onChange={(e)=>setAccept(e.target.checked)}
                                         type="checkbox"
                                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-500"
                                     />

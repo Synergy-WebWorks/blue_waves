@@ -2,19 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BookingOrder;
 use App\Models\Rent;
 use App\Models\Upload;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class RentController extends Controller
 {
     // Display a listing of the rent items
-    public function index()
+    public function index(Request $request)
     {
-        $rents = Rent::with(['uploads'])->get();
+        // Convert input dates to Y-m-d format
+        $startDate = Carbon::parse($request->start)->format('Y-m-d');
+        $endDate = Carbon::parse($request->end)->format('Y-m-d');
+
+        // Get all bookings in the date range
+        $bookings = BookingOrder::where(function ($q) use ($startDate, $endDate) {
+            $q->whereRaw("STR_TO_DATE(started_at, '%M %d, %Y') BETWEEN ? AND ?", [$startDate, $endDate])
+                ->orWhereRaw("STR_TO_DATE(end_at, '%M %d, %Y') BETWEEN ? AND ?", [$startDate, $endDate])
+                ->orWhereRaw("STR_TO_DATE(started_at, '%M %d, %Y') <= ? AND STR_TO_DATE(end_at, '%M %d, %Y') >= ?", [$startDate, $endDate]);
+        })->pluck('rent_id')->toArray();  // Extract rent IDs only
+
+        // Get all Rents that are NOT booked
+        $rents = Rent::whereNotIn('id', $bookings)->with(['uploads'])->get();
+
         return response()->json([
-            'result' => $rents
+            'result' => $rents,
         ], 200);
     }
 
@@ -84,11 +99,11 @@ class RentController extends Controller
             'description' => 'sometimes|nullable|string',
             'type' => 'sometimes|required|string|max:100',
         ]);
-        $rent =Rent::where('id',$request->id)->first();
+        $rent = Rent::where('id', $request->id)->first();
         if ($rent) {
             $rent->update($request->all());
         }
-       
+
         return response()->json($rent);
     }
 
