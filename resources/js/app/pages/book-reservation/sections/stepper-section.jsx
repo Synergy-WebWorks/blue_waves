@@ -289,9 +289,15 @@ export default function StepperSection() {
                                 ? () => submitHandler()
                                 : handleNext
                         }
-                        disabled={selected.length == 0 || loading || !accept}
+                        disabled={
+                            selected.length == 0 ||
+                            loading ||
+                            (!accept && currentStep == 3)
+                        }
                         className={`px-4 py-2 text-white ${
-                            selected.length == 0 || loading || !accept
+                            selected.length == 0 ||
+                            loading ||
+                            (!accept && currentStep == 3)
                                 ? "bg-gray-600 hover:bg-gray-700 text-white"
                                 : "bg-cyan-600 hover:bg-cyan-700 text-white"
                         }}  rounded-md `}
