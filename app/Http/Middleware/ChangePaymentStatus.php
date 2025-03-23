@@ -13,8 +13,8 @@ class ChangePaymentStatus
     public function handle(Request $request, Closure $next): Response
     {
         $referenceId = $request->query('reference_id');
-
-        $result = $this->getPaymentStatus(base64_decode($referenceId));
+        $status = $request->query('status');
+        $result = $this->getPaymentStatus(base64_decode($referenceId), $status);
 
         if (!$result) {
             return redirect('/');
@@ -23,16 +23,20 @@ class ChangePaymentStatus
         return $next($request);
     }
 
-    private function getPaymentStatus($referenceId)
+    private function getPaymentStatus($referenceId, $status)
     {
         $bookingInfo = BookingInfo::where('reference_id', $referenceId)->first();
 
         if ($bookingInfo) {
-            if ($bookingInfo->status == 'pending') {
+            if ($status == 'failed') {
+                $bookingInfo->update([
+                    'status' => $status
+                ]);
+            }
+            if ($bookingInfo->status == 'pending' && $status == 'success') {
                 $bookingInfo->update([
                     'status' => 'partial'
                 ]);
-
                 $invoiceData = [
                     'id' => $referenceId,
                     'customer_name' => trim("{$bookingInfo->fname} {$bookingInfo->mname} {$bookingInfo->lname}"),

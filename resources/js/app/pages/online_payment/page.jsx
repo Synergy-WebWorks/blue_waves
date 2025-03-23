@@ -187,24 +187,22 @@ const OnlinePaymentPage = () => {
                     })
                     .then((response) => {
                         setAuthenticating(false);
-                        console.log("Response:", response);
-
+                       
                         if (response.data.status === "CAPTURED") {
                             console.log("Success: ", response.data);
                             router.visit(
                                 `/card-payment/success?reference_id=${btoa(
                                     reference_id
-                                )}`
+                                )}&status=success`
                             );
-                            // setApiResponse(
-                            //     JSON.stringify(response.data, null, 2)
-                            // );
                         }
                         if (response.data.status === "FAILED") {
-                            console.log("Failed: ", response.data);
-                            // setApiResponse(
-                            //     JSON.stringify(response.data, null, 2)
-                            // );
+                            console.log("failed: ", response.data);
+                            router.visit(
+                                `/card-payment/failed?reference_id=${btoa(
+                                    reference_id
+                                )}&status=failed`
+                            );
                         }
 
                         // Close the OTP dialog.
@@ -241,7 +239,6 @@ const OnlinePaymentPage = () => {
                 break;
         }
     };
-
     // Pay with e-Wallet
     const payWithEwallet = async (event) => {
         event.preventDefault();
@@ -257,15 +254,21 @@ const OnlinePaymentPage = () => {
                 channel_code: ewallet,
                 account_number: booking_info.mobile,
                 channel_properties: {
-                    success_redirect_url: `https://blue-waves.site/ewallet/success?reference_id=${btoa(
+                    success_redirect_url: `${
+                        window.location.origin
+                    }/ewallet/success?reference_id=${btoa(
                         reference_id
-                    )}`,
-                    failure_redirect_url: `https://blue-waves.site/ewallet/failed?reference_id=${btoa(
+                    )}&status=success`,
+                    failure_redirect_url: `${
+                        window.location.origin
+                    }/ewallet/failed?reference_id=${btoa(
                         reference_id
-                    )}`,
-                    cancel_redirect_url: `https://blue-waves.site/ewallet/cancel?reference_id=${btoa(
+                    )}&status=failed`,
+                    cancel_redirect_url: `${
+                        window.location.origin
+                    }/ewallet/cancel?reference_id=${btoa(
                         reference_id
-                    )}`,
+                    )}&status=cancelled`,
                 },
             })
             .then((response) => {
@@ -325,8 +328,7 @@ const OnlinePaymentPage = () => {
                 <div className="fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-black bg-opacity-75 backdrop-blur-md">
                     <div className="flex h-3/4 max-w-2xl flex-col items-center justify-center overflow-hidden rounded-xl bg-white p-8 shadow-2xl">
                         <span className="w-3/4 text-center text-xl font-bold">
-                            Please confirm your identity by entering the
-                            one-time password (OTP) provided to you.
+                        Please wait until the transactions are successful.
                         </span>
                         <iframe src={otpUrl} className="h-full w-full"></iframe>
                     </div>
@@ -358,7 +360,7 @@ const OnlinePaymentPage = () => {
                 </header>
 
                 {/* Payment form */}
-                <div className="mt-8 flex w-[500px] flex-col rounded-md border border-gray-300">
+                <div className="mt-8 flex lg:w-[500px] sm:w-[400px] mx-5 flex-col rounded-md border border-gray-300">
                     <div className="flex w-full text-sm">
                         <span
                             className={`flex-1 cursor-pointer p-4 text-center ${
@@ -393,6 +395,7 @@ const OnlinePaymentPage = () => {
                             type="text"
                             className="mb-2 rounded-md border border-gray-300"
                             value={amount}
+                            disabled
                             onChange={(e) => setAmount(e.target.value)}
                         ></input>
                         <form
@@ -582,6 +585,7 @@ const OnlinePaymentPage = () => {
                             type="text"
                             className="col-span-6 mb-2 rounded-md border border-gray-300"
                             value={amount}
+                            disabled
                             onChange={(e) => setAmount(e.target.value)}
                         ></input>
                         <button

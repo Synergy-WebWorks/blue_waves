@@ -16,9 +16,8 @@ export default function FirstFormSection() {
 
     const params = new URLSearchParams(window.location.search);
 
-
-    const products = rents?.filter((res) => res.type === "cottage") || [];
-    const rooms = rents?.filter((res) => res.type === "room") || [];
+    const products = rents?.result?.filter((res) => res.type === "cottage") || [];
+    const rooms = rents?.result?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
 
     const today = new Date();
@@ -77,7 +76,7 @@ export default function FirstFormSection() {
     };
     function search_rent_vacant() {
         router.visit(
-            `/admin/booking?start=${search.startDate}&end=${search.endDate}&adults=${search.adults}&children=${search.children}`
+            `/admin/booking?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
         );
     }
     console.log("selected", selected);
