@@ -3,6 +3,7 @@ import AddCottageSection from "./add-cottage-section";
 import { useSelector } from "react-redux";
 import ViewCottageImageSection from "./view-cottage-image-section";
 import UpdateCottageSection from "./update-cottage-section";
+import DeleteCottageSection from "./delete-cottage-section";
 
 export default function CottageTableSection() {
     const { rents } = useSelector((state) => state.rents)
@@ -128,7 +129,10 @@ export default function CottageTableSection() {
                                                         href="#"
                                                         className="text-indigo-500 hover:text-indigo-700"
                                                     >
-                                                        <UpdateCottageSection data={cottage} />
+                                                        <div className="flex items-center justify-center gap-1">
+                                                            <UpdateCottageSection data={cottage} />
+                                                            <DeleteCottageSection data={cottage} />
+                                                        </div>
                                                         <span className="sr-only">
                                                             , {cottage.rsbsa}
                                                         </span>

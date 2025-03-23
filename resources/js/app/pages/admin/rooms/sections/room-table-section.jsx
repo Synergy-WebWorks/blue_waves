@@ -3,6 +3,7 @@ import AddRoomSection from "./add-room-section";
 import { useSelector } from "react-redux";
 import ViewRoomImageSection from "./view-room-image-section";
 import UpdateRoomSection from "./update-room-section";
+import DeleteRoomSection from "./delete-room-section";
 
 export default function RoomTableSection() {
     const { rents } = useSelector((state) => state.rents)
@@ -117,7 +118,10 @@ export default function RoomTableSection() {
                                                         href="#"
                                                         className="text-indigo-500 hover:text-indigo-700"
                                                     >
-                                                        <UpdateRoomSection data={room} />
+                                                        <div className="flex items-center justify-center gap-1">
+                                                            <UpdateRoomSection data={room} />
+                                                            <DeleteRoomSection data={room} />
+                                                        </div>
                                                         <span className="sr-only">
                                                             , {room.rsbsa}
                                                         </span>

@@ -1,0 +1,1 @@
+import{g as r,y as s}from"./app-C-hwDgbc.js";function e(){try{return r.get("/api/dashboard")}catch{}}function c(){return async function(t,o){const a=await e();t(s.actions.setDashboards(a.data))}}export{c as g};

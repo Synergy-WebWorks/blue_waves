@@ -3,6 +3,7 @@ import AddActivitySection from "./add-activity-section";
 import { useSelector } from "react-redux";
 import ViewActivityImageSection from "./view-activity-image-section";
 import UpdateActivitySection from "./update-activity-section";
+import DeleteActivitySection from "./delete-activity-section";
 
 export default function ActivityTableSection() {
     const { activities } = useSelector((state) => state.activities);
@@ -141,7 +142,10 @@ export default function ActivityTableSection() {
                                                 href="#"
                                                 className="text-indigo-500 hover:text-indigo-700"
                                             >
-                                                <UpdateActivitySection data={activity} />
+                                                <div className="flex items-center justify-center gap-1">
+                                                    <UpdateActivitySection data={activity} />
+                                                    <DeleteActivitySection data={activity} />
+                                                </div>
                                                 <span className="sr-only">
                                                     , {activity.rsbsa}
                                                 </span>
