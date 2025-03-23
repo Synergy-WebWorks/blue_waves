@@ -71,25 +71,25 @@ export default function StatsSection() {
     const cards = [
         {
             name: "Pending Reservation",
-            href: "#",
+            href: "/admin/reservation?status=pending",
             icon: FaMoneyBillTransfer,
             amount: dashboards?.status_count?.pending ?? 0,
         },
         {
             name: "Cancelled Reservation",
-            href: "#",
+            href: "/admin/reservation?status=cancelled",
             icon: FaCalendarCheck,
-            amount: dashboards?.status_count?.cancele ?? 0,
+            amount: dashboards?.status_count?.cancelled ?? 0,
         },
         {
             name: "Partial Payment",
-            href: "#",
+            href: "/admin/reservation?status=partial",
             icon: FaTentArrowDownToLine,
             amount: dashboards?.status_count?.partial ?? 0,
         },
         {
             name: "Paid Payment",
-            href: "#",
+            href: "/admin/reservation?status=paid",
             icon: FaCalendarXmark,
             amount: dashboards?.status_count?.paid ?? 0,
         },
@@ -205,12 +205,12 @@ export default function StatsSection() {
                                             </div>
                                             <div className="bg-gray-50 px-5 py-3">
                                                 <div className="text-sm">
-                                                    <a
+                                                    <Link
                                                         href={card.href}
                                                         className="font-medium text-cyan-700 hover:text-cyan-900"
                                                     >
                                                         View all
-                                                    </a>
+                                                    </Link>
                                                 </div>
                                             </div>
                                         </div>
