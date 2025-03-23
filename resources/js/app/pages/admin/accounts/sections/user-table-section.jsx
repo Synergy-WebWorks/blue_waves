@@ -1,6 +1,7 @@
 import React from "react";
 import AddUserSection from "./add-user-section";
 import { useSelector } from "react-redux";
+import UpdateUserSection from "./update-user-section";
 
 export default function UserTableSection() {
 
@@ -123,7 +124,9 @@ export default function UserTableSection() {
                                                 href="#"
                                                 className="text-indigo-500 hover:text-indigo-700"
                                             >
-                                                Change Status
+                                                <div className="flex items-center justify-center">
+                                                    <UpdateUserSection data={user} />
+                                                </div>
                                                 <span className="sr-only">
                                                     , {user?.rsbsa}
                                                 </span>

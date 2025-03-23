@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/XMarkIcon-Cm7BGQVE.js
-import{r as e}from"./app-C-hwDgbc.js";function a({title:r,titleId:t,...o},n){return e.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",strokeWidth:1.5,stroke:"currentColor","aria-hidden":"true","data-slot":"icon",ref:n,"aria-labelledby":t},o),r?e.createElement("title",{id:t},r):null,e.createElement("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M6 18 18 6M6 6l12 12"}))}const i=e.forwardRef(a);export{i as F};
-========
-import{r as e}from"./app-DbhIt74c.js";function a({title:r,titleId:t,...o},n){return e.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",fill:"none",viewBox:"0 0 24 24",strokeWidth:1.5,stroke:"currentColor","aria-hidden":"true","data-slot":"icon",ref:n,"aria-labelledby":t},o),r?e.createElement("title",{id:t},r):null,e.createElement("path",{strokeLinecap:"round",strokeLinejoin:"round",d:"M6 18 18 6M6 6l12 12"}))}const i=e.forwardRef(a);export{i as F};
->>>>>>>> 008900b14f184cff3cd193f093bf271de5e532bd:public/build/assets/XMarkIcon-Do8aKjwc.js
