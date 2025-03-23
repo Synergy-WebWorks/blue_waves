@@ -18,8 +18,8 @@ export default function AddReservationSection() {
     const booking_info = window.location.pathname.split("/")[3];
     const params = new URLSearchParams(window.location.search);
 
-    const products = rents?.filter((res) => res.type === "cottage") || [];
-    const rooms = rents?.filter((res) => res.type === "room") || [];
+    const products = rents?.result?.filter((res) => res.type === "cottage") || [];
+    const rooms = rents?.result?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
 
     const today = new Date();
