@@ -18,7 +18,7 @@ export default function TermsConditionSection({ data: initialData }) {
                 {data?.content && (
                     <div
                         dangerouslySetInnerHTML={{ __html: data.content }}
-                        className="prose prose-gray mt-4"
+                        className="mt-2 w-full max-h-[515px] min-h-[250px] overflow-auto border-none bg-white/5 px-3 py-2 text-base text-gray-600 prose prose-gray"
                     />
                 )}
 

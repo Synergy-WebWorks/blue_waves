@@ -13,8 +13,9 @@ export default function UpdateTermsConditionSection() {
     const id = 1
 
     useEffect(() => {
-        if (term?.result) {
-            setForm({ content: term.result.content || "" });
+        if (term?.content) {
+            console.log("Fetched Term Data:", term.content); // Debugging
+            setForm({ content: term.content || "" });
         }
     }, [term]);
 
@@ -35,11 +36,11 @@ export default function UpdateTermsConditionSection() {
         }
     };
 
-    console.log('term', term)
+    console.log('term', term.content)
 
     return (
         <div className="mt-4 p-4 border rounded-lg shadow-lg">
-            <TermsConditionSection data={term} />
+            {/* <TermsConditionSection data={term} /> */}
 
             <div className="w-full mt-5 mb-5 px-6 md:px-12 lg:px-20">
                 {/* Terms Condition Section */}
