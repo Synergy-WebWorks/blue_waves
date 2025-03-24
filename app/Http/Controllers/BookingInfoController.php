@@ -82,11 +82,16 @@ class BookingInfoController extends Controller
     public function index(Request $request)
     {
         $query = BookingInfo::query();
-
-        $bookings = $query->orderBy('id', 'desc')->paginate(10)->toArray();
-
+    
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+    
+        $bookings = $query->orderBy('id', 'desc')->paginate(10);
+    
         return response()->json($bookings);
     }
+    
 
 
 
