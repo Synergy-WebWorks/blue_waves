@@ -170,7 +170,7 @@ export default function BookThirdFormSection({ setAccept }) {
                                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(term?.content || "No content available") }}
                             /> */}
                             <div
-                                className="mt-2 w-full max-h-[400px] min-h-[250px] overflow-auto border-none bg-white/5 px-3 py-2 text-base text-gray-600 prose prose-gray"
+                                className="mt-2 w-full max-h-[515px] min-h-[250px] overflow-auto border-none bg-white/5 px-3 py-2 text-base text-gray-600 prose prose-gray"
                                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(term?.content || "No content available") }}
                             />
                             <div className="mt-6 flex">
