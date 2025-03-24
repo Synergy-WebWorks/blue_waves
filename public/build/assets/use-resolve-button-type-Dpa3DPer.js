@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/use-resolve-button-type-BFKeimYI.js
-import{r as i}from"./app-Bq42wZQ1.js";import{l as o}from"./keyboard-zRYMbUP2.js";function u(t){var r;if(t.type)return t.type;let n=(r=t.as)!=null?r:"button";if(typeof n=="string"&&n.toLowerCase()==="button")return"button"}function s(t,r){let[n,e]=i.useState(()=>u(t));return o(()=>{e(u(t))},[t.type,t.as]),o(()=>{n||r.current&&r.current instanceof HTMLButtonElement&&!r.current.hasAttribute("type")&&e("button")},[n,r]),n}export{s as T};
-========
-import{r as i}from"./app-Bze_r7gZ.js";import{l as o}from"./keyboard-BtZk0htW.js";function u(t){var r;if(t.type)return t.type;let n=(r=t.as)!=null?r:"button";if(typeof n=="string"&&n.toLowerCase()==="button")return"button"}function s(t,r){let[n,e]=i.useState(()=>u(t));return o(()=>{e(u(t))},[t.type,t.as]),o(()=>{n||r.current&&r.current instanceof HTMLButtonElement&&!r.current.hasAttribute("type")&&e("button")},[n,r]),n}export{s as T};
->>>>>>>> 6435dea76ec7dc109115a8beac40941beaaae4dd:public/build/assets/use-resolve-button-type-Dpa3DPer.js

@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/failure-BC3OBm16.js
-import{j as e,A as s}from"./app-Bq42wZQ1.js";function i(){return e.jsxs("div",{className:"flex flex-col items-center justify-center h-screen relative",children:[e.jsx("img",{src:"/gif/failed.gif",className:"md:w-1/2 max-h-screen",alt:"Payment Success Animation"}),e.jsx("button",{onClick:()=>s.visit("/"),className:"absolute bottom-5 p-3 bg-blue-700 text-white hover:bg-blue-600 rounded-md",children:"BACK TO WEBSITE"})]})}export{i as default};
-========
-import{j as e,A as s}from"./app-Bze_r7gZ.js";function i(){return e.jsxs("div",{className:"flex flex-col items-center justify-center h-screen relative",children:[e.jsx("img",{src:"/gif/failed.gif",className:"md:w-1/2 max-h-screen",alt:"Payment Success Animation"}),e.jsx("button",{onClick:()=>s.visit("/"),className:"absolute bottom-5 p-3 bg-blue-700 text-white hover:bg-blue-600 rounded-md",children:"BACK TO WEBSITE"})]})}export{i as default};
->>>>>>>> 6435dea76ec7dc109115a8beac40941beaaae4dd:public/build/assets/failure-CmPIHk9Z.js

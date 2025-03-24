@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/booking-info-service-DL5qEGK5.js
-import{g as e}from"./app-Bq42wZQ1.js";function n(r){try{return e.post("/api/add_order",r)}catch{}}function c(r){try{return e.post("/api/checkout_data",r)}catch{}}function a(r){try{return e.post("/api/booking_info",r)}catch{}}function s(r){try{return e.get("/api/get_calendar"+r)}catch{}}function i(){try{return e.get("/api/booking_info"+window.location.search)}catch{}}async function u(r){return(await e.get("/api/booking_info/"+r)).data}export{u as a,s as b,a as c,c as d,n as e,i as g};
-========
-import{g as e}from"./app-Bze_r7gZ.js";function n(r){try{return e.post("/api/add_order",r)}catch{}}function c(r){try{return e.post("/api/checkout_data",r)}catch{}}function a(r){try{return e.post("/api/booking_info",r)}catch{}}function s(r){try{return e.get("/api/get_calendar"+r)}catch{}}function i(){try{return e.get("/api/booking_info"+window.location.search)}catch{}}async function u(r){return(await e.get("/api/booking_info/"+r)).data}export{u as a,s as b,a as c,c as d,n as e,i as g};
->>>>>>>> 6435dea76ec7dc109115a8beac40941beaaae4dd:public/build/assets/booking-info-service-CJOEnNoW.js

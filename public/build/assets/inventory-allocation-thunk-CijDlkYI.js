@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/inventory-allocation-thunk-CijDlkYI.js
-import{g as a,B as e}from"./app-Bq42wZQ1.js";function i(t){try{return a.post("/api/inventory_allocations",t)}catch{}}async function c(t){try{return await a.get(`/api/inventory_allocations/${t}${window.location.search}`)}catch(n){return n}}function l(t){return async function(n,r){await i(t)}}function _(t){return async function(n,r){const o=await c(t);return n(e.actions.setInventoryAllocations(o.data.status)),o}}export{l as c,_ as g};
-========
-import{g as a,B as e}from"./app-Bze_r7gZ.js";function i(t){try{return a.post("/api/inventory_allocations",t)}catch{}}async function c(t){try{return await a.get(`/api/inventory_allocations/${t}${window.location.search}`)}catch(n){return n}}function l(t){return async function(n,r){await i(t)}}function _(t){return async function(n,r){const o=await c(t);return n(e.actions.setInventoryAllocations(o.data.status)),o}}export{l as c,_ as g};
->>>>>>>> 6435dea76ec7dc109115a8beac40941beaaae4dd:public/build/assets/inventory-allocation-thunk-CKbomx3z.js

@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/success-AEWTP3lS.js
-import{j as e,A as s}from"./app-Bq42wZQ1.js";function c(){return e.jsxs("div",{className:"flex flex-col items-center justify-center h-screen relative",children:[e.jsx("img",{src:"/gif/success.gif",className:"md:w-1/2 max-h-screen",alt:"Payment Success Animation"}),e.jsx("button",{onClick:()=>s.visit("/"),className:"absolute bottom-5 p-3 bg-blue-700 text-white hover:bg-blue-600 rounded-md",children:"BACK TO WEBSITE"})]})}export{c as default};
-========
-import{j as e,A as s}from"./app-Bze_r7gZ.js";function c(){return e.jsxs("div",{className:"flex flex-col items-center justify-center h-screen relative",children:[e.jsx("img",{src:"/gif/success.gif",className:"md:w-1/2 max-h-screen",alt:"Payment Success Animation"}),e.jsx("button",{onClick:()=>s.visit("/"),className:"absolute bottom-5 p-3 bg-blue-700 text-white hover:bg-blue-600 rounded-md",children:"BACK TO WEBSITE"})]})}export{c as default};
->>>>>>>> 6435dea76ec7dc109115a8beac40941beaaae4dd:public/build/assets/success-Bm6QMd65.js

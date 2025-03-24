@@ -1,5 +1,0 @@
-<<<<<<<< HEAD:public/build/assets/useLocale-D2n4rYMt.js
-import{r as s}from"./app-Bq42wZQ1.js";import{a8 as i,a9 as c}from"./useZIndex-QGKKbXma.js";const x=(l,a)=>{const o=s.useContext(i),n=s.useMemo(()=>{var e;const t=a||c[l],u=(e=o==null?void 0:o[l])!==null&&e!==void 0?e:{};return Object.assign(Object.assign({},typeof t=="function"?t():t),u||{})},[l,a,o]),r=s.useMemo(()=>{const e=o==null?void 0:o.locale;return o!=null&&o.exist&&!e?c.locale:e},[o]);return[n,r]};export{x as u};
-========
-import{r as s}from"./app-Bze_r7gZ.js";import{a8 as i,a9 as c}from"./useZIndex-D11P-6UW.js";const x=(l,a)=>{const o=s.useContext(i),n=s.useMemo(()=>{var e;const t=a||c[l],u=(e=o==null?void 0:o[l])!==null&&e!==void 0?e:{};return Object.assign(Object.assign({},typeof t=="function"?t():t),u||{})},[l,a,o]),r=s.useMemo(()=>{const e=o==null?void 0:o.locale;return o!=null&&o.exist&&!e?c.locale:e},[o]);return[n,r]};export{x as u};
->>>>>>>> 6435dea76ec7dc109115a8beac40941beaaae4dd:public/build/assets/useLocale-BtEkZXo9.js
