@@ -1,0 +1,1 @@
+import{g as n,E as s}from"./app-Bq42wZQ1.js";async function i(t){return(await n.get("/api/term/"+t)).data}function u(t){try{return n.put(`/api/term/${t.id}`,t)}catch{}}function o(t){return async function(e,a){const r=await i(t);return e(s.actions.setTerm(r.status)),r.status}}function _(t){return async function(e,a){await u(t)}}export{o as g,_ as u};

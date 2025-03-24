@@ -1,9 +1,11 @@
 import React from "react";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
+import DOMPurify from 'dompurify';
 
-export default function BookThirdFormSection({setAccept}) {
+export default function BookThirdFormSection({ setAccept }) {
     const { selected, customer, search } = useSelector((store) => store.app);
+    const { term } = useSelector((state) => state.terms)
 
     function getDayGap(startDate, endDate) {
         const start = new Date(startDate);
@@ -14,6 +16,8 @@ export default function BookThirdFormSection({setAccept}) {
     const gap = getDayGap(search.start, search.end);
     const totalRate =
         selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
+
+
 
     return (
         <div className="bg-gray-50">
@@ -161,55 +165,15 @@ export default function BookThirdFormSection({setAccept}) {
                             >
                                 Terms & Condition
                             </label>
-                            <textarea
-                                readOnly
-                                id="contact_content"
-                                name="contact_content"
-                                className="mt-2 w-full min-h-[650px] border-none bg-white/5 px-3 py-2 text-base text-gray-600 resize-none"
-                                value="
-Welcome to Blue Waves Resort! To ensure a pleasant and hassle-free stay, we kindly ask all guests to review and adhere to our Terms and Conditions.
-
-1. Booking & Cancellation Policies
-A valid government-issued ID and full payment are required to confirm your booking.
-Cancellations made 7 days or more before check-in will receive a full refund.
-Cancellations made within 3-6 days before check-in will incur a 50% charge.
-Cancellations made within 48 hours of check-in or no-shows are non-refundable.
-Date changes are subject to availability and may incur additional charges.
-
-2. Check-in & Check-out Times
-Check-in time: 2:00 PM onwards. Early check-in is subject to availability.
-Check-out time: 12:00 PM. Late check-out beyond 1 hour may incur additional charges.
-Guests must return keycards at check-out to avoid a replacement fee.
-
-3. Guest Responsibilities
-Guests must comply with all resort rules and regulations.
-Noise levels should be kept at a minimum, especially after 10:00 PM.
-Guests are responsible for any damage to resort property and may be charged accordingly.
-Smoking is only permitted in designated areas. A cleaning fee applies for smoking inside rooms.
-
-4. Resort Facilities & Services
-Swimming pools, fitness centers, and other amenities are available during operating hours.
-Proper swimwear is required in pool areas.
-Outside food and beverages may not be allowed in certain areas of the resort.
-Guests must follow safety instructions when using resort facilities.
-
-5. Liability & Safety
-The resort is not liable for lost, stolen, or damaged personal belongings. Guests are advised to use in-room safes.
-The resort is not responsible for injuries due to misuse of facilities or failure to follow safety rules.
-In case of emergencies, please contact the front desk or resort security immediately.
-
-6. General Policies
-The resort reserves the right to refuse service to any guest who violates these terms.
-Any disputes arising from the stay will be handled according to local laws.
-By confirming your booking and staying at Blue Waves Resort, you agree to abide by these Terms and Conditions.
-
-                                                    "
+                            <div
+                                className="mt-2 w-full min-h-[650px] border-none bg-white/5 px-3 py-2 text-base text-gray-600 prose prose-gray"
+                                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(term?.content || "No content available") }}
                             />
                             <div className="mt-6 flex">
                                 <label className="flex items-center space-x-2">
                                     <input
                                         required
-                                        onChange={(e)=>setAccept(e.target.checked)}
+                                        onChange={(e) => setAccept(e.target.checked)}
                                         type="checkbox"
                                         className="w-4 h-4 text-blue-600 border-gray-300 rounded focus:ring focus:ring-blue-500"
                                     />

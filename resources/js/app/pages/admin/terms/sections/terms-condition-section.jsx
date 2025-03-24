@@ -68,8 +68,8 @@ export default function TermsConditionSection({ data: initialData }) {
                     <li>
                         <strong>Liability & Safety</strong> – Disclaimers for accidents, lost items, or emergency protocols.
                     </li>
-                </ul> */}
-                {/* <p className="mt-2 text-sm/6 text-gray-400">
+                </ul>
+                <p className="mt-2 text-sm/6 text-gray-400">
                     By agreeing to these terms, guests acknowledge their responsibilities and the resort’s policies, ensuring a hassle-free and enjoyable stay.
                 </p> */}
             </div>
