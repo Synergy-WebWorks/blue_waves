@@ -558,7 +558,7 @@ export default function AdminLayout({ children }) {
                                 </li>
                                 <li className="-mx-6 mt-auto">
                                     <Link
-                                        href="#"
+                                        href={route("logout")}
                                         className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-cyan-100 hover:bg-cyan-600 hover:text-white"
                                     >
                                         <img
