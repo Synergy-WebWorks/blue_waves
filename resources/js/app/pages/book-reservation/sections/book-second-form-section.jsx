@@ -4,9 +4,12 @@ import { TrashIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
 import { setCustomer, setSelected } from "@/app/redux/app-slice";
 
+
 export default function BookSecondFormSection() {
     const { selected, customer, search } = useSelector((store) => store.app);
     const dispatch = useDispatch();
+
+    const mobile = customer?.mobile || "";
 
     function getDayGap(startDate, endDate) {
         const start = new Date(startDate);
@@ -17,12 +20,29 @@ export default function BookSecondFormSection() {
     const gap = getDayGap(search.start, search.end);
     const totalRate =
         selected.reduce((sum, item) => sum + Number(item.rate), 0) * gap;
-        
+
     function remove_cart(value) {
         const idToRemove = value.id;
         const updatedData = selected.filter((item) => item.id !== idToRemove);
         dispatch(setSelected(updatedData));
     }
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        if (value.length <= 11) {
+            dispatch(setCustomer({
+                ...customer,
+                [name]: value,
+            }));
+        }
+    };
+
+    const handleBlur = () => {
+        if (mobile.length > 11) {
+            alert('Mobile number cannot exceed 11 digits!');
+        }
+    };
+
     console.log("customer", customer);
     return (
         <div className="bg-gray-50">
@@ -59,7 +79,9 @@ export default function BookSecondFormSection() {
                                         id="email-address"
                                         type="email"
                                         autoComplete="email"
+                                        placeholder="ex:guest@gmail.com"
                                         className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
+                                        required
                                     />
                                 </div>
                             </div>
@@ -74,20 +96,19 @@ export default function BookSecondFormSection() {
                                     <input
                                         id="mobile"
                                         name="mobile"
-                                        value={customer.mobile ?? ""}
-                                        onChange={(e) =>
-                                            dispatch(
-                                                setCustomer({
-                                                    ...customer,
-                                                    [e.target.name]:
-                                                        e.target.value,
-                                                })
-                                            )
-                                        }
+                                        value={mobile} // Use mobile from the customer object (with fallback)
+                                        onChange={handleChange}
+                                        onBlur={handleBlur} // Optional: Trigger validation when the input loses focus
                                         type="number"
                                         autoComplete="tel"
                                         className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
+                                        required
                                     />
+                                    {mobile.length > 11 && (
+                                        <p className="text-red-500 text-sm mt-2">
+                                            Mobile number cannot exceed 11 digits.
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         </div>
@@ -122,6 +143,7 @@ export default function BookSecondFormSection() {
                                             type="text"
                                             autoComplete="given-name"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -178,6 +200,7 @@ export default function BookSecondFormSection() {
                                             type="text"
                                             autoComplete="family-name"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -241,6 +264,7 @@ export default function BookSecondFormSection() {
                                             type="text"
                                             autoComplete="street-address"
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
+                                            required
                                         />
                                     </div>
                                 </div>
@@ -347,7 +371,7 @@ export default function BookSecondFormSection() {
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm"> Subtotal: {totalRate.toFixed(2)/gap} x {gap}</dt>
+                                    <dt className="text-sm"> Subtotal: {totalRate.toFixed(2) / gap} x {gap}</dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{totalRate.toFixed(2)}
                                     </dd>

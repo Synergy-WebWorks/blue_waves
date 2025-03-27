@@ -281,10 +281,10 @@ export default function StepperSection() {
                 </nav>
 
                 <div className="mb-8 mt-4 p-4">{renderCurrentForm()}</div>
-                <div className="fixed  bottom-0 mt-4 flex items-center justify-between w-full p-3">
+                <div className="fixed bottom-0 mt-14 h-0 flex items-center justify-between w-full p-16">
                     <button
                         onClick={handlePrevious}
-                        className="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400"
+                        className="px-6 py-2 bg-[rgba(45,55,72,0.6)] hover:bg-[rgba(45,55,72,0.8)] text-white rounded-md "
                         disabled={currentStep === 1}
                     >
                         Previous
@@ -300,10 +300,10 @@ export default function StepperSection() {
                             loading ||
                             (!accept && currentStep == 3)
                         }
-                        className={`px-4 py-2 text-white ${selected.length == 0 ||
+                        className={`px-6 py-2 text-white ${selected.length == 0 ||
                             loading ||
                             (!accept && currentStep == 3)
-                            ? "bg-gray-600 hover:bg-gray-700 text-white"
+                            ? "bg-[rgba(45,55,72,0.6)] hover:bg-[rgba(45,55,72,0.8)] text-white"
                             : "bg-cyan-600 hover:bg-cyan-700 text-white"
                             }}  rounded-md `}
                     >
@@ -314,7 +314,7 @@ export default function StepperSection() {
                         ) : currentStep === steps.length ? (
                             "Proceed to Online Payment"
                         ) : (
-                            "Next"
+                            "Proceed"
                         )}
                     </button>
                 </div>
