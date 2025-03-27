@@ -62,7 +62,6 @@ export default function RoomSection() {
                                                     {rent.price}
                                                 </p>
                                             </div>
-
                                         </div>
                                         <div className="flex flex-row items-start justify-between">
                                             <div> ₱ {parseInt(rent.rate).toFixed(2)}</div>

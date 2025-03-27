@@ -7,10 +7,10 @@ import { resolvePageComponent } from "laravel-vite-plugin/inertia-helpers";
 import { Provider } from "react-redux";
 import store from "./app/store/store";
 
-const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+const appName = import.meta.env.VITE_APP_NAME || "Blue Waves Resort";
 
 createInertiaApp({
-    title: (title) => `${title} - ${appName}`,
+    title: (title) => `${title}${appName}`,
     resolve: (name) =>
         resolvePageComponent(
             `./app/pages/${name}.jsx`,
