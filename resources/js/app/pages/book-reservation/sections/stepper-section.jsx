@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
     CheckIcon,
     ChevronLeftIcon,
@@ -12,6 +12,7 @@ import store from "@/app/store/store";
 import { create_booking_info_thunk } from "@/app/redux/booking-info-thunk";
 import moment from "moment";
 import { router } from "@inertiajs/react";
+import { get_term_by_id_thunk } from "@/app/redux/term-thunk";
 
 export default function StepperSection() {
     const [currentStep, setCurrentStep] = useState(1); // Set the first step as current (1-based index)
@@ -34,6 +35,11 @@ export default function StepperSection() {
         return classes.filter(Boolean).join(" ");
     }
 
+    const id = 1
+    useEffect(() => {
+        store.dispatch(get_term_by_id_thunk(id))
+    }, []);
+
     // Determine the dynamic status of each step
     const updateStepStatus = () =>
         steps.map((step, index) => ({
@@ -42,8 +48,8 @@ export default function StepperSection() {
                 index + 1 < currentStep
                     ? "complete"
                     : index + 1 === currentStep
-                    ? "current"
-                    : "upcoming",
+                        ? "current"
+                        : "upcoming",
         }));
 
     const stepsWithStatus = updateStepStatus();
@@ -294,13 +300,12 @@ export default function StepperSection() {
                             loading ||
                             (!accept && currentStep == 3)
                         }
-                        className={`px-4 py-2 text-white ${
-                            selected.length == 0 ||
+                        className={`px-4 py-2 text-white ${selected.length == 0 ||
                             loading ||
                             (!accept && currentStep == 3)
-                                ? "bg-gray-600 hover:bg-gray-700 text-white"
-                                : "bg-cyan-600 hover:bg-cyan-700 text-white"
-                        }}  rounded-md `}
+                            ? "bg-gray-600 hover:bg-gray-700 text-white"
+                            : "bg-cyan-600 hover:bg-cyan-700 text-white"
+                            }}  rounded-md `}
                     >
                         {loading ? (
                             <>Loading...</>

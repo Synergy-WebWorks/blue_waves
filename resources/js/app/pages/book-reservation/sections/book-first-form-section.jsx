@@ -14,11 +14,11 @@ export default function BookFirstFormSection() {
     NEXT_MONTH.setMonth(NEXT_MONTH.getMonth() + 1);
     const { rents } = useSelector((store) => store.rent);
     const { selected } = useSelector((store) => store.app);
-    
+
     const params = new URLSearchParams(window.location.search);
     const adults = params.get("adults");
     const children = params.get("children");
-console.log('rentsrents',rents)
+    console.log('rentsrents', rents)
     const products = rents.result?.filter((res) => res.type === "cottage") || [];
     const rooms = rents.result?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
@@ -48,7 +48,7 @@ console.log('rentsrents',rents)
             endDate: end,
         });
     }, []);
-    
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -81,7 +81,7 @@ console.log('rentsrents',rents)
             prevIndexes.map((imgIndex, i) =>
                 i === index
                     ? (imgIndex - 1 + products[i].uploads.length) %
-                      products[i].uploads.length
+                    products[i].uploads.length
                     : imgIndex
             )
         );
@@ -102,7 +102,7 @@ console.log('rentsrents',rents)
             prevIndexes2.map((imgIndex2, i) =>
                 i === index2
                     ? (imgIndex2 - 1 + rooms[i].images.length) %
-                      rooms[i].images.length
+                    rooms[i].images.length
                     : imgIndex2
             )
         );
@@ -112,15 +112,22 @@ console.log('rentsrents',rents)
             `/book-reservation?start=${dateRange.startDate}&end=${dateRange.endDate}&adults=${person.adults}&children=${person.children}`
         );
     }
-    console.log("selected", selected);
     function add_to_cart(value) {
+        // Dispatching item to cart logic
         const updatedSelected = [...selected, value];
         const uniqueData = Array.from(
             new Map(updatedSelected.map((item) => [item.id, item])).values()
         );
         dispatch(setSelected(uniqueData));
+
+        // Set button as permanently clicked
+        setClickedButtons((prevState) => ({
+            ...prevState,
+            [value.id]: true, // Mark this button as clicked
+        }));
     }
 
+    const [clickedButtons, setClickedButtons] = useState({});
     return (
         <div className="bg-gray-50">
             <div className="mx-auto px-4 pt-16 pb-24 sm:px-6 lg:px-8">
@@ -138,7 +145,7 @@ console.log('rentsrents',rents)
                                     {/* First Column - Datepicker & Booking Guest Component */}
                                     <div className="flex flex-col gap-4">
                                         <div className="flex flex-col sm:flex-row sm:gap-4">
-                                          
+
                                             <Datepicker
                                                 primaryColor={"teal"}
                                                 value={dateRange}
@@ -240,14 +247,16 @@ console.log('rentsrents',rents)
                                                             {product.price}
                                                         </p>
                                                         <button
-                                                            onClick={() =>
-                                                                add_to_cart(
-                                                                    product
-                                                                )
-                                                            }
-                                                            className="ml-4 bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 rounded-md"
+                                                            onClick={() => add_to_cart(product)}
+                                                            disabled={clickedButtons[product.id]} // Disable button after click
+                                                            className={`ml-4 px-2 py-1 rounded-md text-white transition-colors duration-300 ${clickedButtons[product.id]
+                                                                ? "bg-gray-500 cursor-not-allowed" // Stay gray after clicking
+                                                                : "bg-orange-500 hover:bg-orange-600"
+                                                                }`}
                                                         >
-                                                            Add to Booking
+                                                            {clickedButtons[product.id]
+                                                                ? "Added to your Booking"
+                                                                : "Add to Booking"}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -311,12 +320,16 @@ console.log('rentsrents',rents)
                                                         {cottage.price}
                                                     </p>
                                                     <button
-                                                        onClick={() =>
-                                                            add_to_cart(cottage)
-                                                        }
-                                                        className="ml-4 bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 rounded-md"
+                                                        onClick={() => add_to_cart(cottage)}
+                                                        disabled={clickedButtons[cottage.id]} // Disable button after click
+                                                        className={`ml-4 px-2 py-1 rounded-md text-white transition-colors duration-300 ${clickedButtons[cottage.id]
+                                                            ? "bg-gray-500 cursor-not-allowed" // Stay gray after clicking
+                                                            : "bg-orange-500 hover:bg-orange-600"
+                                                            }`}
                                                     >
-                                                        Add to Booking
+                                                        {clickedButtons[cottage.id]
+                                                            ? "Added to your Booking"
+                                                            : "Add to Booking"}
                                                     </button>
                                                 </div>
                                             </div>

@@ -126,11 +126,10 @@ export default function IndexPage() {
                                 onClick={(e) =>
                                     handleNavigationClick(e, item.href)
                                 }
-                                className={`text-md/8 font-semibold text-gray-200 hover:text-white ${
-                                    activeSection === item.href.slice(1)
+                                className={`text-md/8 font-semibold text-gray-200 hover:text-white ${activeSection === item.href.slice(1)
                                         ? "text-white"
                                         : ""
-                                }`}
+                                    }`}
                             >
                                 {item.name}
                             </a>
@@ -211,11 +210,11 @@ export default function IndexPage() {
                                             ))}
                                         </duv>
                                     </Disclosure>
-                                  
+
                                 </div>
                                 <div className="py-6">
                                     <Link
-                                         href="/user-login"
+                                        href="/user-login"
                                         className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                                     >
                                         Log in

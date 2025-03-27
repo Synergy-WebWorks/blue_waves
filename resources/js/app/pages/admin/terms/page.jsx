@@ -7,7 +7,10 @@ import { get_term_by_id_thunk, get_term_thunk } from "@/app/redux/term-thunk";
 export default function TermsAndConditionPage() {
     const id = 1
     useEffect(() => {
-        store.dispatch(get_term_by_id_thunk(id))
+        const fetchTerm = async () => {
+            await store.dispatch(get_term_by_id_thunk(id));
+        };
+        fetchTerm();
     }, []);
     return (
         <AdminLayout>
