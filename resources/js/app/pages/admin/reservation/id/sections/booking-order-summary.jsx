@@ -128,6 +128,44 @@ export default function BookingOrderSummary() {
                                 )}
                             </ul>
                             <dl className="space-y-6 border-t border-gray-200 px-4 py-6 sm:px-6">
+                                <>
+                                    <div>Activities</div>
+                                    {booking_info?.additionals?.map(
+                                        (res, i) => {
+                                            return (
+                                                <div className="flex items-center justify-between">
+                                                    <dt className="text-sm">
+                                                        {res?.activity?.name}
+                                                    </dt>
+
+                                                    <dd className="text-sm font-medium text-gray-900">
+                                                        <div className="flex gap-3">
+                                                            <div>
+                                                                Rate:
+                                                                {parseInt(
+                                                                    res.rate
+                                                                ).toFixed(2)}
+                                                            </div>
+                                                            <div>*</div>
+                                                            <div>
+                                                                Quantity:&nbsp;
+                                                                {res.quantity}
+                                                            </div>
+                                                            <div>=</div>
+                                                            <div>
+                                                                ₱
+                                                                {parseInt(
+                                                                    res.total
+                                                                ).toFixed(2)}
+                                                            </div>
+                                                        </div>
+                                                    </dd>
+                                                </div>
+                                            );
+                                        }
+                                    )}
+                                </>
+
                                 <div className="flex items-center justify-between ">
                                     <dt className="text-base font-medium">
                                         Cottages/Rooms
@@ -184,12 +222,8 @@ export default function BookingOrderSummary() {
                                     <dd className="text-base text-gray-900 font-black">
                                         ₱
                                         {(
-                                            parseInt(rent_total) +
-                                            parseInt(
-                                                booking_info.children ?? 0
-                                            ) +
-                                            parseInt(booking_info.adults ?? 0) -
-                                            parseInt(booking_info.initial)
+                                            Number(booking_info?.total) -
+                                            Number(booking_info?.initial)
                                         )?.toFixed(2)}
                                     </dd>
                                 </div>

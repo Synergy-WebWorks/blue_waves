@@ -23,4 +23,8 @@ class BookingOrder extends Model
     {
         return $this->hasOne(Rent::class,'id','rent_id')->with(['upload']);
     }
+    public function booking_info():HasOne
+    {
+        return $this->hasOne(BookingInfo::class,'reference_id','reference_id');
+    }
 }

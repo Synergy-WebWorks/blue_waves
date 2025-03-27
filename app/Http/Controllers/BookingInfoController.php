@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Additional;
 use App\Models\BookingInfo;
 use App\Models\BookingOrder;
 use App\Notifications\BookingNotification;
@@ -45,7 +46,7 @@ class BookingInfoController extends Controller
             $bookingInfo->update([
                 'adults' => $request->customer['adults'] + $bookingInfo->adults,
                 'children' => $request->customer['children'] + $bookingInfo->children,
-                'total' => $request->total_rent + $bookingInfo->total,
+                'total' => $request->total_rent + $bookingInfo->total + $request->total_activity,
             ]);
             foreach ($request->selected as $key => $value) {
                 BookingOrder::create([
@@ -55,6 +56,15 @@ class BookingInfoController extends Controller
                     'end_at' => $request->end,
                     'duration' => $request->gap,
                     'sub_total' => $value['rate'] *  $request->gap,
+                ]);
+            }
+            foreach ($request->activities as $key => $value) {
+                Additional::create([
+                    'reference_id'=>$request->customer['reference_id'],
+                    'activity_id' => $value['id'],
+                    'rate' => $value['rate'],
+                    'quantity' => $value['quantity'],
+                    'total' => intval($value['rate']) * intval($value['quantity']),
                 ]);
             }
             return response()->json('success');
@@ -82,16 +92,16 @@ class BookingInfoController extends Controller
     public function index(Request $request)
     {
         $query = BookingInfo::query();
-    
+
         if ($request->has('status')) {
             $query->where('status', $request->status);
         }
-    
+
         $bookings = $query->orderBy('id', 'desc')->paginate(10);
-    
+
         return response()->json($bookings);
     }
-    
+
 
 
 
@@ -138,7 +148,7 @@ class BookingInfoController extends Controller
     // Display the specified booking record
     public function show($id)
     {
-        $bookingInfo = BookingInfo::where('reference_id', $id)->with(['booking_orders'])->first();
+        $bookingInfo = BookingInfo::where('reference_id', $id)->with(['booking_orders','additionals'])->first();
         return response()->json($bookingInfo, 200);
     }
 

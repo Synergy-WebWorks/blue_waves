@@ -7,6 +7,7 @@ use App\Models\Rent;
 use App\Models\Upload;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 class RentController extends Controller
@@ -18,14 +19,18 @@ class RentController extends Controller
         $startDate = Carbon::parse($request->start)->format('Y-m-d');
         $endDate = Carbon::parse($request->end)->format('Y-m-d');
 
-        // Get all bookings in the date range
-        $bookings = BookingOrder::where(function ($q) use ($startDate, $endDate) {
-            $q->whereRaw("STR_TO_DATE(started_at, '%M %d, %Y') BETWEEN ? AND ?", [$startDate, $endDate])
-                ->orWhereRaw("STR_TO_DATE(end_at, '%M %d, %Y') BETWEEN ? AND ?", [$startDate, $endDate])
-                ->orWhereRaw("STR_TO_DATE(started_at, '%M %d, %Y') <= ? AND STR_TO_DATE(end_at, '%M %d, %Y') >= ?", [$startDate, $endDate]);
-        })->pluck('rent_id')->toArray();  // Extract rent IDs only
+        $bookings = BookingOrder::whereHas('booking_info', function ($q) {
+            $q->where('status', '=', 'partial'); // Filter non-pending bookings
+        })
+            ->where(function ($q) use ($startDate, $endDate) {
+                $q->whereBetween(DB::raw("STR_TO_DATE(started_at, '%M %d, %Y')"), [$startDate, $endDate])
+                    ->orWhereBetween(DB::raw("STR_TO_DATE(end_at, '%M %d, %Y')"), [$startDate, $endDate])
+                    ->orWhereRaw("STR_TO_DATE(started_at, '%M %d, %Y') <= ? AND STR_TO_DATE(end_at, '%M %d, %Y') >= ?", [$startDate, $endDate]);
+            })
+            ->pluck('rent_id')
+            ->toArray();
+        // Extract rent IDs only
 
-        // Get all Rents that are NOT booked
         $rents = Rent::whereNotIn('id', $bookings)->with(['uploads'])->get();
 
         return response()->json([

@@ -14,11 +14,21 @@ export default function AddReservationSection() {
     NEXT_MONTH.setMonth(NEXT_MONTH.getMonth() + 1);
     const { rents } = useSelector((store) => store.rent);
     const { selected, search, customer } = useSelector((store) => store.app);
-
+    const { activities } = useSelector((state) => state.activities);
+   
     const booking_info = window.location.pathname.split("/")[3];
     const params = new URLSearchParams(window.location.search);
-
-    const products = rents?.result?.filter((res) => res.type === "cottage") || [];
+    const [quantities, setQuantities] = useState(() => {
+        return (
+            activities?.result?.reduce((acc, res) => {
+                acc[res.id] = res.quantity ?? 0; // Default quantity to 0
+                return acc;
+            }, {}) || {}
+        ); // Ensure an empty object if activities.result is undefined
+    });
+    console.log("quantities", quantities);
+    const products =
+        rents?.result?.filter((res) => res.type === "cottage") || [];
     const rooms = rents?.result?.filter((res) => res.type === "room") || [];
     const dispatch = useDispatch();
 
@@ -78,10 +88,10 @@ export default function AddReservationSection() {
     };
     function search_rent_vacant() {
         router.visit(
-            `/admin/reservation/${booking_info}?start=${search.start}&end=${search.end}&adults=${search.adults}&children=${search.children}`
+            `/admin/reservation/${booking_info}?start=${search?.start}&end=${search?.end}&adults=${search?.adults}&children=${search?.children}`
         );
     }
-    console.log("selected", selected);
+    console.log("quantities", quantities);
     function add_to_cart(value) {
         const updatedSelected = [...selected, value];
         const uniqueData = Array.from(
@@ -90,17 +100,109 @@ export default function AddReservationSection() {
         dispatch(setSelected(uniqueData));
     }
 
+    const handleIncrement = (res) => {
+        setQuantities((prev) => ({
+            ...prev,
+            [res.id]: {
+                ...res,
+                quantity: (prev[res.id]?.quantity ?? 0) + 1, // Ensure default quantity is 0 before incrementing
+            },
+        }));
+    };
+
+    const handleDecrement = (res) => {
+        setQuantities((prev) => ({
+            ...prev,
+            [res.id]: {
+                ...res,
+                quantity: Math.max((prev[res.id]?.quantity ?? 0) - 1, 0), 
+            },
+        }));
+    };
+
     return (
         <div className="bg-gray-50">
             <div className="mx-auto">
                 <div className="lg:grid lg:grid-cols-1 lg:gap-x-12 xl:gap-x-16">
                     <div>
                         <div className="mt-2 pt-1 pb-5">
-                            <div className="sticky top-0 z-10 bg-gray-50 pt-5 pb-5 px-5 py-5 border-b border-gray-300">
+                            <div className=" bg-gray-50 pt-5 pb-5 px-5 py-5 border-b border-gray-300">
                                 <h2 className="text-lg font-medium text-cyan-600">
                                     Booking Details
                                 </h2>
+                                <table className="min-w-full divide-y divide-gray-300">
+                                    <thead>
+                                        <tr>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 sm:pl-0"
+                                            >
+                                                Activity Name
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-left text-sm font-semibold text-gray-900"
+                                            >
+                                                Rate/Hour
+                                            </th>
+                                            <th
+                                                scope="col"
+                                                className="px-3 py-3.5 text-center text-sm font-semibold text-gray-900"
+                                            >
+                                                Action
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody className="divide-y divide-gray-200">
+                                        {activities?.result?.map((res) => (
+                                            <tr key={res.id}>
+                                                <td className="px-3 py-3.5 text-sm font-medium whitespace-nowrap text-gray-900 sm:pl-0">
+                                                    {res.name}
+                                                </td>
+                                                <td className="px-3 py-3.5 text-sm whitespace-nowrap text-gray-500">
+                                                    {parseFloat(
+                                                        res.rate
+                                                    ).toFixed(2)}
+                                                </td>
+                                                <td className="px-3 py-3.5 text-sm whitespace-nowrap text-gray-500">
+                                                    <div className="flex items-center gap-2">
+                                                        <button
+                                                            onClick={() =>
+                                                                handleDecrement(
+                                                                    res
+                                                                )
+                                                            }
+                                                            className="px-3 py-1 bg-gray-200 text-gray-700 rounded"
+                                                        >
+                                                            -
+                                                        </button>
+                                                        <input
+                                                            type="text"
+                                                            value={
+                                                                quantities?.[
+                                                                    res.id
+                                                                ]?.quantity ?? 0
+                                                            }
+                                                            readOnly
+                                                            className="w-20 text-center border border-gray-300 rounded"
+                                                        />
 
+                                                        <button
+                                                            onClick={() =>
+                                                                handleIncrement(
+                                                                    res
+                                                                )
+                                                            }
+                                                            className="px-3 py-1 bg-teal-600 text-white rounded"
+                                                        >
+                                                            +
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </table>
                                 {/* Sticky Booking Section */}
 
                                 <div>
@@ -148,7 +250,7 @@ export default function AddReservationSection() {
 
                                     {/* Second Column - My Cart Button */}
                                     <div className="flex mt-5 justify-between items-center self-end">
-                                        <AddOrderSection />
+                                        <AddOrderSection quantities={quantities}/>
                                         <BookingCartComponent />
                                     </div>
                                 </div>
@@ -200,7 +302,10 @@ export default function AddReservationSection() {
                                                     </a>
                                                 </h3>
                                                 <p className="text-sm italic font-bold text-gray-500">
-                                                  Price:  {parseInt(product.rate).toFixed(2)}
+                                                    Price:{" "}
+                                                    {parseInt(
+                                                        product.rate
+                                                    ).toFixed(2)}
                                                 </p>
                                                 <p className="text-sm text-gray-500 text-justify">
                                                     {product.description}

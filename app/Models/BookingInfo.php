@@ -34,4 +34,8 @@ class BookingInfo extends Model
     {
         return $this->hasMany(BookingOrder::class,'reference_id','reference_id')->with(['rent']);
     }
+    public function additionals():HasMany
+    {
+        return $this->hasMany(Additional::class,'reference_id','reference_id')->with(['activity']);
+    }
 }
