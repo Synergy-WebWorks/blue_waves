@@ -55,6 +55,7 @@ Route::get('/user-login', function () {
     return Inertia::render('user-login/page');
 })->name('login');
 
+
 Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     Route::get('/dashboard', function () {
         return Inertia::render('admin/dashboard/page');
@@ -128,6 +129,153 @@ Route::middleware('auth:sanctum')->prefix('admin')->group(function () {
     });
 });
 
+Route::middleware('auth:sanctum')->prefix('staff')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('staff/dashboard/page');
+    });
+
+    Route::get('/activities', function () {
+        return Inertia::render('staff/activities/page');
+    });
+
+    Route::get('/reports', function () {
+        return Inertia::render('staff/reports/page');
+    });
+
+    Route::get('/reservation', function () {
+        return Inertia::render('staff/reservation/page');
+    });
+
+    Route::get('/reservation/{id}', function () {
+        return Inertia::render('staff/reservation/id/page');
+    });
+    Route::get('/rooms', function () {
+        return Inertia::render('staff/rooms/page');
+    });
+
+    Route::get('/settings', function () {
+        return Inertia::render('staff/settings/page');
+    });
+
+    Route::get('/cottage', function () {
+        return Inertia::render('staff/cottage/page');
+    });
+
+    Route::get('/accounts', function () {
+        return Inertia::render('staff/accounts/page');
+    });
+
+    Route::get('/inventory', function () {
+        return Inertia::render('staff/inventory/page');
+    });
+
+    Route::prefix('inventory')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('staff/inventory/page');
+        });
+        Route::get('/{item_id}', function () {
+            return Inertia::render('staff/item_logs/page');
+        });
+        Route::get('/inventory_received/{item_id}', function () {
+            return Inertia::render('staff/received_inventory_stock/page');
+        });
+    });
+
+    Route::get('/terms', function () {
+        return Inertia::render('staff/terms/page');
+    });
+
+    Route::get('/landing-page', function () {
+        return Inertia::render('staff/landing-page/page');
+    });
+
+    Route::get('/booking', function () {
+        return Inertia::render('staff/booking/page');
+    });
+
+    Route::get('/booking/checkout', function () {
+        return Inertia::render('staff/booking/page');
+    });
+
+    Route::get('/contact', function () {
+        return Inertia::render('staff/contact/page');
+    });
+});
+
+
+
+Route::middleware('auth:sanctum')->prefix('administrator')->group(function () {
+    Route::get('/dashboard', function () {
+        return Inertia::render('administrator/dashboard/page');
+    });
+
+    Route::get('/activities', function () {
+        return Inertia::render('administrator/activities/page');
+    });
+
+    Route::get('/reports', function () {
+        return Inertia::render('administrator/reports/page');
+    });
+
+    Route::get('/reservation', function () {
+        return Inertia::render('administrator/reservation/page');
+    });
+
+    Route::get('/reservation/{id}', function () {
+        return Inertia::render('administrator/reservation/id/page');
+    });
+    Route::get('/rooms', function () {
+        return Inertia::render('administrator/rooms/page');
+    });
+
+    Route::get('/settings', function () {
+        return Inertia::render('administrator/settings/page');
+    });
+
+    Route::get('/cottage', function () {
+        return Inertia::render('administrator/cottage/page');
+    });
+
+    Route::get('/accounts', function () {
+        return Inertia::render('administrator/accounts/page');
+    });
+
+    Route::get('/inventory', function () {
+        return Inertia::render('administrator/inventory/page');
+    });
+
+    Route::prefix('inventory')->group(function () {
+        Route::get('/', function () {
+            return Inertia::render('administrator/inventory/page');
+        });
+        Route::get('/{item_id}', function () {
+            return Inertia::render('administrator/item_logs/page');
+        });
+        Route::get('/inventory_received/{item_id}', function () {
+            return Inertia::render('administrator/received_inventory_stock/page');
+        });
+    });
+
+    Route::get('/terms', function () {
+        return Inertia::render('administrator/terms/page');
+    });
+
+    Route::get('/landing-page', function () {
+        return Inertia::render('administrator/landing-page/page');
+    });
+
+    Route::get('/booking', function () {
+        return Inertia::render('administrator/booking/page');
+    });
+
+    Route::get('/booking/checkout', function () {
+        return Inertia::render('administrator/booking/page');
+    });
+
+    Route::get('/contact', function () {
+        return Inertia::render('administrator/contact/page');
+    });
+});
 
 Route::get('/staff/settings', function () {
     return Inertia::render('staff/settings/page');
