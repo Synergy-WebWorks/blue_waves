@@ -70,7 +70,7 @@ export default function ActivityTableSection() {
                         A list of all the activities in the system.
                     </p>
                 </div>
-                <AddActivitySection />
+                {/* <AddActivitySection /> */}
             </div>
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -144,7 +144,7 @@ export default function ActivityTableSection() {
                                             >
                                                 <div className="flex items-center justify-center gap-1">
                                                     <UpdateActivitySection data={activity} />
-                                                    <DeleteActivitySection data={activity} />
+                                                    {/* <DeleteActivitySection data={activity} /> */}
                                                 </div>
                                                 <span className="sr-only">
                                                     , {activity.rsbsa}

@@ -58,7 +58,7 @@ export default function CottageTableSection() {
                         A list of all the active cottages in the system.
                     </p>
                 </div>
-                <AddCottageSection />
+                {/* <AddCottageSection /> */}
             </div>
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -131,7 +131,7 @@ export default function CottageTableSection() {
                                                     >
                                                         <div className="flex items-center justify-center gap-1">
                                                             <UpdateCottageSection data={cottage} />
-                                                            <DeleteCottageSection data={cottage} />
+                                                            {/* <DeleteCottageSection data={cottage} /> */}
                                                         </div>
                                                         <span className="sr-only">
                                                             , {cottage.rsbsa}

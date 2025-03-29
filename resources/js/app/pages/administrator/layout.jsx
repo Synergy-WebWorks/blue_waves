@@ -74,20 +74,20 @@ const teams = [
             // },
         ],
     },
-    // {
-    //     id: 3,
-    //     name: "Help Desk",
-    //     icon: FaHeadset,
-    //     current: false,
-    //     children: [
-    //         // {
-    //         //     name: "Download User Manual",
-    //         //     href: "/administrator/manual",
-    //         //     icon: FaRegCircleDot,
-    //         // },
-    //         { name: "Contact Us", href: "/administrator/contact", icon: FaRegCircleDot },
-    //     ],
-    // },
+    {
+        id: 3,
+        name: "Help Desk",
+        icon: FaHeadset,
+        current: false,
+        children: [
+            // {
+            //     name: "Download User Manual",
+            //     href: "/administrator/manual",
+            //     icon: FaRegCircleDot,
+            // },
+            { name: "Contact Us", href: "/administrator/contact", icon: FaRegCircleDot },
+        ],
+    },
 ];
 
 function classNames(...classes) {

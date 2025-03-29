@@ -70,7 +70,7 @@ export default function InventoryTabsSection() {
           </nav>
         </div>
         <div className='w-full flex items-center justify-end'>
-          <AddItemsSection />
+          {/* <AddItemsSection /> */}
         </div>
       </div>
 
