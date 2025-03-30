@@ -34,7 +34,7 @@ export default function ContactSection() {
                 Get in touch
               </h2>
               <p className="mt-6 text-lg text-gray-300 sm:text-xl">
-                We’d love to hear from you! Whether you’re planning your next getaway, have a question about our services, or need assistance, our team is here to help. Reach out to us, and let’s make your stay unforgettable. Feel free to contact us through the form below, or give us a call. We look forward to welcoming you soon!
+                We’d love to hear from you! Whether you’re planning your next getaway, have a question about our services, or need assistance, our team is here to help. Reach out to us, and let’s make your stay unforgettable. Feel free to reach out to us using the contact details below or give us a call. We look forward to welcoming you soon!
               </p>
               <dl className="mt-10 space-y-4 text-base text-gray-200">
                 <div className="flex gap-x-4">
