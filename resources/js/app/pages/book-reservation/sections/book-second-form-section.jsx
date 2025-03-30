@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ChevronDownIcon } from "@heroicons/react/16/solid";
 import { TrashIcon } from "@heroicons/react/20/solid";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +7,7 @@ import { setCustomer, setSelected } from "@/app/redux/app-slice";
 
 export default function BookSecondFormSection() {
     const { selected, customer, search } = useSelector((store) => store.app);
+    const [error, setError] = useState("");
     const dispatch = useDispatch();
 
     const mobile = customer?.mobile || "";
@@ -26,9 +27,31 @@ export default function BookSecondFormSection() {
         const updatedData = selected.filter((item) => item.id !== idToRemove);
         dispatch(setSelected(updatedData));
     }
-
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+    function isValidPHPhone(phone) {
+        return /^09\d{9}$/.test(phone);
+    }
     const handleChange = (e) => {
         const { name, value } = e.target;
+
+        if (name === "mobile") {
+            if (!isValidPHPhone(value)) {
+                setError("Invalid mobile number format. Use 11 digit number format");
+            } else {
+                setError("");
+            }
+        }
+
+        // if (name === "email") {
+        //     if (!isValidEmail(value)) {
+        //         setError("Invalid email address formatt");
+        //     } else {
+        //         setError("");
+        //     }
+        // }
+
         if (value.length <= 11) {
             dispatch(setCustomer({
                 ...customer,
@@ -37,11 +60,6 @@ export default function BookSecondFormSection() {
         }
     };
 
-    const handleBlur = () => {
-        if (mobile.length > 11) {
-            alert('Mobile number cannot exceed 11 digits!');
-        }
-    };
 
     console.log("customer", customer);
     return (
@@ -79,11 +97,15 @@ export default function BookSecondFormSection() {
                                         id="email-address"
                                         type="email"
                                         autoComplete="email"
-                                        placeholder="ex:guest@gmail.com"
+                                        placeholder="(e.g.,guest@gmail.com)"
                                         className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
                                         required
                                     />
                                 </div>
+                                {/* {error && <p className="text-red-500 text-sm mt-1">{error}</p>} */}
+                                {!customer.email && (
+                                    <p className="text-gray-400 text-sm mt-1">This field is required</p>
+                                )}
                             </div>
                             <div className="sm:col-span-2 mt-3">
                                 {/* <label
@@ -113,7 +135,7 @@ export default function BookSecondFormSection() {
                                     )}
                                 </div> */}
 
-                                <label for="phone-input" class="block mb-2 text-sm font-medium">Phone number:</label>
+                                <label for="phone-input" class="block mb-2 text-sm font-medium">Mobile number:</label>
                                 <div class="relative">
                                     <div class="absolute text-gray-700 inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
                                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 19 18">
@@ -123,15 +145,19 @@ export default function BookSecondFormSection() {
                                     <input
                                         value={mobile}
                                         onChange={handleChange}
-                                        onBlur={handleBlur}
-                                        type="text"
+                                        type="tel"
                                         id="mobile"
                                         name="mobile"
-                                        class="bg-white border outline-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 "
-                                        pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
-                                        placeholder="+123-456-7890"
-                                        required />
+                                        maxLength={11}
+                                        className="bg-white border outline-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                        placeholder="(0912-345-6789)"
+                                        required
+                                    />
                                 </div>
+                                {error && <p className="text-red-500 text-sm mt-1">{error}</p>}
+                                {!customer.mobile && (
+                                    <p className="text-gray-400 text-sm mt-1">This field is required</p>
+                                )}
                             </div>
                         </div>
 
@@ -168,6 +194,9 @@ export default function BookSecondFormSection() {
                                             required
                                         />
                                     </div>
+                                    {!customer.fname && (
+                                        <p className="text-gray-400 text-sm mt-1">This field is required</p>
+                                    )}
                                 </div>
 
                                 <div>
@@ -224,6 +253,9 @@ export default function BookSecondFormSection() {
                                             className="block w-full rounded-md bg-white px-3 py-2 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-cyan-600 sm:text-sm/6"
                                             required
                                         />
+                                        {!customer.lname && (
+                                            <p className="text-gray-400 text-sm mt-1">This field is required</p>
+                                        )}
                                     </div>
                                 </div>
 
@@ -290,6 +322,9 @@ export default function BookSecondFormSection() {
                                             required
                                         />
                                     </div>
+                                    {!customer.address && (
+                                        <p className="text-gray-400 text-sm mt-1">This field is required</p>
+                                    )}
                                 </div>
                             </div>
                         </div>

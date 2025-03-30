@@ -130,6 +130,39 @@ export default function StepperSection() {
         }
     };
 
+
+    function isValidPHPhone(phone) {
+        return /^09\d{9}$/.test(phone);
+    }
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+    function isCustomerEmpty(customer) {
+        return customer == undefined || customer == null || customer == "";
+    }
+    function validation_function(params) {
+        if (selected.length == 0) {
+            return true
+        } if (loading) {
+            return true
+        }
+        if (!accept && currentStep == 3) {
+            return true
+        }
+        if (selected.length !== 0 && currentStep == 2) {
+            if (!isValidEmail(customer?.email)) {
+                return true
+            } else if (!isValidPHPhone(customer.mobile)) {
+                return true
+            } else if (isCustomerEmpty(customer?.fname) || isCustomerEmpty(customer?.lname) || isCustomerEmpty(customer?.address)) {
+                return true
+            }
+        } else {
+            return false
+        }
+
+    }
+    console.log('validation_function', selected.length == 0)
     return (
         <div>
             <div className="lg:border-b lg:border-t lg:border-gray-200 mt-5 mb-5">
@@ -295,15 +328,8 @@ export default function StepperSection() {
                                 ? () => submitHandler()
                                 : handleNext
                         }
-                        disabled={
-                            selected.length == 0 ||
-                            loading ||
-                            (!accept && currentStep == 3)
-                        }
-                        className={`px-6 py-2 text-white ${selected.length == 0 ||
-                            loading ||
-                            (!accept && currentStep == 3)
-                            ? "bg-[rgba(45,55,72,0.6)] hover:bg-[rgba(45,55,72,0.8)] text-white"
+                        disabled={validation_function()}
+                        className={`px-6 py-2 text-white ${validation_function() ? "bg-[rgba(45,55,72,0.6)] text-white"
                             : "bg-cyan-600 hover:bg-cyan-700 text-white"
                             }}  rounded-md `}
                     >

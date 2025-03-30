@@ -106,7 +106,7 @@ export default function BookThirdFormSection({ setAccept }) {
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
-                                        Adults: 20 x {search.adults}
+                                        Adults: 80 x {search.adults}
                                     </dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{customer.adults.toFixed(2)}
@@ -115,7 +115,7 @@ export default function BookThirdFormSection({ setAccept }) {
                                 <div className="flex items-center justify-between">
                                     <dt className="text-sm">
                                         {" "}
-                                        Children: 20 x {search.children}
+                                        Children: 40 x {search.children}
                                     </dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{customer.children.toFixed(2)}
