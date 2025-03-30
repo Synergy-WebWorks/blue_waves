@@ -403,13 +403,13 @@ export default function BookSecondFormSection() {
                                     <dt className="text-sm">Entrance Fee</dt>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">  Adult: 50 x {search.adults}</dt>
+                                    <dt className="text-sm">  Adult: 80 x {search.adults}</dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{customer.adults.toFixed(2)}
                                     </dd>
                                 </div>
                                 <div className="flex items-center justify-between">
-                                    <dt className="text-sm">  Children: 20 x {search.children}</dt>
+                                    <dt className="text-sm">  Children: 40 x {search.children}</dt>
                                     <dd className="text-sm font-medium text-gray-900">
                                         ₱{customer.children.toFixed(2)}
                                     </dd>
