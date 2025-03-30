@@ -42,9 +42,9 @@ class BookingInfoSeeder extends Seeder
                 'suffix' => rand(0, 1) ? 'Jr.' : '',
                 'address' => 'Street ' . rand(1, 100) . ', City ' . rand(1, 50),
                 'initial' => ($duration * $rent->rate) / 2,
-                'adults' => 50,
-                'children' => 20,
-                'total' => $total, // Total cost
+                'adults' => 80,
+                'children' => 40,
+                'total' => ($duration * $rent->rate), // Total cost
                 'status' => ['pending', 'paid', 'canceled', 'partial'][array_rand(['pending', 'paid', 'canceled', 'partial'])], // Fixed status array
                 'submitted_date' => now()->toDateTimeString(),
                 'created_at' => now(),

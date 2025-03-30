@@ -59,13 +59,15 @@ class BookingInfoController extends Controller
                 ]);
             }
             foreach ($request->activities as $key => $value) {
-                Additional::create([
-                    'reference_id'=>$request->customer['reference_id'],
-                    'activity_id' => $value['id'],
-                    'rate' => $value['rate'],
-                    'quantity' => $value['quantity'],
-                    'total' => intval($value['rate']) * intval($value['quantity']),
-                ]);
+                if ($value['id'] ?? null) {
+                    Additional::create([
+                        'reference_id' => $request->customer['reference_id'],
+                        'activity_id' => $value['id'],
+                        'rate' => $value['rate'],
+                        'quantity' => $value['quantity'],
+                        'total' => intval($value['rate']) * intval($value['quantity']),
+                    ]);
+                }
             }
             return response()->json('success');
         }
@@ -148,7 +150,7 @@ class BookingInfoController extends Controller
     // Display the specified booking record
     public function show($id)
     {
-        $bookingInfo = BookingInfo::where('reference_id', $id)->with(['booking_orders','additionals'])->first();
+        $bookingInfo = BookingInfo::where('reference_id', $id)->with(['booking_orders', 'additionals'])->first();
         return response()->json($bookingInfo, 200);
     }
 
