@@ -5,8 +5,8 @@ const adults = params.get("adults");
 const children = params.get("children");
 const start = params.get("start");
 const end = params.get("end");
-const adults_price = parseInt(adults) * 50;
-const children_price = parseInt(children) * 20;
+const adults_price = parseInt(adults) * 80;
+const children_price = parseInt(children) * 40;
 
 export const appSlice = createSlice({
     name: "app",
@@ -35,8 +35,8 @@ export const appSlice = createSlice({
         setSearch: (state, action) => {
             state.customer = {
                 ...state.customer,
-                adults: action.payload.adults * 50,
-                children: action.payload.children * 20
+                adults: action.payload.adults * 80,
+                children: action.payload.children * 40
             }
             state.search = action.payload;
         },
