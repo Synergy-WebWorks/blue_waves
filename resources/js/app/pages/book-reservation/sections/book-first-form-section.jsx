@@ -244,7 +244,7 @@ export default function BookFirstFormSection() {
                                                 <div className="flex flex-1 flex-col justify-end">
                                                     <div className="flex items-center justify-between">
                                                         <p className="text-base font-medium text-cyan-800">
-                                                            {product.price}
+                                                        {parseFloat(product.rate).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
                                                         </p>
                                                         <button
                                                             onClick={() => add_to_cart(product)}
@@ -317,7 +317,7 @@ export default function BookFirstFormSection() {
                                             <div className="flex flex-1 flex-col justify-end">
                                                 <div className="flex items-center justify-between">
                                                     <p className="text-base font-medium text-cyan-800">
-                                                        {cottage.price}
+                                                        {parseFloat(cottage.rate).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
                                                     </p>
                                                     <button
                                                         onClick={() => add_to_cart(cottage)}
