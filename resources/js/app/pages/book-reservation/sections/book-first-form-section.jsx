@@ -7,6 +7,7 @@ import { router } from "@inertiajs/react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { setSelected } from "@/app/redux/app-slice";
+import ViewRentImageSection from "../../index/sections/view-rent-image-section";
 
 
 export default function BookFirstFormSection() {
@@ -198,35 +199,7 @@ export default function BookFirstFormSection() {
                                             className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg"
                                         >
                                             {/* Image container with navigation */}
-                                            <div className="relative">
-                                                <img
-                                                    alt={product.name}
-                                                    src={
-                                                        product.uploads[
-                                                            imageIndexes[index]
-                                                        ]?.file ?? "/"
-                                                    }
-                                                    className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
-                                                />
-                                                {/* Previous button */}
-                                                <button
-                                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                    onClick={() =>
-                                                        handlePrev(index)
-                                                    }
-                                                >
-                                                    <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
-                                                </button>
-                                                {/* Next button */}
-                                                <button
-                                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                    onClick={() =>
-                                                        handleNext(index)
-                                                    }
-                                                >
-                                                    <ChevronRightIcon className="h-6 w-6 text-gray-600" />
-                                                </button>
-                                            </div>
+                                            <ViewRentImageSection data={product} />
 
                                             {/* Room Info */}
                                             <div className="flex flex-1 flex-col space-y-2 p-4">
@@ -244,7 +217,7 @@ export default function BookFirstFormSection() {
                                                 <div className="flex flex-1 flex-col justify-end">
                                                     <div className="flex items-center justify-between">
                                                         <p className="text-base font-medium text-cyan-800">
-                                                        {parseFloat(product.rate).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
+                                                            {parseFloat(product.rate).toLocaleString('en-PH', { style: 'currency', currency: 'PHP' })}
                                                         </p>
                                                         <button
                                                             onClick={() => add_to_cart(product)}
@@ -271,35 +244,7 @@ export default function BookFirstFormSection() {
                                         className="group relative flex flex-col overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg"
                                     >
                                         {/* Image container with navigation */}
-                                        <div className="relative">
-                                            <img
-                                                alt={cottage.name}
-                                                src={
-                                                    cottage.uploads[
-                                                        imageIndexes[index2]
-                                                    ]?.file ?? "/"
-                                                }
-                                                className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
-                                            />
-                                            {/* Previous button */}
-                                            <button
-                                                className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                onClick={() =>
-                                                    handlePrev2(index2)
-                                                }
-                                            >
-                                                <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
-                                            </button>
-                                            {/* Next button */}
-                                            <button
-                                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                onClick={() =>
-                                                    handleNext2(index2)
-                                                }
-                                            >
-                                                <ChevronRightIcon className="h-6 w-6 text-gray-600" />
-                                            </button>
-                                        </div>
+                                        <ViewRentImageSection data={cottage} />
 
                                         {/* Room Info */}
                                         <div className="flex flex-1 flex-col space-y-2 p-4">
