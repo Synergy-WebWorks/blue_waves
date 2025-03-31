@@ -117,8 +117,16 @@ export default function ReservationTableSection() {
                                             </div>
                                         </td>
                                         <td className="px-3 py-5 text-sm whitespace-nowrap text-gray-500">
-                                            <span className="inline-flex items-center rounded-md bg-yellow-50 px-2 py-1 text-xs font-medium text-yellow-700 ring-1 ring-yellow-600/20 ring-inset">
-                                                <ExclamationCircleIcon className="float-left size-4" />
+                                            <span
+                                                className={`inline-flex items-center rounded-md px-2 py-1 text-xs font-medium ring-1 ring-inset
+        ${res?.status === 'paid' ? 'bg-green-200 text-green-700 ring-green-600/20' :
+                                                        res?.status === 'pending' ? 'bg-yellow-50 text-yellow-700 ring-yellow-600/20' :
+                                                            res?.status === 'partial' ? 'bg-orange-300 text-orange-700 ring-orange-600/20' :
+                                                                res?.status === 'canceled' ? 'bg-red-200 text-red-700 ring-red-600/20' :
+                                                                    'bg-yellow-50 text-yellow-700 ring-yellow-600/20'}`
+                                                }
+                                            >
+                                                {/* <ExclamationCircleIcon className="size-4 mr-1" /> */}
                                                 {res.status}
                                             </span>
                                         </td>
