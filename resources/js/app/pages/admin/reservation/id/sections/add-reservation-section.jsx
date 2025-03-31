@@ -8,6 +8,7 @@ import { setCustomer, setSearch, setSelected } from "@/app/redux/app-slice";
 import BookingCartComponent from "@/app/pages/book-reservation/components/booking-cart-component";
 import BookingGuestComponent from "../../../booking/components/booking-guest-component";
 import AddOrderSection from "./add-order-section";
+import ViewRentImageSection from "@/app/pages/index/sections/view-rent-image-section";
 
 export default function AddReservationSection() {
     const NEXT_MONTH = new Date();
@@ -15,7 +16,7 @@ export default function AddReservationSection() {
     const { rents } = useSelector((store) => store.rent);
     const { selected, search, customer } = useSelector((store) => store.app);
     const { activities } = useSelector((state) => state.activities);
-   
+
     const booking_info = window.location.pathname.split("/")[3];
     const params = new URLSearchParams(window.location.search);
     const [quantities, setQuantities] = useState(() => {
@@ -60,7 +61,7 @@ export default function AddReservationSection() {
             prevIndexes.map((imgIndex, i) =>
                 i === index
                     ? (imgIndex - 1 + products[i].uploads.length) %
-                      products[i].uploads.length
+                    products[i].uploads.length
                     : imgIndex
             )
         );
@@ -81,7 +82,7 @@ export default function AddReservationSection() {
             prevIndexes2.map((imgIndex2, i) =>
                 i === index2
                     ? (imgIndex2 - 1 + rooms[i].images.length) %
-                      rooms[i].images.length
+                    rooms[i].images.length
                     : imgIndex2
             )
         );
@@ -115,18 +116,18 @@ export default function AddReservationSection() {
             ...prev,
             [res.id]: {
                 ...res,
-                quantity: Math.max((prev[res.id]?.quantity ?? 0) - 1, 0), 
+                quantity: Math.max((prev[res.id]?.quantity ?? 0) - 1, 0),
             },
         }));
     };
 
     return (
         <div className="bg-gray-50">
-            <div className="mx-auto">
+            <div className="mx-auto mb-8">
                 <div className="lg:grid lg:grid-cols-1 lg:gap-x-12 xl:gap-x-16">
                     <div>
                         <div className="mt-2 pt-1 pb-5">
-                            <div className=" bg-gray-50 pt-5 pb-5 px-5 py-5 border-b border-gray-300">
+                            <div className=" bg-gray-50 pt-5 pb-5 px-5 py-5 border-b border-gray-600">
                                 <h2 className="text-lg font-medium text-cyan-600">
                                     Booking Details
                                 </h2>
@@ -250,13 +251,14 @@ export default function AddReservationSection() {
 
                                     {/* Second Column - My Cart Button */}
                                     <div className="flex mt-5 justify-between items-center self-end">
-                                        <AddOrderSection quantities={quantities}/>
+                                        <AddOrderSection quantities={quantities} />
                                         <BookingCartComponent />
                                     </div>
                                 </div>
                             </div>
 
-                            <div className="grid  grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-2 lg:gap-x-8 mt-6 p-3">
+                            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-2 lg:gap-x-8 mt-6 p-3 
+                max-h-[600px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 border-b border-gray-600">
                                 {products.map((product, index) => {
                                     return (
                                         <div
@@ -265,33 +267,7 @@ export default function AddReservationSection() {
                                         >
                                             {/* Image container with navigation */}
                                             <div className="relative">
-                                                <img
-                                                    alt={product.name}
-                                                    src={
-                                                        product.uploads[
-                                                            imageIndexes[index]
-                                                        ]?.file ?? "/"
-                                                    }
-                                                    className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
-                                                />
-                                                {/* Previous button */}
-                                                <button
-                                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                    onClick={() =>
-                                                        handlePrev(index)
-                                                    }
-                                                >
-                                                    <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
-                                                </button>
-                                                {/* Next button */}
-                                                <button
-                                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                    onClick={() =>
-                                                        handleNext(index)
-                                                    }
-                                                >
-                                                    <ChevronRightIcon className="h-6 w-6 text-gray-600" />
-                                                </button>
+                                                <ViewRentImageSection data={product} />
                                             </div>
 
                                             {/* Room Info */}
@@ -339,33 +315,7 @@ export default function AddReservationSection() {
                                     >
                                         {/* Image container with navigation */}
                                         <div className="relative">
-                                            <img
-                                                alt={cottage.name}
-                                                src={
-                                                    cottage.uploads[
-                                                        imageIndexes[index2]
-                                                    ]?.file ?? "/"
-                                                }
-                                                className="aspect-[3/4] w-full bg-gray-200 object-cover sm:aspect-auto sm:h-96"
-                                            />
-                                            {/* Previous button */}
-                                            <button
-                                                className="absolute left-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                onClick={() =>
-                                                    handlePrev2(index2)
-                                                }
-                                            >
-                                                <ChevronLeftIcon className="h-6 w-6 text-gray-600" />
-                                            </button>
-                                            {/* Next button */}
-                                            <button
-                                                className="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-300 p-2 rounded-full shadow-md hover:bg-gray-200 opacity-80"
-                                                onClick={() =>
-                                                    handleNext2(index2)
-                                                }
-                                            >
-                                                <ChevronRightIcon className="h-6 w-6 text-gray-600" />
-                                            </button>
+                                            <ViewRentImageSection data={cottage} />
                                         </div>
 
                                         {/* Room Info */}
