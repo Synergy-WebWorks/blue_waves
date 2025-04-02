@@ -1,1 +1,0 @@
-import{g as n}from"./booking-info-service-B0tVPw0X.js";import{D as i}from"./app-Bt1dew7a.js";function s(){return async function(o,e){const t=await n();o(i.actions.setBookingOrders(t.data))}}export{s as g};

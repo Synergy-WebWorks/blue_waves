@@ -85,7 +85,7 @@ export default function InventoryNonConsumableSection() {
                                                 <Tooltip title="Allocation History">
                                                     <button
                                                         type="button"
-                                                        onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/${inventory.id}`)}
+                                                        onClick={() => router.visit(`http://bluewaves-sipaway.com/admin/inventory/${inventory.id}`)}
                                                         title="Allocation History"
                                                         className="relative -ml-px inline-flex items-center rounded-r-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-indigo-500 focus:z-10"
                                                     >
@@ -95,7 +95,7 @@ export default function InventoryNonConsumableSection() {
                                                 <Tooltip title="Inventory Received Records">
                                                     <button
                                                         type="button"
-                                                        onClick={() => router.visit(`http://127.0.0.1:8000/admin/inventory/inventory_received/${inventory.id}`)}
+                                                        onClick={() => router.visit(`http://bluewaves-sipaway.com/admin/inventory/inventory_received/${inventory.id}`)}
                                                         className="relative -ml-px inline-flex items-center rounded-r-md bg-orange-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-orange-500 focus:z-10"
                                                     >
                                                         <FaClipboardCheck />
