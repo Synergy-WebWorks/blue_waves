@@ -135,14 +135,7 @@ export default function IndexPage() {
                             </a>
                         ))}
                     </div>
-                    <div className="hidden lg:flex lg:flex-1 lg:justify-end">
-                        <Link
-                            href="/user-login"
-                            className="text-sm/6 font-semibold text-gray-100"
-                        >
-                            Log in <span aria-hidden="true">&rarr;</span>
-                        </Link>
-                    </div>
+                   
                     <div className="flex lg:hidden">
                         <button
                             type="button"
@@ -212,14 +205,7 @@ export default function IndexPage() {
                                     </Disclosure>
 
                                 </div>
-                                <div className="py-6">
-                                    <Link
-                                        href="/user-login"
-                                        className="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
-                                    >
-                                        Log in
-                                    </Link>
-                                </div>
+                               
                             </div>
                         </div>
                     </div>

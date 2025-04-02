@@ -224,12 +224,12 @@ export default function BookFirstFormSection() {
                                                             disabled={clickedButtons[product.id]} // Disable button after click
                                                             className={`ml-4 px-2 py-1 rounded-md text-white transition-colors duration-300 ${clickedButtons[product.id]
                                                                 ? "bg-gray-500 cursor-not-allowed" // Stay gray after clicking
-                                                                : "bg-orange-500 hover:bg-orange-600"
+                                                                : "bg-teal-600 hover:bg-teal-700"
                                                                 }`}
                                                         >
                                                             {clickedButtons[product.id]
-                                                                ? "Added to your Booking"
-                                                                : "Add to Booking"}
+                                                                ? "ADDED"
+                                                                : "BOOK NOW"}
                                                         </button>
                                                     </div>
                                                 </div>
@@ -269,7 +269,7 @@ export default function BookFirstFormSection() {
                                                         disabled={clickedButtons[cottage.id]} // Disable button after click
                                                         className={`ml-4 px-2 py-1 rounded-md text-white transition-colors duration-300 ${clickedButtons[cottage.id]
                                                             ? "bg-gray-500 cursor-not-allowed" // Stay gray after clicking
-                                                            : "bg-orange-500 hover:bg-orange-600"
+                                                            : "bg-teal-600 hover:bg-teal-700"
                                                             }`}
                                                     >
                                                         {clickedButtons[cottage.id]

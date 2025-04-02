@@ -84,15 +84,15 @@ export default function CheckoutSection() {
                                     </div>
                                 </div>
                                 <Dialog.Title className="text-lg font-semibold text-gray-900">
-                                    Payment successful
+                                    Payment Confirmation
                                 </Dialog.Title>
-                                <p className="mt-2 text-sm text-gray-500">
+                                {/* <p className="mt-2 text-sm text-gray-500">
                                     Lorem ipsum, dolor sit amet consectetur
                                     adipisicing elit. Eius aliquam laudantium
                                     explicabo pariatur iste dolorem animi vitae
                                     error totam. At sapiente aliquam accusamus
                                     facere veritatis.
-                                </p>
+                                </p> */}
                             </div>
 
                             {/* Buttons */}

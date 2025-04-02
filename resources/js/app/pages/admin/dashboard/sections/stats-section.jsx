@@ -205,12 +205,12 @@ export default function StatsSection() {
                                             </div>
                                             <div className="bg-gray-50 px-5 py-3">
                                                 <div className="text-sm">
-                                                    <Link
+                                                    <a
                                                         href={card.href}
                                                         className="font-medium text-cyan-700 hover:text-cyan-900"
                                                     >
                                                         View all
-                                                    </Link>
+                                                    </a>
                                                 </div>
                                             </div>
                                         </div>

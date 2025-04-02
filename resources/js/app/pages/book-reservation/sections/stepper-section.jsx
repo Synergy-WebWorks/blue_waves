@@ -330,7 +330,7 @@ export default function StepperSection() {
                         }
                         disabled={validation_function()}
                         className={`px-6 py-2 text-white ${validation_function() ? "bg-[rgba(45,55,72,0.6)] text-white"
-                            : "bg-cyan-600 hover:bg-cyan-700 text-white"
+                            : "bg-teal-600 hover:bg-teal-700 text-white"
                             }}  rounded-md `}
                     >
                         {loading ? (

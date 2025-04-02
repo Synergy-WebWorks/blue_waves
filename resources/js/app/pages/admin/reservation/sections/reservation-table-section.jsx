@@ -11,10 +11,6 @@ import { Link } from "@inertiajs/react";
 export default function ReservationTableSection() {
     const { booking_infos } = useSelector((store) => store.booking_info);
 
-    useEffect(() => {
-        store.dispatch(get_booking_info_thunk());
-    }, []);
-
     return (
         <div className="px-4 sm:px-6 lg:px-8">
             <div className="sm:flex sm:items-center">

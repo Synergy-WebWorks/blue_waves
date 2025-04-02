@@ -23,7 +23,7 @@ export default function BookingCartComponent() {
             <button
                 type="button"
                 onClick={() => setOpen(true)}
-                className="rounded-md bg-orange-600 p-2 text-white shadow-xs hover:bg-orange-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
+                className="rounded-md bg-teal-600 p-2 text-white shadow-xs hover:bg-teal-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
             >
                 <FaCartFlatbedSuitcase
                     aria-hidden="true"

@@ -51,8 +51,8 @@ Route::get('/{type_payment}/cancel', function () {
 Route::get('auth/google', [GoogleController::class, 'redirectToGoogle']);
 Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback']);
 
-Route::get('/user-login', function () {
-    return Inertia::render('user-login/page');
+Route::get('/auth/login', function () {
+    return Inertia::render('user_login/page');
 })->name('login');
 
 
