@@ -558,7 +558,7 @@ export default function AdministratorLayout({ children }) {
                                 </li>
                                 <li className="-mx-6 mt-auto">
                                     <Link
-                                        href={route("logout")}
+                                        method="post" href={route('logout')} as="button"
                                         className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-cyan-100 hover:bg-cyan-600 hover:text-white"
                                     >
                                         <img
@@ -570,7 +570,7 @@ export default function AdministratorLayout({ children }) {
                                             Your profile
                                         </span>
                                         <span aria-hidden="true">
-                                            {user?.fname} {user?.lname}
+                                            LOGOUT
                                         </span>
                                     </Link>
                                 </li>

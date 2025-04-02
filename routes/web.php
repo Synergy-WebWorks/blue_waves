@@ -24,7 +24,7 @@ Route::get('/xendivel/invoice/generate', [XenditController::class, 'get_invoice'
 
 
 
-Route::get('/', function () {
+Route::middleware('redirectBasedOnRole')->get('/', function () {
     return Inertia::render('index/page');
 });
 
