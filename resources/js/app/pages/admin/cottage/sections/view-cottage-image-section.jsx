@@ -34,6 +34,13 @@ export default function ViewCottageImageSection({ data }) {
     return (
         <div>
             <div className="relative mt-3 flex items-center justify-center">
+                <Image
+                    alt="Selected Image"
+                    src={images[currentImageIndex]?.file}
+                    width={200}
+                    height={100}
+                    style={{ borderRadius: '16px', objectFit: 'cover' }}
+                />
                 {/* Previous Button */}
                 {images.length > 1 && (
                     <button
@@ -43,15 +50,6 @@ export default function ViewCottageImageSection({ data }) {
                         <ChevronLeftIcon className='h-6' />
                     </button>
                 )}
-
-                <Image
-                    alt="Selected Image"
-                    src={images[currentImageIndex]?.file}
-                    width={200}
-                    height={100}
-                    style={{ borderRadius: '16px', objectFit: 'cover' }}
-                />
-
                 {/* Next Button */}
                 {images.length > 1 && (
                     <button
