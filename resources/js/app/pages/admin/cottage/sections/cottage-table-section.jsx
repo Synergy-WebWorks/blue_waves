@@ -8,45 +8,6 @@ import DeleteCottageSection from "./delete-cottage-section";
 export default function CottageTableSection() {
     const { rents } = useSelector((state) => state.rents)
 
-    const room = [
-        {
-            id: 1,
-            name: "Umbrella Cottage 1",
-            href: "#",
-            rate: "₱600",
-            capacity: "Good for 4-5 Persons",
-            imageSrc: "/images/Umbrella Cottage (2pcs)/1.jpeg",
-            status: "Active",
-
-        },
-        {
-            id: 2,
-            name: "Umbrella Cottage 2",
-            href: "#",
-            rate: "₱600",
-            capacity: "Good for 4-5 Persons",
-            imageSrc: "/images/Umbrella Cottage (2pcs)/2.jpg",
-            status: "Active",
-        },
-        {
-            id: 3,
-            name: "Pavillion Cottage",
-            href: "#",
-            rate: "₱2500",
-            capacity: "Good for 15 - 20 Persons",
-            imageSrc: "/images/Pavillion Cottage (1pc)/1.jpg",
-            status: "Active",
-        },
-        {
-            id: 4,
-            name: "Floating  Cottage",
-            href: "#",
-            rate: "₱3500",
-            capacity: "Good for 15 - 20 Persons",
-            imageSrc: "/images/Activities/Floating Cottage (1pc)/1.jpeg",
-            status: "Active",
-        },
-    ];
     return (
         <div className="px-4 sm:px-6 lg:px-8 mt-4 pb-8 border rounded-lg shadow-lg">
             <div className="sm:flex sm:items-center">

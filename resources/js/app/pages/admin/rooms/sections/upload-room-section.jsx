@@ -1,6 +1,6 @@
-import { FileImageOutlined, FilePdfOutlined } from '@ant-design/icons';
-import { PhotoIcon, XMarkIcon } from '@heroicons/react/24/outline';
-import React, { useState } from 'react';
+import { FileImageOutlined, FilePdfOutlined } from "@ant-design/icons";
+import { PhotoIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import React, { useState } from "react";
 
 export default function UploadRoomSection({ files, setFiles }) {
     const [uploadedFiles, setUploadedFiles] = useState([]);
@@ -11,7 +11,10 @@ export default function UploadRoomSection({ files, setFiles }) {
             return { file, fileUrl };
         });
         setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-        setFiles(fileList); // Ensuring that the parent receives the files
+        setFiles((prevFiles) => [
+            ...prevFiles,
+            ...newFiles.map((res) => res.file),
+        ]); 
     };
 
     const handleFileInputChange = (e) => {
@@ -30,22 +33,25 @@ export default function UploadRoomSection({ files, setFiles }) {
 
     const handleRemoveFile = (e, fileToRemove) => {
         e.preventDefault(); // Prevent form submission or other default behaviors
-        const updatedFiles = uploadedFiles.filter((fileData) => fileData.file !== fileToRemove);
+        const updatedFiles = uploadedFiles.filter(
+            (fileData) => fileData.file !== fileToRemove
+        );
         setUploadedFiles(updatedFiles); // Update the local state
 
         // Update the parent state as well to reflect the removal of the file
         setFiles((prevFiles) => {
-            const updatedParentFiles = Array.from(prevFiles).filter((file) => file !== fileToRemove);
+            const updatedParentFiles = Array.from(prevFiles).filter(
+                (file) => file !== fileToRemove
+            );
             return updatedParentFiles;
         });
     };
 
-
     const renderFileIcon = (file) => {
-        const fileType = file.type.split('/')[0];
-        if (fileType === 'image') {
+        const fileType = file.type.split("/")[0];
+        if (fileType === "image") {
             return <FileImageOutlined className="text-2xl text-gray-500" />;
-        } else if (file.type === 'application/pdf') {
+        } else if (file.type === "application/pdf") {
             return <FilePdfOutlined className="text-2xl text-gray-500" />;
         }
         return null;
@@ -53,29 +59,45 @@ export default function UploadRoomSection({ files, setFiles }) {
 
     return (
         <div>
-            <div className="w-full py-9 rounded-2xl gap-3 grid" onDragOver={handleDragOver} onDrop={handleDrop}>
+            <div
+                className="w-full py-9 rounded-2xl gap-3 grid"
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
+            >
                 <div className="grid gap-1">
                     <PhotoIcon
                         aria-hidden="true"
                         className="mx-auto size-12 text-gray-300"
                     />
-                    <h2 className="text-center text-white text-xs leading-4">Image</h2>
+                    <h2 className="text-center text-white text-xs leading-4">
+                        Image
+                    </h2>
                 </div>
                 <div className="grid gap-2">
-                    <h4 className="text-center text-white text-sm font-medium leading-snug">Drag and Drop your file here or</h4>
+                    <h4 className="text-center text-white text-sm font-medium leading-snug">
+                        Drag and Drop your file here or
+                    </h4>
                     <div className="flex items-center justify-center">
                         <label>
-                            <input type="file" hidden onChange={handleFileInputChange} multiple />
-                            <div className="flex w-28 h-9 px-2 flex-col border rounded-full shadow text-white text-xs font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">Choose File</div>
+                            <input
+                                type="file"
+                                hidden
+                                onChange={handleFileInputChange}
+                                multiple
+                            />
+                            <div className="flex w-28 h-9 px-2 flex-col border rounded-full shadow text-white text-xs font-semibold leading-4 items-center justify-center cursor-pointer focus:outline-none">
+                                Choose File
+                            </div>
                         </label>
                     </div>
                 </div>
             </div>
             <div className="mt-4 mb-4 grid grid-cols-3 gap-4">
                 {uploadedFiles.map((fileData, index) => (
-                    <div key={index} className="flex items-center justify-between rounded-md p-2">
-
-                    </div>
+                    <div
+                        key={index}
+                        className="flex items-center justify-between rounded-md p-2"
+                    ></div>
                 ))}
             </div>
             <div>
@@ -84,12 +106,18 @@ export default function UploadRoomSection({ files, setFiles }) {
                         {uploadedFiles.map((fileData, index) => (
                             <div key={index} className="relative flex flex-col">
                                 <div>
-                                    <button className="text-white flex w-full items-center justify-end mb-1 pr-1" onClick={(e) => handleRemoveFile(e, fileData.file)}>
+                                    <button
+                                        className="text-white flex w-full items-center justify-end mb-1 pr-1"
+                                        onClick={(e) =>
+                                            handleRemoveFile(e, fileData.file)
+                                        }
+                                    >
                                         <XMarkIcon className="h-6" />
                                     </button>
                                 </div>
                                 <div>
-                                    {fileData.file.type === 'application/pdf' ? (
+                                    {fileData.file.type ===
+                                    "application/pdf" ? (
                                         <iframe
                                             src={fileData.fileUrl}
                                             width="300px"

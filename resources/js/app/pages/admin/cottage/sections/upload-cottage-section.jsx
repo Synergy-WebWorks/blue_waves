@@ -11,7 +11,11 @@ export default function UploadCottageSection({ files, setFiles }) {
             return { file, fileUrl };
         });
         setUploadedFiles((prevFiles) => [...prevFiles, ...newFiles]);
-        setFiles(fileList); // Ensuring that the parent receives the files
+        // setFiles(fileList); // Ensuring that the parent receives the files
+        setFiles((prevFiles) => [
+            ...prevFiles,
+            ...newFiles.map((res) => res.file),
+        ]); 
     };
 
     const handleFileInputChange = (e) => {

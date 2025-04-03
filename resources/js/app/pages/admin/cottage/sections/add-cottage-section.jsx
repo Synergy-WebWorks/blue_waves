@@ -12,7 +12,7 @@ import UploadCottageSection from "./upload-cottage-section";
 export default function AddCottageSection() {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [uploadedFile1, setUploadedFile1] = useState(null);
+    const [uploadedFile1, setUploadedFile1] = useState([]);
     const { rent } = useSelector((state) => state.rents);
     const dispatch = useDispatch();
 
