@@ -7,7 +7,35 @@ import DeleteRoomSection from "./delete-room-section";
 
 export default function RoomTableSection() {
     const { rents } = useSelector((state) => state.rents)
-   
+    const room = [
+        {
+            id: 1,
+            name: "Room A",
+            href: "#",
+            rate: "₱1500/night",
+            capacity: "Good for 4 Persons",
+            imageSrc: "/images/ROOMS (2pcs)/ROOM B/B.jpeg",
+            status: "Active",
+        },
+        {
+            id: 2,
+            name: "Room B",
+            href: "#",
+            rate: "₱1500/night",
+            capacity: "Good for 4 Persons",
+            imageSrc: "/images/ROOMS (2pcs)/ROOM B/B.jpeg",
+            status: "Active",
+        },
+        {
+            id: 3,
+            name: "Family Room",
+            href: "#",
+            rate: "₱6500/night",
+            capacity: "Good for 5 Persons",
+            imageSrc: "/images/Family Room/C.jpeg",
+            status: "Active",
+        },
+    ];
     return (
         <div className="px-4 sm:px-6 lg:px-8 mt-4 pb-8 border rounded-lg shadow-lg">
             <div className="sm:flex sm:items-center">

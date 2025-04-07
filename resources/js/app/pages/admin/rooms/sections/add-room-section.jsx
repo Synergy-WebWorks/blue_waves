@@ -12,7 +12,7 @@ import UploadRoomSection from "./upload-room-section";
 export default function AddRoomSection() {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
-    const [uploadedFile1, setUploadedFile1] = useState([]);
+    const [uploadedFile1, setUploadedFile1] = useState(null);
     const { rent } = useSelector((state) => state.rents);
     const dispatch = useDispatch();
 
@@ -55,7 +55,7 @@ export default function AddRoomSection() {
             setLoading(false);
         }
     }
-console.log('uploadedFile1ss',uploadedFile1)
+
     return (
         <>
             <div className="mt-5 text-right">
