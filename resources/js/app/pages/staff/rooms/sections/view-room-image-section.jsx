@@ -35,6 +35,13 @@ export default function ViewRoomImageSection({ data }) {
         <div>
             <div className="relative mt-3 flex items-center justify-center">
                 {/* Previous Button */}
+                <Image
+                    alt="Selected Image"
+                    src={images[currentImageIndex]?.file}
+                    width={200}
+                    height={100}
+                    style={{ borderRadius: '16px', objectFit: 'cover' }}
+                />
                 {images.length > 1 && (
                     <button
                         onClick={handlePrevious}
@@ -43,15 +50,6 @@ export default function ViewRoomImageSection({ data }) {
                         <ChevronLeftIcon className='h-6' />
                     </button>
                 )}
-
-                <Image
-                    alt="Selected Image"
-                    src={images[currentImageIndex]?.file}
-                    width={200}
-                    height={100}
-                    style={{ borderRadius: '16px', objectFit: 'cover' }}
-                />
-
                 {/* Next Button */}
                 {images.length > 1 && (
                     <button

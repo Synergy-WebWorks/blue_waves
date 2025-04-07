@@ -5,6 +5,7 @@ import {
     CalendarDaysIcon,
     FolderIcon,
     HomeIcon,
+    PowerIcon,
     UserGroupIcon,
     XMarkIcon,
 } from "@heroicons/react/24/outline";
@@ -62,11 +63,11 @@ const teams = [
                 href: "/staff/inventory",
                 icon: FaRegCircleDot,
             },
-            {
-                name: "Terms & Condition Section",
-                href: "/staff/terms",
-                icon: FaRegCircleDot,
-            },
+            // {
+            //     name: "Terms & Condition Section",
+            //     href: "/staff/terms",
+            //     icon: FaRegCircleDot,
+            // },
             // {
             //     name: "Landing Page Section",
             //     href: "/staff/landing-page",
@@ -559,19 +560,9 @@ export default function StaffLayout({ children }) {
                                 <li className="-mx-6 mt-auto">
                                     <Link
                                         method="post" href={route('logout')} as="button"
-                                        className="flex items-center gap-x-4 px-6 py-3 text-sm/6 font-semibold text-cyan-100 hover:bg-cyan-600 hover:text-white"
+                                        className="flex w-full items-center gap-1 px-6 py-3 text-sm/6 font-semibold text-cyan-100 hover:bg-cyan-600 hover:text-white"
                                     >
-                                        <img
-                                            alt=""
-                                            src="/images/user_icon.png"
-                                            className="size-8 rounded-full bg-gray-50"
-                                        />
-                                        <span className="sr-only">
-                                            Your profile
-                                        </span>
-                                        <span aria-hidden="true">
-                                            LOGOUT
-                                        </span>
+                                        <PowerIcon className="h-5" />LOGOUT
                                     </Link>
                                 </li>
                             </ul>
