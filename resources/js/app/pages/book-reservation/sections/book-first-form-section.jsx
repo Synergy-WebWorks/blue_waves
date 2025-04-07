@@ -273,8 +273,8 @@ export default function BookFirstFormSection() {
                                                             }`}
                                                     >
                                                         {clickedButtons[cottage.id]
-                                                            ? "Added to your Booking"
-                                                            : "Add to Booking"}
+                                                            ? "ADDED"
+                                                            : "BOOK NOW"}
                                                     </button>
                                                 </div>
                                             </div>
