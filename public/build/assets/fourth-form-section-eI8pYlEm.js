@@ -1,1 +1,0 @@
-import{j as r}from"./app-CBuwA0R4.js";function e(){return r.jsx("div",{className:"py-5 border-t border-gray-300",children:r.jsx("div",{className:"border p-4 rounded-lg shadow-md",children:"FourthFormSection"})})}export{e as default};
