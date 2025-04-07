@@ -214,9 +214,9 @@ export default function FirstFormSection() {
                                                                     product
                                                                 )
                                                             }
-                                                            className="ml-4 bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 rounded-md"
+                                                            className="ml-4 bg-teal-600 text-white hover:bg-teal-700 px-2 py-1 rounded-md"
                                                         >
-                                                            Add to Booking
+                                                           BOOK NOW
                                                         </button>
                                                     </div>
                                                 </div>
@@ -283,9 +283,9 @@ export default function FirstFormSection() {
                                                         onClick={() =>
                                                             add_to_cart(cottage)
                                                         }
-                                                        className="ml-4 bg-orange-500 text-white hover:bg-orange-600 px-2 py-1 rounded-md"
+                                                        className="ml-4 bg-teal-600 text-white hover:bg-teal-700 px-2 py-1 rounded-md"
                                                     >
-                                                        Add to Booking
+                                                     BOOK NOW
                                                     </button>
                                                 </div>
                                             </div>

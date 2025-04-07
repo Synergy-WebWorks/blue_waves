@@ -122,7 +122,7 @@ class BookingInfoController extends Controller
             'mname' => $request->mname,
             'lname' => $request->lname,
             'suffix' => $request->suffix,
-            'address' => $request->address,
+            'address' => $request->address??'',
             'initial' => $request->initial,
             'total' => $request->total,
             'children' => $request->children,

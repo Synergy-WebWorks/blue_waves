@@ -1,1 +1,0 @@
-import{g as e,C as o}from"./app-B_NMsaeA.js";async function s(n){try{return await e.get(`/api/inventory_stocks/${n}${window.location.search}`)}catch(t){return t}}function i(n){return async function(t,a){const r=await s(n);return t(o.actions.setInventoryStocks(r.data.status)),r}}export{i as g};

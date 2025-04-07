@@ -293,7 +293,7 @@ export default function BookSecondFormSection() {
                                         </select>
                                     </div>
                                 </div>
-
+{/* 
                                 <div className="sm:col-span-2">
                                     <label
                                         htmlFor="address"
@@ -325,7 +325,7 @@ export default function BookSecondFormSection() {
                                     {!customer.address && (
                                         <p className="text-gray-400 text-sm mt-1">This field is required</p>
                                     )}
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>

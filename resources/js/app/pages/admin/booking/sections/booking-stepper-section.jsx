@@ -21,7 +21,7 @@ export default function RegistrationStepperSection() {
     const params = new URLSearchParams(window.location.search);
     const start = params.get("start");
     const end = params.get("end");
-    const dispatch =useDispatch()
+    const dispatch = useDispatch();
     function classNames(...classes) {
         return classes.filter(Boolean).join(" ");
     }
@@ -39,7 +39,6 @@ export default function RegistrationStepperSection() {
         }));
 
     const stepsWithStatus = updateStepStatus();
-   
 
     const handleNext = () => {
         // if (currentStep < steps.length) {
@@ -85,12 +84,14 @@ export default function RegistrationStepperSection() {
         const start = new Date(startDate);
         const end = new Date(endDate);
         const difference = (end - start) / (1000 * 60 * 60 * 24);
-       return difference == 0?1:difference;
+        return difference == 0 ? 1 : difference;
     }
     const gap = getDayGap(search.start, search.end);
 
-    const totalRate =
-        selected.reduce((sum, item) => sum + (Number(item.rate) * gap), 0);
+    const totalRate = selected.reduce(
+        (sum, item) => sum + Number(item.rate) * gap,
+        0
+    );
 
     const adults_rate = customer.adults;
     const children_rate = customer.children;
@@ -98,7 +99,7 @@ export default function RegistrationStepperSection() {
 
     const down_payment =
         (parseInt(totalRate) + customer.children + customer.adults) / 2;
-console.log('down_payment',selected)
+    console.log("down_payment", selected);
 
     async function submitHandler(params) {
         setLoading(true);
@@ -118,14 +119,50 @@ console.log('down_payment',selected)
                     initial: down_payment,
                     status: "pending",
                     processed_by: "admin",
-                    gap:gap
+                    gap: gap,
                 })
             );
             setLoading(false);
-            dispatch(setSelected([]))
+            dispatch(setSelected([]));
             router.visit(`/admin/reservation`);
         } catch (error) {
             setLoading(false);
+        }
+    }
+
+    function isValidPHPhone(phone) {
+        return /^09\d{9}$/.test(phone);
+    }
+    function isValidEmail(email) {
+        return /\S+@\S+\.\S+/.test(email);
+    }
+    function isCustomerEmpty(customer) {
+        return customer == undefined || customer == null || customer == "";
+    }
+    function validation_function(params) {
+        if (selected.length == 0) {
+            return true;
+        }
+        if (loading) {
+            return true;
+        }
+        if (currentStep == 3) {
+            return true;
+        }
+        if (selected.length !== 0 && currentStep == 2) {
+            if (!isValidEmail(customer?.email)) {
+                return true;
+            } else if (!isValidPHPhone(customer.mobile)) {
+                return true;
+            } else if (
+                isCustomerEmpty(customer?.fname) ||
+                isCustomerEmpty(customer?.lname) 
+                // || isCustomerEmpty(customer?.address)
+            ) {
+                return true;
+            }
+        } else {
+            return false;
         }
     }
     return (
@@ -295,8 +332,10 @@ console.log('down_payment',selected)
                                 ? () => submitHandler()
                                 : handleNext
                         }
-                        disabled={loading}
-                        className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-700"
+                        disabled={validation_function()}
+                        className={`px-6 py-2 text-white ${validation_function() ? "bg-[rgba(45,55,72,0.6)] text-white"
+                            : "bg-cyan-600 hover:bg-cyan-700 text-white"
+                            }}  rounded-md `}
                         // disabled={currentStep === steps.length}
                     >
                         {loading ? (

@@ -154,13 +154,14 @@ export default function StepperSection() {
                 return true
             } else if (!isValidPHPhone(customer.mobile)) {
                 return true
-            } else if (isCustomerEmpty(customer?.fname) || isCustomerEmpty(customer?.lname) || isCustomerEmpty(customer?.address)) {
+            } else if (isCustomerEmpty(customer?.fname) || isCustomerEmpty(customer?.lname) 
+                // || isCustomerEmpty(customer?.address)
+            ) {
                 return true
             }
         } else {
             return false
         }
-
     }
     console.log('validation_function', selected.length == 0)
     return (

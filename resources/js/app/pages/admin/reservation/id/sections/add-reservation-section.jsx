@@ -299,7 +299,7 @@ export default function AddReservationSection() {
                                                             }
                                                             className="ml-4 bg-teal-600 text-white hover:bg-teal-700 px-2 py-1 rounded-md"
                                                         >
-                                                            Add to Booking
+                                                            BOOK NOW
                                                         </button>
                                                     </div>
                                                 </div>
@@ -342,7 +342,7 @@ export default function AddReservationSection() {
                                                         }
                                                         className="ml-4 bg-teal-600 text-white hover:bg-teal-700 px-2 py-1 rounded-md"
                                                     >
-                                                        Add to Booking
+                                                        BOOK NOW
                                                     </button>
                                                 </div>
                                             </div>
