@@ -43,12 +43,12 @@ export default function AddAllocateSection({ data, datas }) {
         }
     };
 
-    const roomRents = Array.isArray(rents) ? rents.filter((rent) => rent.type === "room") : [];
-    const cottageRents = Array.isArray(rents) ? rents.filter((rent) => rent.type === "cottage") : [];
+    const roomRents = Array.isArray(rents?.result) ? rents?.result?.filter((rent) => rent.type === "room") : [];
+    const cottageRents = Array.isArray(rents?.result) ? rents?.result?.filter((rent) => rent.type === "cottage") : [];
 
 
     console.log('fafaf', data)
-    console.log('zxzxz', rents)
+    console.log('zxzadadaxz', roomRents)
     return (
         <>
             <div className="mt-5 text-right">

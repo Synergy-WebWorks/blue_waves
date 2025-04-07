@@ -103,7 +103,7 @@ export default function InventoryConsumableSection() {
                                                     </Tooltip>
                                                     <Tooltip title="Inventory Received Records">
                                                         <a
-                                                            href={`/admin/inventory/${inventory.id}`}
+                                                            href={`/admin/inventory/inventory_received/${inventory.id}`}
                                                             className="relative -ml-px inline-flex items-center rounded-r-md bg-orange-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-orange-500 focus:z-10"
                                                         >
                                                             <FaClipboardCheck />
