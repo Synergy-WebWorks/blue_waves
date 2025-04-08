@@ -21,9 +21,9 @@ export default function InventoryNonConsumableSection() {
                         name, quantity and allocation history.
                     </p>
                 </div>
-                <div>
+                {/* <div>
                     <ReturnNonConsumableSection />
-                </div>
+                </div> */}
             </div>
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
