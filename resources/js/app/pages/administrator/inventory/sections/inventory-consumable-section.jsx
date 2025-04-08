@@ -93,14 +93,14 @@ export default function InventoryConsumableSection() {
                                             <td className="whitespace-nowrap px-3 py-4 text-sm text-cyan-600 font-bold">
                                                 <span className="isolate flex gap-1 rounded-md shadow-xs">
                                                     <AddStocksSection data={inventory} />
-                                                    <Tooltip title="Issued/Dispensed History">
+                                                    {/* <Tooltip title="Issued/Dispensed History">
                                                         <a
                                                             href={`/admin/inventory/${inventory.id}`}
                                                             className="relative -ml-px inline-flex items-center rounded-r-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-gray-300 ring-1 ring-gray-300 ring-inset hover:bg-indigo-500 focus:z-10"
                                                         >
                                                             <FaClockRotateLeft />
                                                         </a>
-                                                    </Tooltip>
+                                                    </Tooltip> */}
                                                     <Tooltip title="Inventory Received Records">
                                                         <a
                                                             href={`/admin/inventory/inventory_received/${inventory.id}`}

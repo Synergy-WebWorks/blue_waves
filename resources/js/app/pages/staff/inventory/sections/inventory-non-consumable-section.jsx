@@ -82,7 +82,7 @@ export default function InventoryNonConsumableSection() {
                                         <td className="whitespace-nowrap px-3 py-4 text-sm text-cyan-600 font-bold">
                                             <span className="isolate flex gap-1 rounded-md shadow-xs">
                                                 <AddStocksSection data={inventory} />
-                                                <Tooltip title="Allocation History">
+                                                {/* <Tooltip title="Allocation History">
                                                     <a
                                                         href={`/admin/inventory/${inventory.id}`}
                                                         title="Allocation History"
@@ -90,7 +90,7 @@ export default function InventoryNonConsumableSection() {
                                                     >
                                                         <FaClockRotateLeft />
                                                     </a>
-                                                </Tooltip>
+                                                </Tooltip> */}
                                                 <Tooltip title="Inventory Received Records">
                                                     <a
                                                         href={`/admin/inventory/inventory_received/${inventory.id}`}
