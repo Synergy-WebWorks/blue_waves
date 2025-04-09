@@ -42,7 +42,7 @@ class BookingNotification extends Notification
             ->line('**Reservation ID:** ' . $this->booking->reference_id)
             ->line('**Down Payment** ' . number_format($this->booking->initial, 2))
             ->line('**Reservation Date & Time:** ' . $this->booking->start . ' to ' . $this->booking->end)
-            ->action('GO TO PAYMENT METHOD', url('https://blue-waves.site/online-payment?reference_id='. $this->booking->reference_id))
+            ->action('GO TO PAYMENT METHOD', url('https://bluewaves-sipaway.com/online-payment?reference_id='. $this->booking->reference_id))
             ->line('We look forward to serving you!')
             ->salutation('Best regards, ' . "\n" . config('app.name'));
     }
