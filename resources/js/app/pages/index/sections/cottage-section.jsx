@@ -40,6 +40,11 @@ export default function CottageSection() {
                                         <h3 className="text-sm font-medium text-gray-900">
                                             <a href={rent.href}>{rent.name}</a>
                                         </h3>
+                                        <h3 className="text-sm font-medium text-gray-900">
+                                            <a href={rent.href}>
+                                                ({rent?.min_capacity}-{rent?.min_capacity} person)
+                                            </a>
+                                        </h3>
                                         <p className="text-sm text-gray-500 text-justify">
                                             {rent.description}
                                         </p>
