@@ -1,0 +1,1 @@
+import{g as n}from"./booking-info-service-bE9Oe7-K.js";import{D as i}from"./app-Crtfxy3G.js";function s(){return async function(o,e){const t=await n();o(i.actions.setBookingOrders(t.data))}}export{s as g};
