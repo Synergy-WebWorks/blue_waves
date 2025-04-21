@@ -116,27 +116,27 @@ export default function CottageTableSection() {
                                         const plainText = cottage.description
                                         return (
                                             <tr key={cottage.name}>
-                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-900">
+                                                <td className="text-center px-3 py-4 text-sm text-gray-900">
                                                     {cottage.name}
                                                 </td>
                                                 <ViewCottageImageSection data={cottage} />
-                                                <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-900">
+                                                <td className="px-4 py-4 text-sm text-gray-900">
                                                     <div className="prose prose-custom prose-sm m-0">
                                                         <div dangerouslySetInnerHTML={{ __html: plainText }} />
                                                     </div>
                                                 </td>
-                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-900">
+                                                <td className="text-center px-3 py-4 text-sm text-gray-900">
                                                     {cottage.rate}
                                                 </td>
-                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-900">
+                                                <td className="text-center px-3 py-4 text-sm text-gray-900">
                                                     {cottage.min_capacity}-{cottage.max_capacity} person
                                                 </td>
-                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-900">
+                                                <td className="text-center px-3 py-4 text-sm text-gray-900">
                                                     <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                                                         {cottage.status}
                                                     </span>
                                                 </td>
-                                                <td className="relative whitespace-nowrap text-center py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
+                                                <td className="relative text-center py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                                                     <a
                                                         href="#"
                                                         className="text-indigo-500 hover:text-indigo-700"

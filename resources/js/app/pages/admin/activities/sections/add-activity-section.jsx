@@ -8,6 +8,7 @@ import UploadActivitySection from "./upload-activity-section";
 import { useDispatch, useSelector } from "react-redux";
 import { setActivity } from "@/app/redux/activity-slice";
 import store from "@/app/store/store";
+import WysiwygRent from "@/app/pages/components/wysiwyg_rent";
 
 export default function AddActivitySection() {
     const [open, setOpen] = useState(false);
@@ -16,11 +17,18 @@ export default function AddActivitySection() {
     const { activity } = useSelector((state) => state.activities);
     const dispatch = useDispatch();
 
-    function data_handler(e) {
-        dispatch(setActivity({
-            ...activity,
-            [e.target.name]: e.target.value,
-        }));
+    function data_handler(eOrKey, value) {
+        if (typeof eOrKey === 'string') {
+            dispatch(setActivity({
+                ...activity,
+                [eOrKey]: value,
+            }));
+        } else {
+            dispatch(setActivity({
+                ...activity,
+                [eOrKey.target.name]: eOrKey.target.value,
+            }));
+        }
     }
 
     async function handleSubmit(e) {
@@ -181,12 +189,9 @@ export default function AddActivitySection() {
                                                 </div>
 
                                                 <div className="sm:col-span-12">
-                                                    <textarea
-                                                        name="description"
-                                                        onChange={data_handler}
+                                                    <WysiwygRent
+                                                        onChange={(value) => data_handler('description', value)}
                                                         value={activity?.description ?? ""}
-                                                        placeholder="Activity Description"
-                                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
                                                 </div>
 

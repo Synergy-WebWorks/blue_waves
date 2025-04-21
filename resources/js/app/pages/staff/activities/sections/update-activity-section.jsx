@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setActivity } from "@/app/redux/activity-slice";
 import store from "@/app/store/store";
 import UpdateImageSection from "./update-image-section";
+import WysiwygRent from "@/app/pages/components/wysiwyg_rent";
 
 export default function UpdateActivitySection({ data }) {
     const [open, setOpen] = useState(false);
@@ -18,11 +19,26 @@ export default function UpdateActivitySection({ data }) {
     const [form, setForm] = useState({})
     const dispatch = useDispatch();
 
+    // function data_handler(e) {
+    //     setForm({
+    //         ...form,
+    //         [e.target.name]: e.target.value,
+    //     });
+    // }
+
     function data_handler(e) {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
+        if (e && e.target) {
+            setForm({
+                ...form,
+                [e.target.name]: e.target.value,
+            });
+        } else {
+            // Assume this is the custom call from WysiwygRent for the description field
+            setForm({
+                ...form,
+                description: e, // assuming `e` is just the string content
+            });
+        }
     }
 
     useEffect(() => {
@@ -189,12 +205,9 @@ export default function UpdateActivitySection({ data }) {
                                                 </div>
 
                                                 <div className="sm:col-span-12">
-                                                    <textarea
-                                                        name="description"
-                                                        onChange={data_handler}
+                                                    <WysiwygRent
+                                                        onChange={(val) => data_handler({ target: { name: "description", value: val } })}
                                                         value={form?.description ?? ""}
-                                                        placeholder="Activity Description"
-                                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
                                                 </div>
                                                 <div className="sm:col-span-12">

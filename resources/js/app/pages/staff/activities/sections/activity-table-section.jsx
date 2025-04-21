@@ -75,7 +75,7 @@ export default function ActivityTableSection() {
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table className="divide-y min-w-full divide-gray-900 text-center">
+                        <table className="divide-y min-w-full divide-gray-900">
                             <thead>
                                 <tr>
                                     <th
@@ -87,6 +87,11 @@ export default function ActivityTableSection() {
                                         className="text-center px-3 py-3 text-xs font-bold uppercase tracking-wide"
                                     >
                                         Image
+                                    </th>
+                                    <th
+                                        className="text-center px-3 py-3 text-xs font-bold uppercase tracking-wide"
+                                    >
+                                        Activity Description
                                     </th>
                                     <th
                                         scope="col"
@@ -116,18 +121,23 @@ export default function ActivityTableSection() {
                             </thead>
                             <tbody className="divide-y divide-gray-300 bg-white">
                                 {activities?.result?.map((activity) => (
-                                    <tr key={activity.name}>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                    <tr tr key={activity.name} >
+                                        <td className="text-center px-3 py-4 text-sm text-gray-900">
                                             <b className="text-lg">{activity.name}</b>
                                         </td>
                                         <ViewActivityImageSection data={activity} />
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                        <td className=" px-4 py-4 text-sm text-gray-900">
+                                            <div className="prose prose-custom prose-sm m-0">
+                                                <div dangerouslySetInnerHTML={{ __html: activity.description }} />
+                                            </div>
+                                        </td>
+                                        <td className="text-center px-3 py-4 text-sm text-gray-900">
                                             {activity.rate} {activity.unit}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                        <td className="text-center px-3 py-4 text-sm text-gray-900">
                                             {activity.quantity}
                                         </td>
-                                        <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                        <td className="text-center px-3 py-4 text-sm text-gray-900">
                                             <span
                                                 className={`inline-flex items-center rounded-md px-2 py-1 text-md font-medium ring-1 ring-inset ${activity.status === "Active"
                                                     ? "bg-green-50 text-green-700 ring-green-600/20"
@@ -137,7 +147,7 @@ export default function ActivityTableSection() {
                                                 {activity?.status}
                                             </span>
                                         </td>
-                                        <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                        <td className="relative text-center py-4 pl-3 pr-4 text-sm font-medium sm:pr-0">
                                             <a
                                                 href="#"
                                                 className="text-indigo-500 hover:text-indigo-700"
@@ -158,6 +168,6 @@ export default function ActivityTableSection() {
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 }

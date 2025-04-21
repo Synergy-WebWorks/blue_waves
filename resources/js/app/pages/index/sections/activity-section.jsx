@@ -85,6 +85,7 @@ export default function ActivitySection() {
                         >
                             {activities?.result?.map((activity) => {
                                 if (activity.status === "Active") {
+                                    const plainText = activity.description
                                     return (
                                         <li key={activity.id}>
                                             <ViewActivityImageSection data={activity} />
@@ -94,9 +95,9 @@ export default function ActivitySection() {
                                             <p className="text-base/7 text-gray-600">
                                                 {activity.intro}
                                             </p>
-                                            <p className="mt-4 text-base/7 text-gray-600">
-                                                {activity.description}
-                                            </p>
+                                            <div className="prose prose-custom prose-sm mt-4 text-base/7">
+                                                <div dangerouslySetInnerHTML={{ __html: plainText }} />
+                                            </div>
                                             <ul
                                                 role="list"
                                                 className="mt-6 flex gap-x-6"
