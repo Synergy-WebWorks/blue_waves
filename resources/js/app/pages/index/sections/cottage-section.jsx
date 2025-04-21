@@ -28,6 +28,7 @@ export default function CottageSection() {
                 <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-10 lg:grid-cols-4 lg:gap-x-8 border-t border-gray-300 pt-6">
                     {rents?.result?.map((rent, index) => {
                         if (rent.type === "cottage") {
+                            const plainText = rent.description
                             return (
                                 <div
                                     key={rent.cottage_id}
@@ -45,9 +46,9 @@ export default function CottageSection() {
                                                 ({rent?.min_capacity}-{rent?.max_capacity} person)
                                             </a>
                                         </h3>
-                                        <p className="text-sm text-gray-500 text-justify">
-                                            {rent.description}
-                                        </p>
+                                        <div className="prose prose-custom prose-sm">
+                                            <div dangerouslySetInnerHTML={{ __html: plainText }} />
+                                        </div>
                                         <div className="flex flex-1 flex-col justify-end">
                                             <p className="text-sm italic text-gray-500">
                                                 {rent.options}

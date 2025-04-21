@@ -8,6 +8,7 @@ import { message } from "antd";
 import { setRent } from "@/app/redux/rent-slice";
 import { useDispatch, useSelector } from "react-redux";
 import UploadCottageSection from "./upload-cottage-section";
+import WysiwygRent from "@/app/pages/components/wysiwyg_rent";
 
 export default function AddCottageSection() {
     const [open, setOpen] = useState(false);
@@ -16,11 +17,20 @@ export default function AddCottageSection() {
     const { rent } = useSelector((state) => state.rents);
     const dispatch = useDispatch();
 
-    function data_handler(e) {
-        dispatch(setRent({
-            ...rent,
-            [e.target.name]: e.target.value,
-        }));
+    function data_handler(eOrKey, value) {
+        if (typeof eOrKey === 'string') {
+            // Called manually with key and value (like for WYSIWYG)
+            dispatch(setRent({
+                ...rent,
+                [eOrKey]: value,
+            }));
+        } else {
+            // Regular input onChange event
+            dispatch(setRent({
+                ...rent,
+                [eOrKey.target.name]: eOrKey.target.value,
+            }));
+        }
     }
 
     async function handleSubmit(e) {
@@ -172,12 +182,9 @@ export default function AddCottageSection() {
                                                 </div>
 
                                                 <div className="sm:col-span-12">
-                                                    <textarea
-                                                        name="description"
-                                                        onChange={data_handler}
+                                                    <WysiwygRent
+                                                        onChange={(value) => data_handler('description', value)}
                                                         value={rent?.description ?? ""}
-                                                        placeholder="Cottage Description"
-                                                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
                                                     />
                                                 </div>
 

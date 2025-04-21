@@ -10,6 +10,7 @@ import { message } from "antd";
 import UploadRoomSection from "./upload-room-section";
 import WysiwygRent from "@/app/pages/components/wysiwyg_rent";
 
+
 export default function AddRoomSection() {
     const [open, setOpen] = useState(false);
     const [loading, setLoading] = useState(false);
