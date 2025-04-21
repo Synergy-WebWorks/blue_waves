@@ -47,10 +47,10 @@ export default function AddRoomSection() {
         try {
             await store.dispatch(create_rent_thunk(fd));
             await store.dispatch(get_rent_thunk());
-            message.success("Cottage successfully saved!");
+            message.success("Room successfully saved!");
             setOpen(false);
         } catch (error) {
-            message.error("Failed to add Cottage. Please try again.");
+            message.error("Failed to add Room. Please try again.");
         } finally {
             setLoading(false);
         }

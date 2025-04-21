@@ -52,7 +52,7 @@ export default function RoomTableSection() {
             <div className="mt-8 flow-root">
                 <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div className="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-                        <table className="min-w-full divide-y text-center divide-gray-900">
+                        <table className="min-w-full divide-y  divide-gray-900">
                             <thead>
                                 <tr>
                                     <th
@@ -66,6 +66,12 @@ export default function RoomTableSection() {
                                         className="px-3 py-3 text-center text-xs font-medium uppercase tracking-wide"
                                     >
                                         Image
+                                    </th>
+                                    <th
+                                        scope="col"
+                                        className="px-3 py-3 text-center text-xs font-medium uppercase tracking-wide"
+                                    >
+                                        Room Description
                                     </th>
                                     <th
                                         scope="col"
@@ -96,24 +102,31 @@ export default function RoomTableSection() {
                             <tbody className="divide-y divide-gray-300 bg-white">
                                 {rents?.result?.map((room) => {
                                     if (room.type === "room") {
+                                        const plainText = room.description
                                         return (
                                             <tr key={room.name}>
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
+                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm uppercase text-gray-900">
                                                     {room.name}
                                                 </td>
                                                 <ViewRoomImageSection data={room} />
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm uppercase text-gray-900">
+                                                <td className="whitespace-nowrap px-4 py-4 text-sm text-gray-900">
+                                                    <div className="prose prose-custom prose-sm m-0">
+                                                        <div dangerouslySetInnerHTML={{ __html: plainText }} />
+                                                    </div>
+                                                </td>
+
+                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm uppercase text-gray-900">
                                                     {room.rate}
                                                 </td>
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-900">
                                                     {room.min_capacity}-{room.max_capacity} person
                                                 </td>
-                                                <td className="whitespace-nowrap px-3 py-4 text-sm text-gray-900">
+                                                <td className="whitespace-nowrap text-center px-3 py-4 text-sm text-gray-900">
                                                     <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                                                         {room.status}
                                                     </span>
                                                 </td>
-                                                <td className="relative whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-0">
+                                                <td className="relative whitespace-nowrap text-center py-4 pl-3 pr-4  text-sm font-medium sm:pr-0">
                                                     <a
                                                         href="#"
                                                         className="text-indigo-500 hover:text-indigo-700"

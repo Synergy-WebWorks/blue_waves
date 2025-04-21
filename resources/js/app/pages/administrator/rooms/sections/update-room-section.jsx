@@ -52,10 +52,10 @@ export default function UpdateRoomSection({ data }) {
         try {
             await store.dispatch(update_rent_thunk(fd));
             store.dispatch(get_rent_thunk())
-            message.success("Cottage successfully updated!");
+            message.success("Room successfully updated!");
             setOpen(false);
         } catch (error) {
-            message.error("Failed to update Cottage. Please try again.");
+            message.error("Failed to update Room. Please try again.");
         } finally {
             setLoading(false);
         }

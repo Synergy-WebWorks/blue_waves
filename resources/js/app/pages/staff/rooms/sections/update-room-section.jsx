@@ -9,6 +9,7 @@ import { setActivity } from "@/app/redux/activity-slice";
 import store from "@/app/store/store";
 import UpdateImageSection from "./update-image-section";
 import { get_rent_thunk, update_rent_thunk } from "@/app/redux/rent-thunk";
+import WysiwygRent from "@/app/pages/components/wysiwyg_rent";
 
 export default function UpdateRoomSection({ data }) {
     const [open, setOpen] = useState(false);
@@ -18,12 +19,28 @@ export default function UpdateRoomSection({ data }) {
     const [form, setForm] = useState({})
     const dispatch = useDispatch();
 
+    // function data_handler(e) {
+    //     setForm({
+    //         ...form,
+    //         [e.target.name]: e.target.value,
+    //     });
+    // }
+
     function data_handler(e) {
-        setForm({
-            ...form,
-            [e.target.name]: e.target.value,
-        });
+        if (e && e.target) {
+            setForm({
+                ...form,
+                [e.target.name]: e.target.value,
+            });
+        } else {
+            // Assume this is the custom call from WysiwygRent for the description field
+            setForm({
+                ...form,
+                description: e, // assuming `e` is just the string content
+            });
+        }
     }
+
 
     useEffect(() => {
         setForm(data)
@@ -52,10 +69,10 @@ export default function UpdateRoomSection({ data }) {
         try {
             await store.dispatch(update_rent_thunk(fd));
             store.dispatch(get_rent_thunk())
-            message.success("Cottage successfully updated!");
+            message.success("Room successfully updated!");
             setOpen(false);
         } catch (error) {
-            message.error("Failed to update Cottage. Please try again.");
+            message.error("Failed to update Room. Please try again.");
         } finally {
             setLoading(false);
         }
@@ -171,12 +188,16 @@ export default function UpdateRoomSection({ data }) {
                                                 </div>
 
                                                 <div className="sm:col-span-12">
-                                                    <textarea
+                                                    {/* <textarea
                                                         name="description"
                                                         onChange={data_handler}
                                                         value={form?.description ?? ""}
                                                         placeholder="Activity Description"
                                                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-none placeholder:text-gray-400 focus:ring-sky-500 focus:border-sky-500 sm:text-sm/6"
+                                                    /> */}
+                                                    <WysiwygRent
+                                                        onChange={(val) => data_handler({ target: { name: "description", value: val } })}
+                                                        value={form?.description ?? ""}
                                                     />
                                                 </div>
                                                 <div className="sm:col-span-12">

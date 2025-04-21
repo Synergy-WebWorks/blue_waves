@@ -161,7 +161,7 @@ export default function AdminLayout({ children }) {
                                     />
                                 </div>
                                 <nav className="flex flex-1 flex-col">
-                                    <ul
+                                    <li
                                         role="list"
                                         className="flex flex-1 flex-col gap-y-7"
                                     >
@@ -356,7 +356,7 @@ export default function AdminLayout({ children }) {
                                                 ))}
                                             </ul>
                                         </li>
-                                    </ul>
+                                    </li>
                                 </nav>
                             </div>
                         </Dialog.Panel>

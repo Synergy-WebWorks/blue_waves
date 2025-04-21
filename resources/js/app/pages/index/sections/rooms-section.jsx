@@ -58,11 +58,10 @@ export default function RoomSection() {
                                                 ({rent?.min_capacity}-{rent?.max_capacity} person)
                                             </a>
                                         </h3>
-                                        <p className="text-sm text-black text-justify">
-                                           
-                                                <div dangerouslySetInnerHTML={{ __html: plainText }} />
+                                        <div className="prose prose-custom prose-sm">
+                                            <div dangerouslySetInnerHTML={{ __html: plainText }} />
+                                        </div>
 
-                                        </p>
                                         <div className="flex">
                                             <div className="flex flex-1 flex-col justify-end">
                                                 <p className="text-sm italic text-gray-500">
